@@ -13,7 +13,7 @@ export const About = () => {
           <div className="w-full md:w-1/3 flex justify-center">
             <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-blue-500">
               <Image
-                src="/profile-placeholder.jpg"
+                src="/images/profile.jpg"
                 alt={`${personal.name}'s profile`}
                 fill
                 className="object-cover"
