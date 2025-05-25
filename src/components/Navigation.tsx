@@ -24,44 +24,71 @@ export const Navigation = () => {
     []
   );
 
+  // Handle scroll to update active section
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + (window.innerHeight / 3);
+      const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100; // 100px from bottom
+      
+      let currentSection = 'home';
 
-      for (const item of navItems) {
-        const element = document.getElementById(item.id);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetHeight = element.offsetHeight;
+      // If we're at the bottom, always highlight contact
+      if (isAtBottom) {
+        currentSection = 'contact';
+      } else {
+        // Check each section to see if it's in view
+        for (const item of navItems) {
+          const element = document.getElementById(item.id);
+          if (!element) continue;
 
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(item.id);
-            window.history.replaceState({}, "", `#${item.id}`);
+          const { top, bottom } = element.getBoundingClientRect();
+          const elementTop = top + window.pageYOffset;
+          const elementBottom = bottom + window.pageYOffset;
+
+          // If the middle of the viewport is within this section
+          if (scrollPosition >= elementTop && scrollPosition <= elementBottom) {
+            currentSection = item.id;
             break;
           }
         }
       }
+
+      // Only update if the active section has changed
+      if (currentSection !== activeSection) {
+        setActiveSection(currentSection);
+      }
     };
 
-    // Initial check for hash URL
-    if (typeof window !== "undefined" && window.location.hash) {
-      const hash = window.location.hash.substring(1);
-      const validSection = navItems.some((item) => item.id === hash);
-
-      if (validSection) {
-        setActiveSection(hash);
-        const element = document.getElementById(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
+    // Set up scroll event listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Initial check after a short delay to ensure all elements are loaded
+    const timer = setTimeout(handleScroll, 100);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
+    };
+  }, [navItems, activeSection]);
+  
+  // Handle initial hash URL if present
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    const handleHash = () => {
+      if (window.location.hash) {
+        const hash = window.location.hash.substring(1);
+        if (navItems.some(item => item.id === hash)) {
+          setActiveSection(hash);
+          const element = document.getElementById(hash);
+          element?.scrollIntoView({ behavior: 'smooth' });
         }
       }
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    };
+    
+    // Run once on mount
+    handleHash();
   }, [navItems]);
 
   const scrollToSection = (id: string) => {
