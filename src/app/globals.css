@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --animation-duration: 1s;
+  --animation-delay: 0.1s;
 }
 
 @theme inline {
@@ -19,8 +21,53 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp var(--animation-duration) ease-out forwards;
+}
+
+/* Delay classes for staggered animations */
+.delay-100 {
+  animation-delay: calc(var(--animation-delay) * 1);
+}
+
+.delay-200 {
+  animation-delay: calc(var(--animation-delay) * 2);
+}
+
+.delay-300 {
+  animation-delay: calc(var(--animation-delay) * 3);
+}
+
+/* Intersection Observer classes */
+.fade-in.visible {
+  opacity: 0;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
 }

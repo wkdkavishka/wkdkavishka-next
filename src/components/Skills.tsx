@@ -13,36 +13,66 @@ export const Skills = () => {
     return acc;
   }, {} as Record<string, typeof skills>);
 
-  const categoryTitles = {
-    frontend: 'Frontend',
-    backend: 'Backend',
-    devops: 'DevOps & Cloud',
-    other: 'Other'
+  const serviceCategories = {
+    frontend: 'Frontend Development',
+    backend: 'Backend Development',
+    devops: 'DevOps & Cloud Solutions',
+    other: 'Additional Services'
+  };
+
+  const serviceDescriptions: Record<string, string> = {
+    'React': 'Building responsive and interactive user interfaces with modern React',
+    'TypeScript': 'Type-safe JavaScript for better developer experience',
+    'JavaScript': 'Full-stack JavaScript development',
+    'Next.js': 'Server-side rendering and static site generation',
+    'Node.js': 'Scalable backend services and APIs',
+    'Python': 'Backend development and scripting',
+    'GraphQL': 'Efficient data querying with GraphQL APIs',
+    'Docker': 'Containerization and deployment solutions',
+    'PostgreSQL': 'Relational database design and optimization',
+    'MongoDB': 'NoSQL database solutions',
+    'Tailwind CSS': 'Rapid UI development with utility-first CSS',
   };
 
   return (
-    <section id="skills" className="py-20 px-6 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-12 text-center">Skills & Technologies</h2>
+    <section id="services" className="py-20 px-6 bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-4xl font-bold mb-4 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          Services I Provide
+        </h2>
+        <p className="text-lg text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+          Professional solutions tailored to your needs
+        </p>
         
         {Object.entries(skillsByCategory).map(([category, categorySkills]) => (
-          <div key={category} className="mb-12">
-            <h3 className="text-xl font-semibold mb-6 text-gray-700 dark:text-gray-300">
-              {categoryTitles[category as keyof typeof categoryTitles] || category}
+          <div key={category} className="mb-16">
+            <h3 className="text-2xl font-bold mb-8 text-gray-800 dark:text-gray-200">
+              {serviceCategories[category as keyof typeof serviceCategories] || category}
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {categorySkills.map((skill, index) => (
                 <div 
                   key={index} 
-                  className="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                  className="group relative p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.02] border border-gray-100 dark:border-gray-700 hover:border-blue-500/30 hover:ring-2 hover:ring-blue-500/20"
                 >
-                  {React.createElement(skill.icon, { 
-                    className: "text-3xl mb-2",
-                    style: { 
-                      color: getSkillColor(skill.name) 
-                    } 
-                  })}
-                  <span className="text-sm font-medium text-center">{skill.name}</span>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-purple-600/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="relative z-10">
+                    <div className="w-12 h-12 mb-4 rounded-lg bg-blue-500/10 dark:bg-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/20 dark:group-hover:bg-blue-500/30 transition-colors duration-300">
+                      {React.createElement(skill.icon, { 
+                        className: "text-2xl",
+                        style: { 
+                          color: getSkillColor(skill.name),
+                          filter: 'drop-shadow(0 0 4px rgba(99, 102, 241, 0.5))'
+                        } 
+                      })}
+                    </div>
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                      {skill.name}
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                      {serviceDescriptions[skill.name] || 'Professional service with expertise in this technology'}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -69,5 +99,5 @@ function getSkillColor(skillName: string): string {
     'Tailwind CSS': '#06B6D4',
   };
 
-  return colors[skillName] || '#6B7280'; // Default to gray-500 if no specific color
+  return colors[skillName] || '#6B7280';
 }

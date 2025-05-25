@@ -8,6 +8,7 @@ import { Skills } from "@/components/Skills";
 import { Projects } from "@/components/Projects";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { ScrollFadeIn } from "@/components/ui/ScrollFadeIn";
 
 // This is the main page component that renders all sections of the portfolio.
 // Each section is a separate component for better organization and maintainability.
@@ -27,11 +28,21 @@ export default function Home() {
 
       <Navigation />
       <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
+        <ScrollFadeIn>
+          <Hero />
+        </ScrollFadeIn>
+        <ScrollFadeIn delay={1}>
+          <About />
+        </ScrollFadeIn>
+        <ScrollFadeIn delay={2}>
+          <Skills />
+        </ScrollFadeIn>
+        <ScrollFadeIn delay={3}>
+          <Projects />
+        </ScrollFadeIn>
+        <ScrollFadeIn delay={4}>
+          <Contact />
+        </ScrollFadeIn>
       </main>
       <Footer />
     </div>
