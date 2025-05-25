@@ -69,13 +69,13 @@ export const Navigation = () => {
   };
 
   return (
-    <nav className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm z-50 border-b border-gray-200 dark:border-gray-700">
+    <nav className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm z-50 border-b-2 border-teal-200 dark:border-teal-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <button
               onClick={() => scrollToSection('home')}
-              className="flex items-center space-x-2 text-xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="flex items-center space-x-2 text-xl font-bold text-gray-900 dark:text-white hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
             >
               <FaUserCircle className="w-6 h-6 text-current" />
               <span>{siteData.personal.name.split(' ')[0]}</span>
@@ -90,8 +90,8 @@ export const Navigation = () => {
                 onClick={() => scrollToSection(item.id)}
                 className={`${
                   activeSection === item.id
-                    ? 'text-blue-600 dark:text-blue-400 font-medium'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                    ? 'text-teal-600 dark:text-teal-400 font-medium'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400'
                 } px-3 py-2 rounded-md text-sm font-medium transition-colors`}
               >
                 {item.label}
@@ -131,8 +131,8 @@ export const Navigation = () => {
               onClick={() => scrollToSection(item.id)}
               className={`${
                 activeSection === item.id
-                  ? 'bg-gray-100 dark:bg-gray-800 text-blue-600 dark:text-blue-400'
-                  : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white'
+                  ? 'bg-teal-50 dark:bg-teal-900/20 text-teal-600 dark:text-teal-400'
+                  : 'text-gray-700 dark:text-gray-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 hover:text-teal-600 dark:hover:text-teal-400'
               } block w-full text-left px-3 py-2 rounded-md text-base font-medium`}
             >
               {item.label}
