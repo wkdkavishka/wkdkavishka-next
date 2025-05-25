@@ -12,8 +12,9 @@ export const Contact = () => {
           Get In Touch
         </h2>
         <p className="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-          I&apos;m currently looking for new opportunities. Whether you have a question
-          or just want to say hi, I&apos;ll get back to you as soon as possible!
+          I&apos;m currently looking for new opportunities. Whether you have a
+          question or just want to say hi, I&apos;ll get back to you as soon as
+          possible!
         </p>
         <a
           href={`mailto:${personal.email}`}

@@ -7,7 +7,7 @@ import {
   FaCode,
   FaMobileAlt,
   FaCloud,
-  FaPalette
+  FaPalette,
 } from "react-icons/fa";
 
 export interface Skill {
@@ -54,10 +54,10 @@ export interface SiteData {
 // Create the site data with proper typing
 const siteData: SiteData = {
   personal: {
-    name: "Kavishka Weerasinghe",
+    name: "W.K.D.Kavishka",
     title: "Software Engineer",
     location: "Colombo, Sri Lanka",
-    email: "wkd.kavishka@gmail.com",
+    email: "w.k.d.kavishka@outlook.com",
     profileImage: "/images/profile.jpg",
     about: [
       "I'm a passionate software engineer with experience in building modern web applications.",
@@ -69,29 +69,33 @@ const siteData: SiteData = {
   services: [
     {
       name: "Web Applications",
-      description: "Custom web applications built with modern technologies like React, Next.js, and TypeScript",
-      icon: FaReact
+      description:
+        "Custom web applications built with modern technologies like React, Next.js, and TypeScript",
+      icon: FaReact,
     },
     {
       name: "Custom Software Solutions",
-      description: "Tailored software solutions designed to meet your specific business needs",
-      icon: FaCode
+      description:
+        "Tailored software solutions designed to meet your specific business needs",
+      icon: FaCode,
     },
     {
       name: "Mobile Apps (Android & iOS)",
-      description: "Cross-platform mobile applications for both Android and iOS platforms",
-      icon: FaMobileAlt
+      description:
+        "Cross-platform mobile applications for both Android and iOS platforms",
+      icon: FaMobileAlt,
     },
     {
       name: "Cloud Services",
       description: "Cloud infrastructure setup, deployment, and management",
-      icon: FaCloud
+      icon: FaCloud,
     },
     {
       name: "UI/UX Design",
-      description: "Beautiful and intuitive user interfaces with exceptional user experience",
-      icon: FaPalette
-    }
+      description:
+        "Beautiful and intuitive user interfaces with exceptional user experience",
+      icon: FaPalette,
+    },
   ],
   projects: [
     {
