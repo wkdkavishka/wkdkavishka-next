@@ -11,22 +11,27 @@ export const Projects = () => {
   }
 
   return (
-    <section id="projects" className="py-20 px-6 bg-white dark:bg-gray-800">
+    <section id="projects" className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-12 text-center">Featured Projects</h2>
+        <h2 className="text-4xl font-bold mb-4 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          Featured Projects
+        </h2>
+        <p className="text-lg text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+          Some of my recent work
+        </p>
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <div 
               key={project.id} 
-              className="group bg-gray-50 dark:bg-gray-900 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full"
+              className="group bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full border border-gray-100 dark:border-gray-700"
             >
-              <div className="h-48 bg-gray-200 dark:bg-gray-700 relative overflow-hidden">
+              <div className="h-48 bg-gray-100 dark:bg-gray-700/50 relative overflow-hidden">
                 <div className="relative w-full h-full">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority={index < 2} // Only preload first 2 images
                   />

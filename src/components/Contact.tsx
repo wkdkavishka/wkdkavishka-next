@@ -6,16 +6,18 @@ export const Contact = () => {
   const { personal, socialLinks } = siteData;
 
   return (
-    <section id="contact" className="py-20 px-6 bg-gray-50 dark:bg-gray-900">
+    <section id="contact" className="py-20 px-6">
       <div className="max-w-2xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-4">Get In Touch</h2>
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-12">
+        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          Get In Touch
+        </h2>
+        <p className="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
           I&apos;m currently looking for new opportunities. Whether you have a question
           or just want to say hi, I&apos;ll get back to you as soon as possible!
         </p>
         <a
           href={`mailto:${personal.email}`}
-          className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-medium hover:opacity-90 transition-opacity"
+          className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-medium hover:opacity-90 transition-opacity hover:shadow-lg transform hover:-translate-y-0.5"
         >
           <FiMail className="mr-2" />
           Say Hello

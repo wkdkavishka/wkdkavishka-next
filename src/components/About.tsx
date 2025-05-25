@@ -6,9 +6,14 @@ export const About = () => {
   const { personal, socialLinks } = siteData;
 
   return (
-    <section id="about" className="py-20 px-6 bg-white dark:bg-gray-800">
+    <section id="about" className="py-20 px-6">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-12 text-center">About Me</h2>
+        <h2 className="text-4xl font-bold mb-4 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          About Me
+        </h2>
+        <p className="text-lg text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+          Get to know me better
+        </p>
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="w-full md:w-1/3 flex justify-center">
             <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-blue-500">
@@ -23,7 +28,7 @@ export const About = () => {
           </div>
           <div className="w-full md:w-2/3">
             {personal.about.map((paragraph, index) => (
-              <p key={index} className="text-lg mb-6">
+              <p key={index} className="text-lg text-gray-600 dark:text-gray-300 mb-6">
                 {paragraph}
               </p>
             ))}
