@@ -55,7 +55,7 @@ export const Hero = () => {
           </a>
           <a
             href="#projects"
-            className="px-8 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-full font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className="px-8 py-3 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full font-medium hover:opacity-90 transition-opacity"
           >
             View My Work
           </a>

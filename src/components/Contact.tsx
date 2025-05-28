@@ -1,9 +1,26 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { FiMail } from "react-icons/fi";
 import siteData from "@/data/site-data";
+import { EmailModal } from "./EmailModal";
 
 export const Contact = () => {
-  const { personal, socialLinks } = siteData;
+  const { socialLinks } = siteData;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleEmailSubmit = (data: {
+    name: string;
+    email: string;
+    message: string;
+  }) => {
+    const recipientEmail = process.env.NEXT_PUBLIC_EMAIL;
+    const subject = encodeURIComponent(`Portfolio Contact from ${data.name}`);
+    const body = encodeURIComponent(
+      `Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
+    );
+    window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+  };
 
   return (
     <section id="contact" className="py-20 px-6">
@@ -16,13 +33,13 @@ export const Contact = () => {
           question or just want to say hi, I&apos;ll get back to you as soon as
           possible!
         </p>
-        <a
-          href={`mailto:${personal.email}`}
+        <button
+          onClick={() => setIsModalOpen(true)}
           className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-medium hover:opacity-90 transition-opacity hover:shadow-lg transform hover:-translate-y-0.5"
         >
           <FiMail className="mr-2" />
           Say Hello
-        </a>
+        </button>
         <div className="mt-12 flex justify-center space-x-6">
           {socialLinks.map((social) => (
             <a
@@ -38,6 +55,11 @@ export const Contact = () => {
           ))}
         </div>
       </div>
+      <EmailModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleEmailSubmit}
+      />
     </section>
   );
 };
