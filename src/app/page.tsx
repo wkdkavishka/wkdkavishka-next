@@ -10,6 +10,7 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { ScrollFadeIn } from "@/components/ui/ScrollFadeIn";
 import siteData from "@/data/site-data";
+import TeamCarousel from "@/components/TeamCarousel";
 
 // This is the main page component that renders all sections of the portfolio.
 // Each section is a separate component for better organization and maintainability.
@@ -37,6 +38,9 @@ export default function Home() {
         </ScrollFadeIn>
         <ScrollFadeIn delay={3}>
           <Projects />
+        </ScrollFadeIn>
+        <ScrollFadeIn delay={3.5}>
+          <TeamCarousel />
         </ScrollFadeIn>
         <ScrollFadeIn delay={4}>
           <Contact />

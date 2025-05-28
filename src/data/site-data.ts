@@ -32,6 +32,20 @@ export interface SocialLink {
   icon: IconType;
 }
 
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  company: string;
+  image: string;
+  testimonial: string;
+  social: {
+    linkedin: string;
+    twitter: string;
+    github: string;
+  };
+}
+
 export interface SiteData {
   personal: {
     name: string;
@@ -49,6 +63,7 @@ export interface SiteData {
     url: string;
     icon: IconType;
   }>;
+  teamMembers: TeamMember[];
 }
 
 // Create the site data with proper typing
@@ -100,21 +115,131 @@ const siteData: SiteData = {
   projects: [
     {
       id: "project-1",
-      title: "Project One",
-      description: "A brief description of project one and what it does.",
-      tags: ["React", "Node.js", "MongoDB"],
-      link: "https://github.com/yourusername/project-one",
-      github: "https://github.com/yourusername/project-one",
-      image: "/images/project-1.jpg",
+      title: "E-Commerce Platform",
+      description:
+        "A full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment integration. Built with Next.js, TypeScript, and MongoDB.",
+      tags: ["Next.js", "TypeScript", "MongoDB", "Stripe", "Tailwind CSS"],
+      link: "https://ecommerce-demo.wkdkavishka.vercel.app",
+      github: "https://github.com/wkdkavishka/ecommerce-platform",
+      image: "/images/projects/project-1.jpg",
     },
     {
       id: "project-2",
-      title: "Project Two",
-      description: "A brief description of project two and what it does.",
-      tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-      link: "https://your-project-two.vercel.app",
-      github: "https://github.com/yourusername/project-two",
-      image: "/images/project-2.jpg",
+      title: "Task Management App",
+      description:
+        "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features. Built with React, Node.js, and Socket.io.",
+      tags: ["React", "Node.js", "Socket.io", "MongoDB", "Material-UI"],
+      link: "https://taskflow.wkdkavishka.vercel.app",
+      github: "https://github.com/wkdkavishka/task-management-app",
+      image: "/images/projects/project-2.jpg",
+    },
+    {
+      id: "project-3",
+      title: "Recipe Finder",
+      description:
+        "A web application that helps users discover recipes based on available ingredients. Features include recipe search, filtering, and saving favorites. Built with Vue.js and the Spoonacular API.",
+      tags: ["Vue.js", "Vuex", "Spoonacular API", "Tailwind CSS"],
+      link: "https://recipe-finder.wkdkavishka.vercel.app",
+      github: "https://github.com/wkdkavishka/recipe-finder",
+      image: "/images/projects/project-3.jpg",
+    },
+    {
+      id: "project-4",
+      title: "Portfolio Website",
+      description:
+        "A modern, responsive portfolio website built with Next.js and Tailwind CSS. Features dark mode, smooth animations, and a clean, minimalist design.",
+      tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      link: "https://wkdkavishka.vercel.app",
+      github: "https://github.com/wkdkavishka/portfolio",
+      image: "/images/projects/project-4.jpg",
+    },
+    {
+      id: "project-5",
+      title: "Weather Dashboard",
+      description:
+        "A weather application that provides current weather conditions and forecasts. Features location detection, 5-day forecast, and weather alerts. Built with React and the OpenWeather API.",
+      tags: ["React", "OpenWeather API", "Geolocation", "Chart.js"],
+      link: "https://weather-dashboard.wkdkavishka.vercel.app",
+      github: "https://github.com/wkdkavishka/weather-dashboard",
+      image: "/images/projects/project-5.jpg",
+    },
+    {
+      id: "project-6",
+      title: "Fitness Tracker",
+      description:
+        "A mobile-first fitness tracking application that helps users log workouts, track progress, and set fitness goals. Includes exercise library and progress visualization.",
+      tags: ["React Native", "Firebase", "Redux", "Expo"],
+      link: "https://fitness-tracker.wkdkavishka.vercel.app",
+      github: "https://github.com/wkdkavishka/fitness-tracker",
+      image: "/images/projects/project-6.jpg",
+    },
+    {
+      id: "project-7",
+      title: "E-Commerce Platform",
+      description:
+        "A full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment integration. Built with Next.js, TypeScript, and MongoDB.",
+      tags: ["Next.js", "TypeScript", "MongoDB", "Stripe", "Tailwind CSS"],
+      link: "https://ecommerce-demo.wkdkavishka.vercel.app",
+      github: "https://github.com/wkdkavishka/ecommerce-platform",
+      image: "/images/projects/project-7.jpg",
+    },
+  ],
+  teamMembers: [
+    {
+      id: "member-1",
+      name: "Alex Johnson",
+      role: "Senior Developer",
+      company: "TechCorp",
+      image: "/images/team/member-1.jpg",
+      testimonial:
+        "Working with WKD was a fantastic experience. Their attention to detail and problem-solving skills are exceptional.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+        github: "#",
+      },
+    },
+    {
+      id: "member-2",
+      name: "Sarah Williams",
+      role: "Product Manager",
+      company: "InnovateX",
+      image: "/images/team/member-2.jpg",
+      testimonial:
+        "One of the most dedicated developers I've worked with. Delivered beyond expectations on every project.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+        github: "#",
+      },
+    },
+    {
+      id: "member-3",
+      name: "Michael Chen",
+      role: "CTO",
+      company: "StartUpHub",
+      image: "/images/team/member-3.jpg",
+      testimonial:
+        "Technical expertise and professionalism at its best. Highly recommended for any complex web development work.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+        github: "#",
+      },
+    },
+    {
+      id: "member-4",
+      name: "Emily Rodriguez",
+      role: "UI/UX Designer",
+      company: "DesignMasters",
+      image: "/images/team/member-4.jpg",
+      testimonial:
+        "Collaborating with WKD was seamless. They understand design principles and implement them perfectly.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+        github: "#",
+      },
     },
   ],
   socialLinks: [
