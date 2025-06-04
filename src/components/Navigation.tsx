@@ -18,6 +18,7 @@ export const Navigation = () => {
       { id: "about", label: "About" },
       { id: "services", label: "Services" },
       { id: "projects", label: "Projects" },
+      { id: "team", label: "People" },
       { id: "contact", label: "Contact" },
     ],
     []

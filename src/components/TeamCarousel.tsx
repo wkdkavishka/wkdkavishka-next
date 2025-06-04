@@ -49,30 +49,44 @@ export default function TeamCarousel() {
     );
   };
 
+  // useEffect(() => {
+  //   if (!isAutoPlaying) return;
+
+  //   const interval = setInterval(() => {
+  //     nextSlide();
+  //   }, 5000);
+
+  //   return () => clearInterval(interval);
+  // }, [isAutoPlaying]);
+
   useEffect(() => {
     if (!isAutoPlaying) return;
 
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
+    const nextSlide = () => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === members.length - 1 ? 0 : prevIndex + 1
+      );
+    };
 
+    const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, members.length]); // Add members.length to dependencies
 
-  const visibleMembers = [
-    members[(currentIndex - 1 + members.length) % members.length],
-    members[currentIndex],
-    members[(currentIndex + 1) % members.length],
-  ];
+  // const visibleMembers = [
+  //   members[(currentIndex - 1 + members.length) % members.length],
+  //   members[currentIndex],
+  //   members[(currentIndex + 1) % members.length],
+  // ];
 
   return (
     <section id="team" className="py-20 px-6 bg-gray-50 dark:bg-gray-900/50">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold mb-4 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          People I've Worked With
+          People I&apos;ve Worked With
         </h2>
         <p className="text-lg text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-          Some of the amazing people I've had the pleasure to collaborate with
+          Some of the amazing people I&apos;ve had the pleasure to collaborate
+          with
         </p>
 
         <div className="relative max-w-6xl mx-auto">
@@ -88,7 +102,8 @@ export default function TeamCarousel() {
               <FaChevronLeft size={24} />
             </button>
 
-            <div className="flex overflow-hidden w-full px-4">
+            {/* card view section */}
+            <div className="flex overflow-hidden w-full px-4 py-4">
               <div
                 className="flex transition-transform duration-500 ease-in-out w-full"
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -116,14 +131,25 @@ export default function TeamCarousel() {
                           <div className="w-32 h-32 md:w-40 md:h-40 relative mb-6 md:mb-0 md:mr-6 flex-shrink-0">
                             <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-teal-400 rounded-full p-1">
                               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-gray-800">
-                                <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                                  <span className="text-4xl font-bold text-gray-400 dark:text-gray-600">
-                                    {member.name
-                                      .split(" ")
-                                      .map((n) => n[0])
-                                      .join("")}
-                                  </span>
-                                </div>
+                                {member.image ? (
+                                  <Image
+                                    src={member.image}
+                                    alt={`${member.name}'s profile`}
+                                    fill
+                                    sizes="(max-width: 768px) 8rem, 10rem"
+                                    className="object-cover"
+                                    priority={index < 3} // Only preload first 3 images
+                                  />
+                                ) : (
+                                  <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                                    <span className="text-4xl font-bold text-gray-400 dark:text-gray-600">
+                                      {member.name
+                                        .split(" ")
+                                        .map((n) => n[0])
+                                        .join("")}
+                                    </span>
+                                  </div>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -174,6 +200,7 @@ export default function TeamCarousel() {
                 ))}
               </div>
             </div>
+            {/* END card view section */}
 
             <button
               onClick={() => {

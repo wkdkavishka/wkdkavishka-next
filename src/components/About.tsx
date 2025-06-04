@@ -28,7 +28,10 @@ export const About = () => {
           </div>
           <div className="w-full md:w-2/3">
             {personal.about.map((paragraph, index) => (
-              <p key={index} className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+              <p
+                key={index}
+                className="text-lg text-gray-600 dark:text-gray-300 mb-6"
+              >
                 {paragraph}
               </p>
             ))}

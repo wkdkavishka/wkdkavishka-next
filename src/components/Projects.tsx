@@ -1,5 +1,5 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 import siteData from "@/data/site-data";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 
@@ -12,26 +12,29 @@ export const Projects = () => {
 
   // Color variants for project cards
   const colorVariants = [
-    'from-blue-600/5 to-purple-600/5',
-    'from-green-600/5 to-blue-600/5',
-    'from-purple-600/5 to-pink-600/5',
-    'from-pink-600/5 to-red-600/5',
-    'from-yellow-600/5 to-orange-600/5',
-    'from-teal-600/5 to-cyan-600/5'
+    "from-blue-600/5 to-purple-600/5",
+    "from-green-600/5 to-blue-600/5",
+    "from-purple-600/5 to-pink-600/5",
+    "from-pink-600/5 to-red-600/5",
+    "from-yellow-600/5 to-orange-600/5",
+    "from-teal-600/5 to-cyan-600/5",
   ];
 
   // Border hover colors
   const borderHoverColors = [
-    'hover:border-blue-500/30 hover:ring-2 hover:ring-blue-500/20',
-    'hover:border-green-500/30 hover:ring-2 hover:ring-green-500/20',
-    'hover:border-purple-500/30 hover:ring-2 hover:ring-purple-500/20',
-    'hover:border-pink-500/30 hover:ring-2 hover:ring-pink-500/20',
-    'hover:border-yellow-500/30 hover:ring-2 hover:ring-yellow-500/20',
-    'hover:border-teal-500/30 hover:ring-2 hover:ring-teal-500/20'
+    "hover:border-blue-500/30 hover:ring-2 hover:ring-blue-500/20",
+    "hover:border-green-500/30 hover:ring-2 hover:ring-green-500/20",
+    "hover:border-purple-500/30 hover:ring-2 hover:ring-purple-500/20",
+    "hover:border-pink-500/30 hover:ring-2 hover:ring-pink-500/20",
+    "hover:border-yellow-500/30 hover:ring-2 hover:ring-yellow-500/20",
+    "hover:border-teal-500/30 hover:ring-2 hover:ring-teal-500/20",
   ];
 
   return (
-    <section id="projects" className="py-20 px-6 bg-gray-50 dark:bg-gray-900/50">
+    <section
+      id="projects"
+      className="py-20 px-6 bg-gray-50 dark:bg-gray-900/50"
+    >
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold mb-4 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           Featured Projects
@@ -42,14 +45,17 @@ export const Projects = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => {
             const colorVariant = colorVariants[index % colorVariants.length];
-            const borderHover = borderHoverColors[index % borderHoverColors.length];
-            
+            const borderHover =
+              borderHoverColors[index % borderHoverColors.length];
+
             return (
-              <div 
+              <div
                 key={project.id}
                 className={`group relative p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.02] border border-gray-100 dark:border-gray-700 ${borderHover}`}
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${colorVariant} rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${colorVariant} rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                ></div>
                 <div className="relative z-10 flex flex-col h-full">
                   <div className="mb-4 rounded-lg overflow-hidden">
                     <div className="relative h-40 w-full">
@@ -71,8 +77,8 @@ export const Projects = () => {
                   </p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag, tagIndex) => (
-                      <span 
-                        key={tagIndex} 
+                      <span
+                        key={tagIndex}
                         className="px-2.5 py-1 bg-gray-100 dark:bg-gray-700/50 text-gray-700 dark:text-gray-200 text-xs font-medium rounded-full"
                       >
                         {tag}
@@ -102,7 +108,7 @@ export const Projects = () => {
                         <FiExternalLink className="w-5 h-5" />
                       </a>
                     </div>
-                    <a 
+                    <a
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
