@@ -8,11 +8,11 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center px-6 py-20"
+      className="min-h-screen flex items-center justify-center px-6 py-2"
     >
       <div className="max-w-4xl mx-auto text-center">
         {/* Profile Image */}
-        <div className="w-40 h-40 md:w-48 md:h-48 mx-auto mb-8 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg bg-gray-200 dark:bg-gray-700">
+        <div className="w-40 h-40 md:w-48 md:h-48 mx-auto mb-8 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg bg-gray-900 dark:bg-gray-700">
           <div className="relative w-full h-full">
             <Image
               src={personal.profileImage}

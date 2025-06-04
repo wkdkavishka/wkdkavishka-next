@@ -16,7 +16,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #030303;  /* Made darker */
     --foreground: #ededed;
   }
 }
@@ -27,12 +27,17 @@ html {
 
 body {
   background: var(--background);
+  background-image: radial-gradient(
+    circle at center,
+    rgba(60, 60, 60, 0.1) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
 
-/* Fade-in animation */
+/* Enhanced fade-in animation with better timing function */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -44,30 +49,55 @@ body {
   }
 }
 
-.fade-in {
+/* Enhanced animation utilities */
+.animate-fade-in {
   opacity: 0;
-  animation: fadeInUp var(--animation-duration) ease-out forwards;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
 }
 
-/* Delay classes for staggered animations */
+.animate-fade-in.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animation delays */
 .delay-100 {
-  animation-delay: calc(var(--animation-delay) * 1);
+  transition-delay: 100ms;
 }
 
 .delay-200 {
-  animation-delay: calc(var(--animation-delay) * 2);
+  transition-delay: 200ms;
 }
 
 .delay-300 {
-  animation-delay: calc(var(--animation-delay) * 3);
+  transition-delay: 300ms;
 }
 
-/* Intersection Observer classes */
-.fade-in.visible {
-  opacity: 0;
+.delay-400 {
+  transition-delay: 400ms;
 }
 
-/* Smooth scrolling for anchor links */
-html {
-  scroll-behavior: smooth;
+.delay-500 {
+  transition-delay: 500ms;
+}
+
+/* Performance optimizations */
+.gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Remove outline for non-keyboard interactions */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Maintain outline for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
 }

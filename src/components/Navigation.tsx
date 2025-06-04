@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
-import { FaUserCircle } from "react-icons/fa";
 import siteData from "@/data/site-data";
+import { useEffect, useMemo, useState } from "react";
 
 interface NavItem {
   id: string;
@@ -68,13 +67,15 @@ export const Navigation = () => {
   };
 
   return (
-    <nav className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm z-50 border-b-2 border-teal-200 dark:border-teal-800/80">
+    <nav className="fixed w-full  backdrop-blur-sm z-50 border-b-2 border-teal-200 dark:border-teal-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <div className="flex items-center space-x-2 text-xl font-bold text-gray-900 dark:text-white">
-              <FaUserCircle className="w-6 h-6 text-current" />
-              <span>{siteData.personal.name}</span>
+              {/* <FaUserCircle className="w-6 h-6 text-current" /> */}
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                {siteData.personal.name}
+              </span>
             </div>
           </div>
 

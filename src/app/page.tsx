@@ -17,7 +17,7 @@ import TeamCarousel from "@/components/TeamCarousel";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <div className="min-h-screen  bg-gradient-to-br from-teal-100 to-purple-100 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-200 transition-colors duration-300">
       <Head>
         <title>{siteData.personal.name} | Software Engineer</title>
         <meta name={siteData.personal.name} content={siteData.personal.name} />

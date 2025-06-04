@@ -21,28 +21,18 @@ export function ScrollFadeIn({
   ...props
 }: ScrollFadeInProps) {
   const elementRef = useRef<HTMLElement>(null);
-  const hasAnimated = useRef(false);
 
   useEffect(() => {
     const element = elementRef.current;
-    if (!element || hasAnimated.current) return;
+    if (!element) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            hasAnimated.current = true;
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = `opacity 0.6s ease-out ${delay * 0.1}s, transform 0.6s ease-out ${delay * 0.1}s`;
-            
-            // Force reflow
-            void element.offsetHeight;
-            
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
-            
-            observer.unobserve(element);
+            element.classList.add("in-view");
+          } else {
+            element.classList.remove("in-view");
           }
         });
       },
@@ -55,18 +45,18 @@ export function ScrollFadeIn({
     observer.observe(element);
 
     return () => {
-      if (element) {
-        observer.unobserve(element);
-      }
+      observer.unobserve(element);
     };
   }, [delay, threshold, rootMargin]);
 
   const Component = Tag as ElementType;
-  
+
+  const delayClass = delay ? `delay-${delay * 100}` : "";
+
   return (
     <Component
       ref={elementRef}
-      className={`${className} opacity-0`}
+      className={`${className} animate-fade-in gpu ${delayClass}`}
       {...props}
     >
       {children}
