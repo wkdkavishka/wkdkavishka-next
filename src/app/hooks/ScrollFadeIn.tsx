@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useEffect, useRef, ReactNode, ElementType } from "react";
+import React, { useEffect, useRef, ReactNode, ElementType } from 'react';
 
 interface ScrollFadeInProps {
   children: ReactNode;
@@ -13,11 +13,11 @@ interface ScrollFadeInProps {
 
 export function ScrollFadeIn({
   children,
-  className = "",
+  className = '',
   delay = 0,
   threshold = 0.1,
-  rootMargin = "0px 0px -50px 0px",
-  as: Tag = "div",
+  rootMargin = '0px 0px -50px 0px',
+  as: Tag = 'div',
   ...props
 }: ScrollFadeInProps) {
   const elementRef = useRef<HTMLElement>(null);
@@ -30,9 +30,9 @@ export function ScrollFadeIn({
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            element.classList.add("in-view");
+            element.classList.add('in-view');
           } else {
-            element.classList.remove("in-view");
+            element.classList.remove('in-view');
           }
         });
       },
@@ -51,7 +51,7 @@ export function ScrollFadeIn({
 
   const Component = Tag as ElementType;
 
-  const delayClass = delay ? `delay-${delay * 100}` : "";
+  const delayClass = delay ? `delay-${delay * 100}` : '';
 
   return (
     <Component

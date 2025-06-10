@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import Head from "next/head";
-import { Navigation } from "@/components/Navigation";
-import { Hero } from "@/components/Hero";
-import { About } from "@/components/About";
-import { Skills } from "@/components/Skills";
-import { Projects } from "@/components/Projects";
-import { Contact } from "@/components/Contact";
-import { Footer } from "@/components/Footer";
-import { ScrollFadeIn } from "@/components/ui/ScrollFadeIn";
-import siteData from "@/data/site-data";
-import TeamCarousel from "@/components/TeamCarousel";
+import Head from 'next/head';
+import { Navigation } from '@/components/Navigation';
+import { Hero } from '@/app/home/page';
+import { About } from '@/app/about/page';
+import { Skills } from '@/app/services/page';
+import Projects from '@/app/projects/page';
+import { Contact } from '@/app/contact/page';
+import { Footer } from '@/components/Footer';
+import { ScrollFadeIn } from '@/app/hooks/ScrollFadeIn';
+import siteData from '@/data/site-data';
+import TeamCarousel from '@/app/team/page';
 
 // This is the main page component that renders all sections of the portfolio.
 // Each section is a separate component for better organization and maintainability.
 
 export default function Home() {
   return (
-    <div className="min-h-screen  bg-gradient-to-br from-teal-100 to-purple-100 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-teal-100 to-purple-100 text-gray-800 transition-colors duration-300 dark:text-gray-200">
       <Head>
         <title>{siteData.personal.name} | Software Engineer</title>
         <meta name={siteData.personal.name} content={siteData.personal.name} />
@@ -26,6 +26,7 @@ export default function Home() {
       </Head>
 
       <Navigation />
+
       <main>
         <ScrollFadeIn>
           <Hero />
@@ -46,6 +47,7 @@ export default function Home() {
           <Contact />
         </ScrollFadeIn>
       </main>
+
       <Footer />
     </div>
   );
