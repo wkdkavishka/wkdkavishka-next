@@ -27,11 +27,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose, onSubmi
     e.preventDefault();
     if (formData.name && formData.email && formData.message) {
       onSubmit(formData);
-      setFormData({
-        name: '',
-        email: '',
-        message: '',
-      });
+      setFormData({ name: '', email: '', message: '' });
       onClose();
     }
   };
@@ -50,38 +46,18 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose, onSubmi
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          exit={{
-            opacity: 0,
-          }}
-          transition={{
-            duration: 0.2,
-          }}
-          className="flex h-screen w-screen items-center justify-center overflow-y-auto backdrop-blur-lg" // appear in the middle seperate from the main page floating
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="z-[9999] flex h-screen w-screen items-center justify-center overflow-y-auto p-4 backdrop-blur-lg"
           onClick={(e) => e.target === e.currentTarget && onClose()}
         >
           <motion.div
-            initial={{
-              y: 20,
-              opacity: 0,
-            }}
-            animate={{
-              y: 0,
-              opacity: 1,
-            }}
-            exit={{
-              y: 20,
-              opacity: 0,
-            }}
-            transition={{
-              duration: 0.3,
-              ease: 'easeOut',
-            }}
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 20, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
             className="relative z-[10000] w-full max-w-lg rounded-2xl border border-teal-100/50 bg-white/90 p-8 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl dark:border-teal-900/50 dark:bg-gray-800/95"
           >
             <button
@@ -155,12 +131,8 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose, onSubmi
                 ></textarea>
               </div>
               <motion.button
-                whileHover={{
-                  scale: 1.02,
-                }}
-                whileTap={{
-                  scale: 0.98,
-                }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={!formData.name || !formData.email || !formData.message}
                 className="flex w-full items-center justify-center space-x-2 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 font-medium text-white transition-all duration-300 hover:from-blue-700 hover:to-purple-700 disabled:cursor-not-allowed disabled:opacity-50"
