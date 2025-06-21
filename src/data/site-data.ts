@@ -73,7 +73,7 @@ const siteData: SiteData = {
         title: 'Software Engineer | DevOps Engineer',
         location: 'Colombo, Sri Lanka',
         email: 'w.k.d.kavishka@outlook.com',
-        profileImage: '/images/profile.jpg',
+        profileImage: '/images/profile.png',
         about: [
             "I'm a passionate software engineer with experience in building modern web applications.",
             'I specialize in JavaScript/TypeScript, React, and Node.js, with a strong foundation in computer science principles and software architecture.',

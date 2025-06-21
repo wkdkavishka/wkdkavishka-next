@@ -21,7 +21,10 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
     const [isMounted, setIsMounted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [privacyAccepted, setPrivacyAccepted] = useState(false);
-    const [showSuccess, setShowSuccess] = useState(false);
+    const [notification, setNotification] = useState<null | {
+        type: 'success' | 'error' | 'info';
+        message: string;
+    }>(null);
 
     useEffect(() => {
         setIsMounted(true);
@@ -39,19 +42,24 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
         return /^\+?[0-9\s\-()]{7,20}$/.test(phone.trim()) || phone.trim() === '';
     };
 
+    const showNotification = (type: 'success' | 'error' | 'info', message: string) => {
+        setNotification({ type, message });
+        setTimeout(() => setNotification(null), 4000);
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!privacyAccepted) {
-            alert('Please accept the privacy policy to proceed.');
-            return;s
+            showNotification('error', 'Please accept the privacy policy to proceed.');
+            return;
         }
         if (!validateEmail(formData.email)) {
-            alert('Please enter a valid email address.');
+            showNotification('error', 'Please enter a valid email address.');
             return;
         }
         if (!validatePhone(formData.phone)) {
-            alert('Please enter a valid phone number or leave it blank.');
+            showNotification('error', 'Please enter a valid phone number or leave it blank.');
             return;
         }
 
@@ -76,13 +84,10 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
 
             setFormData({ name: '', email: '', company: '', phone: '', message: '' });
             setPrivacyAccepted(false);
-            setShowSuccess(true);
-            setTimeout(() => setShowSuccess(false), 4000);
-            // Do not close modal on success
+            showNotification('success', 'Message sent successfully!');
         } catch (error) {
             console.error('Error sending email:', error);
-            alert('Failed to send message. Please try again later.');
-            // Do not close modal on fail
+            showNotification('error', 'Failed to send message. Please try again later.');
         } finally {
             setIsSubmitting(false);
         }
@@ -100,39 +105,83 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
 
     return (
         <>
-            {/* Success Toast */}
+            {/* Notification popup (replaces old success toast) */}
             <AnimatePresence>
-                {showSuccess && (
+                {notification && (
                     <motion.div
                         initial={{ x: 400, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: 400, opacity: 0 }}
                         transition={{ duration: 0.4 }}
-                        className="fixed top-10 right-6 z-[99999] flex items-center gap-3 rounded-lg bg-green-50 px-6 py-4 shadow-lg ring-1 ring-green-400/20 dark:bg-green-900 dark:text-white"
+                        className={`fixed top-10 right-6 z-[99999] flex items-center gap-3 rounded-lg px-6 py-4 shadow-lg ring-1 ${
+                            notification.type === 'success'
+                                ? 'bg-green-50 text-green-600 ring-green-400/20 dark:bg-green-900 dark:text-green-400'
+                                : notification.type === 'error'
+                                  ? 'bg-red-50 text-red-600 ring-red-400/20 dark:bg-red-900 dark:text-red-400'
+                                  : 'bg-blue-50 text-blue-600 ring-blue-400/20 dark:bg-blue-900 dark:text-blue-400'
+                        } `}
                         style={{ minWidth: 260 }}
                     >
-                        <span className="text-green-600 dark:text-green-400">
-                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <circle
-                                    cx="12"
-                                    cy="12"
-                                    r="12"
-                                    fill="currentColor"
-                                    fillOpacity="0.15"
-                                />
-                                <path
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M7 13l3 3 7-7"
-                                />
-                            </svg>
+                        <span>
+                            {notification.type === 'success' && (
+                                <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="12"
+                                        fill="currentColor"
+                                        fillOpacity="0.15"
+                                    />
+                                    <path
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M7 13l3 3 7-7"
+                                    />
+                                </svg>
+                            )}
+                            {notification.type === 'error' && (
+                                <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="12"
+                                        fill="currentColor"
+                                        fillOpacity="0.15"
+                                    />
+                                    <path
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M8 8l8 8M16 8l-8 8"
+                                    />
+                                </svg>
+                            )}
+                            {notification.type === 'info' && (
+                                <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="12"
+                                        fill="currentColor"
+                                        fillOpacity="0.15"
+                                    />
+                                    <path
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M12 8v4m0 4h.01"
+                                    />
+                                </svg>
+                            )}
                         </span>
-                        <span className="font-medium">Message sent successfully!</span>
+                        <span className="font-medium">{notification.message}</span>
                         <button
-                            onClick={() => setShowSuccess(false)}
-                            className="ml-2 rounded-full p-1 text-green-700 hover:bg-green-100 dark:text-green-300 dark:hover:bg-green-800"
+                            onClick={() => setNotification(null)}
+                            className="ml-2 rounded-full p-1 text-inherit hover:bg-gray-100 dark:hover:bg-gray-800"
                             aria-label="Close notification"
                         >
                             <svg width="18" height="18" fill="none" viewBox="0 0 18 18">
