@@ -9,15 +9,6 @@ export const Contact = () => {
     const { socialLinks } = siteData;
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleEmailSubmit = (data: { name: string; email: string; message: string }) => {
-        const recipientEmail = process.env.NEXT_PUBLIC_EMAIL;
-        const subject = encodeURIComponent(`Portfolio Contact from ${data.name}`);
-        const body = encodeURIComponent(
-            `Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
-        );
-        window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
-    };
-
     return (
         <section id="contact" className="px-6 py-20">
             <div className="mx-auto max-w-2xl text-center">
@@ -50,11 +41,9 @@ export const Contact = () => {
                     ))}
                 </div>
             </div>
-            <EmailModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onSubmit={handleEmailSubmit}
-            />
+            <div className="top-0 left-0 z-1000">
+                <EmailModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            </div>
         </section>
     );
 };

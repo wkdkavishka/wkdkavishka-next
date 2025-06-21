@@ -50,7 +50,7 @@ export default function Home() {
                 </ScrollFadeIn>
             </main>
 
-            <div className="bottom-0 px-10">
+            <div className="bottom-0 px-10 pb-2">
                 <Footer />
             </div>
         </div>
