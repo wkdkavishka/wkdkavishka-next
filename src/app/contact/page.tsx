@@ -1,13 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { FiMail } from 'react-icons/fi';
 import siteData from '@/data/site-data';
-import { EmailModal } from '../../components/EmailModal';
 
-export const Contact = () => {
+export const Contact = ({ openEmailModal }: { openEmailModal: () => void }) => {
     const { socialLinks } = siteData;
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <section id="contact" className="px-6 py-20">
@@ -20,7 +18,7 @@ export const Contact = () => {
                     just want to say hi, I&apos;ll get back to you as soon as possible!
                 </p>
                 <button
-                    onClick={() => setIsModalOpen(!isModalOpen)}
+                    onClick={openEmailModal}
                     className="inline-flex transform items-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-3 font-medium text-white transition-opacity hover:-translate-y-0.5 hover:opacity-90 hover:shadow-lg"
                 >
                     <FiMail className="mr-2" />
@@ -40,9 +38,6 @@ export const Contact = () => {
                         </a>
                     ))}
                 </div>
-            </div>
-            <div className="top-0 left-0 z-1000">
-                <EmailModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
             </div>
         </section>
     );

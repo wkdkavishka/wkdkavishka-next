@@ -11,11 +11,17 @@ import { Footer } from '@/components/Footer';
 import { ScrollFadeIn } from '@/app/hooks/ScrollFadeIn';
 import siteData from '@/data/site-data';
 import TeamCarousel from '@/app/team/page';
+import React, { useState } from 'react';
+import { EmailModal } from '@/components/EmailModal';
 
 // This is the main page component that renders all sections of the portfolio.
 // Each section is a separate component for better organization and maintainability.
 
 export default function Home() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    // Function to open modal, pass to Contact
+    const openEmailModal = () => setIsModalOpen(true);
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-teal-100 to-purple-100 text-gray-800 transition-colors duration-300 dark:text-gray-200">
             <Head>
@@ -27,6 +33,10 @@ export default function Home() {
 
             <div className="sticky top-0 z-50 px-10 pt-2">
                 <Navigation />
+            </div>
+
+            <div className="fixed right-0 bottom-0 z-50 p-4 backdrop-blur-2xl">
+                <EmailModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
             </div>
 
             <main>
@@ -46,7 +56,8 @@ export default function Home() {
                     <TeamCarousel />
                 </ScrollFadeIn>
                 <ScrollFadeIn delay={4}>
-                    <Contact />
+                    {/* Pass openEmailModal to Contact */}
+                    <Contact openEmailModal={openEmailModal} />
                 </ScrollFadeIn>
             </main>
 

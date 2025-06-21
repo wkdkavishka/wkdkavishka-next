@@ -61,10 +61,11 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
             setPrivacyAccepted(false);
             setShowSuccess(true);
             setTimeout(() => setShowSuccess(false), 4000);
-            onClose();
+            // Do not close modal on success
         } catch (error) {
             console.error('Error sending email:', error);
             alert('Failed to send message. Please try again later.');
+            // Do not close modal on fail
         } finally {
             setIsSubmitting(false);
         }
@@ -90,7 +91,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: 400, opacity: 0 }}
                         transition={{ duration: 0.4 }}
-                        className="fixed top-6 right-6 z-[99999] flex items-center gap-3 rounded-lg bg-green-50 px-6 py-4 shadow-lg ring-1 ring-green-400/20 dark:bg-green-900 dark:text-white"
+                        className="fixed top-10 right-6 z-[99999] flex items-center gap-3 rounded-lg bg-green-50 px-6 py-4 shadow-lg ring-1 ring-green-400/20 dark:bg-green-900 dark:text-white"
                         style={{ minWidth: 260 }}
                     >
                         <span className="text-green-600 dark:text-green-400">
