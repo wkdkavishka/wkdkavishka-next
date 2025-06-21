@@ -30,11 +30,28 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
         return () => setIsMounted(false);
     }, []);
 
+    const validateEmail = (email: string) => {
+        // Simple email regex
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    };
+    const validatePhone = (phone: string) => {
+        // Accepts numbers, spaces, dashes, parentheses, and optional leading +
+        return /^\+?[0-9\s\-()]{7,20}$/.test(phone.trim()) || phone.trim() === '';
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!privacyAccepted) {
             alert('Please accept the privacy policy to proceed.');
+            return;s
+        }
+        if (!validateEmail(formData.email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+        if (!validatePhone(formData.phone)) {
+            alert('Please enter a valid phone number or leave it blank.');
             return;
         }
 
