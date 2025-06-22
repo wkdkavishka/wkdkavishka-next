@@ -1,25 +1,22 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNotification } from '../contexts/NotificationContext';
 
-export interface NotificationModalProps {
-    status: 'success' | 'error' | 'info';
-    message: string;
-    timeout?: number;
-    onClose: () => void;
-}
+const NotificationModal: React.FC = () => {
+    const { notification, handleClose } = useNotification();
+    const status = notification?.status;
+    const message = notification?.message;
+    const timeout = notification?.timeout ? notification.timeout : 5000;
 
-const NotificationModal: React.FC<NotificationModalProps> = ({
-    status,
-    message,
-    timeout = 4000,
-    onClose,
-}) => {
     useEffect(() => {
-        if (timeout > 0) {
-            const timer = setTimeout(onClose, timeout);
+        if (notification && timeout && timeout > 0) {
+            const timer = setTimeout(handleClose, timeout);
             return () => clearTimeout(timer);
         }
-    }, [timeout, onClose]);
+    }, [notification, timeout, handleClose]);
+
+    if (!notification) return null;
+
     return (
         <AnimatePresence>
             <motion.div
@@ -76,7 +73,7 @@ const NotificationModal: React.FC<NotificationModalProps> = ({
                 </span>
                 <span className="font-medium">{message}</span>
                 <button
-                    onClick={onClose}
+                    onClick={handleClose}
                     className="ml-2 rounded-full p-1 text-inherit hover:bg-gray-100 dark:hover:bg-gray-800"
                     aria-label="Close notification"
                 >

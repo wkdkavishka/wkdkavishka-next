@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { FiX, FiSend } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-import NotificationModal from './NotificationModal';
+import { useNotification } from '../contexts/NotificationContext';
 
 interface EmailModalProps {
     isOpen: boolean;
@@ -22,10 +22,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
     const [isMounted, setIsMounted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [privacyAccepted, setPrivacyAccepted] = useState(false);
-    const [notification, setNotification] = useState<null | {
-        type: 'success' | 'error' | 'info';
-        message: string;
-    }>(null);
+    const { showNotification } = useNotification();
 
     useEffect(() => {
         setIsMounted(true);
@@ -43,24 +40,25 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
         return /^\+?[0-9\s\-()]{7,20}$/.test(phone.trim()) || phone.trim() === '';
     };
 
-    const showNotification = (type: 'success' | 'error' | 'info', message: string) => {
-        setNotification({ type, message });
-        setTimeout(() => setNotification(null), 4000);
-    };
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!privacyAccepted) {
-            showNotification('error', 'Please accept the privacy policy to proceed.');
+            showNotification({
+                status: 'error',
+                message: 'Please accept the privacy policy to proceed.',
+            });
             return;
         }
         if (!validateEmail(formData.email)) {
-            showNotification('error', 'Please enter a valid email address.');
+            showNotification({ status: 'error', message: 'Please enter a valid email address.' });
             return;
         }
         if (!validatePhone(formData.phone)) {
-            showNotification('error', 'Please enter a valid phone number or leave it blank.');
+            showNotification({
+                status: 'error',
+                message: 'Please enter a valid phone number or leave it blank.',
+            });
             return;
         }
 
@@ -85,10 +83,13 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
 
             setFormData({ name: '', email: '', company: '', phone: '', message: '' });
             setPrivacyAccepted(false);
-            showNotification('success', 'Message sent successfully!');
+            showNotification({ status: 'success', message: 'Message sent successfully!' });
         } catch (error) {
             console.error('Error sending email:', error);
-            showNotification('error', 'Failed to send message. Please try again later.');
+            showNotification({
+                status: 'error',
+                message: 'Failed to send message. Please try again later.',
+            });
         } finally {
             setIsSubmitting(false);
         }
@@ -106,17 +107,6 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
 
     return (
         <>
-            {/* Notification popup (replaces old success toast) */}
-            <AnimatePresence>
-                {notification ? (
-                    <NotificationModal
-                        status={notification.type}
-                        message={notification.message}
-                        timeout={4000}
-                        onClose={() => setNotification(null)}
-                    />
-                ) : null}
-            </AnimatePresence>
             {/* Modal */}
             <AnimatePresence>
                 {isOpen && (
