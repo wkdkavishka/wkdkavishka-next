@@ -4,7 +4,7 @@ import React from 'react';
 import { FiMail } from 'react-icons/fi';
 import siteData from '@/data/site-data';
 
-export const Contact = ({ openEmailModal }: { openEmailModal: () => void }) => {
+export default function page({ openEmailModal }: { openEmailModal: () => void }) {
     const { socialLinks } = siteData;
 
     return (
@@ -41,4 +41,4 @@ export const Contact = ({ openEmailModal }: { openEmailModal: () => void }) => {
             </div>
         </section>
     );
-};
+}

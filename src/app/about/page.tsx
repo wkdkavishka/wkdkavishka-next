@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import siteData from '@/data/site-data';
 
-export const About = () => {
+export default function Page() {
     const { personal, socialLinks } = siteData;
 
     return (

@@ -1,8 +1,9 @@
-import React from 'react';
-import Image from 'next/image';
-import siteData from '@/data/site-data';
+'use client';
 
-export const Hero = () => {
+import siteData from '@/data/site-data';
+import Image from 'next/image';
+
+export default function Page() {
     const { personal } = siteData;
 
     return (
@@ -18,12 +19,6 @@ export const Hero = () => {
                             sizes="(max-width: 768px) 12rem, 14rem"
                             className="object-cover"
                             priority
-                            onError={(e) => {
-                                // Fallback in case the image fails to load
-                                const target = e.target as HTMLImageElement;
-                                target.onerror = null;
-                                target.src = '/images/profile.jpg';
-                            }}
                         />
                     </div>
                 </div>
@@ -70,4 +65,4 @@ export const Hero = () => {
             </div>
         </section>
     );
-};
+}

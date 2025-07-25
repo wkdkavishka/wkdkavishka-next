@@ -1,23 +1,23 @@
 'use client';
 
-import Head from 'next/head';
-import { Navigation } from '@/components/Navigation';
-import { Hero } from '@/app/home/page';
-import { About } from '@/app/about/page';
-import { Skills } from '@/app/services/page';
+import About from '@/app/about/page';
+import Contact from '@/app/contact/page';
+import Home from '@/app/home/page';
 import Projects from '@/app/projects/page';
-import { Contact } from '@/app/contact/page';
-import { Footer } from '@/components/Footer';
-import { ScrollFadeIn } from '@/app/hooks/ScrollFadeIn';
-import siteData from '@/data/site-data';
+import Skills from '@/app/services/page';
 import TeamCarousel from '@/app/team/page';
-import React, { useState } from 'react';
-import { EmailModal } from '@/components/EmailModal';
+import siteData from '@/data/site-data';
+import Head from 'next/head';
+import { EmailModal } from '@/components/EmailComp';
+import { Navigation } from '@/components/NavigationComp';
+import { Footer } from '@/components/FooterComp';
+import { ScrollFadeIn } from '@/hooks/ScrollFadeIn';
+import { useState } from 'react';
 
 // This is the main page component that renders all sections of the portfolio.
 // Each section is a separate component for better organization and maintainability.
 
-export default function Home() {
+export default function Page() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     // Function to open modal, pass to Contact
     const openEmailModal = () => setIsModalOpen(true);
@@ -41,7 +41,7 @@ export default function Home() {
 
             <main>
                 <ScrollFadeIn>
-                    <Hero />
+                    <Home />
                 </ScrollFadeIn>
                 <ScrollFadeIn delay={1}>
                     <About />
@@ -55,6 +55,9 @@ export default function Home() {
                 <ScrollFadeIn delay={2}>
                     <TeamCarousel />
                 </ScrollFadeIn>
+                {/* <ScrollFadeIn delay={2}>
+                    <Contact />
+                </ScrollFadeIn> */}
                 <ScrollFadeIn delay={2}>
                     {/* Pass openEmailModal to Contact */}
                     <Contact openEmailModal={openEmailModal} />

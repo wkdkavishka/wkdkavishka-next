@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
-import NotificationModal from '../components/NotificationModal';
+import NotificationModal from '../components/NotificationComp';
 
 export type NotificationStatus = 'success' | 'error' | 'info';
 

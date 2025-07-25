@@ -1,7 +1,7 @@
 import React from 'react';
 import siteData from '@/data/site-data';
 
-export const Skills = () => {
+export default function Page() {
     const { services } = siteData;
 
     // Default colors for service icons
