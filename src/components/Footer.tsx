@@ -6,7 +6,7 @@ export const Footer = () => {
     const { personal } = siteData;
 
     return (
-        <footer className="rounded-4xl border-1 border-teal-200 bg-teal-100/50 p-2 backdrop-blur">
+        <footer className="rounded-4xl border-1 border-teal-200 bg-teal-100/50 p-2 shadow-lg backdrop-blur">
             <div className="mx-auto max-w-4xl text-center">
                 <p className="text-gray-600 dark:text-gray-400">
                     © {currentYear} {personal.name}. All rights reserved.
