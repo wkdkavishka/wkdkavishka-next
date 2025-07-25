@@ -49,13 +49,13 @@ export default function Home() {
                 <ScrollFadeIn delay={2}>
                     <Skills />
                 </ScrollFadeIn>
-                <ScrollFadeIn delay={3}>
+                <ScrollFadeIn delay={2}>
                     <Projects />
                 </ScrollFadeIn>
-                <ScrollFadeIn delay={3.5}>
+                <ScrollFadeIn delay={2}>
                     <TeamCarousel />
                 </ScrollFadeIn>
-                <ScrollFadeIn delay={4}>
+                <ScrollFadeIn delay={2}>
                     {/* Pass openEmailModal to Contact */}
                     <Contact openEmailModal={openEmailModal} />
                 </ScrollFadeIn>
