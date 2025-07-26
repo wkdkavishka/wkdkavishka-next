@@ -138,11 +138,11 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                     aria-labelledby="modal-title"
                     ref={modalRef}
                     tabIndex={-1}
-                    onClick={(e) => {
-                        if (e.target === e.currentTarget) {
-                            onClose();
-                        }
-                    }}
+                    // onClick={(e) => {
+                    //     if (e.target === e.currentTarget) {
+                    //         onClose();
+                    //     }
+                    // }}
                 >
                     <motion.div className="relative w-full max-w-lg rounded-2xl border-2 border-gray-200 bg-white p-8 shadow-xl transition-all duration-300 hover:border-blue-500">
                         <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-blue-600/5 to-purple-600/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
