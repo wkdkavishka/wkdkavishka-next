@@ -3,9 +3,11 @@
 import React from 'react';
 import Image from 'next/image';
 import siteData from '@/data/site-data';
+import { PersonalData, SocialData } from '@/data/site-data';
 
 export default function Page() {
-    const { personal, socialLinks } = siteData;
+    const Personal: PersonalData = siteData.personal;
+    const SocialLinks: SocialData[] = siteData.socialLinks;
 
     return (
         <section id="about" className="px-6 py-20">
@@ -20,8 +22,8 @@ export default function Page() {
                     <div className="flex w-full justify-center md:w-1/3">
                         <div className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-blue-500">
                             <Image
-                                src="/images/profile.jpg"
-                                alt={`${personal.name}'s profile`}
+                                src={Personal.profileImage}
+                                alt={`${Personal.name}'s profile`}
                                 fill
                                 className="object-cover"
                                 priority
@@ -29,7 +31,7 @@ export default function Page() {
                         </div>
                     </div>
                     <div className="w-full md:w-2/3">
-                        {personal.about.map((paragraph, index) => (
+                        {Personal.about.slice(1).map((paragraph, index) => (
                             <p
                                 key={index}
                                 className="mb-6 text-lg text-gray-600 dark:text-gray-300"
@@ -38,7 +40,7 @@ export default function Page() {
                             </p>
                         ))}
                         <div className="flex space-x-4">
-                            {socialLinks.map((social) => (
+                            {SocialLinks.map((social) => (
                                 <a
                                     key={social.name}
                                     href={social.url}
@@ -68,4 +70,4 @@ export default function Page() {
             </div>
         </section>
     );
-};
+}

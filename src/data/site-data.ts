@@ -3,11 +3,11 @@ import {
     FaReact,
     FaGithub,
     FaLinkedin,
-    FaTwitter,
     FaCode,
     FaMobileAlt,
     FaCloud,
     FaPalette,
+    FaFacebook,
 } from 'react-icons/fa';
 
 export interface Skill {
@@ -46,23 +46,29 @@ export interface TeamMemberCarouselCompIntf {
     };
 }
 
+// personel
+export interface PersonalData {
+    name: string;
+    title: string;
+    location: string;
+    email: string;
+    profileImage: string;
+    about: string[];
+    resumeUrl: string;
+}
+
+// socialData
+export interface SocialData {
+    name: string;
+    url: string;
+    icon: IconType;
+}
+
 export interface SiteData {
-    personal: {
-        name: string;
-        title: string;
-        location: string;
-        email: string;
-        profileImage: string;
-        about: string[];
-        resumeUrl: string;
-    };
+    personal: PersonalData;
     services: Skill[];
     projects: CardCompIntf[];
-    socialLinks: Array<{
-        name: string;
-        url: string;
-        icon: IconType;
-    }>;
+    socialLinks: SocialData[];
     teamMembers: TeamMemberCarouselCompIntf[];
 }
 
@@ -72,12 +78,14 @@ const siteData: SiteData = {
         name: 'W.K.D.Kavishka',
         title: 'Software Engineer | DevOps Engineer',
         location: 'Colombo, Sri Lanka',
-        email: 'w.k.d.kavishka@outlook.com',
-        profileImage: '/images/profile.jpg',
+        email: 'w.k.d.kavishka@gmail.com',
+        profileImage: '/images/profile.webp',
         about: [
-            "I'm a passionate software engineer with experience in building modern web applications.",
-            'I specialize in JavaScript/TypeScript, React, and Node.js, with a strong foundation in computer science principles and software architecture.',
-            "When I'm not coding, you can find me exploring new technologies, contributing to open source, and sharing knowledge with the developer community.",
+            'Take your business to the next level',
+            'Taking on challenging projects and delivering exceptional software solutions.',
+            'Focused on delivering high-quality, scalable applications that meet business needs.',
+            'Building lasting client relationships through exceptional service and innovative solutions.',
+            'Dedicated to excellence in every project and committed to client satisfaction.',
         ],
         resumeUrl: '/resume.pdf',
     },
@@ -243,18 +251,18 @@ const siteData: SiteData = {
     socialLinks: [
         {
             name: 'GitHub',
-            url: 'https://github.com/yourusername',
+            url: 'https://github.com/wkdkavishka',
             icon: FaGithub,
         },
         {
             name: 'LinkedIn',
-            url: 'https://linkedin.com/in/yourusername',
+            url: 'https://linkedin.com/in/wkdkavishka',
             icon: FaLinkedin,
         },
         {
-            name: 'Twitter',
-            url: 'https://twitter.com/yourusername',
-            icon: FaTwitter,
+            name: 'Facebook',
+            url: 'https://facebook.com/W.K.D.Kavishka',
+            icon: FaFacebook,
         },
     ],
 };

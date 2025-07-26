@@ -2,9 +2,12 @@
 
 import siteData from '@/data/site-data';
 import Image from 'next/image';
+import { PersonalData, SocialData } from '@/data/site-data';
+import React from 'react';
 
 export default function Page() {
-    const { personal } = siteData;
+    const personal: PersonalData = siteData.personal;
+    const SocialLinks: SocialData[] = siteData.socialLinks;
 
     return (
         <section id="home" className="flex min-h-screen items-center justify-center px-6 py-2">
@@ -37,6 +40,23 @@ export default function Page() {
                 <p className="mx-auto mb-12 max-w-2xl text-lg text-gray-600 md:text-xl dark:text-gray-300">
                     {personal.about[0]}
                 </p>
+
+                <div className="mb-12 flex justify-center space-x-4">
+                    {SocialLinks.map((social) => (
+                        <a
+                            key={social.name}
+                            href={social.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-700 transition-colors hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+                            aria-label={social.name}
+                        >
+                            {React.createElement(social.icon, {
+                                size: 24,
+                            })}
+                        </a>
+                    ))}
+                </div>
 
                 <div className="flex flex-col justify-center gap-4 sm:flex-row">
                     <button
