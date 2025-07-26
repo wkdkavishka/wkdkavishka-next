@@ -29,10 +29,12 @@ export default function ThreeBackground() {
         const renderer = new THREE.WebGLRenderer({
             alpha: true,
             antialias: true,
-            canvas: container.appendChild(document.createElement('canvas'))
+            canvas: container.appendChild(document.createElement('canvas')),
         });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0x000000, 0);
+        renderer.setClearColor(0x000000, 0); // Transparent background
+
+        // Gradient background removed for transparency
 
         // Scene
         const scene = new THREE.Scene();
@@ -64,6 +66,16 @@ export default function ThreeBackground() {
             colors[i] = new THREE.Color('#14b8a6').r;
             colors[i + 1] = new THREE.Color('#14b8a6').g;
             colors[i + 2] = new THREE.Color('#14b8a6').b;
+
+            // Add some random variation to colors
+            colors[i] += (Math.random() - 0.5) * 0.1;
+            colors[i + 1] += (Math.random() - 0.5) * 0.1;
+            colors[i + 2] += (Math.random() - 0.5) * 0.1;
+
+            // Clamp colors to valid range
+            colors[i] = Math.max(0, Math.min(1, colors[i]));
+            colors[i + 1] = Math.max(0, Math.min(1, colors[i + 1]));
+            colors[i + 2] = Math.max(0, Math.min(1, colors[i + 2]));
         }
 
         const geometry = new THREE.BufferGeometry();
@@ -106,7 +118,11 @@ export default function ThreeBackground() {
                     posAttr.array[i + 2] += velocities[i + 2];
 
                     if (Math.random() < 0.01) {
-                        const color = lerpColor(new THREE.Color('#14b8a6'), new THREE.Color('#a78bfa'), Math.random());
+                        const color = lerpColor(
+                            new THREE.Color('#14b8a6'),
+                            new THREE.Color('#a78bfa'),
+                            Math.random()
+                        );
                         colorAttr.array[i] = color.r;
                         colorAttr.array[i + 1] = color.g;
                         colorAttr.array[i + 2] = color.b;
@@ -151,6 +167,10 @@ export default function ThreeBackground() {
     }, []);
 
     return (
-        <div ref={mountRef} className="absolute inset-0 z-0" />
+        <>
+            <div ref={mountRef} className="absolute inset-0 z-0" />
+            {/* Frosted glass effect layer */}
+            <div className="fixed inset-0 z-[1] bg-gradient-to-br from-teal-600/10 to-purple-600/10 backdrop-blur-xs" />
+        </>
     );
 }
