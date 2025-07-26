@@ -16,7 +16,7 @@ export interface Skill {
     icon: IconType;
 }
 
-export interface Project {
+export interface CardCompIntf {
     id: string;
     title: string;
     description: string;
@@ -32,7 +32,7 @@ export interface SocialLink {
     icon: IconType;
 }
 
-export interface TeamMember {
+export interface TeamMemberCarouselCompIntf {
     id: string;
     name: string;
     role: string;
@@ -57,13 +57,13 @@ export interface SiteData {
         resumeUrl: string;
     };
     services: Skill[];
-    projects: Project[];
+    projects: CardCompIntf[];
     socialLinks: Array<{
         name: string;
         url: string;
         icon: IconType;
     }>;
-    teamMembers: TeamMember[];
+    teamMembers: TeamMemberCarouselCompIntf[];
 }
 
 // Create the site data with proper typing

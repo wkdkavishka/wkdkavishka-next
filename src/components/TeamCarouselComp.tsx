@@ -10,10 +10,10 @@ import {
     FaChevronLeft,
     FaChevronRight,
 } from 'react-icons/fa';
-import { TeamMember } from '@/data/site-data';
+import { TeamMemberCarouselCompIntf } from '@/data/site-data';
 
 interface TeamCarouselProps {
-    members: TeamMember[];
+    members: TeamMemberCarouselCompIntf[];
 }
 
 export const TeamCarouselComp: React.FC<TeamCarouselProps> = ({ members }) => {
