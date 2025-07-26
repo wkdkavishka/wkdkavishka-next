@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { FiX, FiSend } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
@@ -12,6 +13,32 @@ interface EmailModalProps {
 }
 
 export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
+    const portalRoot = useRef<HTMLElement | null>(null);
+    const modalRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        portalRoot.current = document.getElementById('portal-root');
+    }, []);
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape' && isOpen) {
+                onClose();
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener('keydown', handleKeyDown);
+            if (modalRef.current) {
+                modalRef.current.focus();
+            }
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isOpen, onClose]);
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -26,17 +53,15 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
 
     useEffect(() => {
         setIsMounted(true);
-        // Initialize EmailJS
         emailjs.init('qz_99WqAXBiP0MXqJ');
         return () => setIsMounted(false);
     }, []);
 
     const validateEmail = (email: string) => {
-        // Simple email regex
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     };
+
     const validatePhone = (phone: string) => {
-        // Accepts numbers, spaces, dashes, parentheses, and optional leading +
         return /^\+?[0-9\s\-()]{7,20}$/.test(phone.trim()) || phone.trim() === '';
     };
 
@@ -64,7 +89,6 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
 
         try {
             setIsSubmitting(true);
-
             const templateParams = {
                 full_name: formData.name,
                 from_email: formData.email,
@@ -73,14 +97,12 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                 message: formData.message,
                 to_email: 'w.k.d.kavishka@outlook.com',
             };
-
             await emailjs.send(
                 'service_y9ix33i',
                 'template_e1c3rv8',
                 templateParams,
                 'qz_99WqAXBiP0MXqJ'
             );
-
             setFormData({ name: '', email: '', company: '', phone: '', message: '' });
             setPrivacyAccepted(false);
             showNotification({ status: 'success', message: 'Message sent successfully!' });
@@ -97,183 +119,176 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    if (!isMounted) return null;
+    if (!isMounted || !portalRoot.current) return null;
 
-    return (
-        <>
-            {/* Modal */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="flex h-screen w-screen items-center justify-center overflow-y-auto p-4"
-                        onClick={(e) => e.target === e.currentTarget && onClose()}
-                    >
-                        <motion.div
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: 20, opacity: 0 }}
-                            transition={{ duration: 0.3, ease: 'easeOut' }}
-                            className="group relative w-full max-w-lg transform rounded-xl border border-gray-100 bg-white p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:border-blue-500/30 hover:shadow-2xl hover:ring-2 hover:ring-blue-500/20 dark:border-gray-700 dark:bg-gray-800"
-                        >
-                            <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-blue-600/5 to-purple-600/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-                            <div className="relative z-10">
-                                <button
-                                    onClick={onClose}
-                                    className="absolute top-4 right-4 rounded-full p-1.5 text-teal-600 transition-colors hover:text-teal-800 dark:text-teal-400 dark:hover:text-teal-300"
-                                    aria-label="Close"
-                                >
-                                    <FiX size={20} />
-                                </button>
-                                <div className="mb-6">
-                                    <h3 className="mb-3 bg-gradient-to-r from-teal-600 to-purple-600 bg-clip-text text-3xl font-bold text-transparent">
-                                        Send a Message
-                                    </h3>
-                                    <p className="mb-6 text-sm text-gray-600 dark:text-gray-300">
-                                        I&apos;ll get back to you as soon as possible!
-                                    </p>
-                                </div>
-                                <form onSubmit={handleSubmit} className="space-y-5">
-                                    <div>
-                                        <label
-                                            htmlFor="name"
-                                            className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                        >
-                                            Full Name
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="name"
-                                            name="name"
-                                            value={formData.name}
-                                            onChange={handleChange}
-                                            className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 dark:border-gray-700 dark:text-white"
-                                            placeholder="John Doe"
-                                            required
-                                        />
-                                    </div>
-                                    <div>
-                                        <label
-                                            htmlFor="company"
-                                            className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                        >
-                                            Company
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="company"
-                                            name="company"
-                                            value={formData.company}
-                                            onChange={handleChange}
-                                            className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 dark:border-gray-700 dark:text-white"
-                                            placeholder="Your company name"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label
-                                            htmlFor="email"
-                                            className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                        >
-                                            Email
-                                        </label>
-                                        <input
-                                            type="email"
-                                            id="email"
-                                            name="email"
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                            className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 dark:border-gray-700 dark:text-white"
-                                            placeholder="you@example.com"
-                                            required
-                                        />
-                                    </div>
-                                    <div>
-                                        <label
-                                            htmlFor="phone"
-                                            className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                        >
-                                            Phone Number
-                                        </label>
-                                        <input
-                                            type="tel"
-                                            id="phone"
-                                            name="phone"
-                                            value={formData.phone}
-                                            onChange={handleChange}
-                                            className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 dark:border-gray-700 dark:text-white"
-                                            placeholder="+1 (555) 000-0000"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label
-                                            htmlFor="message"
-                                            className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
-                                        >
-                                            Message
-                                        </label>
-                                        <textarea
-                                            id="message"
-                                            name="message"
-                                            value={formData.message}
-                                            onChange={handleChange}
-                                            rows={4}
-                                            className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 dark:border-gray-700 dark:text-white"
-                                            placeholder="Tell me about your project, requirements, or any questions you have..."
-                                            required
-                                        />
-                                    </div>
-                                    <div className="flex gap-x-4">
-                                        <label className="inline-flex cursor-pointer items-center">
-                                            <input
-                                                type="checkbox"
-                                                checked={privacyAccepted}
-                                                onChange={(e) =>
-                                                    setPrivacyAccepted(e.target.checked)
-                                                }
-                                                className="peer sr-only"
-                                            />
-                                            <div className="peer relative h-6 w-11 rounded-full peer-checked:bg-blue-600 peer-focus:ring-4 peer-focus:ring-blue-300 peer-focus:outline-none after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white rtl:peer-checked:after:-translate-x-full dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800" />
-                                            <span className="ms-3 text-sm text-gray-600 dark:text-gray-300">
-                                                By selecting this, you agree to our{' '}
-                                                <a
-                                                    href="#"
-                                                    className="text-blue-600 hover:underline"
-                                                >
-                                                    privacy policy
-                                                </a>
-                                                .
-                                            </span>
-                                        </label>
-                                    </div>
-                                    <button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                        className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-                                    >
-                                        {isSubmitting ? (
-                                            'Sending...'
-                                        ) : (
-                                            <>
-                                                <FiSend className="mr-2" />
-                                                Send Message
-                                            </>
-                                        )}
-                                    </button>
-                                </form>
+    return createPortal(
+        <AnimatePresence mode="wait">
+            {isOpen && (
+                <motion.div
+                    key="modal"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto backdrop-blur-lg"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="modal-title"
+                    ref={modalRef}
+                    tabIndex={-1}
+                    onClick={(e) => {
+                        if (e.target === e.currentTarget) {
+                            onClose();
+                        }
+                    }}
+                >
+                    <motion.div className="relative w-full max-w-lg rounded-2xl border-2 border-gray-200 bg-white p-8 shadow-xl transition-all duration-300 hover:border-blue-500">
+                        <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-blue-600/5 to-purple-600/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                        <div className="relative z-10">
+                            <button
+                                onClick={onClose}
+                                className="absolute top-4 right-4 rounded-full p-1.5 text-teal-600 transition-colors hover:text-teal-800 dark:text-teal-400 dark:hover:text-teal-300"
+                                aria-label="Close"
+                            >
+                                <FiX size={20} />
+                            </button>
+                            <div className="mb-6">
+                                <h3 className="mb-3 bg-gradient-to-r from-teal-600 to-purple-600 bg-clip-text text-3xl font-bold text-transparent">
+                                    Send a Message
+                                </h3>
+                                <p className="mb-6 text-sm text-gray-600 dark:text-gray-300">
+                                    I&apos;ll get back to you as soon as possible!
+                                </p>
                             </div>
-                        </motion.div>
+                            <form onSubmit={handleSubmit} className="space-y-5">
+                                <div>
+                                    <label
+                                        htmlFor="name"
+                                        className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    >
+                                        Full Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 focus:outline-none dark:text-white"
+                                        placeholder="John Doe"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor="company"
+                                        className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    >
+                                        Company
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="company"
+                                        name="company"
+                                        value={formData.company}
+                                        onChange={handleChange}
+                                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 dark:border-gray-700 dark:text-white"
+                                        placeholder="Your company name"
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor="email"
+                                        className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    >
+                                        Email
+                                    </label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 dark:border-gray-700 dark:text-white"
+                                        placeholder="you@example.com"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor="phone"
+                                        className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    >
+                                        Phone Number
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 dark:border-gray-700 dark:text-white"
+                                        placeholder="+1 (555) 000-0000"
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor="message"
+                                        className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    >
+                                        Message
+                                    </label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        rows={4}
+                                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 dark:border-gray-700 dark:text-white"
+                                        placeholder="Tell me about your project, requirements, or any questions you have..."
+                                        required
+                                    />
+                                </div>
+                                <div className="flex gap-x-4">
+                                    <label className="inline-flex cursor-pointer items-center">
+                                        <input
+                                            type="checkbox"
+                                            checked={privacyAccepted}
+                                            onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                                            className="peer sr-only"
+                                        />
+                                        <div className="peer relative h-6 w-11 rounded-full peer-checked:bg-blue-600 peer-focus:ring-4 peer-focus:ring-blue-300 peer-focus:outline-none after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white rtl:peer-checked:after:-translate-x-full dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800" />
+                                        <span className="ms-3 text-sm text-gray-600 dark:text-gray-300">
+                                            By selecting this, you agree to our{' '}
+                                            <a href="#" className="text-blue-600 hover:underline">
+                                                privacy policy
+                                            </a>
+                                            .
+                                        </span>
+                                    </label>
+                                </div>
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                                >
+                                    {isSubmitting ? (
+                                        'Sending...'
+                                    ) : (
+                                        <>
+                                            <FiSend className="mr-2" />
+                                            Send Message
+                                        </>
+                                    )}
+                                </button>
+                            </form>
+                        </div>
                     </motion.div>
-                )}
-            </AnimatePresence>
-        </>
+                </motion.div>
+            )}
+        </AnimatePresence>,
+        portalRoot.current
     );
 };

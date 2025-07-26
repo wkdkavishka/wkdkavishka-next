@@ -19,8 +19,6 @@ import { useState } from 'react';
 
 export default function Page() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // Function to open modal, pass to Contact
-    const openEmailModal = () => setIsModalOpen(true);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-teal-100 to-purple-100 text-gray-800 transition-colors duration-300 dark:text-gray-200">
@@ -59,8 +57,7 @@ export default function Page() {
                     <Contact />
                 </ScrollFadeIn> */}
                 <ScrollFadeIn delay={2}>
-                    {/* Pass openEmailModal to Contact */}
-                    <Contact openEmailModal={openEmailModal} />
+                    <Contact />
                 </ScrollFadeIn>
             </main>
 

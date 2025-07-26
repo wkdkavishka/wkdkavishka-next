@@ -3,8 +3,10 @@
 import React from 'react';
 import { FiMail } from 'react-icons/fi';
 import siteData from '@/data/site-data';
+import { useEmail } from '@/contexts/EmailContext';
 
-export default function page({ openEmailModal }: { openEmailModal: () => void }) {
+export default function ContactPage() {
+  const { showEmailModal } = useEmail();
     const { socialLinks } = siteData;
 
     return (
@@ -18,7 +20,7 @@ export default function page({ openEmailModal }: { openEmailModal: () => void })
                     just want to say hi, I&apos;ll get back to you as soon as possible!
                 </p>
                 <button
-                    onClick={openEmailModal}
+                    onClick={showEmailModal}
                     className="inline-flex transform items-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-3 font-medium text-white transition-opacity hover:-translate-y-0.5 hover:opacity-90 hover:shadow-lg"
                 >
                     <FiMail className="mr-2" />
