@@ -14,8 +14,8 @@
     --animation-delay: 0.1s; /* Base animation delay */
 }
 
-/* Theme configuration for Tailwind */
-@theme inline {
+/* Theme configuration using CSS variables */
+:root {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --font-sans: var(--font-geist-sans);
@@ -23,12 +23,12 @@
 }
 
 /* Dark mode theme configuration */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #030303; /* Darker background for dark mode */
-        --foreground: #ededed; /* Lighter text for dark mode */
-    }
-}
+/* @media (prefers-color-scheme: dark) { */
+/* :root { */
+/* --background: #030303; Darker background for dark mode */
+/* --foreground: #ededed; Lighter text for dark mode */
+/* } */
+/* } */
 
 /* Base HTML styles */
 html {
