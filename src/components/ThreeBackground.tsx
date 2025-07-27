@@ -170,7 +170,7 @@ export default function ThreeBackground() {
         <>
             <div ref={mountRef} className="absolute inset-0 z-0" />
             {/* Frosted glass effect layer */}
-            <div className="fixed inset-0 z-[1] bg-gradient-to-br from-teal-600/10 to-purple-600/10 backdrop-blur-xs" />
+            <div className="fixed inset-0 z-[1] bg-gradient-to-tl from-teal-400/50 to-purple-400/50 backdrop-blur-xs" />
         </>
     );
 }
