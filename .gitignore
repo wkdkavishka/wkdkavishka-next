@@ -1,59 +1,40 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # Dependencies
 /node_modules
 /.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-
-# IDE and Editor
-/.idea
-
-# Build and Production
-/.next/
-/out/
-/dist/
-/build
-/public/sitemap.xml
-/public/sitemap-0.xml
-/public/robots.txt
+.pnp.js
 
 # Testing
 /coverage
 
-# Environment
-.env*
-.vercel
+# Production
+/build
+/dist
+/.next
+/out
 
-# Debug
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
 
-# TypeScript
-*.tsbuildinfo
-next-env.d.ts
-
-# System and OS
-.DS_Store
-*.pem
-
-# Misc
-# Local development files
-.next/
-.vercel
-
-# IDE specific
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
 .idea
-
-# Package manager
-.pnpm-debug.log*
-
-# TypeScript
-*.tsbuildinfo
-next-env.d.ts
+/.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?*
+/public/sitemap-0.xml
+/public/sitemap.xml
