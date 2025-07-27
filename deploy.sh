@@ -1,7 +1,3 @@
-# generate sitemap
-echo "[deploy] Generating sitemap..."
-npx ts-node generate-sitemap.ts
-
 echo "[deploy] Building project..."
 npm run build
 
