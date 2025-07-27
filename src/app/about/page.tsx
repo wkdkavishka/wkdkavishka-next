@@ -10,8 +10,8 @@ export default function Page() {
     const SocialLinks: SocialData[] = siteData.socialLinks;
 
     return (
-        <section id="about" className="px-6 py-20">
-            <div className="mx-auto max-w-4xl">
+        <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20">
+            <div className="mx-auto max-w-4xl flex flex-col items-center">
                 <h2 className="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-center text-4xl font-bold text-transparent">
                     About Me
                 </h2>
