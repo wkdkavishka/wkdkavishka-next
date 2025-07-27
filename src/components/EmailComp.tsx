@@ -149,7 +149,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                         <div className="relative z-10">
                             <button
                                 onClick={onClose}
-                                className="absolute top-4 right-4 rounded-full p-1.5 text-teal-600 transition-colors hover:text-teal-800 dark:text-teal-400 dark:hover:text-teal-300"
+                                                                className="absolute top-4 right-4 rounded-full p-1.5 text-teal-600 transition-colors hover:text-teal-800"
                                 aria-label="Close"
                             >
                                 <FiX size={20} />
@@ -158,7 +158,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                                 <h3 className="mb-3 bg-gradient-to-r from-teal-600 to-purple-600 bg-clip-text text-3xl font-bold text-transparent">
                                     Send a Message
                                 </h3>
-                                <p className="mb-6 text-sm text-gray-600 dark:text-gray-300">
+                                                                <p className="mb-6 text-sm text-gray-600">
                                     I&apos;ll get back to you as soon as possible!
                                 </p>
                             </div>
@@ -166,7 +166,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                                 <div>
                                     <label
                                         htmlFor="name"
-                                        className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                                                                className="mb-1.5 block text-sm font-medium text-gray-700"
                                     >
                                         Full Name
                                     </label>
@@ -176,7 +176,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 focus:outline-none dark:text-white"
+                                                                                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 focus:outline-none"
                                         placeholder="John Doe"
                                         required
                                     />
@@ -184,7 +184,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                                 <div>
                                     <label
                                         htmlFor="company"
-                                        className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                                                                className="mb-1.5 block text-sm font-medium text-gray-700"
                                     >
                                         Company
                                     </label>
@@ -194,14 +194,14 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                                         name="company"
                                         value={formData.company}
                                         onChange={handleChange}
-                                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 dark:border-gray-700 dark:text-white"
+                                                                                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50"
                                         placeholder="Your company name"
                                     />
                                 </div>
                                 <div>
                                     <label
                                         htmlFor="email"
-                                        className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                                                                className="mb-1.5 block text-sm font-medium text-gray-700"
                                     >
                                         Email
                                     </label>
@@ -211,7 +211,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 dark:border-gray-700 dark:text-white"
+                                                                                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50"
                                         placeholder="you@example.com"
                                         required
                                     />
@@ -219,7 +219,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                                 <div>
                                     <label
                                         htmlFor="phone"
-                                        className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                                                                className="mb-1.5 block text-sm font-medium text-gray-700"
                                     >
                                         Phone Number
                                     </label>
@@ -229,14 +229,14 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                                         name="phone"
                                         value={formData.phone}
                                         onChange={handleChange}
-                                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 dark:border-gray-700 dark:text-white"
+                                                                                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50"
                                         placeholder="+1 (555) 000-0000"
                                     />
                                 </div>
                                 <div>
                                     <label
                                         htmlFor="message"
-                                        className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                                                                className="mb-1.5 block text-sm font-medium text-gray-700"
                                     >
                                         Message
                                     </label>
@@ -246,7 +246,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                                         value={formData.message}
                                         onChange={handleChange}
                                         rows={4}
-                                        className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 dark:border-gray-700 dark:text-white"
+                                                                                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50"
                                         placeholder="Tell me about your project, requirements, or any questions you have..."
                                         required
                                     />
@@ -259,8 +259,8 @@ export const EmailModal: React.FC<EmailModalProps> = ({ isOpen, onClose }) => {
                                             onChange={(e) => setPrivacyAccepted(e.target.checked)}
                                             className="peer sr-only"
                                         />
-                                        <div className="peer relative h-6 w-11 rounded-full peer-checked:bg-blue-600 peer-focus:ring-4 peer-focus:ring-blue-300 peer-focus:outline-none after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white rtl:peer-checked:after:-translate-x-full dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800" />
-                                        <span className="ms-3 text-sm text-gray-600 dark:text-gray-300">
+                                                                                <div className="peer relative h-6 w-11 rounded-full peer-checked:bg-blue-600 peer-focus:ring-4 peer-focus:ring-blue-300 peer-focus:outline-none after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white rtl:peer-checked:after:-translate-x-full" />
+                                                                                <span className="ms-3 text-sm text-gray-600">
                                             By selecting this, you agree to our{' '}
                                             <a href="#" className="text-blue-600 hover:underline">
                                                 privacy policy

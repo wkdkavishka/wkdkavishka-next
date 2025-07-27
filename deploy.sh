@@ -1,12 +1,12 @@
 # generate sitemap
 echo "[deploy] Generating sitemap..."
-node generate-sitemap.js
+npx ts-node generate-sitemap.ts
 
 echo "[deploy] Building project..."
 npm run build
 
 this=$(pwd)
-TARGET_DIR="/mnt/Storage/projects/Personal projects/wkdkavishka.github.io/"
+TARGET_DIR="/mnt/Storage/Projects/wkdkavishka.github.io/"
 
 echo "[deploy] Checking if target directory exists..."
 if [ ! -d "$TARGET_DIR" ]; then

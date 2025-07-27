@@ -34,7 +34,7 @@ export default function Page() {
                 <h2 className="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-center text-4xl font-bold text-transparent">
                     Featured Projects
                 </h2>
-                <p className="mx-auto mb-12 max-w-2xl text-center text-lg text-gray-600 dark:text-gray-400">
+                                <p className="mx-auto mb-12 max-w-2xl text-center text-lg text-gray-600">
                     Some of my recent work and contributions
                 </p>
                 <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">

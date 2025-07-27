@@ -10,12 +10,12 @@ export default function Page() {
     const SocialLinks: SocialData[] = siteData.socialLinks;
 
     return (
-        <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20">
-            <div className="mx-auto max-w-4xl flex flex-col items-center">
+        <section id="about" className="flex min-h-screen items-center justify-center px-6 py-20">
+            <div className="mx-auto flex max-w-4xl flex-col items-center">
                 <h2 className="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-center text-4xl font-bold text-transparent">
                     About Me
                 </h2>
-                <p className="mx-auto mb-12 max-w-2xl text-center text-lg text-gray-600 dark:text-gray-400">
+                <p className="mx-auto mb-12 max-w-2xl text-center text-lg text-gray-600">
                     Get to know me better
                 </p>
                 <div className="grid grid-cols-1 justify-between md:grid-cols-2">
@@ -37,7 +37,7 @@ export default function Page() {
                                     href={social.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-gray-700 transition-colors hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+                                    className="text-gray-700 transition-colors hover:text-blue-600"
                                     aria-label={social.name}
                                 >
                                     {React.createElement(social.icon, {
@@ -51,7 +51,7 @@ export default function Page() {
                     {/* Second Column: About Texts and Download CV */}
                     <div className="flex flex-col gap-6">
                         {Personal.about.slice(1).map((paragraph, index) => (
-                            <p key={index} className="text-lg text-gray-600 dark:text-gray-300">
+                            <p key={index} className="text-lg text-gray-600">
                                 {paragraph}
                             </p>
                         ))}

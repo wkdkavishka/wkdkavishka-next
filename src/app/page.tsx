@@ -21,9 +21,7 @@ export default function Page() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        // <div className="min-h-screen bg-gradient-to-br from-teal-100 to-purple-100 text-gray-800 transition-colors duration-300 dark:text-gray-200">
-
-        <div className="min-h-screen text-gray-800 transition-colors duration-300 dark:text-gray-200">
+        <div className="min-h-screen text-gray-800 transition-colors duration-300">
             <Head>
                 <title>{siteData.personal.name} | Software Engineer</title>
                 <meta name={siteData.personal.name} content={siteData.personal.name} />

@@ -13,7 +13,7 @@ export default function Page() {
         <section id="home" className="flex min-h-screen items-center justify-center px-6 py-2">
             <div className="mx-auto max-w-4xl text-center">
                 {/* Profile Image */}
-                <div className="mx-auto mb-8 h-40 w-40 overflow-hidden rounded-full border-4 border-white bg-gray-900 shadow-lg md:h-48 md:w-48 dark:border-gray-800 dark:bg-gray-700">
+                                <div className="mx-auto mb-8 h-40 w-40 overflow-hidden rounded-full border-4 border-white bg-gray-900 shadow-lg md:h-48 md:w-48">
                     <div className="relative h-full w-full">
                         <Image
                             src={personal.profileImage}
@@ -33,11 +33,11 @@ export default function Page() {
                     </span>
                 </h1>
 
-                <h2 className="mb-8 text-xl text-gray-600 md:text-2xl dark:text-gray-400">
+                                <h2 className="mb-8 text-xl text-gray-600 md:text-2xl">
                     {personal.title}
                 </h2>
 
-                <p className="mx-auto mb-12 max-w-2xl text-lg text-gray-600 md:text-xl dark:text-gray-300">
+                                <p className="mx-auto mb-12 max-w-2xl text-lg text-gray-600 md:text-xl">
                     {personal.about[0]}
                 </p>
 
@@ -48,7 +48,7 @@ export default function Page() {
                             href={social.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-gray-700 transition-colors hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+                                                        className="text-gray-700 transition-colors hover:text-blue-600"
                             aria-label={social.name}
                         >
                             {React.createElement(social.icon, {
