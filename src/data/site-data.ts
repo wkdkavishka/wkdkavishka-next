@@ -8,6 +8,7 @@ import {
     FaCloud,
     FaPalette,
     FaFacebook,
+    FaWhatsapp,
 } from 'react-icons/fa';
 
 export interface Skill {
@@ -263,6 +264,11 @@ const siteData: SiteData = {
             name: 'Facebook',
             url: 'https://facebook.com/W.K.D.Kavishka',
             icon: FaFacebook,
+        },
+        {
+            name: 'WhatsApp',
+            url: 'https://wa.me/94757676968',
+            icon: FaWhatsapp,
         },
     ],
 };
