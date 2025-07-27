@@ -75,7 +75,7 @@ export const Navigation = () => {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 justify-between">
                     <div className="flex items-center">
-                        <div className="flex items-center space-x-2 text-xl font-bold text-gray-900 dark:text-white">
+                                                <div className="flex items-center space-x-2 text-xl font-bold text-gray-900">
                             {/* <FaUserCircle className="w-6 h-6 text-current" /> */}
                             <span className="bg-gradient-to-r from-teal-600 to-purple-600 bg-clip-text text-transparent">
                                 {siteData.personal.name}
@@ -90,8 +90,8 @@ export const Navigation = () => {
                                 onClick={() => scrollToSection(item.id)}
                                 className={`cursor-pointer text-sm font-medium transition-all duration-300 ease-out ${
                                     activeSection === item.id
-                                        ? 'text-teal-600 dark:text-teal-400'
-                                        : 'text-gray-700 dark:text-gray-300'
+                                                                                ? 'text-teal-600'
+                                                                                : 'text-gray-700'
                                 }`}
                             >
                                 {item.label}
