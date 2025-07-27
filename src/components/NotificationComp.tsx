@@ -26,10 +26,10 @@ const NotificationModal: React.FC = () => {
                 transition={{ duration: 0.4 }}
                 className={`fixed top-10 right-6 z-[99999] flex items-center gap-3 rounded-lg px-6 py-4 shadow-lg ring-1 ${
                     status === 'success'
-                        ? 'bg-green-50 text-green-600 ring-green-400/20 dark:bg-green-900 dark:text-green-400'
+                                                ? 'bg-green-50 text-green-600 ring-green-400/20'
                         : status === 'error'
-                          ? 'bg-red-50 text-red-600 ring-red-400/20 dark:bg-red-900 dark:text-red-400'
-                          : 'bg-blue-50 text-blue-600 ring-blue-400/20 dark:bg-blue-900 dark:text-blue-400'
+                                                    ? 'bg-red-50 text-red-600 ring-red-400/20'
+                                                    : 'bg-blue-50 text-blue-600 ring-blue-400/20'
                 }`}
                 style={{ minWidth: 260 }}
             >
@@ -74,7 +74,7 @@ const NotificationModal: React.FC = () => {
                 <span className="font-medium">{message}</span>
                 <button
                     onClick={handleClose}
-                    className="ml-2 rounded-full p-1 text-inherit hover:bg-gray-100 dark:hover:bg-gray-800"
+                                        className="ml-2 rounded-full p-1 text-inherit hover:bg-gray-100"
                     aria-label="Close notification"
                 >
                     <svg width="18" height="18" fill="none" viewBox="0 0 18 18">

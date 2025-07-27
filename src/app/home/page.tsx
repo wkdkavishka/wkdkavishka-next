@@ -2,15 +2,18 @@
 
 import siteData from '@/data/site-data';
 import Image from 'next/image';
+import { PersonalData, SocialData } from '@/data/site-data';
+import React from 'react';
 
 export default function Page() {
-    const { personal } = siteData;
+    const personal: PersonalData = siteData.personal;
+    const SocialLinks: SocialData[] = siteData.socialLinks;
 
     return (
         <section id="home" className="flex min-h-screen items-center justify-center px-6 py-2">
             <div className="mx-auto max-w-4xl text-center">
                 {/* Profile Image */}
-                <div className="mx-auto mb-8 h-40 w-40 overflow-hidden rounded-full border-4 border-white bg-gray-900 shadow-lg md:h-48 md:w-48 dark:border-gray-800 dark:bg-gray-700">
+                                <div className="mx-auto mb-8 h-40 w-40 overflow-hidden rounded-full border-4 border-white bg-gray-900 shadow-lg md:h-48 md:w-48">
                     <div className="relative h-full w-full">
                         <Image
                             src={personal.profileImage}
@@ -30,13 +33,30 @@ export default function Page() {
                     </span>
                 </h1>
 
-                <h2 className="mb-8 text-xl text-gray-600 md:text-2xl dark:text-gray-400">
+                                <h2 className="mb-8 text-xl text-gray-600 md:text-2xl">
                     {personal.title}
                 </h2>
 
-                <p className="mx-auto mb-12 max-w-2xl text-lg text-gray-600 md:text-xl dark:text-gray-300">
+                                <p className="mx-auto mb-12 max-w-2xl text-lg text-gray-600 md:text-xl">
                     {personal.about[0]}
                 </p>
+
+                <div className="mb-12 flex justify-center space-x-4">
+                    {SocialLinks.map((social) => (
+                        <a
+                            key={social.name}
+                            href={social.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                                                        className="text-gray-700 transition-colors hover:text-blue-600"
+                            aria-label={social.name}
+                        >
+                            {React.createElement(social.icon, {
+                                size: 24,
+                            })}
+                        </a>
+                    ))}
+                </div>
 
                 <div className="flex flex-col justify-center gap-4 sm:flex-row">
                     <button
