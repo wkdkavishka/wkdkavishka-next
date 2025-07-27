@@ -4,6 +4,7 @@ import { NotificationProvider } from '../contexts/NotificationContext';
 import './globals.css';
 import { metadata } from './metadata';
 import ThreeBackground from '../components/ThreeBackground';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export { metadata };
 
@@ -29,6 +30,7 @@ export default function RootLayout({
                         </div>
                     </EmailProvider>
                 </NotificationProvider>
+                <SpeedInsights />
             </body>
         </html>
     );
