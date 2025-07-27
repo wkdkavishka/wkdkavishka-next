@@ -18,8 +18,9 @@ export default function Page() {
                 <p className="mx-auto mb-12 max-w-2xl text-center text-lg text-gray-600 dark:text-gray-400">
                     Get to know me better
                 </p>
-                <div className="flex flex-col items-center gap-12 md:flex-row">
-                    <div className="flex w-full justify-center md:w-1/3">
+                <div className="grid grid-cols-1 justify-between md:grid-cols-2">
+                    {/* First Column: Profile Picture and Social Links */}
+                    <div className="flex flex-col items-center gap-6">
                         <div className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-blue-500">
                             <Image
                                 src={Personal.profileImage}
@@ -29,16 +30,6 @@ export default function Page() {
                                 priority
                             />
                         </div>
-                    </div>
-                    <div className="w-full md:w-2/3">
-                        {Personal.about.slice(1).map((paragraph, index) => (
-                            <p
-                                key={index}
-                                className="mb-6 text-lg text-gray-600 dark:text-gray-300"
-                            >
-                                {paragraph}
-                            </p>
-                        ))}
                         <div className="flex space-x-4">
                             {SocialLinks.map((social) => (
                                 <a
@@ -55,17 +46,26 @@ export default function Page() {
                                 </a>
                             ))}
                         </div>
-                        <div className="mt-6">
-                            <button
-                                onClick={() =>
-                                    window.open('/resume.pdf', '_blank', 'noopener,noreferrer')
-                                }
-                                className="inline-flex transform items-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-3 font-medium text-white transition-opacity hover:-translate-y-0.5 hover:opacity-90 hover:shadow-lg"
-                            >
-                                View Resume
-                            </button>
-                        </div>
                     </div>
+
+                    {/* Second Column: About Texts and Download CV */}
+                    <div className="flex flex-col gap-6">
+                        {Personal.about.slice(1).map((paragraph, index) => (
+                            <p key={index} className="text-lg text-gray-600 dark:text-gray-300">
+                                {paragraph}
+                            </p>
+                        ))}
+                    </div>
+                </div>
+                <div className="mt-10 flex justify-center">
+                    <button
+                        onClick={() =>
+                            window.open(Personal.resumeUrl, '_blank', 'noopener,noreferrer')
+                        }
+                        className="mx-auto items-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-3 font-medium text-white transition-opacity hover:-translate-y-0.5 hover:opacity-90 hover:shadow-lg"
+                    >
+                        View Resume
+                    </button>
                 </div>
             </div>
         </section>
