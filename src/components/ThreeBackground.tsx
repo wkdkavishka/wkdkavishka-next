@@ -49,7 +49,7 @@ export default function ThreeBackground() {
         camera.position.z = 8;
 
         // Particles
-        const PARTICLE_COUNT = 800;
+        const PARTICLE_COUNT = 2500;
         const positions = new Float32Array(PARTICLE_COUNT * 3);
         const velocities = new Float32Array(PARTICLE_COUNT * 3);
         const colors = new Float32Array(PARTICLE_COUNT * 3);
@@ -59,9 +59,9 @@ export default function ThreeBackground() {
             positions[i + 1] = (Math.random() - 0.5) * 20;
             positions[i + 2] = (Math.random() - 0.5) * 20;
 
-            velocities[i] = (Math.random() - 0.5) * 0.1;
-            velocities[i + 1] = (Math.random() - 0.5) * 0.1;
-            velocities[i + 2] = (Math.random() - 0.5) * 0.1;
+            velocities[i] = (Math.random() - 0.5) * 0.05;
+            velocities[i + 1] = (Math.random() - 0.5) * 0.05;
+            velocities[i + 2] = (Math.random() - 0.5) * 0.05;
 
             colors[i] = new THREE.Color('#14b8a6').r;
             colors[i + 1] = new THREE.Color('#14b8a6').g;
@@ -83,7 +83,7 @@ export default function ThreeBackground() {
         geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
         const material = new THREE.PointsMaterial({
-            size: 0.1,
+            size: 0.125,
             vertexColors: true,
             transparent: true,
             opacity: 0.5,
