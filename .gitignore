@@ -11,6 +11,8 @@
 /dist
 /.next
 /out
+/.cache
+/.idea
 
 
 # Environment files
@@ -27,9 +29,8 @@ yarn-error.log*
 
 # Editor directories and files
 .vscode/*
+/.vscode
 !.vscode/extensions.json
-.idea
-/.idea
 .DS_Store
 *.suo
 *.ntvs*
