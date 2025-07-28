@@ -23,7 +23,7 @@ export interface CardCompIntf {
     description: string;
     tags: string[];
     link: string;
-    image: string;
+    image: string[];
     github?: string;
 }
 
@@ -121,74 +121,19 @@ const siteData: SiteData = {
     ],
     projects: [
         {
-            id: 'project-1',
-            title: 'E-Commerce Platform',
+            id: 'wkdkavishka-vue',
+            title: 'My old Portfolio Template',
             description:
                 'A full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment integration. Built with Next.js, TypeScript, and MongoDB.',
             tags: ['Next.js', 'TypeScript', 'MongoDB', 'Stripe', 'Tailwind CSS'],
             link: 'https://ecommerce-demo.wkdkavishka.vercel.app',
             github: 'https://github.com/wkdkavishka/ecommerce-platform',
-            image: '/images/projects/project-1.jpg',
-        },
-        {
-            id: 'project-2',
-            title: 'Task Management App',
-            description:
-                'A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features. Built with React, Node.js, and Socket.io.',
-            tags: ['React', 'Node.js', 'Socket.io', 'MongoDB', 'Material-UI'],
-            link: 'https://taskflow.wkdkavishka.vercel.app',
-            github: 'https://github.com/wkdkavishka/task-management-app',
-            image: '/images/projects/project-2.jpg',
-        },
-        {
-            id: 'project-3',
-            title: 'Recipe Finder',
-            description:
-                'A web application that helps users discover recipes based on available ingredients. Features include recipe search, filtering, and saving favorites. Built with Vue.js and the Spoonacular API.',
-            tags: ['Vue.js', 'Vuex', 'Spoonacular API', 'Tailwind CSS'],
-            link: 'https://recipe-finder.wkdkavishka.vercel.app',
-            github: 'https://github.com/wkdkavishka/recipe-finder',
-            image: '/images/projects/project-3.jpg',
-        },
-        {
-            id: 'project-4',
-            title: 'Portfolio Website',
-            description:
-                'A modern, responsive portfolio website built with Next.js and Tailwind CSS. Features dark mode, smooth animations, and a clean, minimalist design.',
-            tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-            link: 'https://wkdkavishka.vercel.app',
-            github: 'https://github.com/wkdkavishka/portfolio',
-            image: '/images/projects/project-4.jpg',
-        },
-        {
-            id: 'project-5',
-            title: 'Weather Dashboard',
-            description:
-                'A weather application that provides current weather conditions and forecasts. Features location detection, 5-day forecast, and weather alerts. Built with React and the OpenWeather API.',
-            tags: ['React', 'OpenWeather API', 'Geolocation', 'Chart.js'],
-            link: 'https://weather-dashboard.wkdkavishka.vercel.app',
-            github: 'https://github.com/wkdkavishka/weather-dashboard',
-            image: '/images/projects/project-5.jpg',
-        },
-        {
-            id: 'project-6',
-            title: 'Fitness Tracker',
-            description:
-                'A mobile-first fitness tracking application that helps users log workouts, track progress, and set fitness goals. Includes exercise library and progress visualization.',
-            tags: ['React Native', 'Firebase', 'Redux', 'Expo'],
-            link: 'https://fitness-tracker.wkdkavishka.vercel.app',
-            github: 'https://github.com/wkdkavishka/fitness-tracker',
-            image: '/images/projects/project-6.jpg',
-        },
-        {
-            id: 'project-7',
-            title: 'E-Commerce Platform',
-            description:
-                'A full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment integration. Built with Next.js, TypeScript, and MongoDB.',
-            tags: ['Next.js', 'TypeScript', 'MongoDB', 'Stripe', 'Tailwind CSS'],
-            link: 'https://ecommerce-demo.wkdkavishka.vercel.app',
-            github: 'https://github.com/wkdkavishka/ecommerce-platform',
-            image: '/images/projects/project-7.jpg',
+            image: [
+                '/images/projects/wkdkavishka-vue/1.png',
+                '/images/projects/wkdkavishka-vue/2.png',
+                '/images/projects/wkdkavishka-vue/3.png',
+                '/images/projects/wkdkavishka-vue/4.png',
+            ],
         },
     ],
     teamMembers: [

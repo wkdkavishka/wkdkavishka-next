@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://wkdkavishka.vercel.app
+Host: http://wkdkavishka.github.io
 
 # Sitemaps
-Sitemap: https://wkdkavishka.vercel.app/sitemap.xml
+Sitemap: http://wkdkavishka.github.io/sitemap.xml
