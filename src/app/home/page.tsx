@@ -65,7 +65,7 @@ export default function Page() {
                         className="inline-flex transform items-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-3 font-medium text-white transition-opacity hover:-translate-y-0.5 hover:opacity-90 hover:shadow-lg"
                     >
                         <FiMail className="mr-2" />
-                        Say Hello
+                        Send Mail
                     </button>
                     <button
                         onClick={() => {

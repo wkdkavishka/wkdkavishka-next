@@ -1,5 +1,5 @@
 module.exports = {
-    siteUrl: process.env.SITE_URL || 'https://wkdkavishka.vercel.app',
+    siteUrl: 'http://wkdkavishka.github.io',
     generateRobotsTxt: true, // (optional)
     // ...other options
     sitemapSizeLimit: 1000,
