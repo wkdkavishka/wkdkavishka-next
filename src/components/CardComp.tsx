@@ -11,6 +11,16 @@ interface CardProps {
     children?: React.ReactNode;
 }
 
+// Color variants for project tags
+const tagColorVariants = [
+    'bg-blue-100/70 text-blue-800/70',
+    'bg-green-100/70 text-green-800/70',
+    'bg-purple-100/70 text-purple-800/70',
+    'bg-pink-100/70 text-pink-800/70',
+    'bg-yellow-100/70 text-yellow-800/70',
+    'bg-teal-100/70 text-teal-800/70',
+];
+
 export const CardComp: React.FC<CardProps> = ({ project, colorVariant, borderHover, index }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [transition, setTransition] = useState(false);
@@ -36,7 +46,7 @@ export const CardComp: React.FC<CardProps> = ({ project, colorVariant, borderHov
             ></div>
             <div className="relative z-10 flex h-full flex-col">
                 <div className="mb-4 overflow-hidden rounded-lg">
-                    <div className="relative h-40 w-full">
+                    <div className="relative h-50 w-full">
                         <div className="relative h-full w-full">
                             {project.image.map((img, i) => (
                                 <div
@@ -63,10 +73,10 @@ export const CardComp: React.FC<CardProps> = ({ project, colorVariant, borderHov
                 </h3>
                 <p className="mb-4 flex-grow text-sm text-gray-600">{project.description}</p>
                 <div className="mb-4 flex flex-wrap gap-2">
-                    {project.tags.map((tag, tagIndex) => (
+                    {project.tags.map((tag, i) => (
                         <span
-                            key={tagIndex}
-                            className="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-700"
+                            key={tag}
+                            className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${tagColorVariants[i % tagColorVariants.length]}`}
                         >
                             {tag}
                         </span>
