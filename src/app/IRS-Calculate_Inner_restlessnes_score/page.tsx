@@ -162,7 +162,7 @@ export default function Page() {
 
     if (isLoading) {
         return (
-            <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-blue-50 to-indigo-50">
+            <div className="flex min-h-screen items-center justify-center">
                 <div className="text-center">
                     <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-blue-500"></div>
                     <p className="mt-4 text-gray-600">Loading assessment...</p>
@@ -173,7 +173,7 @@ export default function Page() {
 
     return (
         <div className="flex min-h-screen items-center justify-center px-6 py-20">
-            <div className="mx-auto max-w-2xl overflow-hidden rounded-2xl border-2 border-gray-200 bg-white/40 shadow-xl backdrop-blur-lg">
+            <div className="md:mx-2xl lg:mx-3xl max-w-3xl overflow-hidden rounded-2xl border-2 border-gray-200 bg-white/40 shadow-xl backdrop-blur-lg">
                 <header className="mb-8 border-b border-gray-200 pb-6 text-center">
                     <h1 className="text-3xl font-bold text-gray-800 sm:text-4xl">
                         <span className="block text-blue-600">Internal Restlessness</span>
@@ -311,6 +311,34 @@ export default function Page() {
                                     Score Interpretation
                                 </h3>
                                 <div className="rounded-xl border-2 border-gray-100 bg-white/70 p-4 backdrop-blur-sm">
+                                    <div className="mb-4 flex items-center">
+                                        <span className="mr-2 text-sm font-medium text-gray-700">
+                                            Your Level:
+                                        </span>
+                                        <span
+                                            className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
+                                                score < 40
+                                                    ? 'bg-green-100 text-green-800'
+                                                    : score < 70
+                                                      ? 'bg-yellow-100 text-yellow-800'
+                                                      : score < 90
+                                                        ? 'bg-amber-100 text-amber-800'
+                                                        : score < 110
+                                                          ? 'bg-pink-100 text-pink-800'
+                                                          : 'bg-red-100 text-red-800'
+                                            }`}
+                                        >
+                                            {score < 40
+                                                ? 'Very Low'
+                                                : score < 70
+                                                  ? 'Low to Moderate'
+                                                  : score < 90
+                                                    ? 'Moderate'
+                                                    : score < 110
+                                                      ? 'High'
+                                                      : 'Very High'}
+                                        </span>
+                                    </div>
                                     <p className="text-gray-800">{interpretation}</p>
 
                                     <div className="mt-4 text-sm text-gray-600">
