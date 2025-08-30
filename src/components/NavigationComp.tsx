@@ -7,14 +7,17 @@ import siteData from '../data/site-data';
 export const NavigationComp = () => {
     const [activeSection, setActiveSection] = useState('home');
 
-    const navItems = useMemo(() => [
-        { id: 'home', label: 'Home' },
-        { id: 'about', label: 'About' },
-        { id: 'services', label: 'Services' },
-        { id: 'projects', label: 'Projects' },
-        { id: 'team', label: 'Team' },
-        { id: 'contact', label: 'Contact' },
-    ], []);
+    const navItems = useMemo(
+        () => [
+            { id: 'home', label: 'Home' },
+            { id: 'about', label: 'About' },
+            { id: 'services', label: 'Services' },
+            { id: 'projects', label: 'Projects' },
+            { id: 'team', label: 'Team' },
+            { id: 'contact', label: 'Contact' },
+        ],
+        []
+    );
 
     useEffect(() => {
         const handleScroll = () => {
