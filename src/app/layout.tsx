@@ -5,6 +5,7 @@ import './globals.css';
 import { metadata } from './metadata';
 import ThreeBackground from '../components/ThreeBackground';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Navigation } from '../components/NavigationComp';
 
 export { metadata };
 
@@ -23,9 +24,11 @@ export default function RootLayout({
                 <NotificationProvider>
                     <EmailProvider>
                         <div className="relative min-h-screen">
+                            <div className="sticky top-0 z-50 px-10 pt-2">
+                                <Navigation />
+                            </div>
                             <div className="relative z-10">
-                                {/* comment */}
-                                {children}
+                                <main>{children}</main>
                             </div>
                         </div>
                     </EmailProvider>

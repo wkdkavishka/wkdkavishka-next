@@ -9,7 +9,7 @@ import TeamCarousel from '@/app/team/page';
 import siteData from '@/data/site-data';
 import Head from 'next/head';
 import { EmailModal } from '@/components/EmailComp';
-import { Navigation } from '@/components/NavigationComp';
+// import { Navigation } from '@/components/NavigationComp';
 import { Footer } from '@/components/FooterComp';
 import { ScrollFadeIn } from '@/hooks/ScrollFadeIn';
 import { useState } from 'react';
@@ -29,33 +29,45 @@ export default function Page() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="sticky top-0 z-50 px-10 pt-2">
+            {/* <div className="sticky top-0 z-50 px-10 pt-2">
                 <Navigation />
-            </div>
+            </div> */}
 
             <div className="fixed right-0 bottom-0 z-50 p-4 backdrop-blur-2xl">
                 <EmailModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
             </div>
 
             <main>
-                <ScrollFadeIn>
-                    <Home />
-                </ScrollFadeIn>
-                <ScrollFadeIn delay={1}>
-                    <About />
-                </ScrollFadeIn>
-                <ScrollFadeIn delay={2}>
-                    <Skills />
-                </ScrollFadeIn>
-                <ScrollFadeIn delay={2}>
-                    <Projects />
-                </ScrollFadeIn>
-                <ScrollFadeIn delay={2}>
-                    <TeamCarousel />
-                </ScrollFadeIn>
-                <ScrollFadeIn delay={2}>
-                    <Contact />
-                </ScrollFadeIn>
+                <section id="home">
+                    <ScrollFadeIn>
+                        <Home />
+                    </ScrollFadeIn>
+                </section>
+                <section id="about">
+                    <ScrollFadeIn delay={1}>
+                        <About />
+                    </ScrollFadeIn>
+                </section>
+                <section id="services">
+                    <ScrollFadeIn delay={2}>
+                        <Skills />
+                    </ScrollFadeIn>
+                </section>
+                <section id="projects">
+                    <ScrollFadeIn delay={2}>
+                        <Projects />
+                    </ScrollFadeIn>
+                </section>
+                <section id="team">
+                    <ScrollFadeIn delay={2}>
+                        <TeamCarousel />
+                    </ScrollFadeIn>
+                </section>
+                <section id="contact">
+                    <ScrollFadeIn delay={2}>
+                        <Contact />
+                    </ScrollFadeIn>
+                </section>
             </main>
 
             <div className="bottom-0 px-10 pb-2">
