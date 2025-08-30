@@ -5,7 +5,7 @@ import './globals.css';
 import { metadata } from './metadata';
 import ThreeBackground from '../components/ThreeBackground';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Navigation } from '../components/NavigationComp';
+import { NavigationComp as Navigation } from '../components/NavigationComp';
 
 export { metadata };
 
