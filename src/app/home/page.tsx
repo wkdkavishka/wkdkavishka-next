@@ -1,7 +1,6 @@
 'use client';
 
 import siteData from '@/data/site-data';
-import Image from 'next/image';
 import { PersonalData, SocialData } from '@/data/site-data';
 import React from 'react';
 import { useEmail } from '@/contexts/EmailContext';

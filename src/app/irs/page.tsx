@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 
 type Question = {
@@ -83,7 +84,7 @@ export default function Page() {
     useEffect(() => {
         setAnswers(new Array(questions.length).fill(null));
         setIsLoading(false);
-    }, []);
+    }, [questions.length]);
 
     const handleAnswer = (value: number) => {
         const newAnswers = [...answers];
@@ -165,14 +166,17 @@ export default function Page() {
             <div className="flex min-h-screen items-center justify-center">
                 <div className="text-center">
                     <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-blue-500"></div>
-                    <p className="mt-4 text-gray-600">Loading assessment...</p>
+                    <p className="mt-4 text-gray-600">Loading ...</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="flex min-h-screen items-center justify-center px-6 py-20">
+        <section
+            id="IRS-Calculate_Inner_restlessnes_score"
+            className="flex min-h-screen items-center justify-center px-6 py-20"
+        >
             <div className="md:mx-2xl lg:mx-3xl max-w-3xl overflow-hidden rounded-2xl border-2 border-gray-200 bg-white/40 shadow-xl backdrop-blur-lg">
                 <header className="mb-8 border-b border-gray-200 pb-6 text-center">
                     <h1 className="text-3xl font-bold text-gray-800 sm:text-4xl">
@@ -506,6 +510,6 @@ export default function Page() {
                     </p>
                 </footer>
             </div>
-        </div>
+        </section>
     );
 }
