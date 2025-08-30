@@ -60,13 +60,20 @@ export const Navigation = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [navItems, activeSection]);
 
-    const scrollToSection = (id: string) => {
-        const element = document.getElementById(id);
+    const scrollToSection = (idOrRoute: string) => {
+        // If we're not on the home page, navigate to home first
+        if (window.location.pathname !== '/') {
+            window.location.href = `/${idOrRoute === 'home' ? '' : `#${idOrRoute}`}`;
+            return;
+        }
+
+        // If we're already on the home page, just scroll to the section
+        const element = document.getElementById(idOrRoute);
         if (element) {
             element.scrollIntoView({
                 behavior: 'smooth',
             });
-            window.history.pushState({}, '', `#${id}`);
+            window.history.pushState({}, '', `#${idOrRoute}`);
         }
     };
 
@@ -75,9 +82,12 @@ export const Navigation = () => {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 justify-between">
                     <div className="flex items-center">
-                                                <div className="flex items-center space-x-2 text-xl font-bold text-gray-900">
+                        <div className="flex items-center space-x-2 text-xl font-bold text-gray-900">
                             {/* <FaUserCircle className="w-6 h-6 text-current" /> */}
-                            <span className="bg-gradient-to-r from-teal-600 to-purple-600 bg-clip-text text-transparent">
+                            <span
+                                onClick={() => scrollToSection('/')}
+                                className="cursor-pointer bg-gradient-to-r from-teal-600 to-purple-600 bg-clip-text text-transparent transition-opacity hover:opacity-80"
+                            >
                                 {siteData.personal.name}
                             </span>
                         </div>
@@ -89,9 +99,7 @@ export const Navigation = () => {
                                 key={item.id}
                                 onClick={() => scrollToSection(item.id)}
                                 className={`cursor-pointer text-sm font-medium transition-all duration-300 ease-out ${
-                                    activeSection === item.id
-                                                                                ? 'text-teal-600'
-                                                                                : 'text-gray-700'
+                                    activeSection === item.id ? 'text-teal-600' : 'text-gray-700'
                                 }`}
                             >
                                 {item.label}
