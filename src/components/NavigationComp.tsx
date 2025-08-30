@@ -1,27 +1,20 @@
 'use client';
 
-import siteData from '@/data/site-data';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
+import siteData from '../data/site-data';
 
-interface NavItem {
-    id: string;
-    label: string;
-}
-
-export const Navigation = () => {
+export const NavigationComp = () => {
     const [activeSection, setActiveSection] = useState('home');
 
-    const navItems = useMemo<NavItem[]>(
-        () => [
-            { id: 'home', label: 'Home' },
-            { id: 'about', label: 'About' },
-            { id: 'services', label: 'Services' },
-            { id: 'projects', label: 'Projects' },
-            { id: 'team', label: 'People' },
-            { id: 'contact', label: 'Contact' },
-        ],
-        []
-    );
+    const navItems = useMemo(() => [
+        { id: 'home', label: 'Home' },
+        { id: 'about', label: 'About' },
+        { id: 'services', label: 'Services' },
+        { id: 'projects', label: 'Projects' },
+        { id: 'team', label: 'Team' },
+        { id: 'contact', label: 'Contact' },
+    ], []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -60,10 +53,14 @@ export const Navigation = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [navItems, activeSection]);
 
+    const router = useRouter();
+    const pathname = usePathname();
+
     const scrollToSection = (idOrRoute: string) => {
-        // If we're not on the home page, navigate to home first
-        if (window.location.pathname !== '/') {
-            window.location.href = `/${idOrRoute === 'home' ? '' : `#${idOrRoute}`}`;
+        // If we're not on the home page, navigate to home first with the section hash
+        if (pathname !== '/') {
+            const hash = idOrRoute === 'home' ? '' : `#${idOrRoute}`;
+            router.push(`/${hash}`);
             return;
         }
 
