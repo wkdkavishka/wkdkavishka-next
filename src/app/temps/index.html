@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover"
+    />
+    <title>
+      Internal Restlessness Scale (IRS) Assessment Tool | ADHD Self-Test
+    </title>
+    <meta
+      name="description"
+      content="Take the free Internal Restlessness Scale (IRS) assessment, a validated self-report measure for inner restlessness often associated with ADHD symptoms. Get instant results and insights."
+    />
+    <meta
+      name="keywords"
+      content="ADHD self-assessment, inner restlessness scale, IRS test, ADHD symptoms test, mental health assessment, Lisa Weyandt, ADHD screening, adult ADHD test, mental health tool, attention deficit test"
+    />
+    <meta name="author" content="WKDKavishka" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="geo.region" content="US" />
+    <meta name="geo.placename" content="United States" />
+    <meta name="theme-color" content="#4a6fa5" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://wkdkavishka.github.io/IRS-Calculate_Inner_restlessnes_score/"
+    />
+    <meta
+      property="og:title"
+      content="Free ADHD Self-Assessment | Internal Restlessness Scale (IRS) Tool"
+    />
+    <meta
+      property="og:description"
+      content="Take the free Internal Restlessness Scale (IRS) assessment to evaluate ADHD-related inner restlessness. Get instant results and insights about your symptoms."
+    />
+    <meta
+      property="og:image"
+      content="https://wkdkavishka.github.io/IRS-Calculate_Inner_restlessnes_score/og-image.jpg"
+    />
+    <meta property="og:site_name" content="IRS Assessment Tool" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:url"
+      content="https://wkdkavishka.github.io/IRS-Calculate_Inner_restlessnes_score/"
+    />
+    <meta
+      name="twitter:title"
+      content="Free ADHD Self-Assessment | Internal Restlessness Scale (IRS) Tool"
+    />
+    <meta
+      name="twitter:description"
+      content="Take the free Internal Restlessness Scale (IRS) assessment to evaluate ADHD-related inner restlessness. Get instant results and insights."
+    />
+    <meta
+      name="twitter:image"
+      content="https://wkdkavishka.github.io/IRS-Calculate_Inner_restlessnes_score/og-image.jpg"
+    />
+
+    <link
+      rel="canonical"
+      href="https://wkdkavishka.github.io/IRS-Calculate_Inner_restlessnes_score/"
+    />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Base Styles */
+      :root {
+        --primary-color: #4a6fa5;
+        --primary-light: #6b8cba;
+        --primary-dark: #3a5a80;
+        --secondary-color: #f8f9fa;
+        --text-color: #333;
+        --border-color: #ddd;
+        --success-color: #28a745;
+        --warning-color: #ffc107;
+        --danger-color: #dc3545;
+        --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        --border-radius: 8px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: #f5f7fa;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      /* Header */
+      .header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .header h1 {
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        color: #666;
+        font-style: italic;
+      }
+
+      /* Disclaimer */
+      .disclaimer {
+        background-color: #fff8e1;
+        border-left: 4px solid #ffc107;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      }
+
+      /* Warning */
+      .warning {
+        background-color: #ff000011;
+        border-left: 4px solid #ff0000;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      }
+
+      .warning h3 {
+        color: var(--warning-color);
+        margin-bottom: 0.5rem;
+      }
+
+      /* Progress Bar */
+      #progress-container {
+        margin-bottom: 2rem;
+      }
+
+      #progress-bar {
+        height: 10px;
+        background-color: #e9ecef;
+        border-radius: 5px;
+        margin-bottom: 0.5rem;
+        overflow: hidden;
+      }
+
+      #progress-bar::after {
+        content: "";
+        display: block;
+        height: 100%;
+        width: 0%;
+        background-color: var(--primary-color);
+        transition: width 0.3s ease;
+      }
+
+      #progress-text {
+        text-align: right;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      /* Question */
+      #question-text {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        font-weight: 500;
+        min-height: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: var(--border-radius);
+      }
+
+      /* Slider */
+      .slider-container {
+        margin: 2rem 0;
+        padding: 0 1rem;
+      }
+
+      .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 8px;
+        border-radius: 4px;
+        background: #e9ecef;
+        outline: none;
+        margin: 1.5rem 0;
+      }
+
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .slider::-webkit-slider-thumb:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .scale-labels {
+        display: flex;
+        justify-content: space-between;
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .slider-ticks {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+      }
+
+      .slider-ticks span {
+        width: 20px;
+        text-align: center;
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      /* Buttons */
+      .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+      }
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-color: #e9ecef;
+        color: #333;
+      }
+
+      .btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      /* Results */
+      #result-container {
+        text-align: center;
+        padding: 2rem 0;
+      }
+
+      #result-container h2 {
+        color: var(--primary-color);
+        margin-bottom: 2rem;
+      }
+
+      .score-container {
+        margin: 2rem 0;
+      }
+
+      .score-bar {
+        height: 30px;
+        background-color: #e9ecef;
+        border-radius: 15px;
+        margin-bottom: 1rem;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .score-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #4a6fa5, #6b8cba);
+        border-radius: 15px;
+        transition: width 1s ease-in-out;
+      }
+
+      .score-text {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+      }
+
+      .interpretation {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin: 2rem 0;
+        padding: 1.5rem;
+        background-color: #f8f9fa;
+        border-radius: var(--border-radius);
+        text-align: left;
+      }
+
+      .score-info {
+        margin-top: 3rem;
+        text-align: left;
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+      }
+
+      .score-info h3 {
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+      }
+
+      .score-info ul {
+        list-style-type: none;
+      }
+
+      .score-info li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .score-info li:last-child {
+        border-bottom: none;
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        color: #666;
+        font-size: 0.9rem;
+        margin-top: 2rem;
+        padding: 1rem;
+      }
+
+      /* Utility Classes */
+      .hidden {
+        display: none !important;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .container {
+          padding: 1rem;
+        }
+
+        #question-text {
+          font-size: 1.1rem;
+        }
+
+        .button-container {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .btn {
+          width: 100%;
+        }
+      }
+    </style>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "PsychologicalAssessment",
+        "name": "Internal Restlessness Scale (IRS) Assessment Tool",
+        "description": "A validated self-report measure for assessing inner restlessness, often associated with ADHD symptoms in adults.",
+        "url": "https://wkdkavishka.github.io/IRS-Calculate_Inner_restlessnes_score/",
+        "creator": [
+          {
+            "@type": "Person",
+            "name": "Dr. Lisa Weyandt",
+            "url": "https://www.researchgate.net/profile/Lisa-Weyandt-2"
+          },
+          {
+            "@type": "Person",
+            "name": "WKDKavishka",
+            "url": "https://github.com/wkdkavishka"
+          }
+        ],
+        "about": {
+          "@type": "MedicalCondition",
+          "name": "ADHD Symptoms in Adults",
+          "description": "Assessment of attention deficit hyperactivity disorder symptoms including inattention, hyperactivity, and impulsivity in adults.",
+          "relatedTherapy": {
+            "@type": "MedicalTherapy",
+            "name": "Psychological Assessment"
+          }
+        },
+        "isAccessibleForFree": true,
+        "inLanguage": "en-US",
+        "keywords": [
+          "ADHD self-assessment",
+          "inner restlessness scale",
+          "adult ADHD test",
+          "mental health screening",
+          "ADHD symptoms test",
+          "attention deficit test"
+        ],
+        "publisher": {
+          "@type": "Organization",
+          "name": "WKDKavishka",
+          "url": "https://github.com/wkdkavishka"
+        },
+        "audience": {
+          "@type": "PeopleAudience",
+          "suggestedMaxAge": 99,
+          "suggestedMinAge": 18,
+          "suggestedGender": "Unisex"
+        },
+        "timeRequired": "PT5M",
+        "educationalUse": "self-assessment",
+        "learningResourceType": "assessment",
+        "dateModified": "2025-08-30",
+        "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "image": "https://wkdkavishka.github.io/IRS-Calculate_Inner_restlessnes_score/og-image.jpg"
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>Internal Restlessness Scale (IRS)</h1>
+
+        <p class="subtitle">
+          Research Author:
+          <a
+            href="https://www.researchgate.net/profile/Lisa-Weyandt-2"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Dr. Lisa Weyandt</a
+          >
+          and Colleagues
+        </p>
+        <p class="subtitle">
+          Web Application developed by
+          <a
+            href="https://github.com/wkdkavishka"
+            target="_blank"
+            rel="noopener noreferrer"
+            >WKDKavishka</a
+          >
+        </p>
+      </header>
+
+      <div class="warning">
+        <p>
+          I am not a doctor or mental health professional. I just recreated the
+          original questions and made a web application for it.
+        </p>
+      </div>
+
+      <div class="disclaimer">
+        <p>Be aware these are not the original questions.</p>
+        <p>
+          This assessment is for educational and research purposes only. It is
+          not a diagnostic tool.
+        </p>
+        <p>For clinical use, please consult with a qualified professional.</p>
+      </div>
+
+      <div id="progress-container">
+        <div id="progress-bar"></div>
+        <div id="progress-text">Question 1 of 24</div>
+      </div>
+
+      <div id="question-container">
+        <div id="question-text"></div>
+        <div class="slider-container">
+          <div class="scale-labels">
+            <span>Not at all true</span>
+            <span>Very true</span>
+          </div>
+          <input
+            type="range"
+            min="1"
+            max="7"
+            value="4"
+            class="slider"
+            id="response-slider"
+          />
+          <div class="slider-ticks">
+            <span>1</span><span>2</span><span>3</span><span>4</span
+            ><span>5</span><span>6</span><span>7</span>
+          </div>
+        </div>
+        <div class="button-container">
+          <button id="prev-btn" class="btn" disabled>Previous</button>
+          <button id="next-btn" class="btn btn-primary">Next</button>
+        </div>
+      </div>
+
+      <div id="result-container" class="hidden">
+        <h2>Your Results</h2>
+        <div class="score-container">
+          <div class="score-bar">
+            <div id="score-fill" class="score-fill"></div>
+          </div>
+          <div id="score-text" class="score-text"></div>
+        </div>
+        <div id="interpretation" class="interpretation"></div>
+        <button id="restart-btn" class="btn btn-primary">
+          Take Test Again
+        </button>
+
+        <div class="score-info">
+          <h3>Score Interpretation</h3>
+          <ul>
+            <li>
+              <strong>24-69:</strong> Typical range for neurotypical adults
+            </li>
+            <li>
+              <strong>70-89:</strong> Borderline range, may indicate subclinical
+              symptoms
+            </li>
+            <li><strong>90-110:</strong> Typical range for adults with ADHD</li>
+            <li>
+              <strong>110-168:</strong> High range, often seen in significant
+              ADHD symptoms
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>This implementation is for educational and research purposes only.</p>
+      <p>Original scale developed by Dr. Lisa Weyandt</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
