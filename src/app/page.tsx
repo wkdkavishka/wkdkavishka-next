@@ -53,9 +53,6 @@ export default function Page() {
                 <ScrollFadeIn delay={2}>
                     <TeamCarousel />
                 </ScrollFadeIn>
-                {/* <ScrollFadeIn delay={2}>
-                    <Contact />
-                </ScrollFadeIn> */}
                 <ScrollFadeIn delay={2}>
                     <Contact />
                 </ScrollFadeIn>
