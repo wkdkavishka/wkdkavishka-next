@@ -122,11 +122,11 @@ const siteData: SiteData = {
     projects: [
         {
             id: 'irs-calculator',
-            title: 'ADHD Self-Assessment Tool',
+            title: 'ADHD Self-Assessment Tool (Sort Of) test',
             description:
                 'An interactive Internal Restlessness Scale (IRS) assessment tool that helps evaluate ADHD-related inner restlessness. Features a responsive questionnaire with instant results and detailed insights.',
             tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Mental Health'],
-            link: 'https://wkdkavishka.github.io/IRS-Calculate_Inner_restlessnes_score/',
+            link: 'https://wkdkavishka.github.io/irs',
             github: 'https://github.com/wkdkavishka/IRS-Calculate_Inner_restlessnes_score',
             image: [
                 '/images/projects/irs-calculator/1.png',
