@@ -177,9 +177,13 @@ export const NavigationComp = () => {
                     <div
                         className={`${
                             isOpen ? 'block' : 'hidden'
-                        } absolute right-0 left-0 z-50 mt-2 rounded-2xl border-t-0 border-purple-100 bg-purple-100/70 shadow-lg backdrop-blur-sm md:hidden`}
-                        style={{ top: 'calc(100% - 2px)' }}
+                        } fixed inset-0 z-[100] mt-16 bg-black/10 backdrop-blur-sm md:hidden`}
+                        onClick={() => setIsOpen(false)}
                     >
+                        <div 
+                            className="mx-4 mt-2 overflow-hidden rounded-2xl border border-purple-300 bg-slate-50/80 shadow-lg"
+                            onClick={(e) => e.stopPropagation()}
+                        >
                         {navItems.map((item) => (
                             <div
                                 key={item.id}
@@ -196,6 +200,7 @@ export const NavigationComp = () => {
                                 {item.label}
                             </div>
                         ))}
+                        </div>
                     </div>
                 </div>
             </div>
