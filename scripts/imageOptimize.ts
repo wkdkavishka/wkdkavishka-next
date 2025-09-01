@@ -9,9 +9,10 @@ import sharp from 'sharp'; // You would need to install this: npm install sharp
 // ============================================================================
 const RESIZE_CONFIG = [
     // Format: { path: string, dimensions: string, quality: number }
-    { path: '../public/images/projects/irs-calculator', dimensions: '800x600', quality: 85 },
-    { path: '../public/images/projects/wkdkavishka-vue', dimensions: '800x600', quality: 85 },
-    { path: '../public/images/team', dimensions: '800x600', quality: 85 },
+    { path: '../public/images/projects/irs-calculator', dimensions: '400x300', quality: 85 },
+    { path: '../public/images/projects/wkdkavishka-vue', dimensions: '400x300', quality: 85 },
+    { path: '../public/images/team', dimensions: '400x300', quality: 85 },
+    { path: '../public/images/profile', dimensions: '800x600', quality: 85 },
 ];
 // ============================================================================
 
@@ -52,10 +53,29 @@ export class ImageProcessor {
 
                 const filePath = path.join(file.path, file.name);
                 const ext = path.extname(filePath).toLowerCase();
-                
-                // Skip WebP files as they are already in the desired format
+
+                // For WebP files, process them directly
                 if (ext === '.webp') {
-                    console.log(`Skipping already processed WebP file: ${filePath}`);
+                    this.totalProcessed++;
+                    console.log(`\nFound WebP image: ${filePath}`);
+
+                    try {
+                        const tempPath = `${filePath}.tmp`;
+                        const needsResize = await this.needsResize(filePath, [width, height]);
+
+                        if (needsResize) {
+                            await this.resizeImage(filePath, tempPath, [width, height], quality);
+                            // Replace original with resized version
+                            await fs.rename(tempPath, filePath);
+                            console.log(`  ✅ Resized and optimized: ${filePath}`);
+                            this.totalResized++;
+                        } else {
+                            console.log('✅ Image already optimized, skipping.');
+                        }
+                    } catch (error) {
+                        console.error(`❌ Failed to process WebP ${filePath}:`, error);
+                        this.totalErrors++;
+                    }
                     continue;
                 }
                 const fileExtension = path.extname(filePath).toLowerCase();
@@ -93,6 +113,22 @@ export class ImageProcessor {
         }
     }
 
+    private async needsResize(
+        filePath: string,
+        targetDimensions: [number, number]
+    ): Promise<boolean> {
+        try {
+            const metadata = await sharp(filePath).metadata();
+            if (!metadata.width || !metadata.height) return true;
+
+            // Check if image is larger than target dimensions
+            return metadata.width > targetDimensions[0] || metadata.height > targetDimensions[1];
+        } catch (error) {
+            console.error(`❌ Failed to get image dimensions for ${filePath}:`, error);
+            return false;
+        }
+    }
+
     private async needsProcessing(
         originalPath: string,
         webpPath: string,
@@ -101,13 +137,9 @@ export class ImageProcessor {
         try {
             // Check if the WebP version exists and has the correct dimensions
             await fs.access(webpPath); // Throws if file doesn't exist
-            const metadata = await sharp(webpPath).metadata();
-            if (metadata.width === targetDimensions[0] && metadata.height === targetDimensions[1]) {
-                return false;
-            }
-            return true;
-        } catch (error) {
-            console.error(`❌ Failed to check WebP file:`, error);
+            const needsResize = await this.needsResize(webpPath, targetDimensions);
+            return needsResize;
+        } catch (_error) {
             // WebP file doesn't exist, so it needs processing
             return true;
         }

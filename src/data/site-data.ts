@@ -81,7 +81,7 @@ const siteData: SiteData = {
         title: 'Software Engineer | DevOps Engineer',
         location: 'Colombo, Sri Lanka',
         email: 'w.k.d.kavishka@gmail.com',
-        profileImage: '/images/profile.webp',
+        profileImage: '/images/profile/profile.webp',
         about: [
             'Take your business to the next level',
             'Taking on challenging projects and delivering exceptional software solutions.',
