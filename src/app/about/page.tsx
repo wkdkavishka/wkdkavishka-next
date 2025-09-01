@@ -21,7 +21,7 @@ export default function Page() {
                 <div className="grid grid-cols-1 justify-between md:grid-cols-2">
                     {/* First Column: Profile Picture and Social Links */}
                     <div className="flex flex-col items-center gap-6">
-                        <div className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-blue-500">
+                        <div className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-blue-500 md:h-80 md:w-80">
                             <Image
                                 src={Personal.profileImage}
                                 alt={`${Personal.name}'s profile`}
@@ -30,7 +30,7 @@ export default function Page() {
                                 priority
                             />
                         </div>
-                        <div className="flex space-x-4">
+                        <div className="my-4 flex space-x-4">
                             {SocialLinks.map((social) => (
                                 <a
                                     key={social.name}
@@ -41,7 +41,7 @@ export default function Page() {
                                     aria-label={social.name}
                                 >
                                     {React.createElement(social.icon, {
-                                        size: 24,
+                                        size: 28,
                                     })}
                                 </a>
                             ))}
@@ -49,9 +49,9 @@ export default function Page() {
                     </div>
 
                     {/* Second Column: About Texts and Download CV */}
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col justify-between gap-6 py-2">
                         {Personal.about.slice(1).map((paragraph, index) => (
-                            <p key={index} className="text-lg text-gray-600">
+                            <p key={index} className="text-center text-xl text-gray-900">
                                 {paragraph}
                             </p>
                         ))}

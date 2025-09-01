@@ -29,10 +29,6 @@ export default function Page() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            {/* <div className="sticky top-0 z-50 px-10 pt-2">
-                <Navigation />
-            </div> */}
-
             <div className="fixed right-0 bottom-0 z-50 p-4 backdrop-blur-2xl">
                 <EmailModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
             </div>
