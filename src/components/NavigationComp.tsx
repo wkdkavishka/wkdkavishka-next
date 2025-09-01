@@ -1,11 +1,13 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import siteData from '../data/site-data';
 
 export const NavigationComp = () => {
     const [activeSection, setActiveSection] = useState('home');
+    const [isOpen, setIsOpen] = useState(false);
+    const navRef = useRef<HTMLDivElement>(null);
 
     const navItems = useMemo(
         () => [
@@ -77,15 +79,73 @@ export const NavigationComp = () => {
         }
     };
 
+    // Close menu when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (navRef.current && !navRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
     return (
-        <nav className="mx-auto rounded-4xl border-1 border-purple-300 bg-purple-100/70 shadow-lg backdrop-blur">
+        <nav
+            className="relative mx-auto rounded-4xl border-1 border-purple-300 bg-purple-100/70 shadow-lg backdrop-blur"
+            ref={navRef}
+        >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex h-16 justify-between">
-                    <div className="flex items-center">
+                <div className="relative flex h-16 items-center justify-center md:justify-between">
+                    {/* Mobile menu button */}
+                    <div className="absolute top-1/2 right-4 -translate-y-1/2 md:hidden">
+                        <button
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-purple-200 focus:outline-none"
+                            aria-expanded="false"
+                        >
+                            <span className="sr-only">Open main menu</span>
+                            <svg
+                                className={`${isOpen ? 'hidden' : 'block'} h-6 w-6`}
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M4 6h16M4 12h16M4 18h16"
+                                />
+                            </svg>
+                            <svg
+                                className={`${isOpen ? 'block' : 'hidden'} h-6 w-6`}
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+
+                    {/* Site name - centered on mobile, left on desktop */}
+                    <div className="flex w-full items-center justify-center md:w-auto md:justify-start">
                         <div className="flex items-center space-x-2 text-xl font-bold text-gray-900">
-                            {/* <FaUserCircle className="w-6 h-6 text-current" /> */}
                             <span
-                                onClick={() => scrollToSection('home')}
+                                onClick={() => {
+                                    scrollToSection('home');
+                                    setIsOpen(false);
+                                }}
                                 className="cursor-pointer bg-gradient-to-r from-teal-600 to-purple-600 bg-clip-text text-transparent transition-opacity hover:opacity-80"
                             >
                                 {siteData.personal.name}
@@ -93,17 +153,48 @@ export const NavigationComp = () => {
                         </div>
                     </div>
 
+                    {/* Desktop Navigation */}
                     <div className="hidden items-center space-x-6 md:flex">
                         {navItems.map((item) => (
                             <span
                                 key={item.id}
-                                onClick={() => scrollToSection(item.id)}
-                                className={`cursor-pointer text-sm font-medium transition-all duration-300 ease-out ${
-                                    activeSection === item.id ? 'text-teal-600' : 'text-gray-700'
+                                onClick={() => {
+                                    scrollToSection(item.id);
+                                    setIsOpen(false);
+                                }}
+                                className={`cursor-pointer text-sm font-medium transition-colors ${
+                                    activeSection === item.id
+                                        ? 'text-purple-600'
+                                        : 'text-gray-700 hover:text-purple-600'
                                 }`}
                             >
                                 {item.label}
                             </span>
+                        ))}
+                    </div>
+
+                    {/* Mobile Navigation */}
+                    <div
+                        className={`${
+                            isOpen ? 'block' : 'hidden'
+                        } absolute right-0 left-0 z-50 mt-2 rounded-2xl border-t-0 border-purple-100 bg-purple-100/70 py-2 shadow-lg backdrop-blur md:hidden`}
+                        style={{ top: 'calc(100% - 2px)' }}
+                    >
+                        {navItems.map((item) => (
+                            <div
+                                key={item.id}
+                                onClick={() => {
+                                    scrollToSection(item.id);
+                                    setIsOpen(false);
+                                }}
+                                className={`block cursor-pointer px-4 py-3 text-sm font-medium ${
+                                    activeSection === item.id
+                                        ? 'bg-white/50 text-purple-600'
+                                        : 'text-gray-700 hover:bg-white/50 hover:text-purple-600'
+                                }`}
+                            >
+                                {item.label}
+                            </div>
                         ))}
                     </div>
                 </div>
