@@ -177,7 +177,7 @@ export const NavigationComp = () => {
                     <div
                         className={`${
                             isOpen ? 'block' : 'hidden'
-                        } absolute right-0 left-0 z-50 mt-2 rounded-2xl border-t-0 border-purple-100 bg-purple-100/70 py-2 shadow-lg backdrop-blur md:hidden`}
+                        } absolute right-0 left-0 z-50 mt-2 rounded-2xl border-t-0 border-purple-100 bg-purple-100/70 shadow-lg backdrop-blur-sm md:hidden`}
                         style={{ top: 'calc(100% - 2px)' }}
                     >
                         {navItems.map((item) => (
@@ -187,9 +187,9 @@ export const NavigationComp = () => {
                                     scrollToSection(item.id);
                                     setIsOpen(false);
                                 }}
-                                className={`block cursor-pointer px-4 py-3 text-sm font-medium ${
+                                className={`block cursor-pointer rounded-2xl px-4 py-3 text-sm font-medium transition-colors ${
                                     activeSection === item.id
-                                        ? 'bg-white/50 text-purple-600'
+                                        ? 'bg-white/70 text-purple-600'
                                         : 'text-gray-700 hover:bg-white/50 hover:text-purple-600'
                                 }`}
                             >
