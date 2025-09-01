@@ -1,0 +1,176 @@
+// @/path/to/img_optimize.ts
+
+import * as path from 'path';
+import * as fs from 'fs/promises';
+import sharp from 'sharp'; // You would need to install this: npm install sharp
+
+// ============================================================================
+// CONFIGURATION - Edit this array to add your resize requirements
+// ============================================================================
+const RESIZE_CONFIG = [
+    // Format: { path: string, dimensions: string, quality: number }
+    { path: '../public/images/projects/irs-calculator', dimensions: '800x600', quality: 85 },
+    { path: '../public/images/projects/wkdkavishka-vue', dimensions: '800x600', quality: 85 },
+    { path: '../public/images/team', dimensions: '800x600', quality: 85 },
+];
+// ============================================================================
+
+const supportedFormats = new Set(['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp']);
+
+export class ImageProcessor {
+    totalProcessed = 0;
+    totalResized = 0;
+    totalErrors = 0;
+
+    async processAllConfigs() {
+        console.log('✨ Starting image processing...');
+        for (const config of RESIZE_CONFIG) {
+            console.log(`\n=== Processing: ${config.path} ===`);
+            await this.processDirectory(config.path, config.dimensions, config.quality);
+        }
+        this.printStatistics();
+    }
+
+    private async processDirectory(dirPath: string, dimensions: string, quality: number) {
+        // Remove the leading '../' from the path since we'll resolve from project root
+        const relativePath = dirPath.startsWith('../') ? dirPath.slice(3) : dirPath;
+        const projectRoot = path.resolve(process.cwd());
+        const absolutePath = path.join(projectRoot, relativePath);
+        console.log(`Scanning directory: ${absolutePath}`);
+
+        try {
+            const files = await fs.readdir(absolutePath, { withFileTypes: true, recursive: true });
+            const [width, height] = dimensions.split('x').map(Number);
+            if (isNaN(width) || isNaN(height)) {
+                console.error(`❌ Invalid dimensions format: ${dimensions}`);
+                this.totalErrors++;
+                return;
+            }
+
+            for (const file of files) {
+                if (!file.isFile()) continue;
+
+                const filePath = path.join(file.path, file.name);
+                const ext = path.extname(filePath).toLowerCase();
+                
+                // Skip WebP files as they are already in the desired format
+                if (ext === '.webp') {
+                    console.log(`Skipping already processed WebP file: ${filePath}`);
+                    continue;
+                }
+                const fileExtension = path.extname(filePath).toLowerCase();
+
+                if (!supportedFormats.has(fileExtension)) {
+                    continue;
+                }
+
+                this.totalProcessed++;
+                console.log(`\nFound image: ${filePath}`);
+
+                try {
+                    const webpPath = path.join(
+                        path.dirname(filePath),
+                        `${path.parse(filePath).name}.webp`
+                    );
+                    const needsProcessing = await this.needsProcessing(filePath, webpPath, [
+                        width,
+                        height,
+                    ]);
+
+                    if (needsProcessing) {
+                        await this.resizeImage(filePath, webpPath, [width, height], quality);
+                    } else {
+                        console.log('✅ Image already optimized, skipping.');
+                    }
+                } catch (error) {
+                    console.error(`❌ Failed to process ${filePath}:`, error);
+                    this.totalErrors++;
+                }
+            }
+        } catch (error) {
+            console.error(`❌ Directory does not exist or cannot be read: ${absolutePath}`, error);
+            this.totalErrors++;
+        }
+    }
+
+    private async needsProcessing(
+        originalPath: string,
+        webpPath: string,
+        targetDimensions: [number, number]
+    ): Promise<boolean> {
+        try {
+            // Check if the WebP version exists and has the correct dimensions
+            await fs.access(webpPath); // Throws if file doesn't exist
+            const metadata = await sharp(webpPath).metadata();
+            if (metadata.width === targetDimensions[0] && metadata.height === targetDimensions[1]) {
+                return false;
+            }
+            return true;
+        } catch (error) {
+            console.error(`❌ Failed to check WebP file:`, error);
+            // WebP file doesn't exist, so it needs processing
+            return true;
+        }
+    }
+
+    private async resizeImage(
+        filePath: string,
+        webpPath: string,
+        targetDimensions: [number, number],
+        quality: number
+    ) {
+        console.log(`  Processing image...`);
+        const [width, height] = targetDimensions;
+
+        // Use sharp to read, resize, and convert
+        await sharp(filePath)
+            .resize(width, height, {
+                fit: 'contain',
+                background: { r: 255, g: 255, b: 255, alpha: 0 },
+            })
+            .webp({ quality })
+            .toFile(webpPath);
+
+        const newMetadata = await sharp(webpPath).metadata();
+        const originalStats = await fs.stat(filePath);
+        const newStats = await fs.stat(webpPath);
+
+        console.log(`  ✅ Converted to WebP: ${newMetadata.width}x${newMetadata.height}`);
+        const sizeReduction = ((originalStats.size - newStats.size) / originalStats.size) * 100;
+        console.log(
+            `  📊 Size change: ${originalStats.size}B -> ${newStats.size}B (${sizeReduction.toFixed(1)}% reduction)`
+        );
+
+        // Delete the original file unless it was a WebP file we updated
+        if (path.extname(filePath).toLowerCase() !== '.webp') {
+            await fs.unlink(filePath);
+            console.log('  🗑️ Original file removed.');
+        }
+
+        this.totalResized++;
+    }
+
+    private printStatistics() {
+        console.log('\n=====================================');
+        console.log('🚀 PROCESSING COMPLETE');
+        console.log(`Total images processed: ${this.totalProcessed}`);
+        console.log(`Images resized: ${this.totalResized}`);
+        if (this.totalErrors > 0) {
+            console.log(`Errors encountered: ${this.totalErrors}`);
+        } else {
+            console.log('No errors encountered.');
+        }
+        console.log('=====================================');
+    }
+}
+
+// Main execution block
+async function main() {
+    const processor = new ImageProcessor();
+    await processor.processAllConfigs();
+}
+
+main().catch((error) => {
+    console.error('An unexpected error occurred:', error);
+    process.exit(1);
+});

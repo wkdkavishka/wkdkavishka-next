@@ -81,7 +81,7 @@ const siteData: SiteData = {
         title: 'Software Engineer | DevOps Engineer',
         location: 'Colombo, Sri Lanka',
         email: 'w.k.d.kavishka@gmail.com',
-        profileImage: '/images/profile.webp',
+        profileImage: '/images/profile-optimized.webp',
         about: [
             'Take your business to the next level',
             'Taking on challenging projects and delivering exceptional software solutions.',
@@ -143,11 +143,9 @@ const siteData: SiteData = {
             link: 'https://wkdkavishka.github.io/IRS-Calculate_Inner_restlessnes_score/',
             github: 'https://github.com/wkdkavishka/IRS-Calculate_Inner_restlessnes_score',
             image: [
-                '/images/projects/irs-calculator/1.png',
-                '/images/projects/irs-calculator/2.png',
-                '/images/projects/irs-calculator/3.png',
-                '/images/projects/irs-calculator/4.png',
-                '/images/projects/irs-calculator/5.png',
+                '/images/projects/irs-calculator/1.webp',
+                '/images/projects/irs-calculator/2.webp',
+                '/images/projects/irs-calculator/3.webp',
             ],
         },
         {
@@ -159,10 +157,10 @@ const siteData: SiteData = {
             link: 'https://ecommerce-demo.wkdkavishka.vercel.app',
             github: 'https://github.com/wkdkavishka/ecommerce-platform',
             image: [
-                '/images/projects/wkdkavishka-vue/1.png',
-                '/images/projects/wkdkavishka-vue/2.png',
-                '/images/projects/wkdkavishka-vue/3.png',
-                '/images/projects/wkdkavishka-vue/4.png',
+                '/images/projects/wkdkavishka-vue/1.webp',
+                '/images/projects/wkdkavishka-vue/2.webp',
+                '/images/projects/wkdkavishka-vue/3.webp',
+                '/images/projects/wkdkavishka-vue/4.webp',
             ],
         },
     ],
@@ -172,7 +170,7 @@ const siteData: SiteData = {
             name: 'Alex Johnson',
             role: 'Senior Developer',
             company: 'TechCorp',
-            image: '/images/team/member-1.jpg',
+            image: '/images/team/member-1.webp',
             testimonial:
                 'Working with WKD was a fantastic experience. Their attention to detail and problem-solving skills are exceptional.',
             social: {
@@ -186,7 +184,7 @@ const siteData: SiteData = {
             name: 'Sarah Williams',
             role: 'Product Manager',
             company: 'InnovateX',
-            image: '/images/team/member-2.jpg',
+            image: '/images/team/member-2.webp',
             testimonial:
                 "One of the most dedicated developers I've worked with. Delivered beyond expectations on every project.",
             social: {
@@ -200,7 +198,7 @@ const siteData: SiteData = {
             name: 'Michael Chen',
             role: 'CTO',
             company: 'StartUpHub',
-            image: '/images/team/member-3.jpg',
+            image: '/images/team/member-3.webp',
             testimonial:
                 'Technical expertise and professionalism at its best. Highly recommended for any complex web development work.',
             social: {
@@ -214,7 +212,7 @@ const siteData: SiteData = {
             name: 'Emily Rodriguez',
             role: 'UI/UX Designer',
             company: 'DesignMasters',
-            image: '/images/team/member-4.jpg',
+            image: '/images/team/member-4.webp',
             testimonial:
                 'Collaborating with WKD was seamless. They understand design principles and implement them perfectly.',
             social: {
