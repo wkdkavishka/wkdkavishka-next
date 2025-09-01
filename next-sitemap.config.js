@@ -4,4 +4,7 @@ module.exports = {
     // ...other options
     sitemapSizeLimit: 1000,
     sitemapFilename: 'sitemap.xml',
+    // update monthly
+    changefreq: 'monthly',
+    priority: 0.7,
 };
