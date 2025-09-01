@@ -31,15 +31,6 @@ async function deploy() {
         const processor = new ImageProcessor();
         await processor.processAllConfigs();
 
-        // // Step 2: Generate meta images (favicons, social media images, etc.)
-        // console.log('[deploy] Generating meta images...');
-        // try {
-        //     await generateMetaImages();
-        //     console.log('[deploy] Meta images generated successfully');
-        // } catch (error) {
-        //     console.warn('[deploy][WARNING] Failed to generate meta images:', error);
-        // }
-
         // Step 3: Build the Next.js project
         console.log('[deploy] Building project...');
         runCommand('npm run build');
