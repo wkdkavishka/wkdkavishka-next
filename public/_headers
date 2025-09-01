@@ -1,0 +1,11 @@
+# Cache static assets for 1 month
+/_next/static/*
+  Cache-Control: public, max-age=2592000, immutable
+
+# Cache images for 1 month
+/images/*
+  Cache-Control: public, max-age=2592000, immutable
+
+# Default cache control for other files
+/*
+  Cache-Control: public, max-age=0, must-revalidate
