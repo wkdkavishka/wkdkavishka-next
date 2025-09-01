@@ -36,7 +36,7 @@ export default function ContactPage() {
                             className="text-gray-700 transition-colors hover:text-blue-600"
                             aria-label={social.name}
                         >
-                            {React.createElement(social.icon, { size: 24 })}
+                            {React.createElement(social.icon, { size: 28 })}
                         </a>
                     ))}
                 </div>
