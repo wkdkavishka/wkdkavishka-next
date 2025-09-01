@@ -1,7 +1,7 @@
 import { Metadata, Viewport } from 'next';
 import siteData from '@/data/site-data';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://wkdkavishka.me';
+const siteUrl = 'https://wkdkavishka.github.io';
 const siteName = siteData.personal.name;
 const siteDescription = siteData.personal.title;
 const siteKeywords = [
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
         },
     },
     verification: {
-        google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+        google: 'dnbg1aDJpyG1SNk4NugqOVp9d0Pa9G-awAm087eCoQg',
         yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
     },
 };
