@@ -44,7 +44,7 @@ export async function generateMetaImages() {
     // Use metaImage.jpg from the same directory as the script
     const __filename = fileURLToPath(import.meta.url);
     const scriptDir = dirname(__filename);
-    const inputImage = join(scriptDir, 'metaImage.jpg');
+    const inputImage = join(scriptDir, 'metaImage.webp');
     const outputDir = join(process.cwd(), 'public/images/meta');
 
     // Check if source image exists

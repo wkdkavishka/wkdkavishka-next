@@ -12,10 +12,10 @@ export default function Page() {
     return (
         <section id="about" className="flex min-h-screen items-center justify-center px-6 py-20">
             <div className="mx-auto flex max-w-4xl flex-col items-center">
-                <h2 className="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-center text-4xl font-bold text-transparent">
+                <h2 className="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-center text-5xl font-bold text-transparent">
                     About Me
                 </h2>
-                <p className="mx-auto mb-12 max-w-2xl text-center text-lg text-gray-600">
+                <p className="mx-auto mb-12 max-w-2xl text-center text-xl text-gray-600">
                     Get to know me better
                 </p>
                 <div className="grid grid-cols-1 justify-between md:grid-cols-2">
@@ -49,9 +49,9 @@ export default function Page() {
                     </div>
 
                     {/* Second Column: About Texts and Download CV */}
-                    <div className="flex flex-col justify-between gap-6 py-2">
+                    <div className="flex flex-col justify-between gap-6 py-4 font-bold">
                         {Personal.about.slice(1).map((paragraph, index) => (
-                            <p key={index} className="text-center text-xl text-gray-900">
+                            <p key={index} className="text-center text-xl text-gray-700">
                                 {paragraph}
                             </p>
                         ))}
