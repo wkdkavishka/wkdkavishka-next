@@ -35,11 +35,11 @@ export default function Page() {
                     </span>
                 </h1>
 
-                <h2 className="mb-6 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text font-sans font-bold text-transparent md:text-3xl">
+                <h2 className="mb-6 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text font-sans text-2xl font-bold text-transparent md:text-3xl">
                     {personal.title}
                 </h2>
 
-                <p className="mx-auto mb-12 max-w-2xl text-lg text-gray-600 md:text-xl">
+                <p className="mx-auto mb-12 max-w-2xl text-xl text-gray-900 md:text-2xl">
                     {personal.about[0]}
                 </p>
 
