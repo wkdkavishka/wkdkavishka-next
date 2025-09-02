@@ -12,7 +12,7 @@ export default function Page() {
     return (
         <section id="about" className="flex min-h-screen items-center justify-center px-6 py-20">
             <div className="mx-auto flex max-w-4xl flex-col items-center">
-                <h2 className="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-center text-5xl font-bold text-transparent">
+                <h2 className="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-center text-4xl md:text-5xl font-bold text-transparent">
                     About Me
                 </h2>
                 <p className="mx-auto mb-12 max-w-2xl text-center text-xl text-gray-600">
