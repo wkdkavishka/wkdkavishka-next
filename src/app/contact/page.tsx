@@ -12,7 +12,7 @@ export default function ContactPage() {
     return (
         <section id="contact" className="px-6 py-20">
             <div className="mx-auto max-w-2xl text-center">
-                <h2 className="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-4xl font-bold text-transparent">
+                <h2 className="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
                     Get In Touch
                 </h2>
                 <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
