@@ -54,7 +54,7 @@ export default function Page() {
                             aria-label={social.name}
                         >
                             {React.createElement(social.icon, {
-                                size: 28,
+                                size: 30,
                             })}
                         </a>
                     ))}
