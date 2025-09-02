@@ -1,5 +1,5 @@
 import siteData from '@/data/site-data';
-import { CardComp } from '@/components/CardComp';
+import { CardComp } from '@/components/projectCardComp';
 
 export default function Page() {
     const { projects } = siteData;
