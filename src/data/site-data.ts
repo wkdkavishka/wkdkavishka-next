@@ -136,7 +136,7 @@ const siteData: SiteData = {
     projects: [
         {
             id: 'irs-calculator',
-            title: 'ADHD Self-Assessment Tool (Sort Of)',
+            title: 'ADHD Self-Assessment Tool',
             description:
                 'An interactive Internal Restlessness Scale (IRS) assessment tool that helps evaluate ADHD-related inner restlessness. Features a responsive questionnaire with instant results and detailed insights.',
             tags: ['Next.js', 'Tailwind CSS', 'GitHub Pages'],

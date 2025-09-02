@@ -24,10 +24,11 @@ export default function Page() {
                 </p>
 
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {/* services card start */}
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="group relative transform rounded-xl border border-gray-100 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:border-blue-500/30 hover:shadow-2xl hover:ring-2 hover:ring-blue-500/20"
+                            className="group relative max-w-sm transform rounded-xl border border-gray-100 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:border-blue-500/30 hover:shadow-2xl hover:ring-2 hover:ring-blue-500/20"
                         >
                             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-600/5 to-purple-600/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
                             <div className="relative z-10">
@@ -53,6 +54,7 @@ export default function Page() {
                             </div>
                         </div>
                     ))}
+                    {/* services card end */}
                 </div>
             </div>
         </section>
