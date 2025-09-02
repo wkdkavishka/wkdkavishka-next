@@ -41,7 +41,7 @@ export const CardComp: React.FC<CardProps> = ({ project, colorVariant, borderHov
     return (
         <div
             key={project.id}
-            className={`group relative transform rounded-xl border border-gray-100 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-xl ${borderHover}`}
+            className={`group relative max-w-sm transform rounded-xl border border-gray-100 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-xl ${borderHover}`}
         >
             <div
                 className={`absolute inset-0 bg-gradient-to-br ${colorVariant} rounded-xl opacity-0 transition-all duration-300 group-hover:opacity-100`}
