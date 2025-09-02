@@ -87,17 +87,6 @@ export const TeamCarouselComp: React.FC<TeamCarouselProps> = ({ members }) => {
 
                 <div className="relative mx-auto max-w-6xl">
                     <div className="flex items-center justify-center">
-                        <button
-                            onClick={() => {
-                                setIsAutoPlaying(false);
-                                prevSlide();
-                            }}
-                            className="z-10 mr-4 rounded-full bg-white p-2 text-blue-600 shadow-lg transition-transform hover:scale-110 max-md:hidden"
-                            aria-label="Previous slide"
-                        >
-                            <FaChevronLeft size={24} />
-                        </button>
-
                         {/* card view section */}
                         <div className="flex w-full overflow-hidden px-4 py-4">
                             <div
@@ -199,21 +188,10 @@ export const TeamCarouselComp: React.FC<TeamCarouselProps> = ({ members }) => {
                             </div>
                         </div>
                         {/* END card view section */}
-
-                        <button
-                            onClick={() => {
-                                setIsAutoPlaying(false);
-                                nextSlide();
-                            }}
-                            className="z-10 ml-4 rounded-full bg-white p-2 text-blue-600 shadow-lg transition-transform hover:scale-110 max-md:hidden"
-                            aria-label="Next slide"
-                        >
-                            <FaChevronRight size={24} />
-                        </button>
                     </div>
 
-                    {/* Mobile Navigation */}
-                    <div className="mt-6 flex items-center justify-center space-x-4 md:hidden">
+                    {/* Team carousel Navigation */}
+                    <div className="mt-6 flex items-center justify-center space-x-12">
                         <button
                             onClick={() => {
                                 setIsAutoPlaying(false);
@@ -225,6 +203,7 @@ export const TeamCarouselComp: React.FC<TeamCarouselProps> = ({ members }) => {
                             <FaChevronLeft size={20} />
                         </button>
 
+                        {/* Team carousel Index View */}
                         <div className="flex space-x-2">
                             {members.map((_, index) => (
                                 <button
@@ -233,8 +212,8 @@ export const TeamCarouselComp: React.FC<TeamCarouselProps> = ({ members }) => {
                                         setIsAutoPlaying(false);
                                         setCurrentIndex(index);
                                     }}
-                                    className={`h-2 w-2 rounded-full transition-colors ${
-                                        index === currentIndex ? 'bg-blue-600' : 'bg-gray-300'
+                                    className={`h-4 w-4 rounded-full transition-colors ${
+                                        index === currentIndex ? 'bg-blue-600' : 'bg-white'
                                     }`}
                                     aria-label={`Go to slide ${index + 1}`}
                                 />
@@ -251,25 +230,6 @@ export const TeamCarouselComp: React.FC<TeamCarouselProps> = ({ members }) => {
                         >
                             <FaChevronRight size={20} />
                         </button>
-                    </div>
-
-                    {/* Index View */}
-                    <div className="mt-8 flex justify-center space-x-2 max-md:hidden">
-                        {members.map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => {
-                                    setIsAutoPlaying(false);
-                                    setCurrentIndex(index);
-                                }}
-                                className={`h-3 w-3 rounded-full transition-colors ${
-                                    index === currentIndex
-                                        ? 'w-8 bg-blue-600'
-                                        : 'bg-gray-300 hover:bg-gray-400'
-                                }`}
-                                aria-label={`Go to slide ${index + 1}`}
-                            />
-                        ))}
                     </div>
                 </div>
             </div>
