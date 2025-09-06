@@ -196,13 +196,4 @@ export class ImageProcessor {
     }
 }
 
-// Main execution block
-async function main() {
-    const processor = new ImageProcessor();
-    await processor.processAllConfigs();
-}
-
-main().catch((error) => {
-    console.error('An unexpected error occurred:', error);
-    process.exit(1);
-});
+// Main execution is handled by the deploy script

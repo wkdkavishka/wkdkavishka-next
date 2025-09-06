@@ -14,6 +14,13 @@
 /.cache
 /.idea
 
+# Public
+dist/googleaf175b30968c86d2.html
+dist/googlef622226116222261.html
+dist/robots.txt
+/dist/sitemap-0.xml
+/dist/sitemap.xml
+
 
 # Environment files
 .env
