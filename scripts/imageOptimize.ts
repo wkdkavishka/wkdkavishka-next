@@ -51,7 +51,7 @@ export class ImageProcessor {
             for (const file of files) {
                 if (!file.isFile()) continue;
 
-                const filePath = path.join(file.path, file.name);
+                const filePath = path.join(absolutePath, file.name);
                 const ext = path.extname(filePath).toLowerCase();
 
                 // For WebP files, process them directly
