@@ -92,6 +92,7 @@ export const NavigationComp = () => {
     }, []);
 
     return (
+        //
         <nav
             className="relative mx-auto rounded-4xl border-1 border-purple-300 bg-purple-100/70 shadow-lg backdrop-blur"
             ref={navRef}
@@ -174,34 +175,34 @@ export const NavigationComp = () => {
                     </div>
 
                     {/* Mobile Navigation */}
-                    <div
-                        className={`${
-                            isOpen ? 'block' : 'hidden'
-                        } fixed inset-0 z-[100] mt-16 bg-black/10 backdrop-blur-sm md:hidden`}
-                        onClick={() => setIsOpen(false)}
-                    >
-                        <div 
-                            className="mx-4 mt-2 overflow-hidden rounded-2xl border border-purple-300 bg-slate-50/80 shadow-lg"
-                            onClick={(e) => e.stopPropagation()}
+                    {isOpen && (
+                        <div
+                            className="fixed inset-0 z-[100] mt-16 md:hidden"
+                            onClick={() => setIsOpen(false)}
                         >
-                        {navItems.map((item) => (
                             <div
-                                key={item.id}
-                                onClick={() => {
-                                    scrollToSection(item.id);
-                                    setIsOpen(false);
-                                }}
-                                className={`block cursor-pointer rounded-2xl px-4 py-3 text-sm font-medium transition-colors ${
-                                    activeSection === item.id
-                                        ? 'bg-white/70 text-purple-600'
-                                        : 'text-gray-700 hover:bg-white/50 hover:text-purple-600'
-                                }`}
+                                className="mx-4 mt-2 overflow-hidden rounded-2xl border border-purple-300 bg-purple-100 shadow-lg"
+                                onClick={(e) => e.stopPropagation()}
                             >
-                                {item.label}
+                                {navItems.map((item) => (
+                                    <div
+                                        key={item.id}
+                                        onClick={() => {
+                                            scrollToSection(item.id);
+                                            setIsOpen(false);
+                                        }}
+                                        className={`block cursor-pointer rounded-2xl px-4 py-3 text-sm font-medium transition-colors ${
+                                            activeSection === item.id
+                                                ? 'bg-white/70 text-purple-600'
+                                                : 'text-gray-700 hover:bg-white/50 hover:text-purple-600'
+                                        }`}
+                                    >
+                                        {item.label}
+                                    </div>
+                                ))}
                             </div>
-                        ))}
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </nav>
