@@ -104,6 +104,18 @@ export default function ThreeBackground() {
 
         window.addEventListener('mousemove', handleMouseMove);
 
+        // Handle window resize
+        const handleResize = () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        };
+        
+        window.addEventListener('resize', handleResize);
+
         // Animation
         const animate = () => {
             animationId = requestAnimationFrame(animate);
@@ -156,6 +168,7 @@ export default function ThreeBackground() {
         return () => {
             cancelAnimationFrame(animationId);
             window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('resize', handleResize);
             renderer.dispose();
             scene.clear();
             geometry.dispose();
