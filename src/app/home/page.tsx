@@ -3,6 +3,7 @@
 import siteData from '@/data/site-data';
 import { PersonalData, SocialData } from '@/data/site-data';
 import React from 'react';
+import Image from 'next/image';
 import { useEmail } from '@/contexts/EmailContext';
 import { FiMail } from 'react-icons/fi';
 
@@ -15,7 +16,7 @@ export default function Page() {
         <section id="home" className="flex min-h-screen items-center justify-center px-6 py-2">
             <div className="mx-auto max-w-4xl text-center">
                 {/* Profile Image */}
-                {/* <div className="mx-auto mb-8 h-40 w-40 overflow-hidden rounded-full border-4 border-white bg-gray-900 shadow-lg md:h-48 md:w-48">
+                <div className="mx-auto mb-8 h-64 w-64 overflow-hidden rounded-full border-4 border-white bg-gray-900 shadow-lg md:h-96 md:w-96">
                     <div className="relative h-full w-full">
                         <Image
                             src={personal.profileImage}
@@ -26,7 +27,7 @@ export default function Page() {
                             priority
                         />
                     </div>
-                </div> */}
+                </div>
 
                 <h1 className="mb-6 text-4xl font-bold md:text-6xl">
                     Hi, I&apos;m{' '}
