@@ -15,24 +15,23 @@ export default function ContactPage() {
                 <h2 className="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
                     Get In Touch
                 </h2>
-                <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
-                    I&apos;m currently looking for new opportunities. Whether you have a question or
-                    just want to say hi, I&apos;ll get back to you as soon as possible!
+                <p className="mx-auto mb-8 max-w-2xl text-lg font-bold text-gray-600">
+                    {siteData.personal.getInTouch}
                 </p>
                 <div className="mx-auto mb-8 flex max-w-md flex-col space-y-4 text-lg">
                     <a
-                        href="mailto:w.k.d.kavishka@outlook.com"
+                        href={`mailto:${siteData.personal.email}`}
                         className="flex items-center justify-center text-gray-700 hover:text-blue-600"
                     >
                         <FiMail className="mr-2" />
-                        w.k.d.kavishka@outlook.com
+                        {siteData.personal.email}
                     </a>
                     <a
-                        href="tel:+94757676968"
+                        href={`tel:${siteData.personal.phone}`}
                         className="flex items-center justify-center text-gray-700 hover:text-blue-600"
                     >
                         <FiPhone className="mr-2" />
-                        +94 75 767 6968
+                        {siteData.personal.phone}
                     </a>
                 </div>
                 <button

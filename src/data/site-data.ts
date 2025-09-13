@@ -53,8 +53,10 @@ export interface PersonalData {
     title: string;
     location: string;
     email: string;
+    phone: string;
     profileImage: string;
     about: string[];
+    getInTouch: string;
     resumeUrl: string;
     skills: string[];
 }
@@ -81,6 +83,7 @@ const siteData: SiteData = {
         title: 'Software Engineer | DevOps Engineer',
         location: 'Colombo, Sri Lanka',
         email: 'w.k.d.kavishka@gmail.com',
+        phone: '+94757676968',
         profileImage: '/images/profile/profile.webp',
         about: [
             'Take your business to the next level',
@@ -89,6 +92,8 @@ const siteData: SiteData = {
             'Building lasting client relationships through exceptional service and innovative solutions.',
             'Dedicated to excellence in every project and committed to client satisfaction.',
         ],
+        getInTouch:
+            'I am currently looking for new opportunities. Whether you have a question or just want to say hi, I will get back to you as soon as possible!',
         resumeUrl: '/resume.pdf',
         skills: [
             'React',
