@@ -5,6 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "next dev --turbopack",
+        "bns": "npm run build && npx serve dist",
         "build": "next build && next-sitemap --config next-sitemap.config.cjs",
         "//start": "next start",
         "start": "npx serve dist",

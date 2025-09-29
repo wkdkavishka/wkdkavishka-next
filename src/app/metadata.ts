@@ -27,7 +27,7 @@ export const viewport: Viewport = {
     themeColor: [{ media: '(prefers-color-scheme: light)', color: '#ffffff' }],
 };
 
-export const metadata: Metadata = {
+export const siteMetadata: Metadata = {
     title: {
         default: siteName,
         template: `%s | ${siteName}`,
@@ -85,6 +85,7 @@ export const metadata: Metadata = {
         google: 'dnbg1aDJpyG1SNk4NugqOVp9d0Pa9G-awAm087eCoQg',
         yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
     },
+    manifest: '/site.webmanifest',
 };
 
-export default metadata;
+export default siteMetadata;

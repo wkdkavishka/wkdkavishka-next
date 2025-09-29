@@ -1,47 +1,15 @@
+import { ClientProviders } from '@/providers/ClientProviders';
+import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { NavigationComp as Navigation } from '../components/NavigationComp';
+import ThreeBackground from '../components/ThreeBackground';
 import { EmailProvider } from '../contexts/EmailContext';
 import { NotificationProvider } from '../contexts/NotificationContext';
 import './globals.css';
-import { metadata as siteMetadata } from './metadata';
-import ThreeBackground from '../components/ThreeBackground';
-import { NavigationComp as Navigation } from '../components/NavigationComp';
-import { Metadata } from 'next';
-import { ClientProviders } from './providers/ClientProviders';
-
-const pwaMetadata = {
-    manifest: '/site.webmanifest',
-    icons: {
-        icon: [
-            { url: '/images/meta/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-            { url: '/images/meta/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-        ],
-        apple: [{ url: '/images/meta/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
-    },
-    other: {
-        'msapplication-config': '/browserconfig.xml',
-        'msapplication-TileColor': '#000000',
-        'msapplication-TileImage': '/images/meta/mstile-144x144.png',
-        'theme-color': '#000000',
-    },
-    openGraph: {
-        images: [
-            {
-                url: '/images/meta/og-image.jpg',
-                width: 1200,
-                height: 630,
-                alt: 'WKDKavishka - Personal Portfolio',
-            },
-        ],
-    },
-    twitter: {
-        card: 'summary_large_image',
-        images: ['/images/meta/og-image.jpg'],
-    },
-};
+import { siteMetadata } from './metadata';
 
 export const metadata: Metadata = {
     ...siteMetadata,
-    ...pwaMetadata,
 };
 
 const inter = Inter({ subsets: ['latin'] });
