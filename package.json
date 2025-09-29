@@ -5,8 +5,9 @@
     "type": "module",
     "scripts": {
         "dev": "next dev --turbopack",
-        "build": "next build && next-sitemap",
-        "start": "next start",
+        "build": "next build && next-sitemap --config next-sitemap.config.cjs",
+        "//start": "next start",
+        "start": "npx serve dist",
         "deploy": "ts-node scripts/deploy.ts",
         "lint": "next lint"
     },

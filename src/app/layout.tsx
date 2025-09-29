@@ -6,6 +6,7 @@ import { metadata as siteMetadata } from './metadata';
 import ThreeBackground from '../components/ThreeBackground';
 import { NavigationComp as Navigation } from '../components/NavigationComp';
 import { Metadata } from 'next';
+import { ClientProviders } from './providers/ClientProviders';
 
 const pwaMetadata = {
     manifest: '/site.webmanifest',
@@ -55,18 +56,20 @@ export default function RootLayout({
             <body className={`${inter.className} min-h-full`}>
                 <div id="portal-root"></div>
                 <ThreeBackground />
-                <NotificationProvider>
-                    <EmailProvider>
-                        <div className="relative min-h-screen">
-                            <div className="sticky top-0 z-50 px-10 pt-2">
-                                <Navigation />
+                <ClientProviders>
+                    <NotificationProvider>
+                        <EmailProvider>
+                            <div className="relative min-h-screen">
+                                <div className="sticky top-0 z-50 px-10 pt-2">
+                                    <Navigation />
+                                </div>
+                                <div className="relative z-10">
+                                    <main>{children}</main>
+                                </div>
                             </div>
-                            <div className="relative z-10">
-                                <main>{children}</main>
-                            </div>
-                        </div>
-                    </EmailProvider>
-                </NotificationProvider>
+                        </EmailProvider>
+                    </NotificationProvider>
+                </ClientProviders>
             </body>
         </html>
     );
