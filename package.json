@@ -10,7 +10,8 @@
         "//start": "next start",
         "start": "npx serve dist",
         "deploy": "ts-node scripts/deploy.ts",
-        "lint": "next lint"
+        "lint": "next lint",
+        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\" \"scripts/**/*.{js,ts}\" \"*.{js,ts,json,md}\""
     },
     "dependencies": {
         "framer-motion": "^12.23.12",
