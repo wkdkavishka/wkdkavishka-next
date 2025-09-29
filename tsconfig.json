@@ -1,48 +1,37 @@
 {
-  "compilerOptions": {
-    "typeRoots": [
-      "./src/types",
-      "./node_modules/@types"
+    "compilerOptions": {
+        "typeRoots": ["./src/types", "./node_modules/@types"],
+        "target": "es2017",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "jsxImportSource": "react",
+        "allowImportingTsExtensions": true,
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ],
+        "paths": {
+            "@/*": ["./src/*"]
+        }
+    },
+    "include": [
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts",
+        "next-env.d.ts",
+        "src/app/contact/page.tsx.back",
+        "dist/types/**/*.ts"
     ],
-    "target": "es2017",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "jsxImportSource": "react",
-    "allowImportingTsExtensions": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    }
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "next-env.d.ts",
-    "src/app/contact/page.tsx.back",
-    "dist/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "exclude": ["node_modules"]
 }
