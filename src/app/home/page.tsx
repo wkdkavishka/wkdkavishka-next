@@ -87,7 +87,7 @@ export default function Page() {
                     {isInstallable && (
                         <button
                             onClick={promptToInstall}
-                            className="inline-flex transform items-center rounded-full bg-gradient-to-r from-teal-600 to-teal-600 px-8 py-3 font-medium text-white transition-opacity hover:-translate-y-0.5 hover:opacity-90 hover:shadow-lg"
+                            className="inline-flex transform items-center rounded-full bg-gradient-to-r from-teal-600 to-purple-600 px-8 py-3 font-medium text-white transition-opacity hover:-translate-y-0.5 hover:opacity-90 hover:shadow-lg"
                         >
                             Install PWA
                         </button>

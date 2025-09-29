@@ -1,4 +1,5 @@
 export const registerServiceWorker = async () => {
+    // Only register service worker in production to avoid caching issues and because Next.js does not serve sw.js in dev mode.
     if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
         try {
             const registration = await navigator.serviceWorker.register('/sw.js');
