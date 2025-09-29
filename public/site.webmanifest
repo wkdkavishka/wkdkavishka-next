@@ -31,6 +31,26 @@
             "sizes": "1280x676",
             "type": "image/png",
             "form_factor": "wide"
+        },
+        {
+            "src": "/images/pwa/desktop-1.png",
+            "sizes": "1280x676",
+            "type": "image/png",
+            "form_factor": "wide"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Contact Me",
+            "short_name": "Contact",
+            "description": "Contact Me to get in touch",
+            "url": "/contact",
+            "icons": [
+                {
+                    "src": "/images/profile/profile.webp",
+                    "sizes": "96x96"
+                }
+            ]
         }
     ]
 }
