@@ -6,11 +6,13 @@ import React from 'react';
 import Image from 'next/image';
 import { useEmail } from '@/contexts/EmailContext';
 import { FiMail } from 'react-icons/fi';
+import { usePWAInstallPrompt } from '@/hooks/usePWAInstallPrompt';
 
 export default function Page() {
     const personal: PersonalData = siteData.personal;
     const SocialLinks: SocialData[] = siteData.socialLinks;
     const { showEmailModal } = useEmail();
+    const { isInstallable, promptToInstall } = usePWAInstallPrompt();
 
     return (
         <section id="home" className="flex min-h-screen items-center justify-center px-6 py-2">
@@ -80,6 +82,16 @@ export default function Page() {
                     >
                         View My Work
                     </button>
+
+                    {/* Install PWA Button */}
+                    {isInstallable && (
+                        <button
+                            onClick={promptToInstall}
+                            className="inline-flex transform items-center rounded-full bg-gradient-to-r from-teal-600 to-teal-600 px-8 py-3 font-medium text-white transition-opacity hover:-translate-y-0.5 hover:opacity-90 hover:shadow-lg"
+                        >
+                            Install PWA
+                        </button>
+                    )}
                 </div>
             </div>
         </section>
