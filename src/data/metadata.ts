@@ -1,10 +1,10 @@
 import { Metadata, Viewport } from 'next';
 import siteData from '@/data/site-data';
 
-const siteUrl = 'https://wkdkavishka.github.io';
-const siteName = siteData.personal.name;
-const siteDescription = siteData.personal.title;
-const siteKeywords = [
+export const siteUrl = 'https://wkdkavishka.github.io';
+export const siteName = siteData.personal.name;
+export const siteDescription = siteData.personal.title;
+export const siteKeywords = [
     'Dumindu Kavishka',
     'Dumindu',
     'Kavishka',
@@ -47,6 +47,12 @@ export const siteMetadata: Metadata = {
     alternates: {
         canonical: '/',
     },
+    appleWebApp: {
+        capable: true,
+        statusBarStyle: 'default',
+        title: siteName,
+        startupImage: [siteData.personal.profileImage],
+    },
     openGraph: {
         type: 'website',
         locale: 'en_US',
@@ -86,7 +92,7 @@ export const siteMetadata: Metadata = {
         google: 'dnbg1aDJpyG1SNk4NugqOVp9d0Pa9G-awAm087eCoQg',
         yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
     },
-    manifest: '/site.webmanifest',
+    // manifest: '/manifest',
 };
 
 export default siteMetadata;
