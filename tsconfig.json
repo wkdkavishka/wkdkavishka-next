@@ -1,63 +1,49 @@
 {
-    "compilerOptions": {
-        "typeRoots": ["./src/types", "./node_modules/@types"],
-        "target": "es2022",
-        "lib": ["dom", "dom.iterable", "es2022", "webworker"],
-        "module": "esnext",
-        "moduleResolution": "bundler",
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "jsx": "preserve",
-        "incremental": true,
-        "jsxImportSource": "react",
-        "allowImportingTsExtensions": true,
-        "strict": true,
-        "noImplicitAny": true,
-        "strictNullChecks": true,
-        "strictFunctionTypes": true,
-        "strictBindCallApply": true,
-        "strictPropertyInitialization": true,
-        "noImplicitThis": true,
-        "useUnknownInCatchVariables": true,
-        "alwaysStrict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "exactOptionalPropertyTypes": true,
-        "noImplicitReturns": true,
-        "noFallthroughCasesInSwitch": true,
-        "noUncheckedIndexedAccess": true,
-        "noImplicitOverride": true,
-        "noPropertyAccessFromIndexSignature": true,
-        "forceConsistentCasingInFileNames": true,
-        "baseUrl": ".",
-        "paths": {
-            "@/*": ["./src/*"]
-        },
-        "types": [
-            "node",
-            "@types/node",
-            "@types/react",
-            "@types/react-dom",
-            "@serwist/next/typings"
-        ],
-        "noEmit": true,
-        "skipLibCheck": true,
-        "allowJs": true,
-        "checkJs": false,
-        "plugins": [
-            {
-                "name": "next"
-            }
-        ]
-    },
-    "include": [
-        "**/*.ts",
-        "**/*.tsx",
-        ".next/types/**/*.ts",
-        "next-env.d.ts",
-        "src/app/contact/page.tsx.back"
+  "compilerOptions": {
+    "typeRoots": [
+      "./src/types",
+      "./node_modules/@types"
     ],
-    "exclude": ["node_modules", "**/node_modules/*", ".next", "out"]
+    "target": "es2017",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext",
+      "webworker"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "jsxImportSource": "react",
+    "allowImportingTsExtensions": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next.config.mjs" // ".next/types/**/*.ts",
+    ,
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "public/sw.js"
+  ]
 }
