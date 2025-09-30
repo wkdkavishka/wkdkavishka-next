@@ -1,5 +1,5 @@
 module.exports = {
-    siteUrl: 'http://wkdkavishka.github.io',
+    siteUrl: 'https://wkdkavishka.github.io',
     generateRobotsTxt: true, // (optional)
     // ...other options
     sitemapSizeLimit: 1000,
