@@ -107,6 +107,7 @@ const siteData: SiteData = {
             'Vue',
             'Spring Boot',
             'Whatsapp API',
+            'Node.js',
         ],
     },
     services: [
