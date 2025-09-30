@@ -58,7 +58,12 @@ const additionalPrecacheEntries: (PrecacheEntry | string)[] = [
 ];
 
 const serwist = new Serwist({
-    precacheEntries: [...(self.__SW_MANIFEST || []), ...additionalPrecacheEntries],
+    precacheEntries: self.__SW_MANIFEST,
+    precacheOptions: {
+        cleanupOutdatedCaches: true,
+        concurrency: 10,
+        ignoreURLParametersMatching: [/^utm_/, /^fbclid$/],
+    },
     skipWaiting: true,
     clientsClaim: true,
     navigationPreload: true,
@@ -75,5 +80,8 @@ const serwist = new Serwist({
         ],
     },
 });
+
+// Add additional static files to cache on install
+serwist.addToPrecacheList(additionalPrecacheEntries);
 
 serwist.addEventListeners();
