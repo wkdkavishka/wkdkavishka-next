@@ -6,7 +6,7 @@ import ThreeBackground from '../components/ThreeBackground';
 import { EmailProvider } from '../contexts/EmailContext';
 import { NotificationProvider } from '../contexts/NotificationContext';
 import './globals.css';
-import { siteMetadata } from './metadata';
+import { siteMetadata } from '../data/metadata';
 
 export const metadata: Metadata = {
     ...siteMetadata,
