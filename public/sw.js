@@ -11,10 +11,46 @@ const staticFiles = [
     '/favicon.ico',
     '/manifest.json',
     '/site.webmanifest',
+    '/sitemap.xml',
+    '/sitemap-0.xml',
+    '/robots.txt',
+    '/browserconfig.xml',
+    '/next.svg',
+    '/vercel.svg',
+    '/file.svg',
+    '/globe.svg',
+    '/window.svg',
+    
+    // PWA assets
     '/images/pwa/mobile.png',
     '/images/pwa/desktop.png',
     '/images/pwa/desktop-1.png',
-    // Add more static assets as needed
+    
+    // Team images
+    '/images/team/member-1.webp',
+    '/images/team/member-2.webp',
+    '/images/team/member-3.webp',
+    '/images/team/member-4.webp',
+    
+    // Project images - IRS Calculator
+    '/images/projects/irs-calculator/1.webp',
+    '/images/projects/irs-calculator/2.webp',
+    '/images/projects/irs-calculator/3.webp',
+    
+    // Project images - WKDKavishka Vue
+    '/images/projects/wkdkavishka-vue/1.webp',
+    '/images/projects/wkdkavishka-vue/2.webp',
+    '/images/projects/wkdkavishka-vue/3.webp',
+    '/images/projects/wkdkavishka-vue/4.webp',
+    
+    // Profile image
+    '/images/profile/profile.webp',
+    
+    // Fonts and other assets (add any custom fonts if used)
+    // '/fonts/your-font.woff2',
+    
+    // Other static assets
+    // '/path/to/other/static/assets'
 ];
 
 self.addEventListener('install', (event) => {
@@ -22,15 +58,13 @@ self.addEventListener('install', (event) => {
         caches.open(CACHE_NAME).then(async (cache) => {
             // Try to add all static files, but don't fail if some are missing
             const cachePromises = [
-                ...staticFiles.map(url => 
-                    cache.add(url).catch(err => 
-                        console.warn(`Failed to cache ${url}:`, err)
-                    )
+                ...staticFiles.map((url) =>
+                    cache.add(url).catch((err) => console.warn(`Failed to cache ${url}:`, err))
                 ),
                 // Add root URL and routes with network-first strategy
-                cache.add('/').catch(err => console.warn('Failed to cache /:', err))
+                cache.add('/').catch((err) => console.warn('Failed to cache /:', err)),
             ];
-            
+
             await Promise.all(cachePromises);
             console.log('Service Worker: Caching complete');
             return self.skipWaiting();
@@ -40,29 +74,32 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
     event.waitUntil(
-        caches.keys().then((cacheNames) => {
-            return Promise.all(
-                cacheNames
-                    .filter((name) => name !== CACHE_NAME)
-                    .map((name) => {
-                        console.log('Deleting old cache:', name);
-                        return caches.delete(name);
-                    })
-            );
-        }).then(() => self.clients.claim())
+        caches
+            .keys()
+            .then((cacheNames) => {
+                return Promise.all(
+                    cacheNames
+                        .filter((name) => name !== CACHE_NAME)
+                        .map((name) => {
+                            console.log('Deleting old cache:', name);
+                            return caches.delete(name);
+                        })
+                );
+            })
+            .then(() => self.clients.claim())
     );
 });
 
 self.addEventListener('fetch', (event) => {
     if (event.request.method !== 'GET') return;
-    
+
     event.respondWith(
         caches.match(event.request).then((response) => {
             // Return cached response if found
             if (response) {
                 return response;
             }
-            
+
             // For navigation requests, try the network first, fall back to offline page
             if (event.request.mode === 'navigate') {
                 return fetch(event.request)
@@ -77,13 +114,15 @@ self.addEventListener('fetch', (event) => {
                         return response;
                     })
                     .catch(() => {
-                        return caches.match('/offline.html')
-                            .then((offlineResponse) => {
-                                return offlineResponse || new Response('You are offline and no offline page is available.');
-                            });
+                        return caches.match('/offline.html').then((offlineResponse) => {
+                            return (
+                                offlineResponse ||
+                                new Response('You are offline and no offline page is available.')
+                            );
+                        });
                     });
             }
-            
+
             // For other requests, try network first, then cache
             return fetch(event.request)
                 .then((response) => {
@@ -91,18 +130,20 @@ self.addEventListener('fetch', (event) => {
                     if (!response || response.status !== 200 || response.type !== 'basic') {
                         return response;
                     }
-                    
+
                     // Cache the response
                     const responseToCache = response.clone();
                     caches.open(CACHE_NAME).then((cache) => {
                         cache.put(event.request, responseToCache);
                     });
-                    
+
                     return response;
                 })
                 .catch(() => {
                     // If both network and cache fail, show a generic offline response
-                    return new Response('You are offline and the requested resource is not available.');
+                    return new Response(
+                        'You are offline and the requested resource is not available.'
+                    );
                 });
         })
     );
