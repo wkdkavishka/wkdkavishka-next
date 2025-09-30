@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: http://wkdkavishka.github.io
+Host: https://wkdkavishka.github.io
 
 # Sitemaps
-Sitemap: http://wkdkavishka.github.io/sitemap.xml
+Sitemap: https://wkdkavishka.github.io/sitemap.xml
