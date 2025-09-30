@@ -5,17 +5,18 @@ const siteUrl = 'https://wkdkavishka.github.io';
 const siteName = siteData.personal.name;
 const siteDescription = siteData.personal.title;
 const siteKeywords = [
+    'Dumindu Kavishka',
+    'Dumindu',
+    'Kavishka',
+    'wkdkavishka',
+    'Portfolio',
+    'Resume',
     'Software Engineer',
     'DevOps Engineer',
     'Web Development',
     'Cloud Computing',
     'Full Stack Development',
-    'React',
-    'Node.js',
-    'TypeScript',
-    'AWS',
-    'Docker',
-    'Kubernetes',
+
     siteData.personal.name,
     ...(siteData.personal.skills || []),
 ].join(', ');
