@@ -59,6 +59,7 @@ export interface PersonalData {
     getInTouch: string;
     resumeUrl: string;
     skills: string[];
+    description: string;
 }
 
 // socialData
@@ -88,14 +89,14 @@ const siteData: SiteData = {
         phone: '+94757676968',
         profileImage: '/images/profile/profile.webp',
         about: [
-            'Take your business to the next level',
-            'Taking on challenging projects and delivering exceptional software solutions.',
-            'Focused on delivering high-quality, scalable applications that meet business needs.',
-            'Building lasting client relationships through exceptional service and innovative solutions.',
-            'Dedicated to excellence in every project and committed to client satisfaction.',
+            'Helping businesses elevate their digital presence through modern software solutions.',
+            'Passionate about tackling challenging projects and delivering scalable, high-performance applications.',
+            'Committed to clean architecture, efficient DevOps practices, and seamless user experiences.',
+            'Building long-term partnerships through innovation, reliability, and transparent communication.',
+            'Dedicated to continuous improvement and excellence in every stage of software development.',
         ],
         getInTouch:
-            'I am currently looking for new opportunities. Whether you have a question or just want to say hi, I will get back to you as soon as possible!',
+            'Looking to turn your ideas into powerful, scalable solutions? Let’s connect! I’m available for freelance projects, collaborations, or consulting. Drop me a message, and I’ll get back to you promptly.',
         resumeUrl: '/resume.pdf',
         skills: [
             'React',
@@ -111,6 +112,8 @@ const siteData: SiteData = {
             'Whatsapp API',
             'Node.js',
         ],
+        description:
+            'W.K.D. Kavishka is a Software Engineer and DevOps Engineer in Colombo, Sri Lanka, specializing in full-stack web development, cloud infrastructure, and automation using React, Next.js, Node.js, Docker, Kubernetes, and AWS.',
     },
     services: [
         {
