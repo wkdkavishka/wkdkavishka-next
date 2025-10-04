@@ -74,10 +74,12 @@ export interface SiteData {
     projects: CardCompIntf[];
     socialLinks: SocialData[];
     teamMembers: TeamMemberCarouselCompIntf[];
+    siteUrl: string;
 }
 
 // Create the site data with proper typing
 const siteData: SiteData = {
+    siteUrl: 'https://wkdkavishka.github.io',
     personal: {
         name: 'W.K.D.Kavishka',
         title: 'Software Engineer | DevOps Engineer',
