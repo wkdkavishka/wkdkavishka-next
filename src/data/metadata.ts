@@ -1,7 +1,7 @@
 import { Metadata, Viewport } from 'next';
 import siteData from '@/data/site-data';
 
-export const siteUrl = 'https://wkdkavishka.github.io';
+export const siteUrl = siteData.siteUrl;
 export const siteName = siteData.personal.name;
 export const siteDescription = siteData.personal.title;
 export const siteKeywords = [
@@ -89,10 +89,8 @@ export const siteMetadata: Metadata = {
         },
     },
     verification: {
-        google: 'dnbg1aDJpyG1SNk4NugqOVp9d0Pa9G-awAm087eCoQg',
-        yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
+        google: process.env.GOOGLE as string,
     },
-    // manifest: '/manifest',
 };
 
 export default siteMetadata;

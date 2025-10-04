@@ -11,7 +11,7 @@ const nextConfig = {
 const withSerwist = withSerwistInit({
     // use something else that works, such as "service-worker/index.ts".
     swSrc: 'src/app/sw.ts',
-    swDest: 'public/sw.js',
+    swDest: 'dist/sw.js',
     cacheOnNavigation: true,
     reloadOnOnline: true,
     disable: process.env.NODE_ENV === 'development', // Optional: disable in dev
