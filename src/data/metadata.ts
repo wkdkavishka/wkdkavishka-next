@@ -3,7 +3,7 @@ import siteData from '@/data/site-data';
 
 export const siteUrl = siteData.siteUrl;
 export const siteName = siteData.personal.name;
-export const siteDescription = siteData.personal.title;
+export const siteDescription = siteData.personal.description;
 export const siteKeywords = [
     'Dumindu Kavishka',
     'Dumindu',
