@@ -7,9 +7,11 @@ import { EmailProvider } from '../contexts/EmailContext';
 import { NotificationProvider } from '../contexts/NotificationContext';
 import './globals.css';
 import { siteMetadata } from '../data/metadata';
+import { Footer } from '@/components/FooterComp';
 
 export const metadata: Metadata = {
     ...siteMetadata,
+    manifest: '/manifest.json',
 };
 
 const inter = Inter({ subsets: ['latin'] });
@@ -28,11 +30,14 @@ export default function RootLayout({
                     <NotificationProvider>
                         <EmailProvider>
                             <div className="relative min-h-screen">
-                                <div className="sticky top-0 z-50 px-10 pt-2">
+                                <div className="sticky top-0 z-50 px-10 pt-2 md:px-20">
                                     <Navigation />
                                 </div>
-                                <div className="relative z-10">
-                                    <main>{children}</main>
+                                <div className="px-10 pt-2">
+                                    <div className="relative z-10">{children}</div>
+                                </div>
+                                <div className="relative bottom-0 z-50 px-10 pb-2">
+                                    <Footer />
                                 </div>
                             </div>
                         </EmailProvider>

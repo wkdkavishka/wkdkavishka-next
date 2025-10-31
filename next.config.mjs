@@ -12,6 +12,7 @@ const nextConfig = {
         unoptimized: true, // Required for static export
     },
     distDir: 'dist',
+    turbopack: {}
 };
 
 const withSerwist = withSerwistInit({

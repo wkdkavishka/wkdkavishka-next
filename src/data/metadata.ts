@@ -53,6 +53,21 @@ export const siteMetadata: Metadata = {
         title: siteName,
         startupImage: [siteData.personal.profileImage],
     },
+    // NEW: Apple PWA icons (correct Next.js API)
+    icons: {
+        apple: [
+            { url: '/images/meta/apple-touch-icon.png', sizes: '180x180' },
+            { url: '/images/meta/android-chrome-192x192.png', sizes: '192x192' },
+            { url: '/images/meta/android-chrome-512x512.png', sizes: '512x512' },
+        ],
+    },
+
+    // Keep the rest of your Apple PWA meta tags (they go in `other` as strings)
+    other: {
+        'apple-mobile-web-app-capable': 'yes',
+        'apple-mobile-web-app-status-bar-style': 'black-translucent', // or 'default'
+        'apple-mobile-web-app-title': siteName,
+    },
     openGraph: {
         type: 'website',
         locale: 'en_US',

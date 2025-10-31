@@ -7,7 +7,7 @@ export function ClientProviders({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         setIsMounted(true);
-        
+
         // Only run this on the client side and after the component has mounted
         const registerSW = async () => {
             try {

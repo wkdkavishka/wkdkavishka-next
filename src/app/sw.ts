@@ -55,6 +55,9 @@ const additionalPrecacheEntries: (PrecacheEntry | string)[] = [
 
     // Profile image
     '/images/profile/profile.webp',
+
+    // NEW: Apple icon
+    '/images/meta/apple-touch-icon.png',
 ];
 
 const serwist = new Serwist({
