@@ -1,36 +1,41 @@
 {
-    "compilerOptions": {
-        "typeRoots": ["./src/types", "./node_modules/@types"],
-        "target": "es2017",
-        "module": "esnext",
-        "moduleResolution": "node",
-        "lib": ["dom", "dom.iterable", "esnext", "webworker"],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "noEmit": true,
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "jsx": "preserve",
-        "incremental": true,
-        "jsxImportSource": "react",
-        "allowImportingTsExtensions": true,
-        "plugins": [
-            {
-                "name": "next"
-            }
-        ],
-        "paths": {
-            "@/*": ["./src/*"]
-        }
-    },
-    "include": [
-        "**/*.ts",
-        "**/*.tsx",
-        ".next/types/**/*.ts", // ".next/types/**/*.ts",
-        "next.config.mjs",
-        "dist/types/**/*.ts"
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext", "webworker"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
     ],
-    "exclude": ["node_modules", "public/sw.js"]
+    "paths": {
+      "@/*": ["./*"]
+    },
+    // custom options
+    "sourceMap": false,
+    // "types": ["@serwist/next/typings"],
+    "typeRoots": ["./node_modules/@types"]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts",
+    "next.config.ts",
+    "dist/types/**/*.ts",
+    "dist/dev/types/**/*.ts"
+  ],
+  "exclude": ["node_modules", "public/sw.js", "public/swe-worker*", "scripts/*"]
 }
