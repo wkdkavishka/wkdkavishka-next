@@ -44,13 +44,23 @@ export default function RootLayout({
         <NotificationProvider>
           <EmailProvider>
             <div className="relative min-h-screen">
-              <div className="sticky top-0 z-50 px-10 pt-2 md:px-20">
-                <Navigation />
+              {/* Desktop Navigation (hidden on mobile) */}
+              <div className="sticky top-0 z-50 hidden px-10 pt-2 md:block md:px-20">
+                <Navigation isMobile={false} />
               </div>
-              <div className="px-10 pt-2">
+
+              {/* Content with bottom padding on mobile to prevent content hiding behind fixed nav */}
+              <div className="px-10 pt-2 pb-24 md:pb-2">
                 <div className="relative z-10">{children}</div>
               </div>
-              <div className="relative bottom-0 z-50 px-10 pb-2">
+
+              {/* Mobile Navigation (fixed at bottom, hidden on desktop) */}
+              <div className="fixed bottom-0 left-0 right-0 z-50 block border-t border-gray-100 bg-white shadow-lg md:hidden">
+                <Navigation isMobile={true} />
+              </div>
+
+              {/* Footer with extra padding on mobile */}
+              <div className="relative bottom-0 z-40 px-10 pb-4 md:pb-2">
                 <Footer />
               </div>
             </div>

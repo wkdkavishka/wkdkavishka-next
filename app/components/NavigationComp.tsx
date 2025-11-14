@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import siteData from "../data/site-data";
 
-export const NavigationComp = () => {
+export const NavigationComp = ({ isMobile }: { isMobile: boolean }) => {
   const [activeSection, setActiveSection] = useState("home");
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
@@ -94,8 +94,14 @@ export const NavigationComp = () => {
 
   return (
     //
+    // <nav
+    //   className="relative mx-auto rounded-4xl border border-purple-300 bg-purple-100/70 shadow-lg backdrop-blur"
+    //   ref={navRef}
+    // >
     <nav
-      className="relative mx-auto rounded-4xl border border-purple-300 bg-purple-100/70 shadow-lg backdrop-blur"
+      className={`relative mx-auto border border-purple-300 bg-purple-100/70 shadow-lg backdrop-blur ${
+        isMobile ? "" : "rounded-4xl" // <-- no rounding on mobile
+      }`}
       ref={navRef}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -179,9 +185,9 @@ export const NavigationComp = () => {
           </div>
 
           {/* Mobile Navigation */}
-          {isOpen && (
+          {/* {isOpen && (
             <div
-              className="fixed inset-0 z-[100] mt-16 md:hidden"
+              className="fixed inset-0 z-100 mt-16 md:hidden"
               onClick={() => setIsOpen(false)}
             >
               <div
@@ -196,6 +202,44 @@ export const NavigationComp = () => {
                       setIsOpen(false);
                     }}
                     className={`block cursor-pointer rounded-2xl px-4 py-3 text-sm font-medium transition-colors ${
+                      activeSection === item.id
+                        ? "bg-white/70 text-purple-600"
+                        : "text-gray-700 hover:bg-white/50 hover:text-purple-600"
+                    }`}
+                  >
+                    {item.label}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )} */}
+
+          {/* Mobile Navigation */}
+          {isOpen && (
+            <div
+              className={`fixed z-100 mt-16 md:hidden ${
+                isMobile
+                  ? "bottom-20 left-1/2 w-[calc(100%-2rem)] -translate-x-1/2"
+                  : "inset-0"
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              <div
+                className={`mx-4 overflow-hidden border border-purple-300 bg-purple-100 shadow-lg ${
+                  isMobile
+                    ? "mb-2 rounded-2xl" // smaller corners + margin from bottom
+                    : "mt-2 rounded-2xl"
+                }`}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {navItems.map((item) => (
+                  <div
+                    key={item.id}
+                    onClick={() => {
+                      scrollToSection(item.id);
+                      setIsOpen(false);
+                    }}
+                    className={`block cursor-pointer px-4 py-3 text-sm font-medium transition-colors ${
                       activeSection === item.id
                         ? "bg-white/70 text-purple-600"
                         : "text-gray-700 hover:bg-white/50 hover:text-purple-600"
