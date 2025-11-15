@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import siteData from "@/app/data/site-data";
+import siteData from "@/data/site-data";
 
 // This is needed for static export
 // This tells Next.js to treat this route as static

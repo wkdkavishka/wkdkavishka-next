@@ -1,5 +1,5 @@
 import React from "react";
-import siteData from "@/app/data/site-data";
+import siteData from "@/data/site-data";
 
 export default function Page() {
   const { services } = siteData;

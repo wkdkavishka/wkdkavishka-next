@@ -1,4 +1,4 @@
-import siteData from "@/app/data/site-data";
+import siteData from "@/data/site-data";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();

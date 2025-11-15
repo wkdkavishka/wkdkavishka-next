@@ -2,10 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
-import siteData, {
-  type PersonalData,
-  type SocialData,
-} from "@/app/data/site-data";
+import siteData, { type PersonalData, type SocialData } from "@/data/site-data";
 
 export default function Page() {
   const Personal: PersonalData = siteData.personal;

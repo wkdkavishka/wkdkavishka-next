@@ -2,8 +2,8 @@
 
 import React from "react";
 import { FiMail, FiPhone } from "react-icons/fi";
-import { useEmail } from "@/app/contexts/EmailContext";
-import siteData from "@/app/data/site-data";
+import { useEmail } from "@/contexts/EmailContext";
+import siteData from "@/data/site-data";
 
 export default function ContactPage() {
   const { showEmailModal } = useEmail();

@@ -10,7 +10,7 @@ import {
   FaQuoteLeft,
   FaTwitter,
 } from "react-icons/fa";
-import type { TeamMemberCarouselCompIntf } from "@/app/data/site-data";
+import type { TeamMemberCarouselCompIntf } from "@/data/site-data";
 
 interface TeamCarouselProps {
   members: TeamMemberCarouselCompIntf[];

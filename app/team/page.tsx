@@ -1,7 +1,7 @@
 "use client";
 
-import { TeamCarouselComp } from "@/app/components/TeamCarouselComp";
-import siteData from "@/app/data/site-data";
+import { TeamCarouselComp } from "@/components/TeamCarouselComp";
+import siteData from "@/data/site-data";
 
 export default function Page() {
   return (

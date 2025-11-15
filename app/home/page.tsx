@@ -3,10 +3,10 @@
 import Image from "next/image";
 import React from "react";
 import { FiMail } from "react-icons/fi";
-import { useEmail } from "@/app/contexts/EmailContext";
-import type { PersonalData, SocialData } from "@/app/data/site-data";
-import siteData from "@/app/data/site-data";
-import { usePWAInstallPrompt } from "@/app/hooks/usePWAInstallPrompt";
+import { useEmail } from "@/contexts/EmailContext";
+import type { PersonalData, SocialData } from "@/data/site-data";
+import siteData from "@/data/site-data";
+import { usePWAInstallPrompt } from "@/hooks/usePWAInstallPrompt";
 
 export default function Page() {
   const personal: PersonalData = siteData.personal;

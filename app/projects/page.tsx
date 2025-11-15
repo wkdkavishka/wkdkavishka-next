@@ -1,5 +1,5 @@
-import { CardComp } from "@/app/components/projectCardComp";
-import siteData from "@/app/data/site-data";
+import { CardComp } from "@/components/projectCardComp";
+import siteData from "@/data/site-data";
 
 export default function Page() {
   const { projects } = siteData;
@@ -34,7 +34,7 @@ export default function Page() {
       className="min-h-screen items-center justify-center px-6 py-20"
     >
       <div className="mx-auto flex max-w-6xl flex-col items-center">
-        <h2 className="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-center text-4xl font-bold text-transparent md:text-5xl">
+        <h2 className="mb-4 bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-center text-4xl font-bold text-transparent md:text-5xl">
           Featured Projects
         </h2>
         <p className="mx-auto mb-12 max-w-2xl text-center text-lg text-gray-600">

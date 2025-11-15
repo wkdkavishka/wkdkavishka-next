@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import siteData from "@/app/data/site-data";
+import siteData from "@/data/site-data";
 
 export const siteUrl = siteData.siteUrl;
 export const siteName = siteData.personal.name;

@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import About from "@/app/about/page";
-import { EmailModal } from "@/app/components/EmailComp";
 import Contact from "@/app/contact/page";
 import Home from "@/app/home/page";
-import { ScrollFadeIn } from "@/app/hooks/ScrollFadeIn";
 import Projects from "@/app/projects/page";
 import Skills from "@/app/services/page";
 import TeamCarousel from "@/app/team/page";
+import { EmailModal } from "@/components/EmailComp";
+import { ScrollFadeIn } from "@/hooks/ScrollFadeIn";
 
 // This is the main page component that renders all sections of the portfolio.
 // Each section is a separate component for better organization and maintainability.
