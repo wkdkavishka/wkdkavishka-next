@@ -1,5 +1,7 @@
 // public/sw.js
-const CACHE_NAME = `pwa-cache-001`;
+//! CACHE_NAME is updated to the date and time
+//! this must be 4th line of the file
+const CACHE_NAME = `pwa-cache-2025-11-15T18:41:12.992Z`;
 const OFFLINE_PAGE = "/offline.html";
 
 const PRECACHE_ASSETS = [
@@ -45,7 +47,7 @@ const PRECACHE_ASSETS = [
 ];
 
 let installSuccess = true;
-let failedAssets = [];
+const failedAssets = [];
 
 // Enhanced: Log failed assets
 async function safeCacheAddAll(cache, urls) {
@@ -56,7 +58,9 @@ async function safeCacheAddAll(cache, urls) {
         await cache.put(url, response.clone());
         console.log(`[SW] Cached: ${url}`);
       } else {
-        console.error(`[SW] Failed to cache: ${url} → ${response.status} ${response.statusText}`);
+        console.error(
+          `[SW] Failed to cache: ${url} → ${response.status} ${response.statusText}`,
+        );
         failedAssets.push({ url, status: response.status });
         installSuccess = false;
       }
@@ -72,7 +76,8 @@ async function safeCacheAddAll(cache, urls) {
 self.addEventListener("install", (event) => {
   console.log("[SW] Installing service worker...");
   event.waitUntil(
-    caches.open(CACHE_NAME)
+    caches
+      .open(CACHE_NAME)
       .then((cache) => safeCacheAddAll(cache, PRECACHE_ASSETS))
       .then(() => {
         if (!installSuccess) {
@@ -82,10 +87,10 @@ self.addEventListener("install", (event) => {
         }
         return self.skipWaiting();
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("[SW] Install failed:", err);
         installSuccess = false;
-      })
+      }),
   );
 });
 
@@ -93,23 +98,27 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   console.log("[SW] Activating...");
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter((key) => key !== CACHE_NAME)
-          .map((key) => {
-            console.log(`[SW] Deleting old cache: ${key}`);
-            return caches.delete(key);
-          })
+    caches
+      .keys()
+      .then((keys) =>
+        Promise.all(
+          keys
+            .filter((key) => key !== CACHE_NAME)
+            .map((key) => {
+              console.log(`[SW] Deleting old cache: ${key}`);
+              return caches.delete(key);
+            }),
+        ),
       )
-    ).then(() => self.clients.claim())
+      .then(() => self.clients.claim()),
   );
 });
 
 // FETCH
 self.addEventListener("fetch", (event) => {
   const { request } = event;
-  if (request.method !== "GET" || request.url.includes("chrome-extension")) return;
+  if (request.method !== "GET" || request.url.includes("chrome-extension"))
+    return;
 
   event.respondWith(
     fetch(request)
@@ -126,7 +135,7 @@ self.addEventListener("fetch", (event) => {
           console.log(`[SW] Offline fallback: ${request.url}`);
           return caches.match(OFFLINE_PAGE);
         });
-      })
+      }),
   );
 });
 

@@ -47,20 +47,14 @@ export default function RootLayout({
               <div className="sticky top-0 z-50 hidden px-10 pt-2 md:block md:px-20">
                 <Navigation isMobile={false} />
               </div>
-
               {/* Mobile Navigation — fixed at absolute bottom, always visible */}
               <div className="fixed bottom-0 left-0 right-0 z-50 block border-t border-gray-100 bg-white shadow-lg md:hidden">
                 <Navigation isMobile={true} />
               </div>
-
               {/* Scrollable Content Area (includes footer) */}
               <main className="flex-1 overflow-y-auto px-10 pt-2 pb-20 md:pb-2">
                 <div className="relative z-10">{children}</div>
-                {/* <div className="px-0 pb-4 md:pb-2">
-                  <Footer />
-                </div> */}
               </main>
-
               {/* Footer with extra padding on mobile */}
               <div className="relative bottom-0 z-40 px-10 pb-20 md:pb-2">
                 <Footer />
