@@ -7,6 +7,7 @@ import { NotificationProvider } from "@/contexts/NotificationContext";
 import "./globals.css";
 import { Footer } from "@/components/FooterComp";
 import { siteMetadata } from "@/data/metadata";
+import RegisterSW from "@/utils/RegisterSW";
 
 export const metadata: Metadata = {
   ...siteMetadata,
@@ -68,7 +69,7 @@ export default function RootLayout({
           </EmailProvider>
         </NotificationProvider>
 
-        {/* <RegisterSW /> */}
+        <RegisterSW />
       </body>
     </html>
   );
