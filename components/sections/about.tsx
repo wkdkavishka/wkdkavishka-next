@@ -3,9 +3,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-import siteData from "@/data/site-data";
+import type { PersonalData } from "@/lib/schema";
 
-export function About() {
+export function About({ personalData }: { personalData: PersonalData }) {
+	const yearsExperience = new Date().getFullYear() - personalData.startYear;
+
 	return (
 		<section
 			id="about"
@@ -37,8 +39,8 @@ export function About() {
 					className="relative aspect-square overflow-hidden rounded-xl bg-muted"
 				>
 					<Image
-						src={siteData.personal.profileImage}
-						alt={`${siteData.personal.name} Profile`}
+						src={personalData.profileImage}
+						alt={`${personalData.name} Profile`}
 						fill
 						className="object-cover"
 					/>
@@ -50,7 +52,7 @@ export function About() {
 					transition={{ duration: 0.5, delay: 0.2 }}
 					className="flex flex-col gap-4"
 				>
-					{siteData.personal.about.map((paragraph, index) => (
+					{personalData.about.map((paragraph, index) => (
 						<p key={index} className="text-lg text-muted-foreground">
 							{paragraph}
 						</p>
@@ -59,7 +61,7 @@ export function About() {
 					<div className="grid grid-cols-2 gap-4 mt-4">
 						<Card>
 							<CardContent className="p-4 flex flex-col items-center justify-center text-center">
-								<span className="text-3xl font-bold">2+</span>
+								<span className="text-3xl font-bold">{yearsExperience}+</span>
 								<span className="text-sm text-muted-foreground">
 									Years Experience
 								</span>

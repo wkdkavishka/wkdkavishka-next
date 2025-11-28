@@ -4,37 +4,41 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { siteMetadata, viewport as siteViewport } from "@/data/site-metadata";
 
 const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+	variable: "--font-inter",
+	subsets: ["latin"],
 });
 
 const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
+	variable: "--font-outfit",
+	subsets: ["latin"],
 });
 
 export const metadata = siteMetadata;
 export const viewport = siteViewport;
 
+import { ClerkProvider } from "@clerk/nextjs";
+
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${outfit.variable} antialiased bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+	return (
+		<ClerkProvider>
+			<html lang="en" suppressHydrationWarning>
+				<body
+					className={`${inter.variable} ${outfit.variable} antialiased bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground`}
+				>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						{children}
+					</ThemeProvider>
+				</body>
+			</html>
+		</ClerkProvider>
+	);
 }

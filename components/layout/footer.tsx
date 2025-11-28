@@ -1,8 +1,16 @@
+"use client";
+
 import { Mail } from "lucide-react";
 import Link from "next/link";
-import siteData from "@/data/site-data";
+import type { PersonalData, SocialLink } from "@/lib/schema";
 
-export function Footer() {
+export function Footer({
+	personalData,
+	socialLinks,
+}: {
+	personalData: PersonalData;
+	socialLinks: SocialLink[];
+}) {
 	return (
 		<footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
 			<div className="container mx-auto flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0 px-4 md:px-6">
@@ -15,11 +23,11 @@ export function Footer() {
 							rel="noreferrer"
 							className="font-medium underline underline-offset-4"
 						>
-							WKDKavishka
+							{personalData.name}
 						</a>
 						. The source code is available on{" "}
 						<a
-							href="#"
+							href={socialLinks.find((l) => l.name === "GitHub")?.url || "#"}
 							target="_blank"
 							rel="noreferrer"
 							className="font-medium underline underline-offset-4"
@@ -30,7 +38,7 @@ export function Footer() {
 					</p>
 				</div>
 				<div className="flex items-center gap-4">
-					{siteData.personal.socialLinks.map((link) => (
+					{socialLinks.map((link) => (
 						<Link
 							key={link.name}
 							href={link.url}
@@ -38,12 +46,13 @@ export function Footer() {
 							rel="noreferrer"
 							className="text-muted-foreground hover:text-foreground transition-colors"
 						>
-							<link.icon className="h-5 w-5" />
-							<span className="sr-only">{link.name}</span>
+							{/* We don't have dynamic icons easily unless we map them or use a library that renders from string */}
+							{/* For now, let's just show the name or use a generic icon if we can't map */}
+							<span className="text-sm font-medium">{link.name}</span>
 						</Link>
 					))}
 					<Link
-						href={`mailto:${siteData.personal.email}`}
+						href={`mailto:${personalData.email}`}
 						className="text-muted-foreground hover:text-foreground transition-colors"
 					>
 						<Mail className="h-5 w-5" />

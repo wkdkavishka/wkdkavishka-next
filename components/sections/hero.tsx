@@ -2,11 +2,18 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
+import Link from "next/link";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
-import siteData from "@/data/site-data";
+import type { PersonalData, SocialLink } from "@/lib/schema";
 
-export function Hero() {
+export function Hero({
+	personalData,
+	socialLinks,
+}: {
+	personalData: PersonalData;
+	socialLinks: SocialLink[];
+}) {
 	return (
 		<section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background pt-16 md:pt-0">
 			{/* Background Elements */}
@@ -34,10 +41,9 @@ export function Hero() {
 						transition={{ duration: 0.5, delay: 0.1 }}
 						className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent pb-5 bg-gradient-to-r from-foreground to-foreground/70"
 					>
-						Hi, I'm{" "}
-						<span className="text-primary">{siteData.personal.name}</span>
+						Hi, I'm <span className="text-primary">{personalData.name}</span>
 						<br />
-						{siteData.personal.title}
+						{personalData.title}
 					</motion.h1>
 					<motion.p
 						initial={{ opacity: 0, y: 20 }}
@@ -45,8 +51,7 @@ export function Hero() {
 						transition={{ duration: 0.5, delay: 0.2 }}
 						className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed"
 					>
-						I build accessible, pixel-perfect, performant, and modern web
-						experiences.
+						{personalData.description}
 					</motion.p>
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
@@ -54,11 +59,15 @@ export function Hero() {
 						transition={{ duration: 0.5, delay: 0.3 }}
 						className="flex flex-col gap-2 min-[400px]:flex-row"
 					>
-						<Button size="lg" className="gap-2">
-							Hire Me <ArrowRight className="h-4 w-4" />
+						<Button size="lg" className="gap-2" asChild>
+							<Link href="#contact">
+								Hire Me <ArrowRight className="h-4 w-4" />
+							</Link>
 						</Button>
-						<Button size="lg" variant="outline" className="gap-2">
-							Download CV <Download className="h-4 w-4" />
+						<Button size="lg" variant="outline" className="gap-2" asChild>
+							<Link href={personalData.resumeUrl} target="_blank">
+								Download CV <Download className="h-4 w-4" />
+							</Link>
 						</Button>
 					</motion.div>
 				</div>
