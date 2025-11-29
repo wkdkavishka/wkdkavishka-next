@@ -62,7 +62,7 @@ export function PersonalForm({ initialData }: { initialData: PersonalData }) {
 					</div>
 				)}
 
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+				<div className="space-y-4 w-2xl lg:w-4xl p-x-2">
 					<FormField
 						control={form.control}
 						name="name"
@@ -148,6 +148,48 @@ export function PersonalForm({ initialData }: { initialData: PersonalData }) {
 						)}
 					/>
 				</div>
+
+				<FormField
+					control={form.control}
+					name="resumeUrl"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Resume / CV</FormLabel>
+							<FormControl>
+								<div className="space-y-2">
+									<Input
+										type="file"
+										accept=".pdf,.doc,.docx"
+										onChange={(e) => {
+											const file = e.target.files?.[0];
+											if (file) {
+												const reader = new FileReader();
+												reader.onloadend = () => {
+													field.onChange(reader.result as string);
+												};
+												reader.readAsDataURL(file);
+											}
+										}}
+									/>
+									{field.value && (
+										<div className="text-sm text-muted-foreground">
+											<span className="mr-2">Current CV:</span>
+											<a
+												href={field.value}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="text-primary hover:underline"
+											>
+												View CV
+											</a>
+										</div>
+									)}
+								</div>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
 
 				<FormField
 					control={form.control}

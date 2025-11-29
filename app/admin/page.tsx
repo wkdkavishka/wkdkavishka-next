@@ -38,7 +38,7 @@ export default async function AdminPage() {
 	}
 
 	return (
-		<div className="space-y-8">
+		<div className="space-y-8 max-w-5xl mx-auto">
 			<div className="flex flex-col gap-2">
 				<h2 className="text-3xl font-bold tracking-tight flex items-center gap-2">
 					<LayoutDashboard className="h-8 w-8" /> Dashboard
