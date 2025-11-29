@@ -2,16 +2,16 @@
 
 import { revalidatePath } from "next/cache";
 import type { z } from "zod";
-import { db } from "@/lib/db";
+import { db, updateLastModified } from "@/lib/db";
 import {
-	type PersonalData,
-	type Project,
-	personalDataSchema,
-	projectSchema,
-	type Skill,
-	type SocialLink,
-	skillSchema,
-	socialLinkSchema,
+    type PersonalData,
+    type Project,
+    personalDataSchema,
+    projectSchema,
+    type Skill,
+    type SocialLink,
+    skillSchema,
+    socialLinkSchema,
 } from "@/lib/schema";
 
 // --- Fetch Actions ---
@@ -103,6 +103,7 @@ export async function updatePersonalData(
 		],
 	});
 
+	await updateLastModified();
 	revalidatePath("/");
 	revalidatePath("/admin");
 	return { success: true };
@@ -128,6 +129,7 @@ export async function updateService(data: z.infer<typeof skillSchema>) {
 		});
 	}
 
+	await updateLastModified();
 	revalidatePath("/");
 	revalidatePath("/admin");
 	return { success: true };
@@ -138,6 +140,7 @@ export async function deleteService(id: number) {
 		sql: `DELETE FROM services WHERE id = ?`,
 		args: [id],
 	});
+	await updateLastModified();
 	revalidatePath("/");
 	revalidatePath("/admin");
 	return { success: true };
@@ -180,6 +183,7 @@ export async function updateProject(data: z.infer<typeof projectSchema>) {
 		});
 	}
 
+	await updateLastModified();
 	revalidatePath("/");
 	revalidatePath("/admin");
 	return { success: true };
@@ -190,6 +194,7 @@ export async function deleteProject(id: number) {
 		sql: `DELETE FROM projects WHERE id = ?`,
 		args: [id],
 	});
+	await updateLastModified();
 	revalidatePath("/");
 	revalidatePath("/admin");
 	return { success: true };
@@ -213,6 +218,7 @@ export async function updateSocialLink(data: z.infer<typeof socialLinkSchema>) {
 		});
 	}
 
+	await updateLastModified();
 	revalidatePath("/");
 	revalidatePath("/admin");
 	return { success: true };
@@ -223,6 +229,7 @@ export async function deleteSocialLink(id: number) {
 		sql: `DELETE FROM social_links WHERE id = ?`,
 		args: [id],
 	});
+	await updateLastModified();
 	revalidatePath("/");
 	revalidatePath("/admin");
 	return { success: true };

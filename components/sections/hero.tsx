@@ -11,7 +11,6 @@ import {
 	MessageCircle,
 } from "lucide-react";
 import Link from "next/link";
-import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import type { PersonalData, SocialLink } from "@/lib/schema";
 
@@ -39,9 +38,6 @@ export function Hero({
 			<div className="absolute left-0 top-0 -z-10 h-[310px] w-[310px] rounded-full bg-primary/20 blur-[100px]"></div>
 			<div className="absolute right-0 bottom-0 -z-10 h-[310px] w-[310px] rounded-full bg-secondary/20 blur-[100px]"></div>
 
-			<div className="absolute top-4 right-4 z-50">
-				<ModeToggle />
-			</div>
 
 			<div className="container mx-auto px-4 md:px-6">
 				<div className="flex flex-col items-center gap-4 text-center">

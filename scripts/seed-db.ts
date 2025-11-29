@@ -1,6 +1,6 @@
 import { createClient } from "@libsql/client";
 import * as dotenv from "dotenv";
-import siteData from "../data/site-data";
+// import siteData from "../data/site-data";
 
 dotenv.config({ path: ".env" });
 
@@ -77,6 +77,10 @@ async function seed() {
 		// 2. Insert Data
 		console.log("Inserting data...");
 
+		/* 
+    // Commented out as site-data.ts is removed. 
+    // Use this script only for schema creation or update with new data source if needed.
+    
 		// Personal Data
 		const personal = siteData.personal;
 		const personalResult = await db.execute({
@@ -102,14 +106,6 @@ async function seed() {
 
 		// Social Links
 		for (const link of personal.socialLinks) {
-			// Extract icon name from function/component (e.g., "FaGithub")
-			// Since siteData imports icons, we need to handle this carefully.
-			// For now, we'll assume we can get the name or map it manually if needed.
-			// In site-data.ts, icons are passed as components. We need to store string names.
-			// We will use a simple mapping or just store the name if we can infer it.
-			// Since we can't easily get the name from the function at runtime in this script without complex parsing,
-			// we will map based on the known icons in site-data.ts for this seed.
-
 			let iconName = "FaLink"; // Default
 			if (link.name === "GitHub") iconName = "FaGithub";
 			if (link.name === "LinkedIn") iconName = "FaLinkedin";
@@ -152,8 +148,9 @@ async function seed() {
 				],
 			});
 		}
+    */
 
-		console.log("✅ Seeding completed successfully!");
+		console.log("✅ Seeding completed successfully (Schema only)!");
 	} catch (error) {
 		console.error("❌ Seeding failed:", error);
 		process.exit(1);
@@ -161,3 +158,4 @@ async function seed() {
 }
 
 seed();
+

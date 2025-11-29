@@ -15,3 +15,46 @@ export const db = createClient({
 	url,
 	authToken,
 });
+
+// Initialize site_metadata table on first import
+async function initMetadataTable() {
+	try {
+		await db.execute(`
+			CREATE TABLE IF NOT EXISTS site_metadata (
+				id INTEGER PRIMARY KEY DEFAULT 1,
+				last_modified TEXT NOT NULL DEFAULT (datetime('now')),
+				CHECK (id = 1)
+			)
+		`);
+		// Insert initial row if it doesn't exist
+		await db.execute(`
+			INSERT OR IGNORE INTO site_metadata (id, last_modified) 
+			VALUES (1, datetime('now'))
+		`);
+	} catch (error) {
+		console.error("Failed to initialize site_metadata table:", error);
+	}
+}
+
+// Initialize on module load
+initMetadataTable();
+
+/**
+ * Get the last modified timestamp for site data
+ * Used for cache invalidation
+ */
+export async function getLastModified(): Promise<string> {
+	const result = await db.execute("SELECT last_modified FROM site_metadata WHERE id = 1");
+	return (result.rows[0]?.last_modified as string) || new Date().toISOString();
+}
+
+/**
+ * Update the last modified timestamp
+ * Should be called after any create/update/delete operation
+ */
+export async function updateLastModified(): Promise<void> {
+	await db.execute({
+		sql: "UPDATE site_metadata SET last_modified = datetime('now') WHERE id = 1",
+		args: [],
+	});
+}
