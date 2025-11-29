@@ -62,7 +62,8 @@ export async function getServices(): Promise<Skill[]> {
 export async function getProjects(): Promise<Project[]> {
 	const result = await db.execute("SELECT * FROM projects");
 	return result.rows.map((row) => ({
-		id: row.id as string,
+		id: row.id as number,
+		slug: row.slug as string,
 		title: row.title as string,
 		description: row.description as string,
 		tags: JSON.parse(row.tags as string),
@@ -145,18 +146,14 @@ export async function deleteService(id: number) {
 export async function updateProject(data: z.infer<typeof projectSchema>) {
 	const validated = projectSchema.parse(data);
 
-	// Check if project exists
-	const existing = await db.execute({
-		sql: "SELECT id FROM projects WHERE id = ?",
-		args: [validated.id],
-	});
-
-	if (existing.rows.length > 0) {
+	if (validated.id) {
+		// Update existing project
 		await db.execute({
 			sql: `UPDATE projects SET 
-        title = ?, description = ?, tags = ?, link = ?, image = ?, github = ? 
+        slug = ?, title = ?, description = ?, tags = ?, link = ?, image = ?, github = ? 
         WHERE id = ?`,
 			args: [
+				validated.slug,
 				validated.title,
 				validated.description,
 				JSON.stringify(validated.tags),
@@ -167,11 +164,12 @@ export async function updateProject(data: z.infer<typeof projectSchema>) {
 			],
 		});
 	} else {
+		// Insert new project
 		await db.execute({
-			sql: `INSERT INTO projects (id, title, description, tags, link, image, github) 
+			sql: `INSERT INTO projects (slug, title, description, tags, link, image, github) 
         VALUES (?, ?, ?, ?, ?, ?, ?)`,
 			args: [
-				validated.id,
+				validated.slug,
 				validated.title,
 				validated.description,
 				JSON.stringify(validated.tags),
@@ -187,7 +185,7 @@ export async function updateProject(data: z.infer<typeof projectSchema>) {
 	return { success: true };
 }
 
-export async function deleteProject(id: string) {
+export async function deleteProject(id: number) {
 	await db.execute({
 		sql: `DELETE FROM projects WHERE id = ?`,
 		args: [id],
@@ -228,4 +226,38 @@ export async function deleteSocialLink(id: number) {
 	revalidatePath("/");
 	revalidatePath("/admin");
 	return { success: true };
+}
+
+export async function uploadImage(formData: FormData) {
+	const file = formData.get("file") as File;
+	if (!file) {
+		throw new Error("No file provided");
+	}
+
+	const arrayBuffer = await file.arrayBuffer();
+	const buffer = Buffer.from(arrayBuffer);
+
+	// Dynamic import to avoid edge runtime issues if any, though we are in node runtime here
+	const cloudinary = (await import("@/lib/cloudinary")).default;
+
+	return new Promise<{ secure_url: string }>((resolve, reject) => {
+		cloudinary.uploader
+			.upload_stream(
+				{
+					folder: "wkdkavishka/projects",
+				},
+				(error, result) => {
+					if (error) {
+						reject(error);
+						return;
+					}
+					if (!result) {
+						reject(new Error("Upload failed"));
+						return;
+					}
+					resolve({ secure_url: result.secure_url });
+				},
+			)
+			.end(buffer);
+	});
 }

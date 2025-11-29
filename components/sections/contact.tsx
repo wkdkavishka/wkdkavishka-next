@@ -1,9 +1,29 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone } from "lucide-react";
+import {
+	Facebook,
+	Github,
+	Globe,
+	Linkedin,
+	Mail,
+	MapPin,
+	MessageCircle,
+	Phone,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import type { PersonalData, SocialLink } from "@/lib/schema";
 
 export function Contact({
@@ -13,6 +33,16 @@ export function Contact({
 	personalData: PersonalData;
 	socialLinks: SocialLink[];
 }) {
+	const getIcon = (name: string) => {
+		const lowerName = name.toLowerCase();
+		if (lowerName.includes("linkedin")) return Linkedin;
+		if (lowerName.includes("github")) return Github;
+		if (lowerName.includes("facebook")) return Facebook;
+		if (lowerName.includes("whatsapp")) return MessageCircle;
+		if (lowerName.includes("instagram")) return Globe; // Fallback or specific
+		return Globe;
+	};
+
 	return (
 		<section
 			id="contact"
@@ -36,52 +66,128 @@ export function Contact({
 			</motion.div>
 
 			<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.5, delay: 0.1 }}
-					className="flex flex-col items-center gap-2 text-center p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
+				<Dialog>
+					<DialogTrigger asChild>
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.5, delay: 0.1 }}
+							className="flex flex-col items-center gap-2 text-center p-6 rounded-lg border bg-card text-card-foreground shadow-sm hover:border-primary/50 transition-colors cursor-pointer"
+						>
+							<Mail className="h-10 w-10 text-primary mb-2" />
+							<h3 className="font-semibold text-lg">Email</h3>
+							<p className="text-sm text-muted-foreground mb-4">
+								Feel free to send me an email.
+							</p>
+							<Button variant="link" asChild>
+								<span>{personalData.email}</span>
+							</Button>
+						</motion.div>
+					</DialogTrigger>
+					<DialogContent className="sm:max-w-[425px]">
+						<DialogHeader>
+							<DialogTitle>Send a Message</DialogTitle>
+							<DialogDescription>
+								Send me a message directly or use your email client.
+							</DialogDescription>
+						</DialogHeader>
+						<div className="grid gap-4 py-4">
+							<div className="grid gap-2">
+								<Label htmlFor="name">Name</Label>
+								<Input id="name" placeholder="Your name" />
+							</div>
+							<div className="grid gap-2">
+								<Label htmlFor="email">Email</Label>
+								<Input id="email" type="email" placeholder="Your email" />
+							</div>
+							<div className="grid gap-2">
+								<Label htmlFor="message">Message</Label>
+								<Textarea id="message" placeholder="Your message" />
+							</div>
+							<Button type="submit" className="w-full">
+								Send Message
+							</Button>
+							<div className="relative">
+								<div className="absolute inset-0 flex items-center">
+									<span className="w-full border-t" />
+								</div>
+								<div className="relative flex justify-center text-xs uppercase">
+									<span className="bg-background px-2 text-muted-foreground">
+										Or
+									</span>
+								</div>
+							</div>
+							<Button variant="outline" className="w-full" asChild>
+								<Link href={`mailto:${personalData.email}`}>
+									Open Mail Client
+								</Link>
+							</Button>
+						</div>
+					</DialogContent>
+				</Dialog>
+
+				<Link
+					href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+						personalData.location,
+					)}`}
+					target="_blank"
 				>
-					<Mail className="h-10 w-10 text-primary mb-2" />
-					<h3 className="font-semibold text-lg">Email</h3>
-					<p className="text-sm text-muted-foreground mb-4">
-						Feel free to send me an email.
-					</p>
-					<Button variant="link" asChild>
-						<Link href={`mailto:${personalData.email}`}>
-							{personalData.email}
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.5, delay: 0.2 }}
+						className="flex flex-col items-center gap-2 text-center p-6 rounded-lg border bg-card text-card-foreground shadow-sm hover:border-primary/50 transition-colors"
+					>
+						<MapPin className="h-10 w-10 text-primary mb-2" />
+						<h3 className="font-semibold text-lg">Location</h3>
+						<p className="text-sm text-muted-foreground mb-4">Based in</p>
+						<span className="text-sm font-medium">{personalData.location}</span>
+					</motion.div>
+				</Link>
+
+				<Link href={`tel:${personalData.phone}`}>
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.5, delay: 0.3 }}
+						className="flex flex-col items-center gap-2 text-center p-6 rounded-lg border bg-card text-card-foreground shadow-sm hover:border-primary/50 transition-colors"
+					>
+						<Phone className="h-10 w-10 text-primary mb-2" />
+						<h3 className="font-semibold text-lg">Phone</h3>
+						<p className="text-sm text-muted-foreground mb-4">Call me at</p>
+						<Button variant="link" asChild>
+							<span>{personalData.phone}</span>
+						</Button>
+					</motion.div>
+				</Link>
+
+				{socialLinks.map((link, index) => {
+					const Icon = getIcon(link.name);
+					return (
+						// biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
+						<Link href={link.url} target="_blank" key={link.name}>
+							<motion.div
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true }}
+								transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+								className="flex flex-col items-center gap-2 text-center p-6 rounded-lg border bg-card text-card-foreground shadow-sm hover:border-primary/50 transition-colors"
+							>
+								<Icon className="h-10 w-10 text-primary mb-2" />
+								<h3 className="font-semibold text-lg">{link.name}</h3>
+								<p className="text-sm text-muted-foreground mb-4">
+									Connect on {link.name}
+								</p>
+								<Button variant="link" asChild>
+									<span>View Profile</span>
+								</Button>
+							</motion.div>
 						</Link>
-					</Button>
-				</motion.div>
-
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.5, delay: 0.2 }}
-					className="flex flex-col items-center gap-2 text-center p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
-				>
-					<MapPin className="h-10 w-10 text-primary mb-2" />
-					<h3 className="font-semibold text-lg">Location</h3>
-					<p className="text-sm text-muted-foreground mb-4">Based in</p>
-					<span className="text-sm font-medium">{personalData.location}</span>
-				</motion.div>
-
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.5, delay: 0.3 }}
-					className="flex flex-col items-center gap-2 text-center p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
-				>
-					<Phone className="h-10 w-10 text-primary mb-2" />
-					<h3 className="font-semibold text-lg">Phone</h3>
-					<p className="text-sm text-muted-foreground mb-4">Call me at</p>
-					<Button variant="link" asChild>
-						<Link href={`tel:${personalData.phone}`}>{personalData.phone}</Link>
-					</Button>
-				</motion.div>
+					);
+				})}
 			</div>
 		</section>
 	);

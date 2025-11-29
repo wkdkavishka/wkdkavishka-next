@@ -26,7 +26,7 @@ export function ProjectsManager({
 		undefined,
 	);
 
-	const handleDelete = async (id: string) => {
+	const handleDelete = async (id: number) => {
 		if (confirm("Are you sure you want to delete this project?")) {
 			await deleteProject(id);
 		}
@@ -77,7 +77,7 @@ export function ProjectsManager({
 									variant="ghost"
 									size="icon"
 									className="text-destructive"
-									onClick={() => handleDelete(project.id)}
+									onClick={() => project.id && handleDelete(project.id)}
 								>
 									<Trash2 className="h-4 w-4" />
 								</Button>

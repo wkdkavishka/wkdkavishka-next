@@ -8,9 +8,23 @@ export const skillSchema = z.object({
 });
 
 export const projectSchema = z.object({
-	id: z.string().min(1, "ID is required"),
+	id: z.number().optional(),
+	slug: z.string().min(1, "Slug is required"),
 	title: z.string().min(1, "Title is required"),
-	description: z.string().min(1, "Description is required"),
+	description: z
+		.string()
+		.min(1, "Description is required")
+		.refine(
+			(val) => {
+				const lines = val
+					.split("\n")
+					.filter((line) => line.trim() !== "").length;
+				return lines === 4;
+			},
+			{
+				message: "Description must be exactly 4 lines",
+			},
+		),
 	tags: z.array(z.string()).min(1, "At least one tag is required"),
 	link: z.string().url("Invalid URL"),
 	image: z.array(z.string()).min(1, "At least one image is required"),
