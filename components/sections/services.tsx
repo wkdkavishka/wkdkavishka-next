@@ -2,12 +2,12 @@
 
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import type { Skill } from "@/lib/schema";
+import type { Service } from "@/lib/schema";
 
-export function Skills({ skills }: { skills: Skill[] }) {
+export function Services({ services }: { services: Service[] }) {
 	return (
 		<section
-			id="skills"
+			id="services"
 			className="container mx-auto py-24 sm:py-32 px-4 md:px-6 flex flex-col items-center"
 		>
 			<motion.div
@@ -28,7 +28,7 @@ export function Skills({ skills }: { skills: Skill[] }) {
 			</motion.div>
 
 			<div className="flex flex-wrap justify-center gap-4 max-w-4xl">
-				{skills.map((skill, index) => (
+				{services.map((service, index) => (
 					<motion.div
 						key={index}
 						initial={{ opacity: 0, scale: 0.9 }}
@@ -38,7 +38,7 @@ export function Skills({ skills }: { skills: Skill[] }) {
 					>
 						<Card className="border-muted-foreground/20 hover:border-primary/50 transition-colors">
 							<CardContent className="p-4 flex items-center justify-center">
-								<span className="font-medium">{skill.name}</span>
+								<span className="font-medium">{service.name}</span>
 							</CardContent>
 						</Card>
 					</motion.div>

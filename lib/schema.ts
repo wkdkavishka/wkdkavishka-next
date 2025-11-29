@@ -1,10 +1,10 @@
 import { z } from "zod";
 
-export const skillSchema = z.object({
+export const serviceSchema = z.object({
 	id: z.number().optional(),
 	name: z.string().min(1, "Name is required"),
 	description: z.string().min(1, "Description is required"),
-	icon: z.string().min(1, "Icon name is required"), // Storing icon name as string
+	icon: z.string().min(1, "Icon is required"),
 });
 
 export const projectSchema = z.object({
@@ -55,7 +55,7 @@ export const personalDataSchema = z.object({
 	startYear: z.number().int().positive("Start year must be positive"),
 });
 
-export type Skill = z.infer<typeof skillSchema>;
+export type Service = z.infer<typeof serviceSchema>;
 export type Project = z.infer<typeof projectSchema>;
 export type SocialLink = z.infer<typeof socialLinkSchema>;
 export type PersonalData = z.infer<typeof personalDataSchema>;

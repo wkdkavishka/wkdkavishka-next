@@ -1,77 +1,93 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { unstable_cache } from "next/cache";
 import type { z } from "zod";
 import { db, updateLastModified } from "@/lib/db";
 import {
-    type PersonalData,
-    type Project,
-    personalDataSchema,
-    projectSchema,
-    type Skill,
-    type SocialLink,
-    skillSchema,
-    socialLinkSchema,
+	type PersonalData,
+	type Project,
+	personalDataSchema,
+	projectSchema,
+	type Service,
+	type SocialLink,
+	serviceSchema,
+	socialLinkSchema,
 } from "@/lib/schema";
 
 // --- Fetch Actions ---
 
-export async function getPersonalData(): Promise<PersonalData | null> {
-	const result = await db.execute("SELECT * FROM personal_data LIMIT 1");
-	if (result.rows.length === 0) return null;
+export const getPersonalData = unstable_cache(
+	async (): Promise<PersonalData | null> => {
+		const result = await db.execute("SELECT * FROM personal_data LIMIT 1");
+		if (result.rows.length === 0) return null;
 
-	const row = result.rows[0];
-	return {
-		id: row.id as number,
-		name: row.name as string,
-		title: row.title as string,
-		location: row.location as string,
-		email: row.email as string,
-		phone: row.phone as string,
-		profileImage: row.profile_image as string,
-		about: JSON.parse(row.about as string),
-		getInTouch: row.get_in_touch as string,
-		resumeUrl: row.resume_url as string,
-		skills: JSON.parse(row.skills as string),
-		description: row.description as string,
-		socialLinks: [], // We'll fetch this separately or join, but for now let's just return empty and handle in component or fetch separately
-		startYear: row.start_year as number,
-	};
-}
+		const row = result.rows[0];
+		return {
+			id: row.id as number,
+			name: row.name as string,
+			title: row.title as string,
+			location: row.location as string,
+			email: row.email as string,
+			phone: row.phone as string,
+			profileImage: row.profile_image as string,
+			about: JSON.parse(row.about as string),
+			getInTouch: row.get_in_touch as string,
+			resumeUrl: row.resume_url as string,
+			skills: JSON.parse(row.skills as string),
+			description: row.description as string,
+			socialLinks: [], // We'll fetch this separately or join, but for now let's just return empty and handle in component or fetch separately
+			startYear: row.start_year as number,
+		};
+	},
+	['personal-data'],
+	{ tags: ['portfolio-data'], revalidate: 3600 }
+);
 
-export async function getSocialLinks(): Promise<SocialLink[]> {
-	const result = await db.execute("SELECT * FROM social_links");
-	return result.rows.map((row) => ({
-		id: row.id as number,
-		name: row.name as string,
-		url: row.url as string,
-		icon: row.icon as string,
-	}));
-}
+export const getSocialLinks = unstable_cache(
+	async (): Promise<SocialLink[]> => {
+		const result = await db.execute("SELECT * FROM social_links");
+		return result.rows.map((row) => ({
+			id: row.id as number,
+			name: row.name as string,
+			url: row.url as string,
+			icon: row.icon as string,
+		}));
+	},
+	['social-links'],
+	{ tags: ['portfolio-data'], revalidate: 3600 }
+);
 
-export async function getServices(): Promise<Skill[]> {
-	const result = await db.execute("SELECT * FROM services");
-	return result.rows.map((row) => ({
-		id: row.id as number,
-		name: row.name as string,
-		description: row.description as string,
-		icon: row.icon as string,
-	}));
-}
+export const getServices = unstable_cache(
+	async (): Promise<Service[]> => {
+		const result = await db.execute("SELECT * FROM services");
+		return result.rows.map((row) => ({
+			id: row.id as number,
+			name: row.name as string,
+			description: row.description as string,
+			icon: row.icon as string,
+		}));
+	},
+	['services'],
+	{ tags: ['portfolio-data'], revalidate: 3600 }
+);
 
-export async function getProjects(): Promise<Project[]> {
-	const result = await db.execute("SELECT * FROM projects");
-	return result.rows.map((row) => ({
-		id: row.id as number,
-		slug: row.slug as string,
-		title: row.title as string,
-		description: row.description as string,
-		tags: JSON.parse(row.tags as string),
-		link: row.link as string,
-		image: JSON.parse(row.image as string),
-		github: (row.github as string) || undefined,
-	}));
-}
+export const getProjects = unstable_cache(
+	async (): Promise<Project[]> => {
+		const result = await db.execute("SELECT * FROM projects");
+		return result.rows.map((row) => ({
+			id: row.id as number,
+			slug: row.slug as string,
+			title: row.title as string,
+			description: row.description as string,
+			tags: JSON.parse(row.tags as string),
+			link: row.link as string,
+			image: JSON.parse(row.image as string),
+			github: (row.github as string) || undefined,
+		}));
+	},
+	['projects'],
+	{ tags: ['portfolio-data'], revalidate: 3600 }
+);
 
 // --- Update Actions ---
 
@@ -104,13 +120,12 @@ export async function updatePersonalData(
 	});
 
 	await updateLastModified();
-	revalidatePath("/");
-	revalidatePath("/admin");
+	
 	return { success: true };
 }
 
-export async function updateService(data: z.infer<typeof skillSchema>) {
-	const validated = skillSchema.parse(data);
+export async function updateService(data: z.infer<typeof serviceSchema>) {
+	const validated = serviceSchema.parse(data);
 
 	if (validated.id) {
 		await db.execute({
@@ -130,8 +145,7 @@ export async function updateService(data: z.infer<typeof skillSchema>) {
 	}
 
 	await updateLastModified();
-	revalidatePath("/");
-	revalidatePath("/admin");
+	
 	return { success: true };
 }
 
@@ -141,8 +155,7 @@ export async function deleteService(id: number) {
 		args: [id],
 	});
 	await updateLastModified();
-	revalidatePath("/");
-	revalidatePath("/admin");
+	
 	return { success: true };
 }
 
@@ -184,8 +197,7 @@ export async function updateProject(data: z.infer<typeof projectSchema>) {
 	}
 
 	await updateLastModified();
-	revalidatePath("/");
-	revalidatePath("/admin");
+	
 	return { success: true };
 }
 
@@ -195,8 +207,7 @@ export async function deleteProject(id: number) {
 		args: [id],
 	});
 	await updateLastModified();
-	revalidatePath("/");
-	revalidatePath("/admin");
+	
 	return { success: true };
 }
 
@@ -219,8 +230,7 @@ export async function updateSocialLink(data: z.infer<typeof socialLinkSchema>) {
 	}
 
 	await updateLastModified();
-	revalidatePath("/");
-	revalidatePath("/admin");
+	
 	return { success: true };
 }
 
@@ -230,8 +240,7 @@ export async function deleteSocialLink(id: number) {
 		args: [id],
 	});
 	await updateLastModified();
-	revalidatePath("/");
-	revalidatePath("/admin");
+	
 	return { success: true };
 }
 

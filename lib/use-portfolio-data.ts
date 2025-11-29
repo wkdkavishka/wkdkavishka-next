@@ -1,19 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { PersonalData, Project, Skill, SocialLink } from "@/lib/schema";
+import type { PersonalData, Project, Service, SocialLink } from "@/lib/schema";
 import {
-    getCachedData,
-    setCachedData,
-    preloadImages,
-    createBlobUrls,
-    cleanupBlobURLs,
-    type CachedData,
+	getCachedData,
+	setCachedData,
+	preloadImages,
+	createBlobUrls,
+	cleanupBlobURLs,
+	type CachedData,
 } from "@/lib/cache-service";
 
 export interface PortfolioData {
 	projects: Project[];
-	services: Skill[];
+	services: Service[];
 	personalData: PersonalData | null;
 	socialLinks: SocialLink[];
 	imageBlobs: Record<string, string>;
@@ -73,7 +73,7 @@ export function usePortfolioData() {
 					]);
 
 				const projects = (await projectsRes.json()) as Project[];
-				const services = (await servicesRes.json()) as Skill[];
+				const services = (await servicesRes.json()) as Service[];
 				const personalData = (await personalDataRes.json()) as PersonalData | null;
 				const socialLinks = (await socialLinksRes.json()) as SocialLink[];
 				const { lastModified } = await timestampRes.json();

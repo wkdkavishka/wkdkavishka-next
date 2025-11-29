@@ -1,4 +1,4 @@
-import type { PersonalData, Project, Skill, SocialLink } from "@/lib/schema";
+import type { PersonalData, Project, Service, SocialLink } from "@/lib/schema";
 
 const DB_NAME = "PortfolioCacheDB";
 const DB_VERSION = 1;
@@ -7,7 +7,7 @@ const STORE_NAME = "portfolioData";
 export interface CachedData {
 	lastModified: string;
 	projects: Project[];
-	services: Skill[];
+	services: Service[];
 	personalData: PersonalData | null;
 	socialLinks: SocialLink[];
 	imageBlobData: Record<string, Blob>; // URL -> Blob object

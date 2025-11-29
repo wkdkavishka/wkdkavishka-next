@@ -1,7 +1,7 @@
 import { Briefcase, Code, LayoutDashboard, Share2, User } from "lucide-react";
 import { PersonalForm } from "@/components/admin/personal-form";
 import { ProjectsManager } from "@/components/admin/projects-manager";
-import { SkillsManager } from "@/components/admin/skills-manager";
+import { ServicesManager } from "@/components/admin/services-manager";
 import { SocialManager } from "@/components/admin/social-manager";
 import {
 	Card,
@@ -20,7 +20,7 @@ import {
 
 export default async function AdminPage() {
 	const personalData = await getPersonalData();
-	const skills = await getServices();
+	const services = await getServices();
 	const projects = await getProjects();
 	const socialLinks = await getSocialLinks();
 
@@ -58,7 +58,7 @@ export default async function AdminPage() {
 						<span>Personal Info</span>
 					</TabsTrigger>
 					<TabsTrigger
-						value="skills"
+						value="services"
 						className="flex items-center gap-2 py-3 data-[state=active]:bg-background data-[state=active]:shadow-sm"
 					>
 						<Code className="h-4 w-4" />
@@ -101,20 +101,20 @@ export default async function AdminPage() {
 				</TabsContent>
 
 				<TabsContent
-					value="skills"
+					value="services"
 					className="space-y-4 focus-visible:outline-none focus-visible:ring-0"
 				>
 					<Card className="border-muted-foreground/20 shadow-sm">
 						<CardHeader>
 							<CardTitle className="flex items-center gap-2">
-								<Code className="h-5 w-5 text-primary" /> Services & Skills
+								<Code className="h-5 w-5 text-primary" /> Services
 							</CardTitle>
 							<CardDescription>
-								Manage the services you offer and your technical skills.
+								Manage the services you offer.
 							</CardDescription>
 						</CardHeader>
 						<CardContent>
-							<SkillsManager initialSkills={skills} />
+							<ServicesManager initialServices={services} />
 						</CardContent>
 					</Card>
 				</TabsContent>

@@ -5,29 +5,29 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { updateService } from "@/lib/actions";
-import { type Skill, skillSchema } from "@/lib/schema";
+import { type Service, serviceSchema } from "@/lib/schema";
 
-export function SkillForm({
+export function ServiceForm({
 	initialData,
 	onSuccess,
 }: {
-	initialData?: Skill;
+	initialData?: Service;
 	onSuccess: () => void;
 }) {
 	const [loading, setLoading] = useState(false);
 
-	const form = useForm<Skill>({
-		resolver: zodResolver(skillSchema),
+	const form = useForm<Service>({
+		resolver: zodResolver(serviceSchema),
 		defaultValues: initialData || {
 			name: "",
 			description: "",
@@ -35,14 +35,14 @@ export function SkillForm({
 		},
 	});
 
-	async function onSubmit(data: Skill) {
+	async function onSubmit(data: Service) {
 		setLoading(true);
 		try {
 			await updateService(data);
 			onSuccess();
 		} catch (error) {
 			console.error(error);
-			alert("Failed to save skill");
+			alert("Failed to save service");
 		} finally {
 			setLoading(false);
 		}
@@ -91,7 +91,7 @@ export function SkillForm({
 					)}
 				/>
 				<Button type="submit" disabled={loading}>
-					{loading ? "Saving..." : "Save Skill"}
+					{loading ? "Saving..." : "Save Service"}
 				</Button>
 			</form>
 		</Form>

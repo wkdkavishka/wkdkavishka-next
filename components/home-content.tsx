@@ -6,7 +6,7 @@ import { About } from "@/components/sections/about";
 import { Contact } from "@/components/sections/contact";
 import { Hero } from "@/components/sections/hero";
 import { Projects } from "@/components/sections/projects";
-import { Skills } from "@/components/sections/skills";
+import { Services } from "@/components/sections/services";
 import { usePortfolioData } from "@/lib/use-portfolio-data";
 
 export function HomeContent() {
@@ -41,7 +41,7 @@ export function HomeContent() {
 				<Hero personalData={data.personalData} socialLinks={data.socialLinks} />
 				<About personalData={data.personalData} />
 				<Projects projects={data.projects} imageBlobs={data.imageBlobs} />
-				<Skills skills={data.services} />
+				<Services services={data.services} />
 				<Contact personalData={data.personalData} socialLinks={data.socialLinks} />
 			</main>
 			<Footer personalData={data.personalData} socialLinks={data.socialLinks} />
