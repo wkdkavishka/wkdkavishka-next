@@ -38,6 +38,16 @@ async function initMetadataTable() {
 
 // Initialize on module load
 initMetadataTable();
+// Cleanup files table if it exists (reverting previous change)
+cleanupFilesTable();
+
+async function cleanupFilesTable() {
+	try {
+		await db.execute("DROP TABLE IF EXISTS files");
+	} catch (error) {
+		console.error("Failed to cleanup files table:", error);
+	}
+}
 
 /**
  * Get the last modified timestamp for site data

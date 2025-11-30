@@ -2,6 +2,7 @@
 
 import { Mail } from "lucide-react";
 import Link from "next/link";
+import { EmailDialog } from "@/components/email-dialog";
 import type { PersonalData, SocialLink } from "@/lib/schema";
 
 export function Footer({
@@ -50,13 +51,12 @@ export function Footer({
 							<span className="text-sm font-medium">{link.name}</span>
 						</Link>
 					))}
-					<Link
-						href={`mailto:${personalData.email}`}
-						className="text-muted-foreground hover:text-foreground transition-colors"
-					>
-						<Mail className="h-5 w-5" />
-						<span className="sr-only">Email</span>
-					</Link>
+					<EmailDialog email={personalData.email}>
+						<button className="text-muted-foreground hover:text-foreground transition-colors">
+							<Mail className="h-5 w-5" />
+							<span className="sr-only">Email</span>
+						</button>
+					</EmailDialog>
 				</div>
 			</div>
 		</footer>

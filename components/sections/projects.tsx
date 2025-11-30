@@ -50,7 +50,8 @@ function ProjectCard({
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
 			whileInView={{ opacity: 1, y: 0 }}
-			viewport={{ once: true }}
+			exit={{ opacity: 0, y: -20 }}
+			viewport={{ once: false, amount: 0.3 }}
 			transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
 		>
 			<Card className="h-full flex flex-col overflow-hidden border-muted-foreground/20 hover:border-primary/50 transition-colors">
@@ -122,7 +123,8 @@ export function Projects({ projects, imageBlobs }: { projects: Project[]; imageB
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
-				viewport={{ once: true }}
+				exit={{ opacity: 0, y: -20 }}
+				viewport={{ once: false, amount: 0.3 }}
 				transition={{ duration: 0.5 }}
 				className="flex flex-col items-center gap-4 text-center md:gap-8 mb-16"
 			>

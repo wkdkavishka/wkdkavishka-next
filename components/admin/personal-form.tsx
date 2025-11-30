@@ -160,14 +160,40 @@ export function PersonalForm({ initialData }: { initialData: PersonalData }) {
 									<Input
 										type="file"
 										accept=".pdf,.doc,.docx"
-										onChange={(e) => {
+										onChange={async (e) => {
 											const file = e.target.files?.[0];
 											if (file) {
-												const reader = new FileReader();
-												reader.onloadend = () => {
-													field.onChange(reader.result as string);
-												};
-												reader.readAsDataURL(file);
+												try {
+													setLoading(true);
+													const formData = new FormData();
+													formData.append("file", file);
+													
+													// Dynamically import uploadResume to avoid circular dependencies if any, 
+													// or just call it directly. 
+													// Since this is a client component, we need to import the server action.
+													// It's already imported at the top? No, let's check imports.
+													// We need to import uploadResume from @/lib/actions
+													
+													const { uploadResume } = await import("@/lib/actions");
+													const result = await uploadResume(formData);
+													
+													setMessage({
+														type: "success",
+														text: "Resume uploaded successfully!",
+													});
+													
+													// Update the field value to the new Cloudinary URL
+													field.onChange(result.secure_url);
+													
+												} catch (error) {
+													console.error("Upload failed:", error);
+													setMessage({
+														type: "error",
+														text: "Failed to upload resume.",
+													});
+												} finally {
+													setLoading(false);
+												}
 											}
 										}}
 									/>
@@ -175,12 +201,12 @@ export function PersonalForm({ initialData }: { initialData: PersonalData }) {
 										<div className="text-sm text-muted-foreground">
 											<span className="mr-2">Current CV:</span>
 											<a
-												href={field.value}
+												href={field.value.replace('/upload/', '/upload/fl_attachment/')}
 												target="_blank"
 												rel="noopener noreferrer"
 												className="text-primary hover:underline"
 											>
-												View CV
+												View / Download CV
 											</a>
 										</div>
 									)}

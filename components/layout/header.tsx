@@ -99,6 +99,7 @@ export function Header() {
 							))}
 							<div className="flex gap-2 items-center">
 								<ModeToggle />
+								
 								<Button size="sm" className="flex-1">
 									Hire Me
 								</Button>

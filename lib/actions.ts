@@ -35,7 +35,7 @@ export const getPersonalData = unstable_cache(
 			resumeUrl: row.resume_url as string,
 			skills: JSON.parse(row.skills as string),
 			description: row.description as string,
-			socialLinks: [], // We'll fetch this separately or join, but for now let's just return empty and handle in component or fetch separately
+			socialLinks: [], 
 			startYear: row.start_year as number,
 		};
 	},
@@ -276,4 +276,33 @@ export async function uploadImage(formData: FormData) {
 			)
 			.end(buffer);
 	});
+}
+
+export async function uploadResume(formData: FormData) {
+	const file = formData.get("file") as File;
+	if (!file) {
+		throw new Error("No file provided");
+	}
+
+	const arrayBuffer = await file.arrayBuffer();
+	const buffer = Buffer.from(arrayBuffer);
+
+	// Insert into files table
+	const result = await db.execute({
+		sql: `INSERT INTO files (filename, mime_type, data) VALUES (?, ?, ?) RETURNING id`,
+		args: [file.name, file.type, buffer],
+	});
+
+	const fileId = result.rows[0].id;
+
+	// Update personal_data with the new file ID
+	// Assuming user ID 1
+	await db.execute({
+		sql: `UPDATE personal_data SET resume_file_id = ? WHERE id = 1`,
+		args: [fileId],
+	});
+
+	await updateLastModified();
+	
+	return { success: true };
 }

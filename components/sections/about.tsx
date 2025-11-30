@@ -16,7 +16,8 @@ export function About({ personalData }: { personalData: PersonalData }) {
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
-				viewport={{ once: true }}
+				exit={{ opacity: 0, y: -20 }}
+				viewport={{ once: false, amount: 0.3 }}
 				transition={{ duration: 0.5 }}
 				className="flex flex-col items-center gap-4 text-center md:gap-8"
 			>
@@ -34,7 +35,8 @@ export function About({ personalData }: { personalData: PersonalData }) {
 				<motion.div
 					initial={{ opacity: 0, x: -50 }}
 					whileInView={{ opacity: 1, x: 0 }}
-					viewport={{ once: true }}
+					exit={{ opacity: 0, x: -50 }}
+					viewport={{ once: false, amount: 0.3 }}
 					transition={{ duration: 0.5, delay: 0.2 }}
 					className="relative aspect-square overflow-hidden rounded-xl bg-muted"
 				>
@@ -48,7 +50,8 @@ export function About({ personalData }: { personalData: PersonalData }) {
 				<motion.div
 					initial={{ opacity: 0, x: 50 }}
 					whileInView={{ opacity: 1, x: 0 }}
-					viewport={{ once: true }}
+					exit={{ opacity: 0, x: 50 }}
+					viewport={{ once: false, amount: 0.3 }}
 					transition={{ duration: 0.5, delay: 0.2 }}
 					className="flex flex-col gap-4"
 				>

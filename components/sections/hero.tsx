@@ -43,7 +43,9 @@ export function Hero({
 				<div className="flex flex-col items-center gap-4 text-center">
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						viewport={{ once: false }}
 						transition={{ duration: 0.5 }}
 						className="inline-block rounded-lg bg-muted px-3 py-1 text-sm"
 					>
@@ -51,7 +53,9 @@ export function Hero({
 					</motion.div>
 					<motion.h1
 						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						viewport={{ once: false }}
 						transition={{ duration: 0.5, delay: 0.1 }}
 						className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent pb-3 bg-gradient-to-r from-foreground to-foreground/70"
 					>
@@ -61,7 +65,9 @@ export function Hero({
 					</motion.h1>
 					<motion.p
 						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						viewport={{ once: false }}
 						transition={{ duration: 0.5, delay: 0.2 }}
 						className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed pb-3 xl:text-xl/relaxed"
 					>
@@ -69,7 +75,9 @@ export function Hero({
 					</motion.p>
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						viewport={{ once: false }}
 						transition={{ duration: 0.5, delay: 0.3 }}
 						className="flex flex-col gap-2 min-[400px]:flex-row"
 					>
@@ -79,7 +87,12 @@ export function Hero({
 							</Link>
 						</Button>
 						<Button size="lg" variant="outline" className="gap-2" asChild>
-							<Link href={personalData.resumeUrl} target="_blank">
+							<Link 
+								href={personalData.resumeUrl.includes('cloudinary') 
+									? personalData.resumeUrl.replace('/upload/', '/upload/fl_attachment/') 
+									: personalData.resumeUrl} 
+								target="_blank"
+							>
 								Download CV <Download className="h-4 w-4" />
 							</Link>
 						</Button>
@@ -87,7 +100,9 @@ export function Hero({
 
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						viewport={{ once: false }}
 						transition={{ duration: 0.5, delay: 0.4 }}
 						className="flex items-center gap-4 mt-8"
 					>
