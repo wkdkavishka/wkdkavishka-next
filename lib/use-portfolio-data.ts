@@ -1,15 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { PersonalData, Project, Service, SocialLink } from "@/lib/schema";
 import {
-	getCachedData,
-	setCachedData,
-	preloadImages,
-	createBlobUrls,
-	cleanupBlobURLs,
 	type CachedData,
+	cleanupBlobURLs,
+	createBlobUrls,
+	getCachedData,
+	preloadImages,
+	setCachedData,
 } from "@/lib/cache-service";
+import type {
+	PersonalData,
+	Project,
+	Service,
+	SocialLink,
+} from "@/lib/db/zod-schema";
 
 export interface PortfolioData {
 	projects: Project[];
@@ -35,7 +40,7 @@ export function usePortfolioData() {
 				// Step 1: Check if we have cached data
 				const cachedData = await getCachedData();
 
-				if (cachedData && cachedData.imageBlobData) {
+				if (cachedData?.imageBlobData) {
 					// Step 2: Check if cache is still valid
 					const response = await fetch("/api/last-modified");
 					const { lastModified } = await response.json();
@@ -45,7 +50,7 @@ export function usePortfolioData() {
 						if (isMounted) {
 							// Convert stored Blobs to URLs
 							currentImageBlobs = createBlobUrls(cachedData.imageBlobData);
-							
+
 							setData({
 								projects: cachedData.projects,
 								services: cachedData.services,
@@ -58,29 +63,35 @@ export function usePortfolioData() {
 						return;
 					}
 
-					// Cache is invalid, but we don't need to cleanup blob URLs here 
+					// Cache is invalid, but we don't need to cleanup blob URLs here
 					// because we haven't created them yet from the old cache
 				}
 
 				// Step 3: Fetch fresh data
-				const [projectsRes, servicesRes, personalDataRes, socialLinksRes, timestampRes] =
-					await Promise.all([
-						fetch("/api/projects"),
-						fetch("/api/services"),
-						fetch("/api/personal-data"),
-						fetch("/api/social-links"),
-						fetch("/api/last-modified"),
-					]);
+				const [
+					projectsRes,
+					servicesRes,
+					personalDataRes,
+					socialLinksRes,
+					timestampRes,
+				] = await Promise.all([
+					fetch("/api/projects"),
+					fetch("/api/services"),
+					fetch("/api/personal-data"),
+					fetch("/api/social-links"),
+					fetch("/api/last-modified"),
+				]);
 
 				const projects = (await projectsRes.json()) as Project[];
 				const services = (await servicesRes.json()) as Service[];
-				const personalData = (await personalDataRes.json()) as PersonalData | null;
+				const personalData =
+					(await personalDataRes.json()) as PersonalData | null;
 				const socialLinks = (await socialLinksRes.json()) as SocialLink[];
 				const { lastModified } = await timestampRes.json();
 
 				// Step 4: Collect all image URLs
 				const allImageUrls: string[] = [];
-				
+
 				// Project images
 				projects.forEach((project) => {
 					project.image.forEach((url) => allImageUrls.push(url));
@@ -109,7 +120,7 @@ export function usePortfolioData() {
 				// Step 7: Update state (converting to URLs)
 				if (isMounted) {
 					currentImageBlobs = createBlobUrls(imageBlobData);
-					
+
 					setData({
 						projects,
 						services,

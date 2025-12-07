@@ -13,7 +13,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { deleteProject } from "@/lib/actions";
-import type { Project } from "@/lib/schema";
+import type { Project } from "@/lib/db/zod-schema";
 import { ProjectForm } from "./project-form";
 
 export function ProjectsManager({

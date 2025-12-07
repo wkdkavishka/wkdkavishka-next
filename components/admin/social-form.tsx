@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { updateSocialLink } from "@/lib/actions";
-import { type SocialLink, socialLinkSchema } from "@/lib/schema";
+import { type SocialLink, socialLinkSchema } from "@/lib/db/zod-schema";
 
 export function SocialForm({
 	initialData,

@@ -12,10 +12,10 @@ import {
 	Phone,
 } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { EmailDialog } from "@/components/email-dialog";
+import { Button } from "@/components/ui/button";
 
-import type { PersonalData, SocialLink } from "@/lib/schema";
+import type { PersonalData, SocialLink } from "@/lib/db/zod-schema";
 
 export function Contact({
 	personalData,

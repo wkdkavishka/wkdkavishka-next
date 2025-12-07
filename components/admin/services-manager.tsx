@@ -5,17 +5,21 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
 } from "@/components/ui/dialog";
 import { deleteService } from "@/lib/actions";
-import type { Service } from "@/lib/schema";
+import type { Service } from "@/lib/db/zod-schema";
 import { ServiceForm } from "./service-form";
 
-export function ServicesManager({ initialServices }: { initialServices: Service[] }) {
+export function ServicesManager({
+	initialServices,
+}: {
+	initialServices: Service[];
+}) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [editingService, setEditingService] = useState<Service | undefined>(
 		undefined,

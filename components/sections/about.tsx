@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-import type { PersonalData } from "@/lib/schema";
+import type { PersonalData } from "@/lib/db/zod-schema";
 
 export function About({ personalData }: { personalData: PersonalData }) {
 	const yearsExperience = new Date().getFullYear() - personalData.startYear;

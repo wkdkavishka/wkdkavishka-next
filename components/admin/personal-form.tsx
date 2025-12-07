@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { updatePersonalData } from "@/lib/actions";
-import { type PersonalData, personalDataSchema } from "@/lib/schema";
+import { type PersonalData, personalDataSchema } from "@/lib/db/zod-schema";
 // Wait, I should check if toast is available. The user mentioned "useGlobalAlert" in previous convos, but that might be a different project.
 // I'll stick to standard UI components. I'll use a simple state for success/error if no toast.
 // Actually, I'll use `alert` or just console for now, or install `sonner` if I want to be fancy.
@@ -167,24 +167,25 @@ export function PersonalForm({ initialData }: { initialData: PersonalData }) {
 													setLoading(true);
 													const formData = new FormData();
 													formData.append("file", file);
-													
-													// Dynamically import uploadResume to avoid circular dependencies if any, 
-													// or just call it directly. 
+
+													// Dynamically import uploadResume to avoid circular dependencies if any,
+													// or just call it directly.
 													// Since this is a client component, we need to import the server action.
 													// It's already imported at the top? No, let's check imports.
 													// We need to import uploadResume from @/lib/actions
-													
-													const { uploadResume } = await import("@/lib/actions");
+
+													const { uploadResume } = await import(
+														"@/lib/actions"
+													);
 													const result = await uploadResume(formData);
-													
+
 													setMessage({
 														type: "success",
 														text: "Resume uploaded successfully!",
 													});
-													
+
 													// Update the field value to the new Cloudinary URL
 													field.onChange(result.secure_url);
-													
 												} catch (error) {
 													console.error("Upload failed:", error);
 													setMessage({
@@ -201,7 +202,10 @@ export function PersonalForm({ initialData }: { initialData: PersonalData }) {
 										<div className="text-sm text-muted-foreground">
 											<span className="mr-2">Current CV:</span>
 											<a
-												href={field.value.replace('/upload/', '/upload/fl_attachment/')}
+												href={field.value.replace(
+													"/upload/",
+													"/upload/fl_attachment/",
+												)}
 												target="_blank"
 												rel="noopener noreferrer"
 												className="text-primary hover:underline"

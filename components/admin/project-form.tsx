@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { updateProject, uploadImage } from "@/lib/actions";
-import { type Project, projectSchema } from "@/lib/schema";
+import { type Project, projectSchema } from "@/lib/db/zod-schema";
 
 export function ProjectForm({
 	initialData,

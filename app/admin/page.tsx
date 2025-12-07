@@ -1,5 +1,13 @@
-import { Briefcase, Code, LayoutDashboard, Share2, User } from "lucide-react";
+import {
+	Briefcase,
+	Code,
+	LayoutDashboard,
+	Share2,
+	User,
+	Image as ImageIcon,
+} from "lucide-react";
 import { PersonalForm } from "@/components/admin/personal-form";
+import { ProfilePicForm } from "@/components/admin/profile-pic-form";
 import { ProjectsManager } from "@/components/admin/projects-manager";
 import { ServicesManager } from "@/components/admin/services-manager";
 import { SocialManager } from "@/components/admin/social-manager";
@@ -49,13 +57,20 @@ export default async function AdminPage() {
 			</div>
 
 			<Tabs defaultValue="personal" className="space-y-6">
-				<TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 h-auto p-1 bg-muted/50">
+				<TabsList className="grid w-full grid-cols-2 lg:grid-cols-5 h-auto p-1 bg-muted/50">
 					<TabsTrigger
 						value="personal"
 						className="flex items-center gap-2 py-3 data-[state=active]:bg-background data-[state=active]:shadow-sm"
 					>
 						<User className="h-4 w-4" />
 						<span>Personal Info</span>
+					</TabsTrigger>
+					<TabsTrigger
+						value="profile-pic"
+						className="flex items-center gap-2 py-3 data-[state=active]:bg-background data-[state=active]:shadow-sm"
+					>
+						<ImageIcon className="h-4 w-4" />
+						<span>Profile Picture</span>
 					</TabsTrigger>
 					<TabsTrigger
 						value="services"
@@ -101,6 +116,23 @@ export default async function AdminPage() {
 				</TabsContent>
 
 				<TabsContent
+					value="profile-pic"
+					className="space-y-4 focus-visible:outline-none focus-visible:ring-0"
+				>
+					<Card className="border-muted-foreground/20 shadow-sm">
+						<CardHeader>
+							<CardTitle className="flex items-center gap-2">
+								<ImageIcon className="h-5 w-5 text-primary" /> Profile Picture
+							</CardTitle>
+							<CardDescription>Update your profile picture.</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<ProfilePicForm initialImage={personalData.profileImage} />
+						</CardContent>
+					</Card>
+				</TabsContent>
+
+				<TabsContent
 					value="services"
 					className="space-y-4 focus-visible:outline-none focus-visible:ring-0"
 				>
@@ -109,9 +141,7 @@ export default async function AdminPage() {
 							<CardTitle className="flex items-center gap-2">
 								<Code className="h-5 w-5 text-primary" /> Services
 							</CardTitle>
-							<CardDescription>
-								Manage the services you offer.
-							</CardDescription>
+							<CardDescription>Manage the services you offer.</CardDescription>
 						</CardHeader>
 						<CardContent>
 							<ServicesManager initialServices={services} />

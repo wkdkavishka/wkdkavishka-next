@@ -13,7 +13,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { deleteSocialLink } from "@/lib/actions";
-import type { SocialLink } from "@/lib/schema";
+import type { SocialLink } from "@/lib/db/zod-schema";
 import { SocialForm } from "./social-form";
 
 export function SocialManager({

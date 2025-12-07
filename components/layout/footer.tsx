@@ -3,7 +3,7 @@
 import { Mail } from "lucide-react";
 import Link from "next/link";
 import { EmailDialog } from "@/components/email-dialog";
-import type { PersonalData, SocialLink } from "@/lib/schema";
+import type { PersonalData, SocialLink } from "@/lib/db/zod-schema";
 
 export function Footer({
 	personalData,

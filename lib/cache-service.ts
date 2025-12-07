@@ -1,4 +1,9 @@
-import type { PersonalData, Project, Service, SocialLink } from "@/lib/schema";
+import type {
+	PersonalData,
+	Project,
+	Service,
+	SocialLink,
+} from "@/lib/db/zod-schema";
 
 const DB_NAME = "PortfolioCacheDB";
 const DB_VERSION = 1;
@@ -96,7 +101,9 @@ export async function clearCache(): Promise<void> {
 /**
  * Preload images and return Blob objects for caching
  */
-export async function preloadImages(imageUrls: string[]): Promise<Record<string, Blob>> {
+export async function preloadImages(
+	imageUrls: string[],
+): Promise<Record<string, Blob>> {
 	const imageBlobData: Record<string, Blob> = {};
 
 	await Promise.all(
@@ -115,7 +122,7 @@ export async function preloadImages(imageUrls: string[]): Promise<Record<string,
 			} catch (error) {
 				console.error(`Error preloading image ${url}:`, error);
 			}
-		})
+		}),
 	);
 
 	return imageBlobData;
@@ -124,13 +131,15 @@ export async function preloadImages(imageUrls: string[]): Promise<Record<string,
 /**
  * Create Blob URLs from stored Blobs
  */
-export function createBlobUrls(imageBlobData: Record<string, Blob>): Record<string, string> {
+export function createBlobUrls(
+	imageBlobData: Record<string, Blob>,
+): Record<string, string> {
 	const imageBlobs: Record<string, string> = {};
-	
+
 	if (!imageBlobData) {
 		return imageBlobs;
 	}
-	
+
 	Object.entries(imageBlobData).forEach(([url, blob]) => {
 		try {
 			imageBlobs[url] = URL.createObjectURL(blob);
@@ -138,7 +147,7 @@ export function createBlobUrls(imageBlobData: Record<string, Blob>): Record<stri
 			console.error("Error creating blob URL:", error);
 		}
 	});
-	
+
 	return imageBlobs;
 }
 
@@ -154,4 +163,3 @@ export function cleanupBlobURLs(imageBlobs: Record<string, string>): void {
 		}
 	});
 }
-
