@@ -132,6 +132,7 @@ export function Projects({ projects }: { projects: Project[] }) {
 
 			<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 				{projects.map((project, index) => (
+					// biome-ignore lint/suspicious/noArrayIndexKey: this is a static amount
 					<ProjectCard key={index} project={project} index={index} />
 				))}
 			</div>

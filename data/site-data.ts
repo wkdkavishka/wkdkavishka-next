@@ -77,11 +77,11 @@ const siteData: SiteData = {
 	siteUrl: "https://wkdkavishka.github.io",
 	personal: {
 		name: "W.K.D.Kavishka",
-		title: "Software Engineer | DevOps Engineer",
+		title: "Software Engineer",
 		location: "Colombo, Sri Lanka",
 		email: "w.k.d.kavishka@gmail.com",
 		phone: "+94757676968",
-		profileImage: "/images/profile/profile.webp",
+		profileImage: "/images/profile/profile.jpg",
 		about: [
 			"Helping businesses elevate their digital presence through modern software solutions.",
 			"Passionate about tackling challenging projects and delivering scalable, high-performance applications.",
@@ -160,6 +160,21 @@ const siteData: SiteData = {
 		{
 			id: "wkdkavishka-vue",
 			title: "My old Portfolio Template",
+			description:
+				"A full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment integration. Built with Next.js, TypeScript, and MongoDB.",
+			tags: ["Next.js", "TypeScript", "MongoDB", "Stripe", "Tailwind CSS"],
+			link: "https://ecommerce-demo.wkdkavishka.vercel.app",
+			github: "https://github.com/wkdkavishka/ecommerce-platform",
+			image: [
+				"/images/projects/wkdkavishka-vue/1.webp",
+				"/images/projects/wkdkavishka-vue/2.webp",
+				"/images/projects/wkdkavishka-vue/3.webp",
+				"/images/projects/wkdkavishka-vue/4.webp",
+			],
+		},
+		{
+			id: "wkdkavishka-vue",
+			title: "dan dapu eka",
 			description:
 				"A full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment integration. Built with Next.js, TypeScript, and MongoDB.",
 			tags: ["Next.js", "TypeScript", "MongoDB", "Stripe", "Tailwind CSS"],

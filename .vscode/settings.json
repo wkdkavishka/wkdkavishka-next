@@ -1,0 +1,16 @@
+{
+	"css.customAtRules": [
+		"import",
+		"theme",
+		"plugin",
+		"custom-variant",
+		"utility",
+		"variant",
+		"apply",
+		"reference",
+		"tailwind",
+		"layer",
+		"config",
+		"source"
+	]
+}
