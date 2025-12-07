@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import type { Service } from "@/lib/db/zod-schema";
+import type { Service } from "@/data/site-data";
 
 export function Services({ services }: { services: Service[] }) {
 	return (

@@ -3,7 +3,7 @@
 import { Mail } from "lucide-react";
 import Link from "next/link";
 import { EmailDialog } from "@/components/email-dialog";
-import type { PersonalData, SocialLink } from "@/lib/db/zod-schema";
+import type { PersonalData, SocialLink } from "@/data/site-data";
 
 export function Footer({
 	personalData,
@@ -52,7 +52,10 @@ export function Footer({
 						</Link>
 					))}
 					<EmailDialog email={personalData.email}>
-						<button className="text-muted-foreground hover:text-foreground transition-colors">
+						<button
+							type="button"
+							className="text-muted-foreground hover:text-foreground transition-colors"
+						>
 							<Mail className="h-5 w-5" />
 							<span className="sr-only">Email</span>
 						</button>

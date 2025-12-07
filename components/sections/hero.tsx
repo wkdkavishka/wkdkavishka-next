@@ -1,18 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-	ArrowRight,
-	Download,
-	Facebook,
-	Github,
-	Globe,
-	Linkedin,
-	MessageCircle,
-} from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import type { PersonalData, SocialLink } from "@/lib/db/zod-schema";
+import type { PersonalData, SocialLink } from "@/data/site-data";
 
 export function Hero({
 	personalData,
@@ -21,16 +13,6 @@ export function Hero({
 	personalData: PersonalData;
 	socialLinks: SocialLink[];
 }) {
-	const getIcon = (name: string) => {
-		const lowerName = name.toLowerCase();
-		if (lowerName.includes("linkedin")) return Linkedin;
-		if (lowerName.includes("github")) return Github;
-		if (lowerName.includes("facebook")) return Facebook;
-		if (lowerName.includes("whatsapp")) return MessageCircle;
-		if (lowerName.includes("instagram")) return Globe; // Fallback or specific
-		return Globe;
-	};
-
 	return (
 		<section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background pt-16 md:pt-0">
 			{/* Background Elements */}
@@ -111,7 +93,7 @@ export function Hero({
 						className="flex items-center gap-4 mt-8"
 					>
 						{socialLinks.map((link) => {
-							const Icon = getIcon(link.name);
+							const Icon = link.icon;
 							return (
 								<Link
 									key={link.name}

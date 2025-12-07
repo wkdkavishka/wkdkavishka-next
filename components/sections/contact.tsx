@@ -1,21 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-	Facebook,
-	Github,
-	Globe,
-	Linkedin,
-	Mail,
-	MapPin,
-	MessageCircle,
-	Phone,
-} from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { EmailDialog } from "@/components/email-dialog";
 import { Button } from "@/components/ui/button";
 
-import type { PersonalData, SocialLink } from "@/lib/db/zod-schema";
+import type { PersonalData, SocialLink } from "@/data/site-data";
 
 export function Contact({
 	personalData,
@@ -24,16 +15,6 @@ export function Contact({
 	personalData: PersonalData;
 	socialLinks: SocialLink[];
 }) {
-	const getIcon = (name: string) => {
-		const lowerName = name.toLowerCase();
-		if (lowerName.includes("linkedin")) return Linkedin;
-		if (lowerName.includes("github")) return Github;
-		if (lowerName.includes("facebook")) return Facebook;
-		if (lowerName.includes("whatsapp")) return MessageCircle;
-		if (lowerName.includes("instagram")) return Globe; // Fallback or specific
-		return Globe;
-	};
-
 	return (
 		<section
 			id="contact"
@@ -118,9 +99,8 @@ export function Contact({
 				</Link>
 
 				{socialLinks.map((link, index) => {
-					const Icon = getIcon(link.name);
+					const Icon = link.icon;
 					return (
-						// biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
 						<Link href={link.url} target="_blank" key={link.name}>
 							<motion.div
 								initial={{ opacity: 0, y: 20 }}

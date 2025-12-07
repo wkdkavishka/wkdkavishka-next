@@ -13,17 +13,9 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import type { Project } from "@/lib/db/zod-schema";
+import type { Project } from "@/data/site-data";
 
-function ProjectCard({
-	project,
-	index,
-	imageBlobs,
-}: {
-	project: Project;
-	index: number;
-	imageBlobs?: Record<string, string>;
-}) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
 	useEffect(() => {
@@ -66,10 +58,7 @@ function ProjectCard({
 							className="absolute inset-0"
 						>
 							<Image
-								src={
-									imageBlobs?.[project.image[currentImageIndex]] ||
-									project.image[currentImageIndex]
-								}
+								src={project.image[currentImageIndex]}
 								alt={project.title}
 								fill
 								className="object-cover transition-all duration-700 ease-in-out group-hover:scale-105"
@@ -117,13 +106,7 @@ function ProjectCard({
 	);
 }
 
-export function Projects({
-	projects,
-	imageBlobs,
-}: {
-	projects: Project[];
-	imageBlobs?: Record<string, string>;
-}) {
+export function Projects({ projects }: { projects: Project[] }) {
 	return (
 		<section
 			id="projects"
@@ -149,12 +132,7 @@ export function Projects({
 
 			<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 				{projects.map((project, index) => (
-					<ProjectCard
-						key={index}
-						project={project}
-						index={index}
-						imageBlobs={imageBlobs}
-					/>
+					<ProjectCard key={index} project={project} index={index} />
 				))}
 			</div>
 		</section>
