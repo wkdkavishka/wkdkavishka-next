@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import siteMetadata from "@/data/metadata";
 import siteData from "@/data/site-data";
 
+export const dynamic = "force-static";
+
 export default function manifest(): MetadataRoute.Manifest {
 	return {
 		name: siteData.personal.name,
