@@ -136,9 +136,23 @@
 @layer base {
   * {
     @apply border-border;
+    min-width: 0; /* Prevents flex/grid items from overflowing */
   }
+  
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+  
   body {
     @apply bg-background text-foreground;
+  }
+  
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
   }
 }
 
@@ -191,8 +205,22 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    min-width: 0;
   }
+  
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+  
   body {
     @apply bg-background text-foreground;
+  }
+  
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
   }
 }

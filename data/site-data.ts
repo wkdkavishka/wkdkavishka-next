@@ -172,21 +172,6 @@ const siteData: SiteData = {
 				"/images/projects/wkdkavishka-vue/4.webp",
 			],
 		},
-		{
-			id: "wkdkavishka-vue",
-			title: "dan dapu eka",
-			description:
-				"A full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment integration. Built with Next.js, TypeScript, and MongoDB.",
-			tags: ["Next.js", "TypeScript", "MongoDB", "Stripe", "Tailwind CSS"],
-			link: "https://ecommerce-demo.wkdkavishka.vercel.app",
-			github: "https://github.com/wkdkavishka/ecommerce-platform",
-			image: [
-				"/images/projects/wkdkavishka-vue/1.webp",
-				"/images/projects/wkdkavishka-vue/2.webp",
-				"/images/projects/wkdkavishka-vue/3.webp",
-				"/images/projects/wkdkavishka-vue/4.webp",
-			],
-		},
 	],
 	teamMembers: [
 		{
