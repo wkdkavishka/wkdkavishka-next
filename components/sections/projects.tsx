@@ -110,7 +110,7 @@ export function Projects({ projects }: { projects: Project[] }) {
 	return (
 		<section
 			id="projects"
-			className="container mx-auto py-24 sm:py-32 px-4 md:px-6 bg-muted/50 flex flex-col items-center"
+			className="container mx-auto py-24 sm:py-32 px-4 md:px-6 bg-muted/50 flex flex-col items-center rounded-xl"
 		>
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}

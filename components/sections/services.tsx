@@ -23,7 +23,7 @@ export function Services({ services }: { services: Service[] }) {
 						Services
 					</h2>
 					<p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-						The tools and technologies I use to bring ideas to life.
+						What Kind of Solution You Need ?
 					</p>
 				</div>
 			</motion.div>

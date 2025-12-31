@@ -55,7 +55,7 @@ export function Hero({
 						transition={{ duration: 0.5, delay: 0.2 }}
 						className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed pb-3 xl:text-xl/relaxed"
 					>
-						{personalData.description}
+						{personalData.about.slice(0, 1)}
 					</motion.p>
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}

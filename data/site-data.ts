@@ -33,19 +33,19 @@ export interface SocialLink {
 	icon: IconType;
 }
 
-export interface TeamMember {
-	id: string;
-	name: string;
-	role: string;
-	company: string;
-	image: string;
-	testimonial: string;
-	social: {
-		linkedin: string;
-		twitter: string;
-		github: string;
-	};
-}
+// export interface TeamMember {
+// 	id: string;
+// 	name: string;
+// 	role: string;
+// 	company: string;
+// 	image: string;
+// 	testimonial: string;
+// 	social: {
+// 		linkedin: string;
+// 		twitter: string;
+// 		github: string;
+// 	};
+// }
 
 // personel
 export interface PersonalData {
@@ -58,7 +58,6 @@ export interface PersonalData {
 	about: string[];
 	getInTouch: string;
 	resumeUrl: string;
-	skills: string[];
 	description: string;
 	startYear: number;
 }
@@ -68,7 +67,6 @@ export interface SiteData {
 	services: Service[];
 	projects: Project[];
 	socialLinks: SocialLink[];
-	teamMembers: TeamMember[];
 	siteUrl: string;
 }
 
@@ -81,7 +79,7 @@ const siteData: SiteData = {
 		location: "Colombo, Sri Lanka",
 		email: "w.k.d.kavishka@gmail.com",
 		phone: "+94757676968",
-		profileImage: "/images/profile/profile.jpg",
+		profileImage: "/images/profile/profile.webp",
 		about: [
 			"Helping businesses elevate their digital presence through modern software solutions.",
 			"Passionate about tackling challenging projects and delivering scalable, high-performance applications.",
@@ -92,20 +90,6 @@ const siteData: SiteData = {
 		getInTouch:
 			"Looking to turn your ideas into powerful, scalable solutions? Let’s connect! I’m available for freelance projects, collaborations, or consulting. Drop me a message, and I’ll get back to you promptly.",
 		resumeUrl: "/resume.pdf",
-		skills: [
-			"React",
-			"Next.js",
-			"TypeScript",
-			"AWS",
-			"Docker",
-			"Kubernetes",
-			"Express",
-			"Angular",
-			"Vue",
-			"Spring Boot",
-			"Whatsapp API",
-			"Node.js",
-		],
 		description:
 			"W.K.D. Kavishka is a Software Engineer and DevOps Engineer in Colombo, Sri Lanka, specializing in full-stack web development, cloud infrastructure, and automation using React, Next.js, Node.js, Docker, Kubernetes, and AWS.",
 		startYear: 2021,
@@ -143,6 +127,42 @@ const siteData: SiteData = {
 	],
 	projects: [
 		{
+			id: "Korean Class",
+			title: "Korean Class",
+			description:
+				"A Korean online exam platform ",
+			tags: ["Next.js", "SQLite", "Clerk", "Fastify", "Vercel", "Serverless"],
+			link: "https://www.sanduni-sonsenim-korean-academy.online/",
+			github:
+				"",
+			image: [
+				"/images/projects/korean-class/1.webp",
+				"/images/projects/korean-class/2.webp",
+				"/images/projects/korean-class/3.webp",
+				"/images/projects/korean-class/4.webp",
+				"/images/projects/korean-class/5.webp",
+				"/images/projects/korean-class/6.webp",
+			],
+		},
+		{
+			id: "SG-Life",
+			title: "SG Life",
+			description:
+				"An E-commerse platfor for Mr.Surangith Godagama , {{ update ethe description }} ",
+			tags: ["Next.js", "PostgreSQL", "AWS", "Firebase", "Docker", "Express", "Payhere"],
+			link: "https://sglife.net/",
+			github:
+				"",
+			image: [
+				"/images/projects/korean-class/1.webp",
+				"/images/projects/korean-class/2.webp",
+				"/images/projects/korean-class/3.webp",
+				"/images/projects/korean-class/4.webp",
+				"/images/projects/korean-class/5.webp",
+				"/images/projects/korean-class/6.webp",
+			],
+		},
+		{
 			id: "irs-calculator",
 			title: "ADHD Self-Assessment Tool",
 			description:
@@ -162,73 +182,15 @@ const siteData: SiteData = {
 			title: "My old Portfolio Template",
 			description:
 				"A full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment integration. Built with Next.js, TypeScript, and MongoDB.",
-			tags: ["Next.js", "TypeScript", "MongoDB", "Stripe", "Tailwind CSS"],
+			tags: ["Vue.js","Tailwind CSS"],
 			link: "https://ecommerce-demo.wkdkavishka.vercel.app",
-			github: "https://github.com/wkdkavishka/ecommerce-platform",
+			github: "https://github.com/wkdkavishka/wkdkavishka-vue",
 			image: [
 				"/images/projects/wkdkavishka-vue/1.webp",
 				"/images/projects/wkdkavishka-vue/2.webp",
 				"/images/projects/wkdkavishka-vue/3.webp",
 				"/images/projects/wkdkavishka-vue/4.webp",
 			],
-		},
-	],
-	teamMembers: [
-		{
-			id: "member-1",
-			name: "Alex Johnson",
-			role: "Senior Developer",
-			company: "TechCorp",
-			image: "/images/team/member-1.webp",
-			testimonial:
-				"Working with WKD was a fantastic experience. Their attention to detail and problem-solving skills are exceptional.",
-			social: {
-				linkedin: "#",
-				twitter: "#",
-				github: "#",
-			},
-		},
-		{
-			id: "member-2",
-			name: "Sarah Williams",
-			role: "Product Manager",
-			company: "InnovateX",
-			image: "/images/team/member-2.webp",
-			testimonial:
-				"One of the most dedicated developers I've worked with. Delivered beyond expectations on every project.",
-			social: {
-				linkedin: "#",
-				twitter: "#",
-				github: "#",
-			},
-		},
-		{
-			id: "member-3",
-			name: "Michael Chen",
-			role: "CTO",
-			company: "StartUpHub",
-			image: "/images/team/member-3.webp",
-			testimonial:
-				"Technical expertise and professionalism at its best. Highly recommended for any complex web development work.",
-			social: {
-				linkedin: "#",
-				twitter: "#",
-				github: "#",
-			},
-		},
-		{
-			id: "member-4",
-			name: "Emily Rodriguez",
-			role: "UI/UX Designer",
-			company: "DesignMasters",
-			image: "/images/team/member-4.webp",
-			testimonial:
-				"Collaborating with WKD was seamless. They understand design principles and implement them perfectly.",
-			social: {
-				linkedin: "#",
-				twitter: "#",
-				github: "#",
-			},
 		},
 	],
 	socialLinks: [

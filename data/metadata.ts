@@ -18,7 +18,6 @@ export const siteKeywords = [
   "Full Stack Development",
 
   siteData.personal.name,
-  ...(siteData.personal.skills || []),
 ].join(", ");
 
 export const viewport: Viewport = {
