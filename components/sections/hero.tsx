@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import Link from "next/link";
+import { PWAInstallButton } from "@/components/pwa-install-button";
 import { Button } from "@/components/ui/button";
 import type { PersonalData, SocialLink } from "@/data/site-data";
 
@@ -84,6 +85,7 @@ export function Hero({
 								Download CV <Download className="h-4 w-4" />
 							</Link>
 						</Button>
+						<PWAInstallButton />
 					</motion.div>
 
 					<motion.div

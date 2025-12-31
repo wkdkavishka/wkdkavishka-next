@@ -24,7 +24,7 @@ async function deploy() {
     // Target directory where the built files will be deployed
     // This should point to your GitHub Pages repository
     const TARGET_DIR = "/mnt/Storage/Projects/wkdkavishka.github.io/";
-    const SRC_DIR = join(process.cwd(), "dist");
+    const SRC_DIR = join(process.cwd(), "out");
 
     //! Step 1: Optimize images
     console.log("[deploy] Optimizing images...");

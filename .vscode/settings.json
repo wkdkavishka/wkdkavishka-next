@@ -12,5 +12,15 @@
 		"layer",
 		"config",
 		"source"
+	],
+	"css.lint.unknownAtRules": "ignore",
+	"css.validate": true,
+	"scss.lint.unknownAtRules": "ignore",
+	"files.associations": {
+		"*.css": "tailwindcss"
+	},
+	"tailwindCSS.experimental.classRegex": [
+		["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+		["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
 	]
 }

@@ -1,7 +1,7 @@
 // public/sw.js
 //! CACHE_NAME is updated to the date and time
 //! this must be 4th line of the file
-const CACHE_NAME = `pwa-cache-2025-11-15T18:41:12.992Z`;
+const CACHE_NAME = `pwa-cache-2025-12-29T18:47:29.222Z`;
 const OFFLINE_PAGE = "/offline.html";
 
 const PRECACHE_ASSETS = [
