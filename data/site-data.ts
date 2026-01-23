@@ -88,7 +88,7 @@ const siteData: SiteData = {
 			"Dedicated to continuous improvement and excellence in every stage of software development.",
 		],
 		getInTouch:
-			"Looking to turn your ideas into powerful, scalable solutions? Let’s connect! I’m available for freelance projects, collaborations, or consulting. Drop me a message, and I’ll get back to you promptly.",
+			"Looking to turn your ideas into powerful, scalable solutions? Let’s connect! I’m available for freelance projects, collaborations. Drop me a message, and I’ll get back to you promptly.",
 		resumeUrl: "/resume.pdf",
 		description:
 			"W.K.D. Kavishka is a Software Engineer and DevOps Engineer in Colombo, Sri Lanka, specializing in full-stack web development, cloud infrastructure, and automation using React, Next.js, Node.js, Docker, Kubernetes, and AWS.",
