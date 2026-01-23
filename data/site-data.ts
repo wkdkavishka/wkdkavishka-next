@@ -130,11 +130,10 @@ const siteData: SiteData = {
 			id: "Korean Class",
 			title: "Korean Class",
 			description:
-				"A Korean online exam platform ",
+				"A comprehensive Korean online VLE platform for EPS TOPIK exam preparation with interactive tests, learning materials, and real-time progress tracking for students.",
 			tags: ["Next.js", "SQLite", "Clerk", "Fastify", "Vercel", "Serverless"],
 			link: "https://www.sanduni-sonsenim-korean-academy.online/",
-			github:
-				"",
+			github: "",
 			image: [
 				"/images/projects/korean-class/1.webp",
 				"/images/projects/korean-class/2.webp",
@@ -148,23 +147,28 @@ const siteData: SiteData = {
 			id: "SG-Life",
 			title: "SG Life",
 			description:
-				"An E-commerse platfor for Mr.Surangith Godagama , {{ update ethe description }} ",
-			tags: ["Next.js", "PostgreSQL", "AWS", "Firebase", "Docker", "Express", "Payhere"],
+				"An MDRT Million Dollar Round Table learning platform by Surangith Godagama, offering comprehensive financial education and professional development resources for insurance professionals.",
+			tags: [
+				"Next.js",
+				"PostgreSQL",
+				"AWS",
+				"Firebase",
+				"Docker",
+				"Express",
+				"Payhere",
+			],
 			link: "https://sglife.net/",
-			github:
-				"",
+			github: "",
 			image: [
-				"/images/projects/korean-class/1.webp",
-				"/images/projects/korean-class/2.webp",
-				"/images/projects/korean-class/3.webp",
-				"/images/projects/korean-class/4.webp",
-				"/images/projects/korean-class/5.webp",
-				"/images/projects/korean-class/6.webp",
+				"/images/projects/sg-life/1.webp",
+				"/images/projects/sg-life/2.webp",
+				"/images/projects/sg-life/3.webp",
+				"/images/projects/sg-life/4.webp",
 			],
 		},
 		{
 			id: "irs-calculator",
-			title: "ADHD Self-Assessment Tool",
+			title: "IRS Self-Assessment Tool",
 			description:
 				"An interactive Internal Restlessness Scale (IRS) assessment tool that helps evaluate ADHD-related inner restlessness. Features a responsive questionnaire with instant results and detailed insights.",
 			tags: ["Next.js", "Tailwind CSS", "GitHub Pages"],
@@ -178,11 +182,26 @@ const siteData: SiteData = {
 			],
 		},
 		{
+			id: "gpt-shell-4o-mini",
+			title: "GPT-shell-4o-mini",
+			description:
+				"A simple, lightweight Python CLI to use OpenAI's ChatGPT and DALL-E from the terminal. Available as a pypi package.",
+			tags: ["Python", "ChatGPT", "40-mini", "pip"],
+			link: "https://pypi.org/project/gpt-shell-4o-mini/",
+			github: "https://github.com/wkdkavishka/gpt-shell-4o-mini",
+			image: [
+				"/images/projects/gpt-shell-4o-mini/1.webp",
+				"/images/projects/gpt-shell-4o-mini/2.webp",
+				"/images/projects/gpt-shell-4o-mini/3.webp",
+				"/images/projects/gpt-shell-4o-mini/4.webp",
+			],
+		},
+		{
 			id: "wkdkavishka-vue",
 			title: "My old Portfolio Template",
 			description:
-				"A full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment integration. Built with Next.js, TypeScript, and MongoDB.",
-			tags: ["Vue.js","Tailwind CSS"],
+				"My old portfolio template built with Vue.js and Tailwind CSS, showcasing my previous work and skills. Now I'm using Next.js for my portfolio. This template is available for free on GitHub.",
+			tags: ["Vue.js", "Tailwind CSS"],
 			link: "https://ecommerce-demo.wkdkavishka.vercel.app",
 			github: "https://github.com/wkdkavishka/wkdkavishka-vue",
 			image: [
