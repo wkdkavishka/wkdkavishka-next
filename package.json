@@ -6,7 +6,8 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "npx http-server -p 3000 out",
-		"lint": "eslint"
+		"lint": "eslint",
+		"bns": "npm run build && npm run start"
 	},
 	"dependencies": {
 		"@emailjs/browser": "^4.4.1",
