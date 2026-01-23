@@ -1,5 +1,6 @@
 // @/path/to/img_optimize.ts
 
+import console from "node:console";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 import sharp from "sharp"; // You would need to install this: npm install sharp
@@ -21,6 +22,16 @@ const RESIZE_CONFIG = [
 	},
 	{
 		path: "../public/images/projects/korean-class",
+		dimensions: "400x300",
+		quality: 85,
+	},
+	{
+		path: "../public/images/projects/sg-life",
+		dimensions: "400x300",
+		quality: 85,
+	},
+	{
+		path: "../public/images/projects/gpt-shell-4o-mini",
 		dimensions: "400x300",
 		quality: 85,
 	},
@@ -115,7 +126,9 @@ export class ImageProcessor {
 
 				// Log file discovery
 				if (this.logLevel === "verbose") {
-					console.log(`\n📄 Examining: ${path.relative(projectRoot, filePath)}`);
+					console.log(
+						`\n📄 Examining: ${path.relative(projectRoot, filePath)}`,
+					);
 					console.log(`   Extension: ${ext}`);
 				}
 
@@ -145,9 +158,7 @@ export class ImageProcessor {
 						await this.convertToWebP(filePath, [width, height], quality);
 					}
 				} catch (error) {
-					console.error(
-						`❌ ERROR processing ${path.basename(filePath)}:`,
-					);
+					console.error(`❌ ERROR processing ${path.basename(filePath)}:`);
 					console.error(`   Path: ${filePath}`);
 					console.error(`   Error:`, error);
 					if (error instanceof Error) {
@@ -189,9 +200,7 @@ export class ImageProcessor {
 			console.log(
 				`   Current dimensions: ${currentWidth}w × ${currentHeight}h`,
 			);
-			console.log(
-				`   Target dimensions: ${targetWidth}w × ${targetHeight}h`,
-			);
+			console.log(`   Target dimensions: ${targetWidth}w × ${targetHeight}h`);
 
 			const needsResize = await this.needsResize(filePath, targetDimensions);
 
@@ -371,9 +380,7 @@ export class ImageProcessor {
 		console.log(
 			`   📐 Output dimensions: ${newMetadata.width}w × ${newMetadata.height}h`,
 		);
-		console.log(
-			`   💾 Output file size: ${this.formatBytes(newStats.size)}`,
-		);
+		console.log(`   💾 Output file size: ${this.formatBytes(newStats.size)}`);
 
 		const sizeReduction =
 			((originalStats.size - newStats.size) / originalStats.size) * 100;
@@ -393,9 +400,7 @@ export class ImageProcessor {
 		// Delete the original file unless it was a WebP file we updated
 		if (path.extname(filePath).toLowerCase() !== ".webp") {
 			await fs.unlink(filePath);
-			console.log(
-				`   🗑️  Original ${path.extname(filePath)} file removed`,
-			);
+			console.log(`   🗑️  Original ${path.extname(filePath)} file removed`);
 		}
 
 		this.totalResized++;
@@ -406,7 +411,7 @@ export class ImageProcessor {
 		const k = 1024;
 		const sizes = ["Bytes", "KB", "MB", "GB"];
 		const i = Math.floor(Math.log(bytes) / Math.log(k));
-		return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
+		return `${Math.round((bytes / k ** i) * 100) / 100} ${sizes[i]}`;
 	}
 
 	private printStatistics() {
@@ -416,9 +421,7 @@ export class ImageProcessor {
 		console.log(`📊 Statistics:`);
 		console.log(`   Total images found: ${this.totalProcessed}`);
 		console.log(`   Images resized/converted: ${this.totalResized}`);
-		console.log(
-			`   Images skipped (already optimal): ${this.totalSkipped}`,
-		);
+		console.log(`   Images skipped (already optimal): ${this.totalSkipped}`);
 		console.log(`   Errors encountered: ${this.totalErrors}`);
 
 		if (this.totalErrors === 0) {
@@ -438,6 +441,3 @@ if (process.argv[1]?.includes("imageOptimize")) {
 	const processor = new ImageProcessor();
 	await processor.processAllConfigs();
 }
-
-
-
