@@ -110,7 +110,7 @@ export function Projects({ projects }: { projects: Project[] }) {
 	return (
 		<section
 			id="projects"
-			className="container mx-auto py-24 sm:py-32 px-4 md:px-6 bg-muted/50 flex flex-col items-center rounded-xl"
+			className="container mx-auto py-24 sm:py-32 px-4 md:px-6 flex flex-col items-center rounded-xl"
 		>
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
@@ -124,7 +124,7 @@ export function Projects({ projects }: { projects: Project[] }) {
 					<h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
 						Featured Projects
 					</h2>
-					<p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+					<p className="mx-auto max-w-175 text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
 						A selection of my recent work.
 					</p>
 				</div>
