@@ -9,6 +9,11 @@ export default function robots(): MetadataRoute.Robots {
 			userAgent: "*",
 			allow: "/",
 		},
-		sitemap: `${siteData.siteUrl}/sitemap.xml`,
+		// robots.txt is per-origin and root-only, so every GitHub Pages project site
+		// under this domain must declare its sitemap here to be discoverable.
+		sitemap: [
+			`${siteData.siteUrl}/sitemap.xml`,
+			`${siteData.siteUrl}/IRS-Calculate_Inner_restlessnes_score/sitemap.xml`,
+		],
 	};
 }
