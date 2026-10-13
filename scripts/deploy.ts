@@ -12,7 +12,7 @@
  */
 
 import { execSync } from "node:child_process";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 // import { generateMetaImages } from './genMetaImages.ts';
@@ -38,16 +38,15 @@ async function deploy() {
 		// update to the date and time
 		const cacheName = `pwa-cache-${new Date().toISOString()}`;
 		// 4th line is one need to update
-		const fs = require("node:fs");
 		const swPath = join(process.cwd(), "public/sw.js");
 		// Read the service worker file
-		const swContent = fs.readFileSync(swPath, "utf8");
+		const swContent = readFileSync(swPath, "utf8");
 		const lines = swContent.split("\n");
 		// Update the 4th line (index 3)
 		if (lines.length >= 4) {
 			lines[3] = `const CACHE_NAME = \`${cacheName}\`;`;
 			const updatedContent = lines.join("\n");
-			fs.writeFileSync(swPath, updatedContent, "utf8");
+			writeFileSync(swPath, updatedContent, "utf8");
 			console.log(
 				`\x1b[36m[deploy]\x1b[0m \x1b[32mUpdated CACHE_NAME to:\x1b[0m ${cacheName}`,
 			);
