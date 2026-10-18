@@ -33,8 +33,7 @@ import { join } from "node:path";
 // import { generateMetaImages } from './genMetaImages.ts';
 import { ImageProcessor } from "./imageOptimize.ts";
 
-// Target directory where the built files will be deployed
-// This should point to your GitHub Pages repository
+// The fixed local Pages-repo destination is deliberately machine-specific.
 const TARGET_DIR = "/mnt/Storage/Projects/wkdkavishka.github.io/";
 // mirrorOutput() deletes files in TARGET_DIR, so its remote must match this
 const TARGET_REMOTE = "wkdkavishka/wkdkavishka.github.io";

@@ -158,6 +158,8 @@ const siteData: SiteData = {
 				"Backends for client web platforms, including SG Life: Express APIs on PostgreSQL, PayHere payments and Docker deployments.",
 		},
 	],
+	// Kubernetes, AWS, iOS and UI/UX claims were removed for lack of real experience;
+	// their absence is deliberate, not a gap to fill from generic developer profiles.
 	skills: [
 		{
 			name: "Mobile",
@@ -262,8 +264,11 @@ const siteData: SiteData = {
 			icon: FaCode,
 		},
 	],
+	// CBA client work must not expose client names, code, protocol details, real data
+	// or screenshots. Naming the employer is allowed; naming its clients is not.
 	projects: [
 		{
+			// This published slug stays stable even when the project title changes.
 			slug: "field-service-gps-tracking-app",
 			title: "CBA Trackable",
 			summary:

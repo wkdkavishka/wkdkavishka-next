@@ -18,6 +18,7 @@ export const personJsonLd = {
 			image: `${siteUrl}${personal.profileImage}`,
 			jobTitle: personal.jobTitle,
 			description: personal.description,
+			// Education names the institution only; alumniOf would imply an unspecified status.
 			email: personal.email,
 			address: {
 				"@type": "PostalAddress",

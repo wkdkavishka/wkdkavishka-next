@@ -1,26 +1,29 @@
 # wkdkavishka portfolio
 
 ## Stack and commands
-- Next 16 App Router, static export (`output: "export"`), React 19 + React Compiler, Tailwind 4, shadcn new-york, npm → `next.config.ts`
-- `npm run dev` — dev server on :3000
-- `npm run lint` — ESLint (next core-web-vitals + typescript) → `eslint.config.mjs`
-- `npm run bns` — build, then serve `out/` on :4000
-- `node scripts/deploy.ts` — optimize images, build, stamp SW cache name into `out/sw.js`, mirror `out/` into the Pages repo, commit + push; `--dry-run` stops before the commit and restores the Pages repo → `deploy()` in `scripts/deploy.ts`
+- Next 16 App Router, React 19 + Compiler, TypeScript, Tailwind 4, npm; static export → `package.json`, `next.config.ts`
+- `npm run dev`, `npm run lint`, `npm run bns` (build + serve) → `package.json`
+- `node scripts/deploy.ts` optimizes, builds, mirrors the fixed local Pages repo, commits and pushes; `--dry-run` restores the target without committing/pushing → `deploy()` in `scripts/deploy.ts`
 
 ## Rules that are easy to get wrong
-- All site content lives in `siteData` → `data/site-data.ts`; SEO/meta in `siteMetadata` → `data/metadata.ts`
-- Keep `const CACHE_NAME = …;` on one line in `public/sw.js` — `deploy()` finds it by regex in `out/sw.js` and aborts unless there is exactly one → `stampCacheName()` in `scripts/deploy.ts`
-- `NEXT_PUBLIC_EMAILJS_*` and `GOOGLE` come from `.env*` (gitignored) → `components/email-dialog.tsx`, `data/metadata.ts`
-- New project image folders must be added to `RESIZE_CONFIG` → `scripts/imageOptimize.ts`
-- Anything the live site needs must come from `public/` or the build — deploy deletes everything else in the Pages repo except `.git`, then writes `.nojekyll` → `mirrorOutput()` in `scripts/deploy.ts`
-- Deploy aborts while the Pages repo has uncommitted or ignored files; the message prints the reset command → `checkTarget()` in `scripts/deploy.ts`
+- Bump site/project `updated` when changing content → `data/site-data.ts`, `app/sitemap.ts`
+- Client components receive data via props; keep `siteData` imports and icon-bearing `socialLinks` on the server → `components/layout/header.tsx`, `components/layout/footer.tsx`
+- Child pages use `pageMetadata()` for canonical and social metadata → `data/metadata.ts`
+- Keep the `CACHE_NAME` declaration on one line → `public/sw.js`, `stampCacheName()` in `scripts/deploy.ts`
+- Add new project image folders to `RESIZE_CONFIG` → `scripts/imageOptimize.ts`
+- Palette-compress regenerated meta-icon PNGs → `generateMetaImages()` in `scripts/genMetaImages.ts`
+- File downloads use `<a>` → `components/sections/hero.tsx`
+- CBA client work excludes client names, code, protocol details, real data and screenshots → `siteData.projects` in `data/site-data.ts`
 
 ## Decisions
-- `images.unoptimized: true` is deliberate — static export can't use the Next image optimizer → `next.config.ts`
-- `deploy()` mirrors `out/` into the hardcoded local repo `/mnt/Storage/Projects/wkdkavishka.github.io/` and pushes it — machine-specific on purpose → `TARGET_DIR` in `scripts/deploy.ts`
+- Brand: "W.K.D. Kavishka"; alternate spellings remain aliases → `siteData.personal` in `data/site-data.ts`
+- Do not add Kubernetes, AWS, iOS or UI/UX experience claims → `siteData` in `data/site-data.ts`
+- Education names the institution only, without degree/status or `alumniOf` → `data/site-data.ts`, `personJsonLd` in `data/structured-data.ts`
+- Preserve CBA Trackable’s `field-service-gps-tracking-app` slug → `siteData.projects` in `data/site-data.ts`
+- Keep `.png` share-image routes, CSS reveals and interaction-loaded email forms → `app/og/[file]/route.tsx`, `app/globals.css`, `components/email-dialog.tsx`
 
 ## Findings
-- `public/sw.js` is not registered anywhere yet (`components/pwa-install-button.tsx` only handles `beforeinstallprompt`), so the cache bump has no effect until it is
-- Deploy does not regenerate meta images — the `generateMetaImages` import is commented out → `scripts/deploy.ts`
+- Keep `experimental.inlineCss` disabled; failed-trial details belong beside `nextConfig` → `next.config.ts`
+- The service worker has no registration; cache stamping alone does not activate it → `public/sw.js`, `components/pwa-install-button.tsx`
 
 @CLAUDE.local.md
