@@ -66,7 +66,7 @@ export function PWAInstallButton() {
 		<Button
 			size="lg"
 			onClick={handleInstallClick}
-			className="gap-2 bg-green-600 hover:bg-green-700 text-white dark:bg-green-700 dark:hover:bg-green-800"
+			className="gap-2 bg-green-700 hover:bg-green-800 text-white dark:bg-green-700 dark:hover:bg-green-800"
 		>
 			<Download className="h-4 w-4" />
 			Install App

@@ -78,8 +78,9 @@ export default function manifest(): MetadataRoute.Manifest {
 				url: "/#contact",
 				icons: [
 					{
-						src: "/images/profile/profile.jpg",
+						src: siteData.personal.profileImage,
 						sizes: "96x96",
+						type: "image/webp",
 					},
 				],
 			},

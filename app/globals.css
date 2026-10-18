@@ -224,3 +224,23 @@
     height: auto;
   }
 }
+
+/* Scroll reveal with no JavaScript: .reveal elements fade up as they enter the viewport, in
+   browsers with scroll-driven animations. Elsewhere, and with reduced motion, they just show.
+   Nothing starts hidden in the HTML, so crawlers and no-JS readers always see the content. */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}

@@ -1,10 +1,7 @@
-"use client";
-
-import { AnimatePresence, motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { ProjectImages } from "@/components/project-images";
+import { ProjectLinkButton } from "@/components/project-link-button";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -16,59 +13,45 @@ import {
 import type { Project } from "@/data/site-data";
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
-	const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-	useEffect(() => {
-		// Only set up interval if there are multiple images
-		if (project.image.length <= 1) return;
-
-		// Stagger the start time based on index (0.5s per index)
-		const startDelay = index * 500; // 500ms = 0.5s
-		let interval: NodeJS.Timeout;
-
-		const timeout = setTimeout(() => {
-			interval = setInterval(() => {
-				setCurrentImageIndex((prev) => (prev + 1) % project.image.length);
-			}, 3000); // Change image every 3 seconds
-		}, startDelay);
-
-		return () => {
-			clearTimeout(timeout);
-			if (interval) clearInterval(interval);
-		};
-	}, [project.image.length, index]);
+	const pageUrl = `/projects/${project.slug}`;
 
 	return (
-		<motion.div
-			initial={{ opacity: 0, y: 20 }}
-			whileInView={{ opacity: 1, y: 0 }}
-			exit={{ opacity: 0, y: -20 }}
-			viewport={{ once: false, amount: 0.3 }}
-			transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-		>
+		<div className="reveal">
 			<Card className="h-full flex flex-col overflow-hidden border-muted-foreground/20 hover:border-primary/50 transition-colors">
-				<div className="aspect-video bg-muted relative group overflow-hidden">
-					<AnimatePresence mode="popLayout">
-						<motion.div
-							key={currentImageIndex}
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							transition={{ duration: 0.5 }}
-							className="absolute inset-0"
-						>
-							<Image
-								src={project.image[currentImageIndex]}
-								alt={project.title}
-								fill
-								className="object-cover transition-all duration-700 ease-in-out group-hover:scale-105"
-							/>
-						</motion.div>
-					</AnimatePresence>
-				</div>
+				{/* Same target as the title link, so it's skipped by keyboard and screen readers */}
+				<Link
+					href={pageUrl}
+					tabIndex={-1}
+					aria-hidden="true"
+					className="aspect-video bg-muted relative group overflow-hidden block"
+				>
+					{project.image.length > 0 ? (
+						<ProjectImages
+							images={project.image}
+							alt={`${project.title} screenshot`}
+							startDelay={index * 500}
+						/>
+					) : (
+						// Client work has no public screenshots: show the stack instead
+						<div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-6 text-center bg-gradient-to-br from-muted to-secondary">
+							<span className="text-lg font-semibold">
+								{project.tags.slice(0, 3).join(" · ")}
+							</span>
+							{project.org && (
+								<span className="text-sm text-muted-foreground">
+									{project.org}
+								</span>
+							)}
+						</div>
+					)}
+				</Link>
 				<CardHeader>
-					<CardTitle>{project.title}</CardTitle>
-					<CardDescription>{project.description}</CardDescription>
+					<CardTitle>
+						<Link href={pageUrl} className="hover:underline underline-offset-4">
+							{project.title}
+						</Link>
+					</CardTitle>
+					<CardDescription>{project.summary}</CardDescription>
 				</CardHeader>
 				<CardContent className="flex-1 flex flex-col gap-4">
 					<div className="flex flex-wrap gap-2">
@@ -81,28 +64,19 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 							</span>
 						))}
 					</div>
-					<div className="flex gap-2 mt-auto">
-						{project.github && (
-							<Button
-								variant="outline"
-								size="sm"
-								className="flex-1 gap-2"
-								asChild
-							>
-								<Link href={project.github} target="_blank">
-									<Github className="h-4 w-4" /> Code
-								</Link>
-							</Button>
-						)}
+					<div className="flex flex-wrap gap-2 mt-auto">
 						<Button size="sm" className="flex-1 gap-2" asChild>
-							<Link href={project.link} target="_blank">
-								<ExternalLink className="h-4 w-4" /> Demo
+							<Link href={pageUrl}>
+								Details <ArrowRight className="h-4 w-4" />
 							</Link>
 						</Button>
+						{project.links.slice(0, 1).map((link) => (
+							<ProjectLinkButton key={link.url} link={link} />
+						))}
 					</div>
 				</CardContent>
 			</Card>
-		</motion.div>
+		</div>
 	);
 }
 
@@ -112,14 +86,7 @@ export function Projects({ projects }: { projects: Project[] }) {
 			id="projects"
 			className="container mx-auto py-24 sm:py-32 px-4 md:px-6 flex flex-col items-center rounded-xl"
 		>
-			<motion.div
-				initial={{ opacity: 0, y: 20 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				exit={{ opacity: 0, y: -20 }}
-				viewport={{ once: false, amount: 0.3 }}
-				transition={{ duration: 0.5 }}
-				className="flex flex-col items-center gap-4 text-center md:gap-8 mb-16"
-			>
+			<div className="reveal flex flex-col items-center gap-4 text-center md:gap-8 mb-16">
 				<div className="space-y-2">
 					<h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
 						Featured Projects
@@ -128,12 +95,11 @@ export function Projects({ projects }: { projects: Project[] }) {
 						A selection of my recent work.
 					</p>
 				</div>
-			</motion.div>
+			</div>
 
 			<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 				{projects.map((project, index) => (
-					// biome-ignore lint/suspicious/noArrayIndexKey: this is a static amount
-					<ProjectCard key={index} project={project} index={index} />
+					<ProjectCard key={project.slug} project={project} index={index} />
 				))}
 			</div>
 		</section>

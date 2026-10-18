@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import Link from "next/link";
 import { PWAInstallButton } from "@/components/pwa-install-button";
@@ -25,53 +22,29 @@ export function Hero({
 
 			<div className="container mx-auto px-4 md:px-6">
 				<div className="flex flex-col items-center gap-4 text-center">
-					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: -20 }}
-						viewport={{ once: false }}
-						transition={{ duration: 0.5 }}
-						className="inline-block rounded-lg bg-muted px-3 py-1 text-sm"
-					>
+					{/* Badge, name and intro are plain markup on purpose: they are the first thing people and
+					    crawlers see, so they must not start hidden (opacity 0) waiting for an animation. */}
+					<div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
 						Available for new projects
-					</motion.div>
-					<motion.h1
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: -20 }}
-						viewport={{ once: false }}
-						transition={{ duration: 0.5, delay: 0.1 }}
-						className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent pb-3 bg-gradient-to-r from-foreground to-foreground/70"
-					>
-						Hi, I'm <span className="text-primary">{personalData.name}</span>
-						<br />
-						{personalData.title}
-					</motion.h1>
-					<motion.p
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: -20 }}
-						viewport={{ once: false }}
-						transition={{ duration: 0.5, delay: 0.2 }}
-						className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed pb-3 xl:text-xl/relaxed"
-					>
-						{personalData.about.slice(0, 1)}
-					</motion.p>
-					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: -20 }}
-						viewport={{ once: false }}
-						transition={{ duration: 0.5, delay: 0.3 }}
-						className="flex flex-col gap-2 min-[400px]:flex-row"
-					>
+					</div>
+					<h1 className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl bg-clip-text text-transparent pb-2 bg-gradient-to-r from-foreground to-foreground/70">
+						{personalData.name}
+					</h1>
+					<p className="text-xl font-semibold text-primary sm:text-2xl md:text-3xl">
+						{personalData.headline}
+					</p>
+					<p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed pb-3 xl:text-xl/relaxed">
+						{personalData.intro}
+					</p>
+					<div className="flex flex-col gap-2 min-[400px]:flex-row">
 						<Button size="lg" className="gap-2" asChild>
 							<Link href="#contact">
 								Hire Me <ArrowRight className="h-4 w-4" />
 							</Link>
 						</Button>
 						<Button size="lg" variant="outline" className="gap-2" asChild>
-							<Link
+							{/* Plain <a>: next/link would prefetch the PDF as if it were a page and log a 404 */}
+							<a
 								href={
 									personalData.resumeUrl.includes("cloudinary")
 										? personalData.resumeUrl.replace(
@@ -81,21 +54,15 @@ export function Hero({
 										: personalData.resumeUrl
 								}
 								target="_blank"
+								rel="noopener"
 							>
 								Download CV <Download className="h-4 w-4" />
-							</Link>
+							</a>
 						</Button>
 						<PWAInstallButton />
-					</motion.div>
+					</div>
 
-					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: -20 }}
-						viewport={{ once: false }}
-						transition={{ duration: 0.5, delay: 0.4 }}
-						className="flex items-center gap-4 mt-8"
-					>
+					<div className="flex items-center gap-4 mt-8">
 						{socialLinks.map((link) => {
 							const Icon = link.icon;
 							return (
@@ -110,7 +77,7 @@ export function Hero({
 								</Link>
 							);
 						})}
-					</motion.div>
+					</div>
 				</div>
 			</div>
 		</section>

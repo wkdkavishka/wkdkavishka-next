@@ -1,35 +1,34 @@
-"use client";
-
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { About } from "@/components/sections/about";
 import { Contact } from "@/components/sections/contact";
+import { Experience } from "@/components/sections/experience";
 import { Hero } from "@/components/sections/hero";
 import { Projects } from "@/components/sections/projects";
 import { Services } from "@/components/sections/services";
+import { Skills } from "@/components/sections/skills";
 import siteData from "@/data/site-data";
 
 export function HomeContent() {
 	return (
 		<div className="flex min-h-screen flex-col">
-			<Header />
+			<Header name={siteData.personal.name} />
 			<main className="flex-1">
 				<Hero
 					personalData={siteData.personal}
 					socialLinks={siteData.socialLinks}
 				/>
 				<About personalData={siteData.personal} />
+				<Experience experience={siteData.experience} />
 				<Projects projects={siteData.projects} />
+				<Skills skills={siteData.skills} />
 				<Services services={siteData.services} />
 				<Contact
 					personalData={siteData.personal}
 					socialLinks={siteData.socialLinks}
 				/>
 			</main>
-			<Footer
-				personalData={siteData.personal}
-				socialLinks={siteData.socialLinks}
-			/>
+			<Footer />
 		</div>
 	);
 }

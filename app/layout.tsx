@@ -1,7 +1,9 @@
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import { JsonLd } from "@/components/json-ld";
 import { ThemeProvider } from "@/components/theme-provider";
 import siteMetadata, { viewport as siteViewport } from "@/data/metadata";
+import { personJsonLd } from "@/data/structured-data";
 
 const inter = Inter({
 	variable: "--font-inter",
@@ -26,6 +28,7 @@ export default function RootLayout({
 			<body
 				className={`${inter.variable} ${outfit.variable} antialiased bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground`}
 			>
+				<JsonLd data={personJsonLd} />
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"

@@ -1,26 +1,26 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import * as React from "react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "../mode-toggle";
 
+// "/#…" rather than "#…" so the links also work from project pages
 const navItems = [
-	{ name: "Home", href: "/" },
-	{ name: "About", href: "#about" },
-	{ name: "Projects", href: "#projects" },
-	{ name: "Services", href: "#services" },
-	{ name: "Contact", href: "#contact" },
+	{ name: "About", href: "/#about" },
+	{ name: "Experience", href: "/#experience" },
+	{ name: "Projects", href: "/#projects" },
+	{ name: "Skills", href: "/#skills" },
+	{ name: "Services", href: "/#services" },
+	{ name: "Contact", href: "/#contact" },
 ];
 
-export function Header() {
+// Takes the name as a prop instead of importing siteData: importing it here would ship all the
+// site content (every project description) to the browser as JavaScript.
+export function Header({ name }: { name: string }) {
 	const [isOpen, setIsOpen] = React.useState(false);
 	const [isScrolled, setIsScrolled] = React.useState(false);
-	const pathname = usePathname();
 
 	React.useEffect(() => {
 		const handleScroll = () => {
@@ -42,9 +42,10 @@ export function Header() {
 			<div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
 				<Link
 					href="/"
+					prefetch={false}
 					className="text-xl font-bold tracking-tight hover:text-primary/80 transition-colors"
 				>
-					WKDKavishka
+					{name}
 				</Link>
 
 				{/* Desktop Nav */}
@@ -53,12 +54,10 @@ export function Header() {
 						<Link
 							key={item.href}
 							href={item.href}
-							className={cn(
-								"text-sm font-medium transition-colors hover:text-primary",
-								pathname === item.href
-									? "text-primary"
-									: "text-muted-foreground",
-							)}
+							// All nav links point at the home page: prefetching it from the home page itself
+							// downloads its whole payload again for nothing
+							prefetch={false}
+							className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
 						>
 							{item.name}
 						</Link>
@@ -71,6 +70,9 @@ export function Header() {
 				<button
 					type="button"
 					className="md:hidden p-2 text-muted-foreground hover:text-foreground"
+					aria-label={isOpen ? "Close menu" : "Open menu"}
+					aria-expanded={isOpen}
+					aria-controls="mobile-nav"
 					onClick={() => setIsOpen(!isOpen)}
 				>
 					{isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -78,36 +80,33 @@ export function Header() {
 			</div>
 
 			{/* Mobile Nav */}
-			<AnimatePresence>
-				{isOpen && (
-					<motion.div
-						initial={{ opacity: 0, height: 0 }}
-						animate={{ opacity: 1, height: "auto" }}
-						exit={{ opacity: 0, height: 0 }}
-						className="md:hidden border-b bg-background/95 backdrop-blur-md"
-					>
-						<div className="container mx-auto flex flex-col gap-4 p-4">
-							{navItems.map((item) => (
-								<Link
-									key={item.href}
-									href={item.href}
-									className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-									onClick={() => setIsOpen(false)}
-								>
-									{item.name}
-								</Link>
-							))}
-							<div className="flex gap-2 items-center">
-								<ModeToggle />
+			{isOpen && (
+				<div
+					id="mobile-nav"
+					className="md:hidden border-b bg-background/95 backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-200"
+				>
+					<div className="container mx-auto flex flex-col gap-4 p-4">
+						{navItems.map((item) => (
+							<Link
+								key={item.href}
+								href={item.href}
+								prefetch={false}
+								className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+								onClick={() => setIsOpen(false)}
+							>
+								{item.name}
+							</Link>
+						))}
+						<div className="flex gap-2 items-center">
+							<ModeToggle />
 {/* 
-								<Button size="sm" className="flex-1">
-									Hire Me
-								</Button> */}
-							</div>
+							<Button size="sm" className="flex-1">
+								Hire Me
+							</Button> */}
 						</div>
-					</motion.div>
-				)}
-			</AnimatePresence>
+					</div>
+				</div>
+			)}
 		</header>
 	);
 }

@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Service } from "@/data/site-data";
 
@@ -10,41 +7,34 @@ export function Services({ services }: { services: Service[] }) {
 			id="services"
 			className="container mx-auto py-24 sm:py-32 px-4 md:px-6 flex flex-col items-center"
 		>
-			<motion.div
-				initial={{ opacity: 0, y: 20 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				exit={{ opacity: 0, y: -20 }}
-				viewport={{ once: false, amount: 0.3 }}
-				transition={{ duration: 0.5 }}
-				className="flex flex-col items-center gap-4 text-center md:gap-8 mb-16"
-			>
+			<div className="reveal flex flex-col items-center gap-4 text-center md:gap-8 mb-16">
 				<div className="space-y-2">
 					<h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
 						Services
 					</h2>
 					<p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-						What Kind of Solution You Need ?
+						What I can build for you.
 					</p>
 				</div>
-			</motion.div>
+			</div>
 
-			<div className="flex flex-wrap justify-center gap-4 max-w-4xl">
-				{services.map((service, index) => (
-					<motion.div
-						key={index}
-						initial={{ opacity: 0, scale: 0.9 }}
-						whileInView={{ opacity: 1, scale: 1 }}
-						exit={{ opacity: 0, scale: 0.9 }}
-						viewport={{ once: false, amount: 0.3 }}
-						transition={{ duration: 0.3, delay: index * 0.05 }}
-					>
-						<Card className="border-muted-foreground/20 hover:border-primary/50 transition-colors">
-							<CardContent className="p-4 flex items-center justify-center">
-								<span className="font-medium">{service.name}</span>
-							</CardContent>
-						</Card>
-					</motion.div>
-				))}
+			<div className="grid gap-6 sm:grid-cols-2 max-w-4xl">
+				{services.map((service) => {
+					const Icon = service.icon;
+					return (
+						<div key={service.name} className="reveal">
+							<Card className="h-full border-muted-foreground/20 hover:border-primary/50 transition-colors">
+								<CardContent className="p-6 flex flex-col gap-3">
+									<Icon className="h-8 w-8 text-primary" />
+									<h3 className="font-semibold text-lg">{service.name}</h3>
+									<p className="text-sm text-muted-foreground">
+										{service.description}
+									</p>
+								</CardContent>
+							</Card>
+						</div>
+					);
+				})}
 			</div>
 		</section>
 	);

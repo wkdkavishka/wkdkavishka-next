@@ -1,30 +1,24 @@
-"use client";
-
 import { Mail } from "lucide-react";
 import Link from "next/link";
 import { EmailDialog } from "@/components/email-dialog";
-import type { PersonalData, SocialLink } from "@/data/site-data";
+import siteData from "@/data/site-data";
 
-export function Footer({
-	personalData,
-	socialLinks,
-}: {
-	personalData: PersonalData;
-	socialLinks: SocialLink[];
-}) {
+// Reads siteData itself rather than taking props: server pages can't pass the icon components
+// in socialLinks to a client component.
+export function Footer() {
+	const { personal: personalData, socialLinks } = siteData;
 	return (
 		<footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
 			<div className="container mx-auto flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0 px-4 md:px-6">
 				<div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
 					<p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
 						Built by{" "}
-						<a
+						<Link
 							href="/"
-							rel="noreferrer"
 							className="font-medium underline underline-offset-4"
 						>
 							{personalData.name}
-						</a>
+						</Link>
 						. The source code is available on{" "}
 						<a
 							href={socialLinks.find((l) => l.name === "GitHub")?.url || "#"}
