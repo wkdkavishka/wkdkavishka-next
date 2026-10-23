@@ -114,14 +114,14 @@ export interface SiteData {
 // Create the site data with proper typing
 const siteData: SiteData = {
 	siteUrl: "https://wkdkavishka.github.io",
-	updated: "2026-10-14",
+	updated: "2026-10-24",
 	personal: {
 		name: "W.K.D. Kavishka",
 		alternateNames: ["Dumindu Kavishka", "W.K.D.Kavishka", "wkdkavishka"],
 		jobTitle: "Associate Software Engineer",
-		headline: "Flutter & Android Developer",
+		headline: "Software Engineer · Web & Flutter Apps",
 		intro:
-			"Software engineer in Colombo, Sri Lanka. I build Flutter and native Android apps, and the web systems behind them.",
+			"I build full-stack web applications and Flutter mobile apps—from interfaces and APIs to databases. Based in Colombo, Sri Lanka.",
 		location: "Colombo, Sri Lanka",
 		email: "w.k.d.kavishka@gmail.com",
 		phone: "+94757676968",
@@ -131,16 +131,16 @@ const siteData: SiteData = {
 			shortName: "UCSC",
 		},
 		about: [
-			"I'm W.K.D. Kavishka (Dumindu Kavishka), a software engineer in Colombo, Sri Lanka. I build Flutter and native Android apps, and the web systems behind them.",
-			"At Ceylon Business Appliances I'm the main developer of CBA Trackable, a Flutter field-service app whose GPS tracking has to survive Android killing it, deep sleep and weak signal. I also lock Android phones down as kiosks, work on Bluetooth links for payment terminals, and built a full-stack inventory system on my own with Next.js, Spring Boot and PostgreSQL.",
+			"I'm W.K.D. Kavishka (Dumindu Kavishka), a software engineer in Colombo, Sri Lanka, specialising in full-stack web applications and Flutter mobile apps.",
+			"At Ceylon Business Appliances I designed and built a full-stack inventory system on my own with Next.js, Spring Boot and PostgreSQL. I'm also the main developer of CBA Trackable, a Flutter field-service app with offline workflows and reliable background GPS tracking.",
 			"At Globevik I build backends for web platforms: Express APIs on PostgreSQL, PayHere payments and Docker deployments.",
-			"On my own I build web apps with Next.js, Chrome extensions and small Linux tools.",
+			"My additional Android experience includes native Kotlin integration, kiosk devices and Bluetooth links for payment terminals. On my own I build web apps with Next.js, Chrome extensions and small Linux tools.",
 		],
 		getInTouch:
-			"Need a Flutter or Android app, or the web system behind it? I'm open to freelance work and collaborations. Send me a message and I'll get back to you soon.",
+			"Need a web application or Flutter mobile app? I'm open to freelance work and collaborations. Send me a message and I'll get back to you soon.",
 		resumeUrl: "/resume.pdf",
 		description:
-			"W.K.D. Kavishka (Dumindu Kavishka) is a Flutter and Android developer in Colombo, Sri Lanka, building background GPS tracking, kiosk devices, payment-terminal apps and full-stack web systems.",
+			"W.K.D. Kavishka (Dumindu Kavishka) is a software engineer in Colombo, Sri Lanka, specialising in full-stack web applications, Flutter mobile apps, APIs and databases.",
 	},
 	experience: [
 		{
@@ -240,9 +240,15 @@ const siteData: SiteData = {
 	],
 	services: [
 		{
-			name: "Flutter & Android Apps",
+			name: "Full-Stack Web Development",
 			description:
-				"Flutter and native Kotlin apps for Android, including offline-first apps and GPS tracking that keeps running in the background.",
+				"Web applications from interface to database, with Next.js, React, Spring Boot, Node.js and PostgreSQL.",
+			icon: FaCode,
+		},
+		{
+			name: "Flutter Mobile Development",
+			description:
+				"Flutter mobile apps with offline workflows, API integration and native Android features, including reliable background GPS tracking.",
 			icon: FaMobileAlt,
 		},
 		{
@@ -257,22 +263,49 @@ const siteData: SiteData = {
 				"Bluetooth, USB and TCP links between Android devices, payment terminals, cash registers and receipt printers (ESC/POS).",
 			icon: FaBluetoothB,
 		},
-		{
-			name: "Full-Stack Web Apps",
-			description:
-				"Web apps and APIs with Next.js, React, Spring Boot, Node.js and PostgreSQL.",
-			icon: FaCode,
-		},
 	],
 	// CBA client work must not expose client names, code, protocol details, real data
 	// or screenshots. Naming the employer is allowed; naming its clients is not.
 	projects: [
 		{
+			slug: "inventory-management-system",
+			title: "Inventory Management System",
+			summary:
+				"Full-stack inventory system built solo in about seven weeks, covering purchasing, stock movements, approvals and reports.",
+			description:
+				"A system that tracks stock from purchase to machine for a vending-machine business: purchase requests through two approval stages to purchase orders and goods receipt, plus transfers, returns, write-offs, stock counts and reports. I designed and built it alone in about seven weeks, with 49 data models, about 150 API endpoints and 46 screens.",
+			highlights: [
+				"Stock lives in an append-only ledger, the only code allowed to change stock, so every balance can be traced back to its movements.",
+				"Documents lock all their stock rows in one call, in a fixed order, with optimistic locking on every record, so two people can't book the same stock. Picking is first-expiry-first-out.",
+				"Started as a browser-only Next.js prototype so the client could try the workflow early, then moved to Spring Boot and PostgreSQL screen by screen, deleting the prototype's duplicate logic.",
+				"Sign-in lockout after repeated wrong passwords, role-based desks and an audit trail on every write.",
+				"Spreadsheet imports for suppliers, items, machines and warehouses that catch mixed-up codes; a dashboard and eight reports.",
+				"CI on Bitbucket Pipelines (lint, type check, formula tests, build and backend verify in parallel), plus one-command dev and prod scripts.",
+			],
+			tags: [
+				"Next.js",
+				"React",
+				"TypeScript",
+				"TanStack Table",
+				"Spring Boot",
+				"Java",
+				"PostgreSQL",
+				"Flyway",
+				"Docker",
+				"Bitbucket Pipelines",
+			],
+			org: "Ceylon Business Appliances",
+			years: "2026",
+			links: [],
+			image: [],
+			updated: "2026-10-24",
+		},
+		{
 			// This published slug stays stable even when the project title changes.
 			slug: "field-service-gps-tracking-app",
 			title: "CBA Trackable",
 			summary:
-				"Flutter field-service app with GPS tracking that keeps working when Android kills it, through deep sleep and weak signal, and offline.",
+				"Flutter field-service app for managing jobs and service requests, with offline workflows and reliable background GPS tracking.",
 			description:
 				"Ceylon Business Appliances' field-service app: staff handle service requests, jobs and claims, and the app records their route while they are on duty. I'm the main developer on the current version, working in Flutter with native Kotlin where Flutter can't reach.",
 			highlights: [
@@ -300,40 +333,7 @@ const siteData: SiteData = {
 			years: "2026",
 			links: [],
 			image: [],
-			updated: "2026-10-14",
-		},
-		{
-			slug: "inventory-management-system",
-			title: "Inventory Management System",
-			summary:
-				"Full-stack inventory system for a vending-machine operator, built alone in about seven weeks: 49 data models, about 150 API endpoints and 46 screens.",
-			description:
-				"A system that tracks stock from purchase to machine for a vending-machine business: purchase requests through two approval stages to purchase orders and goods receipt, plus transfers, returns, write-offs, stock counts and reports. I designed and built it alone.",
-			highlights: [
-				"Stock lives in an append-only ledger, the only code allowed to change stock, so every balance can be traced back to its movements.",
-				"Documents lock all their stock rows in one call, in a fixed order, with optimistic locking on every record, so two people can't book the same stock. Picking is first-expiry-first-out.",
-				"Started as a browser-only Next.js prototype so the client could try the workflow early, then moved to Spring Boot and PostgreSQL screen by screen, deleting the prototype's duplicate logic.",
-				"Sign-in lockout after repeated wrong passwords, role-based desks and an audit trail on every write.",
-				"Spreadsheet imports for suppliers, items, machines and warehouses that catch mixed-up codes; a dashboard and eight reports.",
-				"CI on Bitbucket Pipelines (lint, type check, formula tests, build and backend verify in parallel), plus one-command dev and prod scripts.",
-			],
-			tags: [
-				"Next.js",
-				"React",
-				"TypeScript",
-				"TanStack Table",
-				"Spring Boot",
-				"Java",
-				"PostgreSQL",
-				"Flyway",
-				"Docker",
-				"Bitbucket Pipelines",
-			],
-			org: "Ceylon Business Appliances",
-			years: "2026",
-			links: [],
-			image: [],
-			updated: "2026-10-14",
+			updated: "2026-10-24",
 		},
 		{
 			slug: "korean-class",
@@ -376,6 +376,36 @@ const siteData: SiteData = {
 				"/images/projects/korean-class/6.webp",
 			],
 			updated: "2026-10-14",
+		},
+		{
+			slug: "sg-life",
+			title: "SG Life",
+			summary:
+				"Learning platform built with the Globevik team. I developed the Express and PostgreSQL backend, PayHere payments and Docker deployment.",
+			description:
+				"A learning platform by Surangith Godagama with financial education and professional development courses for insurance professionals. Built by the Globevik team.",
+			highlights: [
+				"My part: the backend API with Express and PostgreSQL.",
+				"PayHere payment integration.",
+				"Docker deployment.",
+			],
+			tags: [
+				"Next.js",
+				"Express",
+				"PostgreSQL",
+				"Firebase",
+				"Docker",
+				"PayHere",
+			],
+			org: "Globevik",
+			links: [{ label: "Live site", url: "https://sglife.net/", type: "demo" }],
+			image: [
+				"/images/projects/sg-life/1.webp",
+				"/images/projects/sg-life/2.webp",
+				"/images/projects/sg-life/3.webp",
+				"/images/projects/sg-life/4.webp",
+			],
+			updated: "2026-10-24",
 		},
 		{
 			slug: "android-kiosk-device-owner",
@@ -443,36 +473,6 @@ const siteData: SiteData = {
 				"/images/projects/irs-calculator/1.webp",
 				"/images/projects/irs-calculator/2.webp",
 				"/images/projects/irs-calculator/3.webp",
-			],
-			updated: "2026-10-14",
-		},
-		{
-			slug: "sg-life",
-			title: "SG Life",
-			summary:
-				"MDRT (Million Dollar Round Table) learning platform for insurance professionals, built with the Globevik team.",
-			description:
-				"A learning platform by Surangith Godagama with financial education and professional development courses for insurance professionals. Built by the Globevik team.",
-			highlights: [
-				"My part: the backend API with Express and PostgreSQL.",
-				"PayHere payment integration.",
-				"Docker deployment.",
-			],
-			tags: [
-				"Next.js",
-				"Express",
-				"PostgreSQL",
-				"Firebase",
-				"Docker",
-				"PayHere",
-			],
-			org: "Globevik",
-			links: [{ label: "Live site", url: "https://sglife.net/", type: "demo" }],
-			image: [
-				"/images/projects/sg-life/1.webp",
-				"/images/projects/sg-life/2.webp",
-				"/images/projects/sg-life/3.webp",
-				"/images/projects/sg-life/4.webp",
 			],
 			updated: "2026-10-14",
 		},

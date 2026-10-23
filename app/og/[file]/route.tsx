@@ -77,20 +77,46 @@ function HomeImage({ photo }: { photo: string }) {
 				alt=""
 				width={300}
 				height={300}
-				style={{ borderRadius: 999, border: `6px solid ${colors.chip}` }}
+				style={{
+					borderRadius: 999,
+					border: `6px solid ${colors.chip}`,
+					flexShrink: 0,
+				}}
 			/>
-			<div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-				<div style={{ display: "flex", fontSize: 84, letterSpacing: -2 }}>
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					flex: 1,
+					minWidth: 0,
+					gap: 20,
+				}}
+			>
+				<div
+					style={{
+						display: "flex",
+						fontSize: 64,
+						lineHeight: 1.1,
+						letterSpacing: -2,
+					}}
+				>
 					{personal.name}
 				</div>
-				<div style={{ display: "flex", fontSize: 40, color: colors.muted }}>
+				<div
+					style={{
+						display: "flex",
+						fontSize: 36,
+						lineHeight: 1.25,
+						color: colors.muted,
+					}}
+				>
 					{personal.headline}
 				</div>
 				<div style={{ display: "flex", fontSize: 30, color: colors.muted }}>
-					{`Full-stack · ${personal.location}`}
+					{personal.location}
 				</div>
 				<div style={{ display: "flex", marginTop: 16 }}>
-					<Chips items={["Flutter", "Android", "Kotlin", "Next.js"]} />
+					<Chips items={["React", "Next.js", "Flutter", "PostgreSQL"]} />
 				</div>
 			</div>
 		</div>
@@ -121,7 +147,14 @@ function ProjectImage({ photo, project }: { photo: string; project: Project }) {
 					height={88}
 					style={{ borderRadius: 999 }}
 				/>
-				<div style={{ display: "flex", flexDirection: "column" }}>
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "column",
+						flex: 1,
+						minWidth: 0,
+					}}
+				>
 					<div style={{ display: "flex", fontSize: 36 }}>{personal.name}</div>
 					<div style={{ display: "flex", fontSize: 26, color: colors.muted }}>
 						{personal.headline}

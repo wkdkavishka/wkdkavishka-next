@@ -14,7 +14,7 @@ export function About({ personalData }: { personalData: PersonalData }) {
 						About Me
 					</h2>
 					<p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-						Flutter and Android apps, and the web systems behind them.
+						Full-stack web applications and Flutter mobile apps.
 					</p>
 				</div>
 			</div>
