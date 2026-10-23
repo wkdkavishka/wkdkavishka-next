@@ -48,6 +48,8 @@ export interface SocialLink {
 	name: string;
 	url: string;
 	icon: IconType;
+	// Display locations do not limit the profile identity links used by structured data.
+	placements: ("hero" | "contact" | "footer")[];
 }
 
 export interface Experience {
@@ -606,31 +608,37 @@ const siteData: SiteData = {
 			name: "GitHub",
 			url: "https://github.com/wkdkavishka",
 			icon: FaGithub,
+			placements: ["hero"],
 		},
 		{
 			name: "LinkedIn",
 			url: "https://linkedin.com/in/wkdkavishka",
 			icon: FaLinkedin,
+			placements: ["hero", "contact"],
 		},
 		{
 			name: "X",
 			url: "https://x.com/wkdkavishka",
 			icon: FaXTwitter,
+			placements: ["footer"],
 		},
 		{
 			name: "Instagram",
 			url: "https://www.instagram.com/w.k.d.kavishka/",
 			icon: FaInstagram,
+			placements: ["footer"],
 		},
 		{
 			name: "Facebook",
 			url: "https://facebook.com/W.K.D.Kavishka",
 			icon: FaFacebook,
+			placements: ["footer"],
 		},
 		{
 			name: "WhatsApp",
 			url: "https://wa.me/94757676968",
 			icon: FaWhatsapp,
+			placements: ["contact"],
 		},
 	],
 };

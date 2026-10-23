@@ -16,7 +16,9 @@ export function HomeContent() {
 			<main className="flex-1">
 				<Hero
 					personalData={siteData.personal}
-					socialLinks={siteData.socialLinks}
+					socialLinks={siteData.socialLinks.filter((link) =>
+						link.placements.includes("hero"),
+					)}
 				/>
 				<About personalData={siteData.personal} />
 				<Projects projects={siteData.projects} />
@@ -25,7 +27,9 @@ export function HomeContent() {
 				<Services services={siteData.services} />
 				<Contact
 					personalData={siteData.personal}
-					socialLinks={siteData.socialLinks}
+					socialLinks={siteData.socialLinks.filter((link) =>
+						link.placements.includes("contact"),
+					)}
 				/>
 			</main>
 			<Footer />

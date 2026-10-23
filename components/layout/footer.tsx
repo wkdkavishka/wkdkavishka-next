@@ -7,9 +7,12 @@ import siteData from "@/data/site-data";
 // in socialLinks to a client component.
 export function Footer() {
 	const { personal: personalData, socialLinks } = siteData;
+	const personalLinks = socialLinks.filter((link) =>
+		link.placements.includes("footer"),
+	);
 	return (
 		<footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-			<div className="container mx-auto flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0 px-4 md:px-6">
+			<div className="container mx-auto flex flex-col items-center justify-between gap-4 py-10 md:min-h-24 md:flex-row md:py-6 px-4 md:px-6">
 				<div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
 					<p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
 						Built by{" "}
@@ -31,20 +34,24 @@ export function Footer() {
 						.
 					</p>
 				</div>
-				<div className="flex items-center gap-4">
-					{socialLinks.map((link) => (
-						<Link
-							key={link.name}
-							href={link.url}
-							target="_blank"
-							rel="noreferrer"
-							className="text-muted-foreground hover:text-foreground transition-colors"
-						>
-							{/* We don't have dynamic icons easily unless we map them or use a library that renders from string */}
-							{/* For now, let's just show the name or use a generic icon if we can't map */}
-							<span className="text-sm font-medium">{link.name}</span>
-						</Link>
-					))}
+				<div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
+					<nav
+						aria-label="Personal socials"
+						className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2"
+					>
+						<span className="text-sm text-muted-foreground">Personal socials</span>
+						{personalLinks.map((link) => (
+							<Link
+								key={link.name}
+								href={link.url}
+								target="_blank"
+								rel="noreferrer"
+								className="text-muted-foreground hover:text-foreground transition-colors"
+							>
+								<span className="text-sm font-medium">{link.name}</span>
+							</Link>
+						))}
+					</nav>
 					<EmailDialog email={personalData.email}>
 						<button
 							type="button"
