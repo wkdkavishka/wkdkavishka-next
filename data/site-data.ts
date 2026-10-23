@@ -28,6 +28,8 @@ export interface Project {
 	// URL segment of the project page (/projects/<slug>) and of its share image (/og/<slug>.png)
 	slug: string;
 	title: string;
+	// Adds search/share context without changing the project's display name or published URL.
+	seoTitle?: string;
 	// One line, shown on the card and used as the page's meta description
 	summary: string;
 	description: string;
@@ -270,8 +272,9 @@ const siteData: SiteData = {
 		{
 			slug: "inventory-management-system",
 			title: "Inventory Management System",
+			seoTitle: "Inventory Management — Next.js & Spring Boot",
 			summary:
-				"Full-stack inventory system built solo in about seven weeks, covering purchasing, stock movements, approvals and reports.",
+				"Inventory management system built solo with Next.js, Spring Boot and PostgreSQL, covering purchasing, stock movements, approvals and reports.",
 			description:
 				"A system that tracks stock from purchase to machine for a vending-machine business: purchase requests through two approval stages to purchase orders and goods receipt, plus transfers, returns, write-offs, stock counts and reports. I designed and built it alone in about seven weeks, with 49 data models, about 150 API endpoints and 46 screens.",
 			highlights: [
@@ -304,8 +307,9 @@ const siteData: SiteData = {
 			// This published slug stays stable even when the project title changes.
 			slug: "field-service-gps-tracking-app",
 			title: "CBA Trackable",
+			seoTitle: "CBA Trackable — Flutter GPS Tracking App",
 			summary:
-				"Flutter field-service app for managing jobs and service requests, with offline workflows and reliable background GPS tracking.",
+				"Main developer of CBA Trackable, a Flutter field-service app with offline job management, service requests and reliable background GPS tracking.",
 			description:
 				"Ceylon Business Appliances' field-service app: staff handle service requests, jobs and claims, and the app records their route while they are on duty. I'm the main developer on the current version, working in Flutter with native Kotlin where Flutter can't reach.",
 			highlights: [
@@ -338,8 +342,9 @@ const siteData: SiteData = {
 		{
 			slug: "korean-class",
 			title: "Korean Class",
+			seoTitle: "Korean Class — EPS-TOPIK-Style Exam Platform",
 			summary:
-				"Online exam platform for a Korean language academy: EPS-TOPIK style exams with listening audio, autosave and instant results.",
+				"Full-stack Korean exam platform built with Next.js and Fastify, with EPS-TOPIK-style listening exams, autosaved answers and instant results.",
 			description:
 				"A full-stack exam platform for a Korean language academy. Teachers build papers with text, audio and image questions; students sit them in the browser and get their results straight away.",
 			highlights: [
@@ -375,11 +380,12 @@ const siteData: SiteData = {
 				"/images/projects/korean-class/5.webp",
 				"/images/projects/korean-class/6.webp",
 			],
-			updated: "2026-10-14",
+			updated: "2026-10-24",
 		},
 		{
 			slug: "sg-life",
 			title: "SG Life",
+			seoTitle: "SG Life — Learning Platform Backend",
 			summary:
 				"Learning platform built with the Globevik team. I developed the Express and PostgreSQL backend, PayHere payments and Docker deployment.",
 			description:
@@ -410,6 +416,7 @@ const siteData: SiteData = {
 		{
 			slug: "android-kiosk-device-owner",
 			title: "Android Kiosk Device Controller",
+			seoTitle: "Android Kiosk Controller — TestDPC Fork",
 			summary:
 				"Fork of Google's TestDPC that locks Android phones down to a few apps, with one-run provisioning scripts for Samsung and Xiaomi phones.",
 			description:
@@ -441,11 +448,12 @@ const siteData: SiteData = {
 				},
 			],
 			image: [],
-			updated: "2026-10-14",
+			updated: "2026-10-24",
 		},
 		{
 			slug: "irs-self-assessment",
 			title: "IRS Self-Assessment Tool",
+			seoTitle: "IRS Tool — Internal Restlessness Self-Assessment",
 			summary:
 				"Internal Restlessness Scale (IRS) self-assessment for ADHD-related inner restlessness, scored privately in the browser.",
 			description:
@@ -474,11 +482,12 @@ const siteData: SiteData = {
 				"/images/projects/irs-calculator/2.webp",
 				"/images/projects/irs-calculator/3.webp",
 			],
-			updated: "2026-10-14",
+			updated: "2026-10-24",
 		},
 		{
 			slug: "chrome-tab-extensions",
 			title: "Tab Sleep Timer & Tab Block",
+			seoTitle: "Tab Sleep Timer & Tab Block — Chrome Extensions",
 			summary:
 				"Two dependency-free Chrome extensions: one puts idle tabs to sleep to save memory, the other closes tabs on blocked sites.",
 			description:
@@ -503,13 +512,14 @@ const siteData: SiteData = {
 				},
 			],
 			image: [],
-			updated: "2026-10-14",
+			updated: "2026-10-24",
 		},
 		{
 			slug: "payment-terminal-launcher",
 			title: "Payment Terminal Connectivity (R&D)",
+			seoTitle: "Android Payment Terminal Connectivity",
 			summary:
-				"Bluetooth, USB and TCP links between Android payment terminals, cash registers and receipt printers.",
+				"Android payment-terminal R&D: Bluetooth, USB and TCP connectivity with cash registers and receipt printers, using Kotlin and Python.",
 			description:
 				"Research and development work on Android payment terminals at Ceylon Business Appliances: connecting a shop's cash register to the terminal, and understanding what POS apps send to their printers.",
 			highlights: [
@@ -531,11 +541,12 @@ const siteData: SiteData = {
 			years: "2026",
 			links: [],
 			image: [],
-			updated: "2026-10-14",
+			updated: "2026-10-24",
 		},
 		{
 			slug: "linux-desktop-tools",
 			title: "Linux Desktop Tools",
+			seoTitle: "Linux Desktop Tools — KDE & Chrome PWA Fixes",
 			summary:
 				"Small tools for the Linux desktop: a fixer for broken Chrome app icons, and a native KDE front end for Xtreme Download Manager.",
 			description:
@@ -554,11 +565,12 @@ const siteData: SiteData = {
 				},
 			],
 			image: [],
-			updated: "2026-10-14",
+			updated: "2026-10-24",
 		},
 		{
 			slug: "gpt-shell-4o-mini",
 			title: "GPT-shell-4o-mini",
+			seoTitle: "GPT-shell-4o-mini — Python ChatGPT CLI",
 			summary:
 				"Lightweight Python CLI to use OpenAI's ChatGPT and DALL-E from the terminal, published on PyPI.",
 			description:
@@ -586,7 +598,7 @@ const siteData: SiteData = {
 				"/images/projects/gpt-shell-4o-mini/3.webp",
 				"/images/projects/gpt-shell-4o-mini/4.webp",
 			],
-			updated: "2026-10-14",
+			updated: "2026-10-24",
 		},
 	],
 	socialLinks: [

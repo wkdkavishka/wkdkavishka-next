@@ -30,7 +30,7 @@ export async function generateMetadata({
 	const project = findProject((await params).slug);
 	if (!project) return {};
 	return pageMetadata({
-		title: project.title,
+		title: project.seoTitle ?? project.title,
 		description: project.summary,
 		path: `/projects/${project.slug}`,
 		image: ogImagePath(project.slug),

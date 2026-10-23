@@ -19,8 +19,8 @@ export function HomeContent() {
 					socialLinks={siteData.socialLinks}
 				/>
 				<About personalData={siteData.personal} />
-				<Experience experience={siteData.experience} />
 				<Projects projects={siteData.projects} />
+				<Experience experience={siteData.experience} />
 				<Skills skills={siteData.skills} />
 				<Services services={siteData.services} />
 				<Contact
