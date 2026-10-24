@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
+import type { ProjectSection } from "@/data/site-data";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "../mode-toggle";
 
@@ -11,21 +12,29 @@ import { ModeToggle } from "../mode-toggle";
 const navItems = [
 	{ name: "About", href: "/#about" },
 	{ name: "Projects", href: "/#projects" },
+	{ name: "Open Source", href: "/#open-source" },
 	{ name: "Experience", href: "/#experience" },
-	{ name: "Skills", href: "/#skills" },
 	{ name: "Services", href: "/#services" },
 	{ name: "Contact", href: "/#contact" },
 ];
 
 // Takes the name as a prop instead of importing siteData: importing it here would ship all the
 // site content (every project description) to the browser as JavaScript.
-export function Header({ name }: { name: string }) {
+export function Header({
+	name,
+	projectSection,
+}: {
+	name: string;
+	projectSection?: ProjectSection;
+}) {
 	const pathname = usePathname();
 	const [isOpen, setIsOpen] = React.useState(false);
 	const [isScrolled, setIsScrolled] = React.useState(false);
 	const [activeSection, setActiveSection] = React.useState<string | null>(null);
 	const activeHref = pathname.startsWith("/projects/")
-		? "/#projects"
+		? projectSection === "open-source"
+			? "/#open-source"
+			: "/#projects"
 		: pathname === "/"
 			? activeSection
 			: null;
@@ -133,7 +142,7 @@ export function Header({ name }: { name: string }) {
 				</Link>
 
 				{/* Desktop Nav */}
-				<nav aria-label="Primary" className="hidden md:flex items-center gap-6">
+				<nav aria-label="Primary" className="hidden lg:flex items-center gap-6">
 					{navItems.map((item) => (
 						<Link
 							key={item.href}
@@ -158,7 +167,7 @@ export function Header({ name }: { name: string }) {
 				{/* Mobile Menu Toggle */}
 				<button
 					type="button"
-					className="md:hidden p-2 text-muted-foreground hover:text-foreground"
+					className="lg:hidden p-2 text-muted-foreground hover:text-foreground"
 					aria-label={isOpen ? "Close menu" : "Open menu"}
 					aria-expanded={isOpen}
 					aria-controls="mobile-nav"
@@ -173,7 +182,7 @@ export function Header({ name }: { name: string }) {
 				<nav
 					id="mobile-nav"
 					aria-label="Mobile primary"
-					className="md:hidden border-b bg-background/95 backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-200"
+					className="lg:hidden border-b bg-background/95 backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-200"
 				>
 					<div className="container mx-auto flex flex-col gap-4 p-4">
 						{navItems.map((item) => (

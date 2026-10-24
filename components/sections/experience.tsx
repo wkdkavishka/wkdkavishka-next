@@ -1,4 +1,5 @@
 import { Briefcase } from "lucide-react";
+import { SectionHeading } from "@/components/section-heading";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Experience as ExperienceItem } from "@/data/site-data";
 
@@ -8,11 +9,7 @@ export function Experience({ experience }: { experience: ExperienceItem[] }) {
 			id="experience"
 			className="container mx-auto py-24 sm:py-32 px-4 md:px-6 flex flex-col items-center"
 		>
-			<div className="reveal flex flex-col items-center gap-4 text-center md:gap-8 mb-16">
-				<h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-					Experience
-				</h2>
-			</div>
+			<SectionHeading title="Experience" subtitle="Where have I worked?" />
 
 			<div className="flex flex-col gap-6 w-full max-w-3xl">
 				{experience.map((job) => (

@@ -24,10 +24,27 @@ export interface ProjectLink {
 	type: "demo" | "code" | "package";
 }
 
+export const projectSections = {
+	featured: {
+		id: "projects",
+		title: "Featured Projects",
+		subtitle: "What have I built?",
+	},
+	"open-source": {
+		id: "open-source",
+		title: "Open Source",
+		subtitle: "What have I shared?",
+	},
+} as const;
+
+export type ProjectSection = keyof typeof projectSections;
+
 export interface Project {
 	// URL segment of the project page (/projects/<slug>) and of its share image (/og/<slug>.png)
 	slug: string;
 	title: string;
+	// Curated placement, not inferred from whether a project has a public repository.
+	section: ProjectSection;
 	// Adds search/share context without changing the project's display name or published URL.
 	seoTitle?: string;
 	// One line, shown on the card and used as the page's meta description
@@ -37,9 +54,12 @@ export interface Project {
 	tags: string[];
 	// Where it was built, for work done for an employer
 	org?: string;
+	engagement?: "Employment" | "Freelance" | "Personal";
+	role?: string;
 	years?: string;
 	links: ProjectLink[];
 	image: string[];
+	imageDetails?: Record<string, { alt: string; caption?: string }>;
 	// Date the page content last changed (sitemap lastmod); bump it when editing the entry
 	updated: string;
 }
@@ -59,11 +79,6 @@ export interface Experience {
 	// Unset means the role is current
 	end?: string;
 	summary: string;
-}
-
-export interface SkillGroup {
-	name: string;
-	skills: string[];
 }
 
 // export interface TeamMember {
@@ -98,6 +113,8 @@ export interface PersonalData {
 	// Where you studied — the user asked for the place only, no degree or status
 	education: { name: string; shortName: string };
 	about: string[];
+	// Only show the external link once the separate personal site is ready.
+	personalInterestsUrl?: string;
 	getInTouch: string;
 	resumeUrl: string;
 	description: string;
@@ -106,7 +123,6 @@ export interface PersonalData {
 export interface SiteData {
 	personal: PersonalData;
 	experience: Experience[];
-	skills: SkillGroup[];
 	services: Service[];
 	projects: Project[];
 	socialLinks: SocialLink[];
@@ -118,7 +134,7 @@ export interface SiteData {
 // Create the site data with proper typing
 const siteData: SiteData = {
 	siteUrl: "https://wkdkavishka.github.io",
-	updated: "2026-10-24",
+	updated: "2026-10-24T00:03:47Z",
 	personal: {
 		name: "W.K.D. Kavishka",
 		alternateNames: ["Dumindu Kavishka", "W.K.D.Kavishka", "wkdkavishka"],
@@ -135,10 +151,9 @@ const siteData: SiteData = {
 			shortName: "UCSC",
 		},
 		about: [
-			"I'm W.K.D. Kavishka (Dumindu Kavishka), a software engineer in Colombo, Sri Lanka, specialising in full-stack web applications and Flutter mobile apps.",
-			"At Ceylon Business Appliances I designed and built a full-stack inventory system on my own with Next.js, Spring Boot and PostgreSQL. I'm also the main developer of CBA Trackable, a Flutter field-service app with offline workflows and reliable background GPS tracking.",
-			"At Globevik I build backends for web platforms: Express APIs on PostgreSQL, PayHere payments and Docker deployments.",
-			"My additional Android experience includes native Kotlin integration, kiosk devices and Bluetooth links for payment terminals. On my own I build web apps with Next.js, Chrome extensions and small Linux tools.",
+			"I'm W.K.D. Kavishka, a software engineer based in Colombo, Sri Lanka. I build software, but that is only part of who I am.",
+			"I'm drawn to philosophy, literature and poetry—to questions that don't always have clear answers, and words that help us understand ourselves a little better.",
+			"I write poems too. This site is where I share what I build; my writing and personal interests will have a space of their own.",
 		],
 		getInTouch:
 			"Need a web application or Flutter mobile app? I'm open to freelance work and collaborations. Send me a message and I'll get back to you soon.",
@@ -160,86 +175,6 @@ const siteData: SiteData = {
 			start: "2024",
 			summary:
 				"Backends for client web platforms, including SG Life: Express APIs on PostgreSQL, PayHere payments and Docker deployments.",
-		},
-	],
-	// Kubernetes, AWS, iOS and UI/UX claims were removed for lack of real experience;
-	// their absence is deliberate, not a gap to fill from generic developer profiles.
-	skills: [
-		{
-			name: "Mobile",
-			skills: [
-				"Flutter",
-				"Dart",
-				"Android",
-				"Kotlin",
-				"Java",
-				"Jetpack Compose",
-				"Riverpod",
-				"Isar",
-				"Firebase",
-				"Google Maps",
-				"Background location",
-				"Foreground services",
-				"WorkManager",
-				"Android Enterprise",
-				"Kiosk mode (lock task)",
-				"Bluetooth",
-				"USB serial",
-				"Payment terminals",
-				"ESC/POS printing",
-			],
-		},
-		{
-			name: "Web",
-			skills: [
-				"Next.js",
-				"React",
-				"TypeScript",
-				"Tailwind CSS",
-				"shadcn/ui",
-				"TanStack Query",
-				"Angular",
-				"Vue",
-			],
-		},
-		{
-			name: "Backend",
-			skills: [
-				"Spring Boot",
-				"Node.js",
-				"Express",
-				"Fastify",
-				"Python",
-				"Flask",
-				"REST APIs",
-			],
-		},
-		{
-			name: "Databases",
-			skills: [
-				"PostgreSQL",
-				"MySQL",
-				"MongoDB",
-				"SQLite / Turso",
-				"Drizzle ORM",
-				"TypeORM",
-				"Flyway",
-			],
-		},
-		{
-			name: "Tools",
-			skills: [
-				"Docker",
-				"Docker Compose",
-				"Bitbucket Pipelines",
-				"Git",
-				"Linux",
-				"systemd",
-				"GitHub Pages",
-				"Vercel",
-				"Qt 6 / QML",
-				"Chrome extensions",
-			],
 		},
 	],
 	services: [
@@ -274,6 +209,7 @@ const siteData: SiteData = {
 		{
 			slug: "inventory-management-system",
 			title: "Inventory Management System",
+			section: "featured",
 			seoTitle: "Inventory Management — Next.js & Spring Boot",
 			summary:
 				"Inventory management system built solo with Next.js, Spring Boot and PostgreSQL, covering purchasing, stock movements, approvals and reports.",
@@ -300,15 +236,18 @@ const siteData: SiteData = {
 				"Bitbucket Pipelines",
 			],
 			org: "Ceylon Business Appliances",
+			engagement: "Employment",
+			role: "Solo full-stack developer",
 			years: "2026",
 			links: [],
 			image: [],
-			updated: "2026-10-24",
+			updated: "2026-10-24T00:03:47Z",
 		},
 		{
 			// This published slug stays stable even when the project title changes.
 			slug: "field-service-gps-tracking-app",
 			title: "CBA Trackable",
+			section: "featured",
 			seoTitle: "CBA Trackable — Flutter GPS Tracking App",
 			summary:
 				"Main developer of CBA Trackable, a Flutter field-service app with offline job management, service requests and reliable background GPS tracking.",
@@ -336,14 +275,17 @@ const siteData: SiteData = {
 				"OSRM",
 			],
 			org: "Ceylon Business Appliances",
+			engagement: "Employment",
+			role: "Main developer",
 			years: "2026",
 			links: [],
 			image: [],
-			updated: "2026-10-24",
+			updated: "2026-10-24T00:03:47Z",
 		},
 		{
 			slug: "korean-class",
 			title: "Korean Class",
+			section: "featured",
 			seoTitle: "Korean Class — EPS-TOPIK-Style Exam Platform",
 			summary:
 				"Full-stack Korean exam platform built with Next.js and Fastify, with EPS-TOPIK-style listening exams, autosaved answers and instant results.",
@@ -382,11 +324,12 @@ const siteData: SiteData = {
 				"/images/projects/korean-class/5.webp",
 				"/images/projects/korean-class/6.webp",
 			],
-			updated: "2026-10-24",
+			updated: "2026-10-24T00:03:47Z",
 		},
 		{
 			slug: "sg-life",
 			title: "SG Life",
+			section: "featured",
 			seoTitle: "SG Life — Learning Platform Backend",
 			summary:
 				"Learning platform built with the Globevik team. I developed the Express and PostgreSQL backend, PayHere payments and Docker deployment.",
@@ -406,6 +349,8 @@ const siteData: SiteData = {
 				"PayHere",
 			],
 			org: "Globevik",
+			engagement: "Employment",
+			role: "Backend developer",
 			links: [{ label: "Live site", url: "https://sglife.net/", type: "demo" }],
 			image: [
 				"/images/projects/sg-life/1.webp",
@@ -413,11 +358,12 @@ const siteData: SiteData = {
 				"/images/projects/sg-life/3.webp",
 				"/images/projects/sg-life/4.webp",
 			],
-			updated: "2026-10-24",
+			updated: "2026-10-24T00:03:47Z",
 		},
 		{
 			slug: "android-kiosk-device-owner",
 			title: "Android Kiosk Device Controller",
+			section: "featured",
 			seoTitle: "Android Kiosk Controller — TestDPC Fork",
 			summary:
 				"Fork of Google's TestDPC that locks Android phones down to a few apps, with one-run provisioning scripts for Samsung and Xiaomi phones.",
@@ -441,6 +387,8 @@ const siteData: SiteData = {
 				"Bash",
 			],
 			org: "Ceylon Business Appliances",
+			engagement: "Employment",
+			role: "Fork and provisioning script maintainer",
 			years: "2026",
 			links: [
 				{
@@ -450,11 +398,13 @@ const siteData: SiteData = {
 				},
 			],
 			image: [],
-			updated: "2026-10-24",
+			updated: "2026-10-24T00:03:47Z",
 		},
 		{
 			slug: "irs-self-assessment",
 			title: "IRS Self-Assessment Tool",
+			section: "open-source",
+			engagement: "Personal",
 			seoTitle: "IRS Tool — Internal Restlessness Self-Assessment",
 			summary:
 				"Internal Restlessness Scale (IRS) self-assessment for ADHD-related inner restlessness, scored privately in the browser.",
@@ -484,11 +434,13 @@ const siteData: SiteData = {
 				"/images/projects/irs-calculator/2.webp",
 				"/images/projects/irs-calculator/3.webp",
 			],
-			updated: "2026-10-24",
+			updated: "2026-10-24T00:03:47Z",
 		},
 		{
 			slug: "chrome-tab-extensions",
 			title: "Tab Sleep Timer & Tab Block",
+			section: "open-source",
+			engagement: "Personal",
 			seoTitle: "Tab Sleep Timer & Tab Block — Chrome Extensions",
 			summary:
 				"Two dependency-free Chrome extensions: one puts idle tabs to sleep to save memory, the other closes tabs on blocked sites.",
@@ -514,11 +466,12 @@ const siteData: SiteData = {
 				},
 			],
 			image: [],
-			updated: "2026-10-24",
+			updated: "2026-10-24T00:03:47Z",
 		},
 		{
 			slug: "payment-terminal-launcher",
 			title: "Payment Terminal Connectivity (R&D)",
+			section: "featured",
 			seoTitle: "Android Payment Terminal Connectivity",
 			summary:
 				"Android payment-terminal R&D: Bluetooth, USB and TCP connectivity with cash registers and receipt printers, using Kotlin and Python.",
@@ -540,14 +493,17 @@ const siteData: SiteData = {
 				"Python",
 			],
 			org: "Ceylon Business Appliances",
+			engagement: "Employment",
 			years: "2026",
 			links: [],
 			image: [],
-			updated: "2026-10-24",
+			updated: "2026-10-24T00:03:47Z",
 		},
 		{
 			slug: "linux-desktop-tools",
 			title: "Linux Desktop Tools",
+			section: "open-source",
+			engagement: "Personal",
 			seoTitle: "Linux Desktop Tools — KDE & Chrome PWA Fixes",
 			summary:
 				"Small tools for the Linux desktop: a fixer for broken Chrome app icons, and a native KDE front end for Xtreme Download Manager.",
@@ -567,11 +523,13 @@ const siteData: SiteData = {
 				},
 			],
 			image: [],
-			updated: "2026-10-24",
+			updated: "2026-10-24T00:03:47Z",
 		},
 		{
 			slug: "gpt-shell-4o-mini",
 			title: "GPT-shell-4o-mini",
+			section: "open-source",
+			engagement: "Personal",
 			seoTitle: "GPT-shell-4o-mini — Python ChatGPT CLI",
 			summary:
 				"Lightweight Python CLI to use OpenAI's ChatGPT and DALL-E from the terminal, published on PyPI.",
@@ -600,7 +558,7 @@ const siteData: SiteData = {
 				"/images/projects/gpt-shell-4o-mini/3.webp",
 				"/images/projects/gpt-shell-4o-mini/4.webp",
 			],
-			updated: "2026-10-24",
+			updated: "2026-10-24T00:03:47Z",
 		},
 	],
 	socialLinks: [

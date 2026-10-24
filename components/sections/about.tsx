@@ -1,4 +1,6 @@
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import { SectionHeading } from "@/components/section-heading";
 import { Card, CardContent } from "@/components/ui/card";
 import type { PersonalData } from "@/data/site-data";
 
@@ -8,23 +10,15 @@ export function About({ personalData }: { personalData: PersonalData }) {
 			id="about"
 			className="container mx-auto py-24 sm:py-32 px-4 md:px-6"
 		>
-			<div className="reveal flex flex-col items-center gap-4 text-center md:gap-8">
-				<div className="space-y-2">
-					<h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-						About Me
-					</h2>
-					<p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-						Full-stack web applications and Flutter mobile apps.
-					</p>
-				</div>
-			</div>
+			<SectionHeading title="About Me" subtitle="Who am I?" />
 
-			<div className="grid gap-12 lg:grid-cols-2 mt-16 items-center">
+			<div className="grid gap-12 lg:grid-cols-2 items-center">
 				<div className="reveal relative aspect-square overflow-hidden rounded-xl bg-muted">
 					<Image
 						src={personalData.profileImage}
 						alt={`${personalData.name}, ${personalData.headline}`}
 						fill
+						sizes="(min-width: 1024px) 50vw, 100vw"
 						className="object-cover"
 					/>
 				</div>
@@ -34,6 +28,17 @@ export function About({ personalData }: { personalData: PersonalData }) {
 							{paragraph}
 						</p>
 					))}
+					{personalData.personalInterestsUrl && (
+						<a
+							href={personalData.personalInterestsUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="inline-flex min-h-11 w-fit items-center gap-2 font-medium underline underline-offset-4"
+						>
+							My personal interests
+							<ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+						</a>
+					)}
 
 					<div className="grid grid-cols-2 gap-4 mt-4">
 						<Card>

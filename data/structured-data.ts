@@ -28,7 +28,7 @@ export const personJsonLd = {
 			worksFor: siteData.experience
 				.filter((job) => !job.end)
 				.map((job) => ({ "@type": "Organization", name: job.company })),
-			knowsAbout: siteData.skills.flatMap((group) => group.skills),
+			knowsAbout: [...new Set(siteData.projects.flatMap((project) => project.tags))],
 			// Profiles only — a wa.me chat link is not a page about the person
 			sameAs: siteData.socialLinks
 				.map((link) => link.url)

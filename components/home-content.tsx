@@ -6,7 +6,6 @@ import { Experience } from "@/components/sections/experience";
 import { Hero } from "@/components/sections/hero";
 import { Projects } from "@/components/sections/projects";
 import { Services } from "@/components/sections/services";
-import { Skills } from "@/components/sections/skills";
 import siteData from "@/data/site-data";
 
 export function HomeContent() {
@@ -21,9 +20,9 @@ export function HomeContent() {
 					)}
 				/>
 				<About personalData={siteData.personal} />
-				<Projects projects={siteData.projects} />
+				<Projects projects={siteData.projects} section="featured" />
+				<Projects projects={siteData.projects} section="open-source" />
 				<Experience experience={siteData.experience} />
-				<Skills skills={siteData.skills} />
 				<Services services={siteData.services} />
 				<Contact
 					personalData={siteData.personal}

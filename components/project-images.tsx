@@ -38,6 +38,7 @@ export function ProjectImages({
 			// Only the first image is described; the others repeat it
 			alt={index === 0 ? alt : ""}
 			fill
+			sizes="(min-width: 768px) 496px, calc(100vw - 2rem)"
 			className={`object-cover transition-[opacity,scale] duration-700 ease-in-out group-hover:scale-105 ${
 				index === current ? "opacity-100" : "opacity-0"
 			}`}
