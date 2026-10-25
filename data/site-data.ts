@@ -8,6 +8,10 @@ import {
 	FaLinkedin,
 	FaLock,
 	FaMobileAlt,
+	FaPuzzlePiece,
+	FaRobot,
+	FaServer,
+	FaTerminal,
 	FaWhatsapp,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -134,7 +138,7 @@ export interface SiteData {
 // Create the site data with proper typing
 const siteData: SiteData = {
 	siteUrl: "https://wkdkavishka.github.io",
-	updated: "2026-10-24T00:03:47Z",
+	updated: "2026-10-25T00:51:25Z",
 	personal: {
 		name: "W.K.D. Kavishka",
 		alternateNames: ["Dumindu Kavishka", "W.K.D.Kavishka", "wkdkavishka"],
@@ -201,6 +205,30 @@ const siteData: SiteData = {
 			description:
 				"Bluetooth, USB and TCP links between Android devices, payment terminals, cash registers and receipt printers (ESC/POS).",
 			icon: FaBluetoothB,
+		},
+		{
+			name: "Browser Extension Development",
+			description:
+				"Custom Chrome extensions for productivity, tab management and browser workflows, built with Manifest V3 and JavaScript.",
+			icon: FaPuzzlePiece,
+		},
+		{
+			name: "Automation & Scripting",
+			description:
+				"Python, Bash and JavaScript tools that automate repetitive tasks, scheduled jobs and file workflows, with custom command-line utilities.",
+			icon: FaTerminal,
+		},
+		{
+			name: "Backend & API Development",
+			description:
+				"REST APIs, databases, authentication and third-party integrations with Node.js, Fastify, Express, Spring Boot and PostgreSQL.",
+			icon: FaServer,
+		},
+		{
+			name: "AI API Integration",
+			description:
+				"OpenAI-powered chat and image-generation features integrated into applications and command-line tools.",
+			icon: FaRobot,
 		},
 	],
 	// CBA client work must not expose client names, code, protocol details, real data
@@ -596,7 +624,7 @@ const siteData: SiteData = {
 			name: "WhatsApp",
 			url: "https://wa.me/94757676968",
 			icon: FaWhatsapp,
-			placements: ["contact"],
+			placements: ["hero", "contact"],
 		},
 	],
 };

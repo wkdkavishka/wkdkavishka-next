@@ -10,6 +10,8 @@ export default function manifest(): MetadataRoute.Manifest {
 		short_name: siteData.personal.name,
 		description: siteMetadata.description || siteData.personal.description,
 		start_url: "/",
+		id: "/",
+		scope: "/",
 		display: "standalone",
 		background_color: "#ffffff",
 		theme_color: "#000000", // Dark theme

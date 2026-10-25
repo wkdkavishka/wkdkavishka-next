@@ -7,7 +7,7 @@
  * 1. Checks the Pages repo (right remote, nothing uncommitted) and pulls it
  * 2. Optimizes images in public/, then warns if this repo has uncommitted changes
  * 3. Builds the Next.js project into out/
- * 4. Stamps a fresh CACHE_NAME into out/sw.js
+ * 4. Prepares the versioned offline export and validates its assets
  * 5. Mirrors out/ into the Pages repo, removing files the build no longer makes
  * 6. Commits and pushes the Pages repo
  *
@@ -24,7 +24,6 @@ import {
 	cpSync,
 	existsSync,
 	readdirSync,
-	readFileSync,
 	rmSync,
 	writeFileSync,
 } from "node:fs";
@@ -32,6 +31,7 @@ import { join } from "node:path";
 
 // import { generateMetaImages } from './genMetaImages.ts';
 import { ImageProcessor } from "./imageOptimize.ts";
+import { preparePwaExport } from "./preparePwa.ts";
 
 // The fixed local Pages-repo destination is deliberately machine-specific.
 const TARGET_DIR = "/mnt/Storage/Projects/wkdkavishka.github.io/";
@@ -65,11 +65,12 @@ async function deploy() {
 		console.log("\x1b[36m[deploy]\x1b[0m \x1b[33mBuilding project...\x1b[0m");
 		runCommand("npm run build");
 
-		//! Step 4: Stamp a fresh service worker CACHE_NAME into the build
+		//! Step 4: Prepare PWA files before touching the Pages repo
 		console.log(
-			"\x1b[36m[deploy]\x1b[0m \x1b[33mUpdating service worker CACHE_NAME...\x1b[0m",
+			"\x1b[36m[deploy]\x1b[0m \x1b[33mPreparing offline export...\x1b[0m",
 		);
-		stampCacheName(join(SRC_DIR, "sw.js"));
+		const pwa = preparePwaExport(SRC_DIR);
+		console.log(`[deploy] ${pwa.cacheName}: ${pwa.assets} offline assets`);
 
 		//! Step 5: Mirror out/ into the Pages repo and commit
 		// Any failure from here to the commit puts the Pages repo back, so a
@@ -190,33 +191,6 @@ function warnIfDirty(): boolean {
 	);
 	console.warn(firstLines(changes));
 	return true;
-}
-
-/**
- * Gives each deploy a fresh service worker cache name. It is stamped into the
- * built out/sw.js rather than public/sw.js, so a deploy never edits the
- * source tree.
- */
-function stampCacheName(swPath: string) {
-	const declaration = /^const CACHE_NAME = .*;$/gm;
-	const content = readFileSync(swPath, "utf8");
-
-	const found = content.match(declaration)?.length ?? 0;
-	if (found !== 1) {
-		throw new Error(
-			`Expected one 'const CACHE_NAME = ...;' line in ${swPath}, found ${found}.`,
-		);
-	}
-
-	const cacheName = `pwa-cache-${new Date().toISOString()}`;
-	writeFileSync(
-		swPath,
-		content.replace(declaration, () => `const CACHE_NAME = \`${cacheName}\`;`),
-		"utf8",
-	);
-	console.log(
-		`\x1b[36m[deploy]\x1b[0m \x1b[32mUpdated CACHE_NAME to:\x1b[0m ${cacheName}`,
-	);
 }
 
 /**

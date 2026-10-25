@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useOnlineStatus } from "@/lib/use-online-status";
 
 // Loaded on demand by EmailDialog (components/email-dialog.tsx); keep it the default export.
 export default function EmailDialogContent({
@@ -29,6 +30,7 @@ export default function EmailDialogContent({
 	onCloseAutoFocus: (event: Event) => void;
 }) {
 	const [copied, setCopied] = useState(false);
+	const online = useOnlineStatus();
 	const [loading, setLoading] = useState(false);
 	const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 	const formRef = useRef<HTMLFormElement>(null);
@@ -41,6 +43,7 @@ export default function EmailDialogContent({
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		if (!navigator.onLine) return;
 		setLoading(true);
 		setStatus("idle");
 
@@ -134,7 +137,12 @@ export default function EmailDialogContent({
 							/>
 						</div>
 
-						<Button type="submit" className="w-full" disabled={loading}>
+						{!online && (
+							<p role="status" className="text-sm text-muted-foreground">
+								Sending requires an internet connection. You can still copy the email address below.
+							</p>
+						)}
+						<Button type="submit" className="w-full" disabled={loading || !online}>
 							{loading ? (
 								<>
 									<span className="animate-spin mr-2">⏳</span>

@@ -9,7 +9,7 @@
 - Bump site/project `updated` when changing content → `data/site-data.ts`, `app/sitemap.ts`
 - Client components receive data via props; keep `siteData` imports and icon-bearing `socialLinks` on the server → `components/layout/header.tsx`, `components/layout/footer.tsx`
 - Child pages use `pageMetadata()` for canonical and social metadata → `data/metadata.ts`
-- Keep the `CACHE_NAME` declaration on one line → `public/sw.js`, `stampCacheName()` in `scripts/deploy.ts`
+- Keep `CACHE_NAME` and `PRECACHE_ASSETS` declarations on one line; deploy prepares versioned HTML and offline assets → `public/sw.js`, `preparePwaExport()` in `scripts/preparePwa.ts`
 - Add new project image folders to `RESIZE_CONFIG` → `scripts/imageOptimize.ts`
 - Palette-compress regenerated meta-icon PNGs → `generateMetaImages()` in `scripts/genMetaImages.ts`
 - File downloads use `<a>` → `components/sections/hero.tsx`
@@ -24,6 +24,6 @@
 
 ## Findings
 - Keep `experimental.inlineCss` disabled; failed-trial details belong beside `nextConfig` → `next.config.ts`
-- The service worker has no registration; cache stamping alone does not activate it → `public/sw.js`, `components/pwa-install-button.tsx`
+- Plain builds intentionally skip worker registration; only deploy-prepared HTML enables offline support → `components/pwa-status.tsx`, `preparePwaExport()` in `scripts/preparePwa.ts`
 
 @CLAUDE.local.md

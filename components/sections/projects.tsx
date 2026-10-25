@@ -81,7 +81,7 @@ export function Projects({
 		>
 			<SectionHeading title={sectionInfo.title} subtitle={sectionInfo.subtitle} />
 
-			<div className="grid w-full max-w-5xl gap-8 md:grid-cols-2">
+			<div className="grid w-full max-w-7xl gap-8 md:grid-cols-2 lg:grid-cols-3">
 				{sectionProjects.map((project, index) => (
 					<ProjectCard key={project.slug} project={project} index={index} />
 				))}

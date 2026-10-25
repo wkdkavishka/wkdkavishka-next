@@ -1,5 +1,6 @@
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight, Download, Mail, Phone } from "lucide-react";
 import Link from "next/link";
+import { EmailDialog } from "@/components/email-dialog";
 import { PWAInstallButton } from "@/components/pwa-install-button";
 import { Button } from "@/components/ui/button";
 import type { PersonalData, SocialLink } from "@/data/site-data";
@@ -66,17 +67,34 @@ export function Hero({
 						{socialLinks.map((link) => {
 							const Icon = link.icon;
 							return (
-								<Link
+								<a
 									key={link.name}
 									href={link.url}
 									target="_blank"
+									rel="noopener noreferrer"
 									className="text-muted-foreground hover:text-primary transition-colors"
 								>
-									<Icon className="h-6 w-6" />
+									<Icon className="h-6 w-6" aria-hidden="true" />
 									<span className="sr-only">{link.name}</span>
-								</Link>
+								</a>
 							);
 						})}
+						<a
+							href={`tel:${personalData.phone}`}
+							className="text-muted-foreground hover:text-primary transition-colors"
+						>
+							<Phone className="h-6 w-6" aria-hidden="true" />
+							<span className="sr-only">Phone</span>
+						</a>
+						<EmailDialog email={personalData.email}>
+							<button
+								type="button"
+								className="cursor-pointer text-muted-foreground hover:text-primary transition-colors"
+							>
+								<Mail className="h-6 w-6" aria-hidden="true" />
+								<span className="sr-only">Email</span>
+							</button>
+						</EmailDialog>
 					</div>
 				</div>
 			</div>

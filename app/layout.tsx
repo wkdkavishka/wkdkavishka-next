@@ -1,6 +1,7 @@
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { JsonLd } from "@/components/json-ld";
+import { PwaStatus } from "@/components/pwa-status";
 import { ThemeProvider } from "@/components/theme-provider";
 import siteMetadata, { viewport as siteViewport } from "@/data/metadata";
 import { personJsonLd } from "@/data/structured-data";
@@ -36,6 +37,7 @@ export default function RootLayout({
 					disableTransitionOnChange
 				>
 					{children}
+					<PwaStatus />
 				</ThemeProvider>
 			</body>
 		</html>
