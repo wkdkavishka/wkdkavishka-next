@@ -50,7 +50,11 @@ export default async function ProjectPage({
 	const facts = [
 		{ label: "Company / organisation", value: project.org },
 		{ label: "Engagement", value: project.engagement },
-		{ label: "My role", value: project.role },
+		{
+			label: "My role",
+			value:
+				project.role ?? (project.contributionType === "solo" ? "Solo developer" : undefined),
+		},
 		{ label: "Year", value: project.years },
 	].filter((fact) => fact.value);
 	const hasDetails = facts.length > 0 || project.links.length > 0;
@@ -80,7 +84,6 @@ export default async function ProjectPage({
 							<Link href="/" className="font-medium underline underline-offset-4">
 								{siteData.personal.name}
 							</Link>
-							, {siteData.personal.headline}
 						</p>
 					</header>
 					<div
@@ -120,7 +123,7 @@ export default async function ProjectPage({
 								)}
 							</aside>
 						)}
-						<div className="space-y-10 sm:space-y-12 lg:col-start-1 lg:row-start-1">
+						<div className="min-w-0 space-y-10 sm:space-y-12 lg:col-start-1 lg:row-start-1">
 							<section aria-labelledby="about-project-heading" className="space-y-4">
 								<h2 id="about-project-heading" className="text-2xl font-bold tracking-tight">
 									About the project
@@ -129,11 +132,18 @@ export default async function ProjectPage({
 									{project.description}
 								</p>
 							</section>
-							<ProjectGallery project={project} />
+							<ProjectGallery
+								key={project.slug}
+								title={project.title}
+								images={project.image}
+								imageDetails={project.imageDetails}
+							/>
 							{project.highlights.length > 0 && (
 								<section aria-labelledby="contribution-heading" className="space-y-4">
 									<h2 id="contribution-heading" className="text-2xl font-bold tracking-tight">
-										My contribution
+										{project.contributionType === "solo"
+											? "Project highlights"
+											: "My contributions"}
 									</h2>
 									<ul className="list-disc pl-5 flex flex-col gap-3 leading-relaxed text-muted-foreground">
 										{project.highlights.map((highlight) => (

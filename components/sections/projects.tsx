@@ -34,7 +34,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 								startDelay={index * 500}
 							/>
 						) : (
-							// No fabricated screenshot or confidential client information in the fallback.
+							// Keep a neutral fallback when no screenshots are available.
 							<div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-secondary">
 								<Code2
 									className="h-12 w-12 text-muted-foreground/50"

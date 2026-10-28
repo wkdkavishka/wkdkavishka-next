@@ -55,6 +55,8 @@ export interface Project {
 	summary: string;
 	description: string;
 	highlights: string[];
+	// Solo refers to the work described here, not authorship of upstream projects in a fork.
+	contributionType: "solo" | "team";
 	tags: string[];
 	// Where it was built, for work done for an employer
 	org?: string;
@@ -138,7 +140,7 @@ export interface SiteData {
 // Create the site data with proper typing
 const siteData: SiteData = {
 	siteUrl: "https://wkdkavishka.github.io",
-	updated: "2026-10-28T19:32:48Z",
+	updated: "2026-10-28T21:22:36Z",
 	personal: {
 		name: "W.K.D. Kavishka",
 		alternateNames: ["Dumindu Kavishka", "W.K.D.Kavishka", "wkdkavishka"],
@@ -231,16 +233,14 @@ const siteData: SiteData = {
 			icon: FaRobot,
 		},
 	],
-	// CBA client work must not expose client names, code, protocol details, real data
-	// or screenshots. Naming the employer is allowed; naming its clients is not.
 	projects: [
 		{
 			slug: "inventory-management-system",
-			title: "Inventory Management System",
+			title: "CBA Grabit Inventory Management System",
 			section: "featured",
-			seoTitle: "Inventory Management — Next.js & Spring Boot",
+			seoTitle: "CBA Grabit Inventory Management System — Next.js & Spring Boot",
 			summary:
-				"Inventory management system built solo with Next.js, Spring Boot and PostgreSQL, covering purchasing, stock movements, approvals and reports.",
+				"CBA Grabit inventory management system, built solo with Next.js, Spring Boot and PostgreSQL, covering purchasing, stock movements, approvals and reports.",
 			description:
 				"A system that tracks stock from purchase to machine for a vending-machine business: purchase requests through two approval stages to purchase orders and goods receipt, plus transfers, returns, write-offs, stock counts and reports. I designed and built it alone in about seven weeks, with 49 data models, about 150 API endpoints and 46 screens.",
 			highlights: [
@@ -251,6 +251,7 @@ const siteData: SiteData = {
 				"Spreadsheet imports for suppliers, items, machines and warehouses that catch mixed-up codes; a dashboard and eight reports.",
 				"CI on Bitbucket Pipelines (lint, type check, formula tests, build and backend verify in parallel), plus one-command dev and prod scripts.",
 			],
+			contributionType: "solo",
 			tags: [
 				"Next.js",
 				"React",
@@ -269,7 +270,7 @@ const siteData: SiteData = {
 			years: "2026",
 			links: [],
 			image: [],
-			updated: "2026-10-24T00:03:47Z",
+			updated: "2026-10-28T21:22:36Z",
 		},
 		{
 			// This published slug stays stable even when the project title changes.
@@ -290,6 +291,7 @@ const siteData: SiteData = {
 				"Offline-first: service requests, comments and ownership changes work without signal and sync safely later.",
 				"Also: app-wide dark mode, Crashlytics in the background isolate, fewer UI rebuilds, image decoding off the UI thread, and an upgrade to Gradle 9, AGP 9 and Kotlin 2.3.",
 			],
+			contributionType: "team",
 			tags: [
 				"Flutter",
 				"Dart",
@@ -308,15 +310,15 @@ const siteData: SiteData = {
 			years: "2026",
 			links: [],
 			image: [],
-			updated: "2026-10-24T00:03:47Z",
+			updated: "2026-10-28T21:22:36Z",
 		},
 		{
 			slug: "korean-class",
-			title: "Korean Class",
+			title: "Sanduni Korean Class",
 			section: "featured",
-			seoTitle: "Korean Class — EPS-TOPIK-Style Exam Platform",
+			seoTitle: "Sanduni Korean Class — EPS-TOPIK-Style Exam Platform",
 			summary:
-				"Full-stack Korean exam platform built with Next.js and Fastify, with EPS-TOPIK-style listening exams, autosaved answers and instant results.",
+				"Sanduni Korean Class, a full-stack exam platform built with Next.js and Fastify, with EPS-TOPIK-style listening exams, autosaved answers and instant results.",
 			description:
 				"A full-stack exam platform for a Korean language academy. Teachers build papers with text, audio and image questions; students sit them in the browser and get their results straight away.",
 			highlights: [
@@ -325,6 +327,7 @@ const siteData: SiteData = {
 				"Fastify API on Vercel serverless with Drizzle ORM on Turso (libSQL); database indexes allow only one active paper at a time.",
 				"Clients check a small cache flag to know when to refresh, instead of reloading settings on every visit; media stored on Cloudinary.",
 			],
+			contributionType: "solo",
 			tags: [
 				"Next.js",
 				"React",
@@ -352,7 +355,7 @@ const siteData: SiteData = {
 				"/images/projects/korean-class/5.webp",
 				"/images/projects/korean-class/6.webp",
 			],
-			updated: "2026-10-24T00:03:47Z",
+			updated: "2026-10-28T21:22:36Z",
 		},
 		{
 			slug: "sg-life",
@@ -368,6 +371,7 @@ const siteData: SiteData = {
 				"PayHere payment integration.",
 				"Docker deployment.",
 			],
+			contributionType: "team",
 			tags: [
 				"Next.js",
 				"Express",
@@ -386,7 +390,7 @@ const siteData: SiteData = {
 				"/images/projects/sg-life/3.webp",
 				"/images/projects/sg-life/4.webp",
 			],
-			updated: "2026-10-24T00:03:47Z",
+			updated: "2026-10-28T21:22:36Z",
 		},
 		{
 			slug: "android-kiosk-device-owner",
@@ -404,6 +408,7 @@ const siteData: SiteData = {
 				"A device options screen inside the kiosk: brightness, screen timeout, rotation, PIN and ten status readouts.",
 				"Unwanted apps are disabled, or hidden when the phone refuses to disable them.",
 			],
+			contributionType: "solo",
 			tags: [
 				"Android",
 				"Java",
@@ -416,7 +421,7 @@ const siteData: SiteData = {
 			],
 			org: "Ceylon Business Appliances",
 			engagement: "Employment",
-			role: "Fork and provisioning script maintainer",
+			role: "Solo TestDPC customization and provisioning developer",
 			years: "2026",
 			links: [
 				{
@@ -426,7 +431,7 @@ const siteData: SiteData = {
 				},
 			],
 			image: [],
-			updated: "2026-10-24T00:03:47Z",
+			updated: "2026-10-28T21:22:36Z",
 		},
 		{
 			slug: "irs-self-assessment",
@@ -443,6 +448,7 @@ const siteData: SiteData = {
 				"SEO fix: a one-question-at-a-time quiz gave search engines only 185 words to read, so I added a visible guide to the scale, taking the page to about 1,500 words.",
 				"Found and fixed a results table whose bands didn't match the real scoring.",
 			],
+			contributionType: "solo",
 			tags: ["Next.js", "TypeScript", "Tailwind CSS", "PWA", "GitHub Pages"],
 			years: "2025 – 2026",
 			links: [
@@ -462,7 +468,7 @@ const siteData: SiteData = {
 				"/images/projects/irs-calculator/2.webp",
 				"/images/projects/irs-calculator/3.webp",
 			],
-			updated: "2026-10-24T00:03:47Z",
+			updated: "2026-10-28T21:22:36Z",
 		},
 		{
 			slug: "chrome-tab-extensions",
@@ -479,6 +485,7 @@ const siteData: SiteData = {
 				"Fixed popup buttons that did nothing: the popup closed before Chrome's background service worker had started. Chrome also won't sleep a window's active tab, so a blank tab is placed in front of it first.",
 				"Tab Block: closes tabs on blocked domains, from your own synced list plus a shared list hosted on GitHub, with import and export.",
 			],
+			contributionType: "solo",
 			tags: ["JavaScript", "Chrome Extensions", "Manifest V3"],
 			years: "2026",
 			links: [
@@ -494,7 +501,7 @@ const siteData: SiteData = {
 				},
 			],
 			image: [],
-			updated: "2026-10-24T00:03:47Z",
+			updated: "2026-10-28T21:22:36Z",
 		},
 		{
 			slug: "payment-terminal-launcher",
@@ -510,6 +517,7 @@ const siteData: SiteData = {
 				"Wrote Python test clients that drive the bridge over Bluetooth, USB and TCP.",
 				"Built a proof of concept that pretends to be a Bluetooth receipt printer (an SPP server) and decodes the ESC/POS print data a POS app sends, with unit tests.",
 			],
+			contributionType: "team",
 			tags: [
 				"Kotlin",
 				"Jetpack Compose",
@@ -525,7 +533,7 @@ const siteData: SiteData = {
 			years: "2026",
 			links: [],
 			image: [],
-			updated: "2026-10-24T00:03:47Z",
+			updated: "2026-10-28T21:22:36Z",
 		},
 		{
 			slug: "linux-desktop-tools",
@@ -541,6 +549,7 @@ const siteData: SiteData = {
 				"Chrome PWA icon fixer: repairs app icons on KDE and GNOME, installs without sudo, and watches for changes with a systemd path unit (cron as fallback). Fixed a loop where the watcher re-triggered on its own writes.",
 				"XDM for KDE: replaced Xtreme Download Manager's Windows and GTK screens with a native Qt 6 / Kirigami interface, and fixed a deadlock where the UI waited for a reply on the same thread that had to read it.",
 			],
+			contributionType: "solo",
 			tags: ["JavaScript", "Bash", "systemd", "Qt 6", "QML", "Kirigami", "KDE Plasma"],
 			years: "2026",
 			links: [
@@ -551,7 +560,7 @@ const siteData: SiteData = {
 				},
 			],
 			image: [],
-			updated: "2026-10-24T00:03:47Z",
+			updated: "2026-10-28T21:22:36Z",
 		},
 		{
 			slug: "gpt-shell-4o-mini",
@@ -567,6 +576,7 @@ const siteData: SiteData = {
 				"Installable with pip from PyPI.",
 				"Chat and image generation from the shell.",
 			],
+			contributionType: "solo",
 			tags: ["Python", "OpenAI API", "CLI", "PyPI"],
 			links: [
 				{
@@ -586,7 +596,7 @@ const siteData: SiteData = {
 				"/images/projects/gpt-shell-4o-mini/3.webp",
 				"/images/projects/gpt-shell-4o-mini/4.webp",
 			],
-			updated: "2026-10-24T00:03:47Z",
+			updated: "2026-10-28T21:22:36Z",
 		},
 	],
 	socialLinks: [

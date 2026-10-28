@@ -6,7 +6,6 @@
 - Add the Blog navigation link and sitemap entry only when at least one post is published.
 - Draft posts in `AI-MD/plans/blog-drafts/`, outside `app/`. Publishing waits for employer clearance and the user's approval of each post.
 - Draft three general-knowledge posts: Flutter background location through Doze and app kills; Android kiosk provisioning with TestDPC; reading ESC/POS printer data over Bluetooth SPP.
-- Keep client names, code, protocol details, real data and screenshots out of client-work posts.
 - Generate `app/llms.txt/route.ts` from `siteData`: identity, skills, projects and links. Treat it as an aid for some AI tools, not a Google ranking feature.
 
 ## Off-site profiles

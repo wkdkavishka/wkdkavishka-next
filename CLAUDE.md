@@ -13,7 +13,6 @@
 - Add new project image folders to `RESIZE_CONFIG` → `scripts/imageOptimize.ts`
 - Palette-compress regenerated meta-icon PNGs → `generateMetaImages()` in `scripts/genMetaImages.ts`
 - File downloads use `<a>` → `components/sections/hero.tsx`
-- CBA client work excludes client names, code, protocol details, real data and screenshots → `siteData.projects` in `data/site-data.ts`
 
 ## Decisions
 - Brand: "W.K.D. Kavishka"; alternate spellings remain aliases → `siteData.personal` in `data/site-data.ts`
