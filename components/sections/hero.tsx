@@ -47,17 +47,17 @@ export function Hero({
 							{/* Plain <a>: next/link would prefetch the PDF as if it were a page and log a 404 */}
 							<a
 								href={
-									personalData.resumeUrl.includes("cloudinary")
-										? personalData.resumeUrl.replace(
+									personalData.portfolioUrl.includes("cloudinary")
+										? personalData.portfolioUrl.replace(
 												"/upload/",
 												"/upload/fl_attachment/",
 											)
-										: personalData.resumeUrl
+										: personalData.portfolioUrl
 								}
 								target="_blank"
 								rel="noopener"
 							>
-								Download CV <Download className="h-4 w-4" />
+								Download Portfolio <Download className="h-4 w-4" />
 							</a>
 						</Button>
 						<PWAInstallButton />

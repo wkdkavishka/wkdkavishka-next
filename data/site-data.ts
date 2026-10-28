@@ -120,7 +120,7 @@ export interface PersonalData {
 	// Only show the external link once the separate personal site is ready.
 	personalInterestsUrl?: string;
 	getInTouch: string;
-	resumeUrl: string;
+	portfolioUrl: string;
 	description: string;
 }
 
@@ -138,7 +138,7 @@ export interface SiteData {
 // Create the site data with proper typing
 const siteData: SiteData = {
 	siteUrl: "https://wkdkavishka.github.io",
-	updated: "2026-10-25T00:51:25Z",
+	updated: "2026-10-28T19:32:48Z",
 	personal: {
 		name: "W.K.D. Kavishka",
 		alternateNames: ["Dumindu Kavishka", "W.K.D.Kavishka", "wkdkavishka"],
@@ -161,7 +161,7 @@ const siteData: SiteData = {
 		],
 		getInTouch:
 			"Need a web application or Flutter mobile app? I'm open to freelance work and collaborations. Send me a message and I'll get back to you soon.",
-		resumeUrl: "/resume.pdf",
+		portfolioUrl: "/portfolio.pdf",
 		description:
 			"W.K.D. Kavishka (Dumindu Kavishka) is a software engineer in Colombo, Sri Lanka, specialising in full-stack web applications, Flutter mobile apps, APIs and databases.",
 	},
