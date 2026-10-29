@@ -1,15 +1,17 @@
 # wkdkavishka portfolio
 
 ## Stack and commands
-- Next 16 App Router, React 19 + Compiler, TypeScript, Tailwind 4, npm; static export → `package.json`, `next.config.ts`
+- Next 16 App Router, React 19 + Compiler, TypeScript, Tailwind 4, npm; normal Vercel build + static Pages mirror → `package.json`, `next.config.ts`
 - `npm run dev`, `npm run lint`, `npm run bns` (build + serve) → `package.json`
+- `npm run build` + `npm start` serves Next.js; `npm run build:static` creates offline-ready `out/` → `scripts/build.ts`
 - `node scripts/deploy.ts` optimizes, builds, mirrors the fixed local Pages repo, commits and pushes; `--dry-run` restores the target without committing/pushing → `deploy()` in `scripts/deploy.ts`
 
 ## Rules that are easy to get wrong
 - Bump site/project `updated` when changing content → `data/site-data.ts`, `app/sitemap.ts`
 - Client components receive data via props; keep `siteData` imports and icon-bearing `socialLinks` on the server → `components/layout/header.tsx`, `components/layout/footer.tsx`
 - Child pages use `pageMetadata()` for canonical and social metadata → `data/metadata.ts`
-- Keep `CACHE_NAME` and `PRECACHE_ASSETS` declarations on one line; deploy prepares versioned HTML and offline assets → `public/sw.js`, `preparePwaExport()` in `scripts/preparePwa.ts`
+- Keep worker declarations on one line; static builds embed asset hashes, normal builds validate document versions and never alias RSC to HTML → `public/sw.js`, `scripts/preparePwa.ts`, `app/pwa-worker.js/route.ts`
+- Vercel is canonical on both hosts; keep the independently hosted IRS tool on GitHub Pages → `lib/site-config.ts`, `app/robots.ts`, `app/sitemap.ts`
 - Add new project image folders to `RESIZE_CONFIG` → `scripts/imageOptimize.ts`
 - Palette-compress regenerated meta-icon PNGs → `generateMetaImages()` in `scripts/genMetaImages.ts`
 - File downloads use `<a>` → `components/sections/hero.tsx`
@@ -24,6 +26,6 @@
 
 ## Findings
 - Keep `experimental.inlineCss` disabled; failed-trial details belong beside `nextConfig` → `next.config.ts`
-- Plain builds intentionally skip worker registration; only deploy-prepared HTML enables offline support → `components/pwa-status.tsx`, `preparePwaExport()` in `scripts/preparePwa.ts`
+- Raw `next build`, development and Vercel previews skip worker registration; use the build wrapper for complete offline artifacts → `scripts/build.ts`, `components/pwa-status.tsx`
 
 @CLAUDE.local.md

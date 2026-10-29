@@ -20,10 +20,11 @@ export function PwaStatus() {
 	const [updating, setUpdating] = useState(false);
 
 	useEffect(() => {
-		// Only deploy.ts prepares the offline artifact. Plain next build previews
-		// and next dev must not register an unprepared or development worker.
+		// Only the build wrapper prepares offline artifacts. Development, raw
+		// next build and previews have no version marker and register no worker.
 		const version = document.querySelector<HTMLMetaElement>('meta[name="pwa-version"]')?.content;
 		if (process.env.NODE_ENV !== "production" || !version || !("serviceWorker" in navigator)) return;
+		const nextMode = document.querySelector<HTMLMetaElement>('meta[name="pwa-mode"]')?.content === "next";
 		let disposed = false;
 		let lastCheck = 0;
 		let announcedReady = false;
@@ -71,7 +72,7 @@ export function PwaStatus() {
 		const connect = async () => {
 			const existing = await navigator.serviceWorker.getRegistration("/");
 			const current = navigator.onLine
-				? await navigator.serviceWorker.register("/sw.js", { scope: "/", updateViaCache: "none" })
+				? await navigator.serviceWorker.register(nextMode ? "/pwa-worker.js" : "/sw.js", { scope: "/", updateViaCache: "none" })
 					.catch((error: unknown) => {
 						// onLine is only a hint; retain offline status if the network
 						// is unreachable while the browser still reports it as online.
@@ -110,6 +111,23 @@ export function PwaStatus() {
 		retry.current = () => { void check(true); };
 		const onForeground = () => { void check(); };
 		const onOnline = () => { void check(true); };
+		// A normal Next server negotiates RSC by request headers. Offline links
+		// instead load the complete saved document; never synthesize a Flight
+		// response from HTML or alias it to a static-export .txt file.
+		const onOfflineLink = (event: MouseEvent) => {
+			if (!nextMode || navigator.onLine || event.defaultPrevented || event.button !== 0 ||
+				event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+			const anchor = event.target instanceof Element ? event.target.closest("a[href]") : null;
+			if (!(anchor instanceof HTMLAnchorElement) || anchor.hasAttribute("download") ||
+				(anchor.target && anchor.target !== "_self")) return;
+			const url = new URL(anchor.href);
+			if (url.origin !== window.location.origin ||
+				(url.pathname === window.location.pathname && url.search === window.location.search)) return;
+			event.preventDefault();
+			event.stopPropagation();
+			window.location.assign(url.href);
+		};
+		document.addEventListener("click", onOfflineLink, true);
 		window.addEventListener("online", onOnline);
 		window.addEventListener("focus", onForeground);
 		document.addEventListener("visibilitychange", onForeground);
@@ -123,6 +141,7 @@ export function PwaStatus() {
 			clearInterval(interval);
 			window.removeEventListener("online", onOnline);
 			window.removeEventListener("focus", onForeground);
+			document.removeEventListener("click", onOfflineLink, true);
 			document.removeEventListener("visibilitychange", onForeground);
 			navigator.serviceWorker.removeEventListener("message", onMessage);
 			navigator.serviceWorker.removeEventListener("controllerchange", onControllerChange);

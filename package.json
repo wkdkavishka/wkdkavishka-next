@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "npx http-server -p 4000 out",
+    "build": "node scripts/build.ts vercel",
+    "build:static": "node scripts/build.ts static",
+    "start": "next start",
+    "start:static": "npx http-server -p 4000 out",
     "lint": "eslint",
-    "bns": "npm run build && npm run start"
+    "bns": "npm run build:static && npm run start:static"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

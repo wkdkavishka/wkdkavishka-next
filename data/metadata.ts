@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import siteData from "@/data/site-data";
+import { deploymentOrigin, isPreview, pwaVersion } from "@/lib/site-config";
 
 export const siteUrl = siteData.siteUrl;
 export const siteName = siteData.personal.name;
@@ -52,9 +53,9 @@ export const siteMetadata: Metadata = {
 		address: false,
 		telephone: true,
 	},
-	metadataBase: new URL(siteUrl),
+	metadataBase: new URL(deploymentOrigin),
 	alternates: {
-		canonical: "/",
+		canonical: `${siteUrl}/`,
 	},
 
 	// iOS PWA SUPPORT (CORRECT API)
@@ -71,6 +72,7 @@ export const siteMetadata: Metadata = {
 	},
 	// Fallback meta tags (optional, but safe)
 	other: {
+		...(pwaVersion ? { "pwa-version": pwaVersion, "pwa-mode": "next" } : {}),
 		"apple-mobile-web-app-capable": "yes",
 		"apple-mobile-web-app-status-bar-style": "black-translucent",
 		"apple-mobile-web-app-title": siteName,
@@ -103,11 +105,11 @@ export const siteMetadata: Metadata = {
 	},
 
 	robots: {
-		index: true,
-		follow: true,
+		index: !isPreview,
+		follow: !isPreview,
 		googleBot: {
-			index: true,
-			follow: true,
+			index: !isPreview,
+			follow: !isPreview,
 			"max-video-preview": -1,
 			"max-image-preview": "large",
 			"max-snippet": -1,
@@ -137,11 +139,11 @@ export function pageMetadata({
 	return {
 		title,
 		description,
-		alternates: { canonical: path },
+		alternates: { canonical: new URL(path, siteUrl).href },
 		openGraph: {
 			type: "website",
 			locale: "en_US",
-			url: path,
+			url: new URL(path, siteUrl).href,
 			siteName,
 			title,
 			description,

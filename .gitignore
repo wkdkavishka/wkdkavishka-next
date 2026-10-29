@@ -15,7 +15,9 @@
 
 # next.js
 /.next/
+/.build-static/
 /out/
+/public/pwa-manifest.json
 
 # production
 /build

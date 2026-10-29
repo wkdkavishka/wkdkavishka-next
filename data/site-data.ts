@@ -1,4 +1,5 @@
 import type { IconType } from "react-icons";
+import { canonicalOrigin } from "@/lib/site-config";
 import {
 	FaBluetoothB,
 	FaCode,
@@ -139,8 +140,8 @@ export interface SiteData {
 
 // Create the site data with proper typing
 const siteData: SiteData = {
-	siteUrl: "https://wkdkavishka.github.io",
-	updated: "2026-10-28T21:22:36Z",
+	siteUrl: canonicalOrigin,
+	updated: "2026-10-29T23:32:24Z",
 	personal: {
 		name: "W.K.D. Kavishka",
 		alternateNames: ["Dumindu Kavishka", "W.K.D.Kavishka", "wkdkavishka"],

@@ -31,7 +31,6 @@ import { join } from "node:path";
 
 // import { generateMetaImages } from './genMetaImages.ts';
 import { ImageProcessor } from "./imageOptimize.ts";
-import { preparePwaExport } from "./preparePwa.ts";
 
 // The fixed local Pages-repo destination is deliberately machine-specific.
 const TARGET_DIR = "/mnt/Storage/Projects/wkdkavishka.github.io/";
@@ -63,14 +62,9 @@ async function deploy() {
 
 		//! Step 3: Build the Next.js project
 		console.log("\x1b[36m[deploy]\x1b[0m \x1b[33mBuilding project...\x1b[0m");
-		runCommand("npm run build");
+		runCommand("npm run build:static");
 
-		//! Step 4: Prepare PWA files before touching the Pages repo
-		console.log(
-			"\x1b[36m[deploy]\x1b[0m \x1b[33mPreparing offline export...\x1b[0m",
-		);
-		const pwa = preparePwaExport(SRC_DIR);
-		console.log(`[deploy] ${pwa.cacheName}: ${pwa.assets} offline assets`);
+		// build:static validates and versions the offline export before the mirror.
 
 		//! Step 5: Mirror out/ into the Pages repo and commit
 		// Any failure from here to the commit puts the Pages repo back, so a

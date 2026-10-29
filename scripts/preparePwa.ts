@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { extname, join } from "node:path";
 
 const VERSION_META = /<meta name="pwa-version" content="[^"]*"\s*\/?\s*>/g;
@@ -12,8 +12,11 @@ const EXTENSIONS = new Set([
 	".webmanifest", ".xml",
 ]);
 
+type OfflineAsset = { url: string; sha256: string } | { url: string; document: true };
+
 function exportedFiles(directory: string, prefix = ""): string[] {
 	return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+		if (entry.isDirectory() && entry.name === "archived") return [];
 		const relative = `${prefix}${entry.name}`;
 		if (entry.isSymbolicLink()) {
 			throw new Error(`PWA export must not contain symlinks: ${relative}`);
@@ -120,4 +123,63 @@ export function preparePwaExport(outputDirectory: string) {
 	}
 	writeFileSync(workerPath, worker);
 	return { cacheName, assets: assets.length };
+}
+
+// Normal Next.js responses are not static-export .html/.txt aliases. Precache
+// actual document responses, validating their build marker instead of hashing
+// an internal .next HTML file that the server may serialize differently.
+// Assets still use byte-for-byte integrity checks. RSC requests remain Next's
+// responsibility; offline links use full document navigation (PwaStatus).
+export function preparePwaNext(buildDirectory: string, publicDirectory: string, version: string) {
+	if (!version.startsWith(`${CACHE_PREFIX}next-`)) throw new Error("Invalid Next.js PWA version");
+	const assets: OfflineAsset[] = [];
+	const urlPath = (file: string) => file.split("/").map(encodeURIComponent).join("/");
+	for (const file of exportedFiles(publicDirectory)) {
+		if (file === "pwa-worker.js") continue;
+		assets.push({ url: `/${urlPath(file)}`, sha256: digest(readFileSync(join(publicDirectory, file))) });
+	}
+	for (const file of exportedFiles(join(buildDirectory, "static"))) {
+		assets.push({
+			url: `/_next/static/${urlPath(file)}`,
+			sha256: digest(readFileSync(join(buildDirectory, "static", file))),
+		});
+	}
+	const manifest: { routes: Record<string, {
+		dataRoute: string | null;
+		initialStatus?: number;
+		initialRevalidateSeconds: number | false;
+	}> } = JSON.parse(readFileSync(join(buildDirectory, "prerender-manifest.json"), "utf8"));
+	for (const [route, entry] of Object.entries(manifest.routes)) {
+		// Never save error pages, revalidating pages, infrastructure, or mutable
+		// server routes as if they were the public prerendered portfolio.
+		if (route.startsWith("/_") || (entry.initialStatus ?? 200) !== 200 ||
+			entry.initialRevalidateSeconds !== false ||
+			["/sw.js", "/pwa-worker.js", "/robots.txt", "/sitemap.xml"].includes(route)) continue;
+		const file = route === "/" ? "index" : route.slice(1);
+		if (file.split("/").some((part) => part === ".." || part === ".")) {
+			throw new Error(`Invalid prerendered route: ${route}`);
+		}
+		const output = join(buildDirectory, "server", "app", file);
+		if (entry.dataRoute) {
+			const html = readFileSync(`${output}.html`, "utf8");
+			if (!html.includes(`name="pwa-version" content="${version}"`)) {
+				throw new Error(`Missing PWA build marker in ${route}`);
+			}
+			assets.push({ url: route, document: true });
+		} else if (existsSync(`${output}.body`)) {
+			assets.push({ url: route, sha256: digest(readFileSync(`${output}.body`)) });
+		}
+	}
+	const paths = new Set(assets.map((asset) => asset.url));
+	if (paths.size !== assets.length) throw new Error("Duplicate Next.js offline asset URLs");
+	for (const required of ["/", "/offline.html", "/manifest.webmanifest"]) {
+		if (!paths.has(required)) throw new Error(`Missing Next.js offline asset: ${required}`);
+	}
+	// The normal build's public directory is collected by Vercel after the build
+	// command finishes. No generated file is written into tracked source or .next.
+	writeFileSync(join(publicDirectory, "pwa-manifest.json"), JSON.stringify({
+		generator: "portfolio-pwa", version, mode: "next",
+		assets: assets.sort((a, b) => a.url.localeCompare(b.url)),
+	}));
+	return { cacheName: version, assets: assets.length };
 }
