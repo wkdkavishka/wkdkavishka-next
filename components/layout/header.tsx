@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -28,6 +29,7 @@ export function Header({
 	projectSection?: ProjectSection;
 }) {
 	const pathname = usePathname();
+	const reducedMotion = useReducedMotion();
 	const [isOpen, setIsOpen] = React.useState(false);
 	const [isScrolled, setIsScrolled] = React.useState(false);
 	const [activeSection, setActiveSection] = React.useState<string | null>(null);
@@ -178,39 +180,45 @@ export function Header({
 			</div>
 
 			{/* Mobile Nav */}
-			{isOpen && (
-				<nav
-					id="mobile-nav"
-					aria-label="Mobile primary"
-					className="lg:hidden border-b bg-background/95 backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-200"
-				>
-					<div className="container mx-auto flex flex-col gap-4 p-4">
-						{navItems.map((item) => (
-							<Link
-								key={item.href}
-								href={item.href}
-								prefetch={false}
-								aria-current={activeHref === item.href ? "location" : undefined}
-								className={cn(
-									"text-sm font-medium text-muted-foreground hover:text-primary transition-colors",
-									activeHref === item.href &&
-										"font-semibold text-primary underline decoration-2 underline-offset-8",
-								)}
-								onClick={() => setIsOpen(false)}
-							>
-								{item.name}
-							</Link>
-						))}
-						<div className="flex gap-2 items-center">
-							<ModeToggle />
-{/* 
-							<Button size="sm" className="flex-1">
-								Hire Me
-							</Button> */}
+			<AnimatePresence>
+				{isOpen && (
+					<motion.nav
+						initial={reducedMotion ? false : { opacity: 0, height: 0 }}
+						animate={{ opacity: 1, height: "auto" }}
+						exit={{ opacity: 0, height: 0 }}
+						transition={reducedMotion ? { duration: 0 } : undefined}
+						id="mobile-nav"
+						aria-label="Mobile primary"
+						className="lg:hidden border-b bg-background/95 backdrop-blur-md"
+					>
+						<div className="container mx-auto flex flex-col gap-4 p-4">
+							{navItems.map((item) => (
+								<Link
+									key={item.href}
+									href={item.href}
+									prefetch={false}
+									aria-current={activeHref === item.href ? "location" : undefined}
+									className={cn(
+										"text-sm font-medium text-muted-foreground hover:text-primary transition-colors",
+										activeHref === item.href &&
+											"font-semibold text-primary underline decoration-2 underline-offset-8",
+									)}
+									onClick={() => setIsOpen(false)}
+								>
+									{item.name}
+								</Link>
+							))}
+							<div className="flex gap-2 items-center">
+								<ModeToggle />
+								{/*
+								<Button size="sm" className="flex-1">
+									Hire Me
+								</Button> */}
+							</div>
 						</div>
-					</div>
-				</nav>
-			)}
+					</motion.nav>
+				)}
+			</AnimatePresence>
 		</header>
 	);
 }

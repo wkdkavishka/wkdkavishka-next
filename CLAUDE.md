@@ -19,7 +19,8 @@
 - Do not add Kubernetes, AWS, iOS or UI/UX experience claims → `siteData` in `data/site-data.ts`
 - Education names the institution only, without degree/status or `alumniOf` → `data/site-data.ts`, `personJsonLd` in `data/structured-data.ts`
 - Preserve CBA Trackable’s `field-service-gps-tracking-app` slug → `siteData.projects` in `data/site-data.ts`
-- Keep `.png` share-image routes, CSS reveals and interaction-loaded email forms → `app/og/[file]/route.tsx`, `app/globals.css`, `components/email-dialog.tsx`
+- Keep `.png` share-image routes and interaction-loaded email forms → `app/og/[file]/route.tsx`, `components/email-dialog.tsx`
+- Preserve the original Framer Motion settings from `5a4d84f^`; CSS scroll-timeline replacements failed to reproduce them → `components/motion.tsx`, `components/sections/`, `components/layout/header.tsx`, `components/project-images.tsx`
 
 ## Findings
 - Keep `experimental.inlineCss` disabled; failed-trial details belong beside `nextConfig` → `next.config.ts`

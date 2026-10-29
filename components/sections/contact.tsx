@@ -1,11 +1,12 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import type { ReactNode } from "react";
 import { EmailDialog } from "@/components/email-dialog";
+import { MotionAnchor, MotionButton, MotionParagraph } from "@/components/motion";
 import { SectionHeading } from "@/components/section-heading";
 import type { PersonalData, SocialLink } from "@/data/site-data";
 
 const cardClassName =
-	"reveal group flex h-full min-h-64 w-full flex-col items-center gap-3 rounded-lg border bg-card p-6 text-center text-card-foreground shadow-sm transition-colors hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+	"group flex h-full min-h-64 w-full flex-col items-center gap-3 rounded-lg border bg-card p-6 text-center text-card-foreground shadow-sm transition-colors hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
 // Spans work inside both a dialog button and links without nested interactive elements.
 function ContactCardContent({
@@ -46,13 +47,27 @@ export function Contact({
 			className="container mx-auto py-24 sm:py-32 px-4 md:px-6"
 		>
 			<SectionHeading title="Get in Touch" subtitle="Shall we talk?" />
-			<p className="reveal mx-auto mb-10 max-w-175 text-center text-lg text-muted-foreground">
+			<MotionParagraph
+				data-motion-reveal
+				initial={{ opacity: 0, y: 20 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				exit={{ opacity: 0, y: -20 }}
+				viewport={{ once: false, amount: 0.3 }}
+				transition={{ duration: 0.5 }}
+				className="mx-auto mb-10 max-w-175 text-center text-lg text-muted-foreground"
+			>
 				{personalData.getInTouch}
-			</p>
+			</MotionParagraph>
 
 			<div className="grid auto-rows-fr gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
 				<EmailDialog email={personalData.email}>
-					<button
+					<MotionButton
+						data-motion-reveal
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						viewport={{ once: false, amount: 0.3 }}
+						transition={{ duration: 0.5, delay: 0.1 }}
 						type="button"
 						className={`${cardClassName} cursor-pointer`}
 					>
@@ -64,10 +79,16 @@ export function Contact({
 							description="Feel free to send me an email."
 							action={personalData.email}
 						/>
-					</button>
+					</MotionButton>
 				</EmailDialog>
 
-				<a
+				<MotionAnchor
+					data-motion-reveal
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					exit={{ opacity: 0, y: -20 }}
+					viewport={{ once: false, amount: 0.3 }}
+					transition={{ duration: 0.5, delay: 0.2 }}
 					href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
 						personalData.location,
 					)}`}
@@ -83,9 +104,18 @@ export function Contact({
 						description="Based in"
 						action={personalData.location}
 					/>
-				</a>
+				</MotionAnchor>
 
-				<a href={`tel:${personalData.phone}`} className={cardClassName}>
+				<MotionAnchor
+					data-motion-reveal
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					exit={{ opacity: 0, y: -20 }}
+					viewport={{ once: false, amount: 0.3 }}
+					transition={{ duration: 0.5, delay: 0.3 }}
+					href={`tel:${personalData.phone}`}
+					className={cardClassName}
+				>
 					<ContactCardContent
 						icon={
 							<Phone className="mb-1 h-10 w-10 shrink-0 text-primary" aria-hidden="true" />
@@ -94,12 +124,18 @@ export function Contact({
 						description="Call me at"
 						action={personalData.phone}
 					/>
-				</a>
+				</MotionAnchor>
 
-				{socialLinks.map((link) => {
+				{socialLinks.map((link, index) => {
 					const Icon = link.icon;
 					return (
-						<a
+						<MotionAnchor
+							data-motion-reveal
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: -20 }}
+							viewport={{ once: false, amount: 0.3 }}
+							transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
 							href={link.url}
 							target="_blank"
 							rel="noopener noreferrer"
@@ -114,7 +150,7 @@ export function Contact({
 								description={`Connect on ${link.name}`}
 								action={link.name === "WhatsApp" ? "Send a message" : "View profile"}
 							/>
-						</a>
+						</MotionAnchor>
 					);
 				})}
 			</div>

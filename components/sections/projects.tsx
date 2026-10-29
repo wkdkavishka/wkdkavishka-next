@@ -1,5 +1,6 @@
 import { ArrowRight, Code2 } from "lucide-react";
 import Link from "next/link";
+import { MotionDiv } from "@/components/motion";
 import { ProjectImages } from "@/components/project-images";
 import { SectionHeading } from "@/components/section-heading";
 import {
@@ -19,7 +20,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 	const pageUrl = `/projects/${project.slug}`;
 
 	return (
-		<div className="reveal">
+		<MotionDiv
+			data-motion-reveal
+			initial={{ opacity: 0, y: 20 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			exit={{ opacity: 0, y: -20 }}
+			viewport={{ once: false, amount: 0.3 }}
+			transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+		>
 			<Card className="h-full overflow-hidden border-muted-foreground/20 hover:border-primary/50 transition-colors">
 				<Link
 					href={pageUrl}
@@ -59,7 +67,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 					</CardContent>
 				</Link>
 			</Card>
-		</div>
+		</MotionDiv>
 	);
 }
 

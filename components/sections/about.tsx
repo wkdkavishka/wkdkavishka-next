@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import { MotionDiv } from "@/components/motion";
 import { SectionHeading } from "@/components/section-heading";
 import { Card, CardContent } from "@/components/ui/card";
 import type { PersonalData } from "@/data/site-data";
@@ -13,7 +14,15 @@ export function About({ personalData }: { personalData: PersonalData }) {
 			<SectionHeading title="About Me" subtitle="Who am I?" />
 
 			<div className="grid gap-12 lg:grid-cols-2 items-center">
-				<div className="reveal relative aspect-square overflow-hidden rounded-xl bg-muted">
+				<MotionDiv
+					data-motion-reveal
+					initial={{ opacity: 0, x: -50 }}
+					whileInView={{ opacity: 1, x: 0 }}
+					exit={{ opacity: 0, x: -50 }}
+					viewport={{ once: false, amount: 0.3 }}
+					transition={{ duration: 0.5, delay: 0.2 }}
+					className="relative aspect-square overflow-hidden rounded-xl bg-muted"
+				>
 					<Image
 						src={personalData.profileImage}
 						alt={`${personalData.name}, ${personalData.headline}`}
@@ -21,8 +30,16 @@ export function About({ personalData }: { personalData: PersonalData }) {
 						sizes="(min-width: 1024px) 50vw, 100vw"
 						className="object-cover"
 					/>
-				</div>
-				<div className="reveal flex flex-col gap-4">
+				</MotionDiv>
+				<MotionDiv
+					data-motion-reveal
+					initial={{ opacity: 0, x: 50 }}
+					whileInView={{ opacity: 1, x: 0 }}
+					exit={{ opacity: 0, x: 50 }}
+					viewport={{ once: false, amount: 0.3 }}
+					transition={{ duration: 0.5, delay: 0.2 }}
+					className="flex flex-col gap-4"
+				>
 					{personalData.about.map((paragraph, index) => (
 						<p key={index} className="text-lg text-muted-foreground">
 							{paragraph}
@@ -60,7 +77,7 @@ export function About({ personalData }: { personalData: PersonalData }) {
 							</CardContent>
 						</Card>
 					</div>
-				</div>
+				</MotionDiv>
 			</div>
 		</section>
 	);

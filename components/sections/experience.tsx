@@ -1,4 +1,5 @@
 import { Briefcase } from "lucide-react";
+import { MotionDiv } from "@/components/motion";
 import { SectionHeading } from "@/components/section-heading";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Experience as ExperienceItem } from "@/data/site-data";
@@ -13,7 +14,15 @@ export function Experience({ experience }: { experience: ExperienceItem[] }) {
 
 			<div className="flex flex-col gap-6 w-full max-w-3xl">
 				{experience.map((job) => (
-					<div key={`${job.company}-${job.role}`} className="reveal">
+					<MotionDiv
+						key={`${job.company}-${job.role}`}
+						data-motion-reveal
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						viewport={{ once: false, amount: 0.3 }}
+						transition={{ duration: 0.5 }}
+					>
 						<Card className="border-muted-foreground/20">
 							<CardContent className="p-6 flex gap-4">
 								<Briefcase className="h-6 w-6 shrink-0 text-primary mt-1" />
@@ -27,7 +36,7 @@ export function Experience({ experience }: { experience: ExperienceItem[] }) {
 								</div>
 							</CardContent>
 						</Card>
-					</div>
+					</MotionDiv>
 				))}
 			</div>
 		</section>

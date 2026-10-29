@@ -1,6 +1,7 @@
 import { ArrowRight, Download, Mail, Phone } from "lucide-react";
 import Link from "next/link";
 import { EmailDialog } from "@/components/email-dialog";
+import { MotionDiv, MotionH1, MotionParagraph } from "@/components/motion";
 import { PWAInstallButton } from "@/components/pwa-install-button";
 import { Button } from "@/components/ui/button";
 import type { PersonalData, SocialLink } from "@/data/site-data";
@@ -23,21 +24,59 @@ export function Hero({
 
 			<div className="container mx-auto px-4 md:px-6">
 				<div className="flex flex-col items-center gap-4 text-center">
-					{/* Badge, name and intro are plain markup on purpose: they are the first thing people and
-					    crawlers see, so they must not start hidden (opacity 0) waiting for an animation. */}
-					<div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
+					<MotionDiv
+						data-motion-reveal
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						viewport={{ once: false }}
+						transition={{ duration: 0.5 }}
+						className="inline-block rounded-lg bg-muted px-3 py-1 text-sm"
+					>
 						Available for new projects
-					</div>
-					<h1 className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl bg-clip-text text-transparent pb-2 bg-gradient-to-r from-foreground to-foreground/70">
+					</MotionDiv>
+					<MotionH1
+						data-motion-reveal
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						viewport={{ once: false }}
+						transition={{ duration: 0.5, delay: 0.1 }}
+						className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl bg-clip-text text-transparent pb-2 bg-gradient-to-r from-foreground to-foreground/70"
+					>
 						{personalData.name}
-					</h1>
-					<p className="text-xl font-semibold text-primary sm:text-2xl md:text-3xl">
+					</MotionH1>
+					<MotionParagraph
+						data-motion-reveal
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						viewport={{ once: false }}
+						transition={{ duration: 0.5, delay: 0.1 }}
+						className="text-xl font-semibold text-primary sm:text-2xl md:text-3xl"
+					>
 						{personalData.headline}
-					</p>
-					<p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed pb-3 xl:text-xl/relaxed">
+					</MotionParagraph>
+					<MotionParagraph
+						data-motion-reveal
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						viewport={{ once: false }}
+						transition={{ duration: 0.5, delay: 0.2 }}
+						className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed pb-3 xl:text-xl/relaxed"
+					>
 						{personalData.intro}
-					</p>
-					<div className="flex flex-col gap-2 min-[400px]:flex-row">
+					</MotionParagraph>
+					<MotionDiv
+						data-motion-reveal
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						viewport={{ once: false }}
+						transition={{ duration: 0.5, delay: 0.3 }}
+						className="flex flex-col gap-2 min-[400px]:flex-row"
+					>
 						<Button size="lg" className="gap-2" asChild>
 							<Link href="#contact">
 								Hire Me <ArrowRight className="h-4 w-4" />
@@ -57,13 +96,21 @@ export function Hero({
 								target="_blank"
 								rel="noopener"
 							>
-								Download Portfolio <Download className="h-4 w-4" />
+								Portfolio <Download className="h-4 w-4" />
 							</a>
 						</Button>
 						<PWAInstallButton />
-					</div>
+					</MotionDiv>
 
-					<div className="flex items-center gap-4 mt-8">
+					<MotionDiv
+						data-motion-reveal
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+						viewport={{ once: false }}
+						transition={{ duration: 0.5, delay: 0.4 }}
+						className="flex items-center gap-4 mt-8"
+					>
 						{socialLinks.map((link) => {
 							const Icon = link.icon;
 							return (
@@ -95,7 +142,7 @@ export function Hero({
 								<span className="sr-only">Email</span>
 							</button>
 						</EmailDialog>
-					</div>
+					</MotionDiv>
 				</div>
 			</div>
 		</section>

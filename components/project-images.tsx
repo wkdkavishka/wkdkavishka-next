@@ -1,10 +1,10 @@
 "use client";
 
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-// Cycles a project's screenshots every 3 s with a CSS cross-fade. All images are stacked and only
-// their opacity changes, so no animation library is needed.
+// Preserve the original 3 s rotation and 0.5 s Motion cross-fade from before 5a4d84f.
 export function ProjectImages({
 	images,
 	alt,
@@ -16,9 +16,10 @@ export function ProjectImages({
 	startDelay: number;
 }) {
 	const [current, setCurrent] = useState(0);
+	const reducedMotion = useReducedMotion();
 
 	useEffect(() => {
-		if (images.length <= 1) return;
+		if (images.length <= 1 || reducedMotion) return;
 		let interval: ReturnType<typeof setInterval> | undefined;
 		const timeout = setTimeout(() => {
 			interval = setInterval(() => {
@@ -29,19 +30,28 @@ export function ProjectImages({
 			clearTimeout(timeout);
 			if (interval) clearInterval(interval);
 		};
-	}, [images.length, startDelay]);
+	}, [images.length, startDelay, reducedMotion]);
 
-	return images.map((src, index) => (
-		<Image
-			key={src}
-			src={src}
-			// Only the first image is described; the others repeat it
-			alt={index === 0 ? alt : ""}
-			fill
-			sizes="(min-width: 768px) 496px, calc(100vw - 2rem)"
-			className={`object-cover transition-[opacity,scale] duration-700 ease-in-out group-hover:scale-105 ${
-				index === current ? "opacity-100" : "opacity-0"
-			}`}
-		/>
-	));
+	if (images.length === 0) return null;
+	return (
+		<AnimatePresence mode="popLayout">
+			<motion.div
+				key={current}
+				data-motion-reveal
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				exit={{ opacity: 0 }}
+				transition={{ duration: reducedMotion ? 0 : 0.5 }}
+				className="absolute inset-0"
+			>
+				<Image
+					src={images[current]}
+					alt={alt}
+					fill
+					sizes="(min-width: 768px) 496px, calc(100vw - 2rem)"
+					className="object-cover transition-all duration-700 ease-in-out group-hover:scale-105"
+				/>
+			</motion.div>
+		</AnimatePresence>
+	);
 }

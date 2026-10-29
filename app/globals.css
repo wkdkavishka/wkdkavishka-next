@@ -230,22 +230,16 @@
   }
 }
 
-/* Scroll reveal with no JavaScript: .reveal elements fade up as they enter the viewport, in
-   browsers with scroll-driven animations. Elsewhere, and with reduced motion, they just show.
-   Nothing starts hidden in the HTML, so crawlers and no-JS readers always see the content. */
-@keyframes reveal {
-  from {
-    opacity: 0;
-    translate: 0 24px;
-  }
+/* Motion writes inline styles. These overrides keep keyboard focus, reduced-motion
+   readers and printed pages visible without changing the original animation settings. */
+[data-motion-reveal]:focus-within {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal {
-      animation: reveal linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 60%;
-    }
+@media (prefers-reduced-motion: reduce), print {
+  [data-motion-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
