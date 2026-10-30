@@ -68,7 +68,7 @@ export default function EmailDialogContent({
 		}
 
 		try {
-			await emailjs.send(serviceId, templateId, templateParams, publicKey);
+			await emailjs.send(serviceId, templateId, templateParams, { publicKey });
 
 			setStatus("success");
 			formRef.current?.reset();

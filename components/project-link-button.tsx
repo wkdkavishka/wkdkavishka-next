@@ -1,8 +1,9 @@
-import { ExternalLink, Github, Package } from "lucide-react";
+import { ExternalLink, Package } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import type { ProjectLink } from "@/data/site-data";
 
-const icons = { demo: ExternalLink, code: Github, package: Package };
+const icons = { demo: ExternalLink, code: FaGithub, package: Package };
 
 // Outbound link of a project (live site, source code, package page)
 export function ProjectLinkButton({ link }: { link: ProjectLink }) {
